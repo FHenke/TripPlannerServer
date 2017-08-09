@@ -35,6 +35,7 @@ public class TripPlanner {
 		}
 		
 		
+		//++Updates the entries of the database
 		try{
 			UpdateDatabase.proceed(new database.DatabaseConnection().getConnection());
 		}catch(IOException | SQLException e){

@@ -6,3 +6,37 @@
   Detail: Auf Schlüssel (city_id)=(HERI) wird noch aus Tabelle »airports« verwiesen.
 2017-08-06 18:19:47.533 [main] WARN  database.updateTables.UpdateContinents - Problem by reading or loading the XML file from the Skyscanner API - java.io.IOException: Problem by writing updated City to Database - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »cities« verletzt Fremdschlüssel-Constraint »airports_city_id_fkey« von Tabelle »airports«
   Detail: Auf Schlüssel (city_id)=(HERI) wird noch aus Tabelle »airports« verwiesen.
+2017-08-09 10:48:49.919 [main] WARN  database.updateTables.UpdateContinents - Problem by writing following City to Database:Heringsdorf   - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »cities« verletzt Fremdschlüssel-Constraint »airports_city_id_fkey« von Tabelle »airports«
+  Detail: Auf Schlüssel (city_id)=(HERI) wird noch aus Tabelle »airports« verwiesen.
+2017-08-09 10:48:49.921 [main] WARN  database.updateTables.UpdateContinents - Problem by reading or loading the XML file from the Skyscanner API - java.io.IOException: Problem by writing updated City to Database - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »cities« verletzt Fremdschlüssel-Constraint »airports_city_id_fkey« von Tabelle »airports«
+  Detail: Auf Schlüssel (city_id)=(HERI) wird noch aus Tabelle »airports« verwiesen.
+2017-08-09 10:51:56.226 [main] WARN  database.updateTables.UpdateContinents - Problem by writing following City to Database:Heringsdorf   - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »cities« verletzt Fremdschlüssel-Constraint »airports_city_id_fkey« von Tabelle »airports«
+  Detail: Auf Schlüssel (city_id)=(HERI) wird noch aus Tabelle »airports« verwiesen.
+2017-08-09 10:51:56.227 [main] WARN  database.updateTables.UpdateContinents - Problem by reading or loading the XML file from the Skyscanner API - java.io.IOException: Problem by writing updated City to Database - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »cities« verletzt Fremdschlüssel-Constraint »airports_city_id_fkey« von Tabelle »airports«
+  Detail: Auf Schlüssel (city_id)=(HERI) wird noch aus Tabelle »airports« verwiesen.
+2017-08-09 10:53:00.837 [main] WARN  database.updateTables.UpdateContinents - Problem by writing following City to Database:Heringsdorf   - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »cities« verletzt Fremdschlüssel-Constraint »airports_city_id_fkey« von Tabelle »airports«
+  Detail: Auf Schlüssel (city_id)=(HERI) wird noch aus Tabelle »airports« verwiesen.
+2017-08-09 10:53:00.841 [main] WARN  database.updateTables.UpdateContinents - Problem by reading or loading the XML file from the Skyscanner API - java.io.IOException: Problem by writing updated City to Database - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »cities« verletzt Fremdschlüssel-Constraint »airports_city_id_fkey« von Tabelle »airports«
+  Detail: Auf Schlüssel (city_id)=(HERI) wird noch aus Tabelle »airports« verwiesen.
+2017-08-09 13:33:24.683 [main] WARN  database.updateTables.UpdateContinents - Problem by writing following City to Database:Heringsdorf   - org.postgresql.util.PSQLException: Für den Parameter 1 wurde kein Wert angegeben.
+2017-08-09 13:33:24.685 [main] WARN  database.updateTables.UpdateContinents - Problem by reading or loading the XML file from the Skyscanner API - java.io.IOException: Problem by writing updated City to Database - org.postgresql.util.PSQLException: Für den Parameter 1 wurde kein Wert angegeben.
+2017-08-09 13:35:49.053 [main] WARN  database.updateTables.UpdateContinents - Problem by writing following City to Database:Heringsdorf   - org.postgresql.util.PSQLException: FEHLER: Argument von AND muss Typ boolean haben, nicht Typ character varying
+  Position: 32
+2017-08-09 13:35:49.054 [main] WARN  database.updateTables.UpdateContinents - Problem by reading or loading the XML file from the Skyscanner API - java.io.IOException: Problem by writing updated City to Database - org.postgresql.util.PSQLException: FEHLER: Argument von AND muss Typ boolean haben, nicht Typ character varying
+  Position: 32
+2017-08-09 13:37:20.816 [main] WARN  database.updateTables.UpdateContinents - Problem by writing following City to Database:Heringsdorf   - org.postgresql.util.PSQLException: FEHLER: Argument von AND muss Typ boolean haben, nicht Typ character varying
+  Position: 32
+2017-08-09 13:37:20.818 [main] WARN  database.updateTables.UpdateContinents - Problem by reading or loading the XML file from the Skyscanner API - java.io.IOException: Problem by writing updated City to Database - org.postgresql.util.PSQLException: FEHLER: Argument von AND muss Typ boolean haben, nicht Typ character varying
+  Position: 32
+2017-08-09 13:38:39.704 [main] WARN  database.updateTables.UpdateContinents - Problem by writing following City to Database:Heringsdorf   - org.postgresql.util.PSQLException: FEHLER: Argument von AND muss Typ boolean haben, nicht Typ character varying
+  Position: 32
+2017-08-09 13:38:39.708 [main] WARN  database.updateTables.UpdateContinents - Problem by reading or loading the XML file from the Skyscanner API - java.io.IOException: Problem by writing updated City to Database - org.postgresql.util.PSQLException: FEHLER: Argument von AND muss Typ boolean haben, nicht Typ character varying
+  Position: 32
+2017-08-09 13:47:58.491 [main] WARN  database.updateTables.UpdateContinents - Problem by writing following City to Database:Heringsdorf   - org.postgresql.util.PSQLException: FEHLER: Syntaxfehler bei »=«
+  Position: 47
+2017-08-09 13:47:58.492 [main] WARN  database.updateTables.UpdateContinents - Problem by reading or loading the XML file from the Skyscanner API - java.io.IOException: Problem by writing updated City to Database - org.postgresql.util.PSQLException: FEHLER: Syntaxfehler bei »=«
+  Position: 47
+2017-08-09 14:45:35.410 [main] WARN  database.updateTables.UpdateContinents - Problem by writing following Airport to Database:Olsztyn-Mazury   - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »airports« verletzt Fremdschlüssel-Constraint »flight_connections_origin_fkey« von Tabelle »flight_connections«
+  Detail: Auf Schlüssel (airport_id)=(SZY) wird noch aus Tabelle »flight_connections« verwiesen.
+2017-08-09 14:45:35.412 [main] WARN  database.updateTables.UpdateContinents - Problem by reading or loading the XML file from the Skyscanner API - java.io.IOException: Problem by writing updated Airport to Database - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »airports« verletzt Fremdschlüssel-Constraint »flight_connections_origin_fkey« von Tabelle »flight_connections«
+  Detail: Auf Schlüssel (airport_id)=(SZY) wird noch aus Tabelle »flight_connections« verwiesen.

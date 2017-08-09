@@ -42,7 +42,8 @@ public class UpdateAirports extends UpdateTable {
 				PreparedStatement selectId = conn.prepareStatement("SELECT * FROM airports WHERE airport_id = ?;");
 				PreparedStatement deleteEntry = conn.prepareStatement("DELETE FROM airports WHERE airport_id = ?;");
 				PreparedStatement insertEntry = conn.prepareStatement("INSERT INTO airports VALUES (?, ?, ?, ?, ST_GeomFromText(?, -1));");
-		
+				PreparedStatement updateEntry = conn.prepareStatement("UPDATE airports SET city_id = ?, iata_code = ?, name = ?, location = ST_GeomFromText(?, -1) WHERE airport_id = ?;");
+
 			
 			
 				//iterates over all places in placelist to add them to the database if not already existing
@@ -61,16 +62,21 @@ public class UpdateAirports extends UpdateTable {
 							selectId.setString(1, place.getId());
 							if(super.isQuerryEmpty(selectId)){
 								//if yes drop the old entry for adding the new one later
-								deleteEntry.setString(1, place.getId());
-								deleteEntry.executeUpdate();
+								updateEntry.setString(1, place.getCity());
+								updateEntry.setString(2, place.getIata());
+								updateEntry.setString(3, place.getName());
+								updateEntry.setString(4, "Point(" + Double.toString(place.getLatitude()) + " " + Double.toString(place.getLongitude()) + ")" );
+								updateEntry.setString(5, place.getId());
+								updateEntry.executeUpdate();
+							}else{
+								//if not add the new dataset
+								insertEntry.setString(1, place.getId());
+								insertEntry.setString(2, place.getCity());
+								insertEntry.setString(3, place.getIata());
+								insertEntry.setString(4, place.getName());
+								insertEntry.setString(5, "Point(" + Double.toString(place.getLatitude()) + " " + Double.toString(place.getLongitude()) + ")" );
+								insertEntry.executeUpdate();
 							}
-							//if not add the new dataset
-							insertEntry.setString(1, place.getId());
-							insertEntry.setString(2, place.getCity());
-							insertEntry.setString(3, place.getIata());
-							insertEntry.setString(4, place.getName());
-							insertEntry.setString(5, "Point(" + Double.toString(place.getLatitude()) + " " + Double.toString(place.getLongitude()) + ")" );
-							insertEntry.executeUpdate();
 						}
 					}catch(SQLException e){
 						logger.warn("Problem by writing following Airport to Database:" + place.getName() + "   - " + e.toString());

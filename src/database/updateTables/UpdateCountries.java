@@ -40,8 +40,8 @@ public class UpdateCountries extends UpdateTable{
 			try {
 				PreparedStatement selectIdenticalEntries = conn.prepareStatement("SELECT * FROM countries WHERE country_id = ? AND name = ? AND (currency = ?  OR (currency IS NULL AND ? IS NULL)) AND (language = ? OR (language IS NULL AND ? IS NULL)) AND continent_id = ?;");
 				PreparedStatement selectId = conn.prepareStatement("SELECT * FROM countries WHERE country_id = ?;");
-				PreparedStatement deleteEntry = conn.prepareStatement("DELETE FROM Countries WHERE country_id = ?;");
 				PreparedStatement insertEntry = conn.prepareStatement("INSERT INTO countries VALUES (?, ?, ?, ?, ?);");
+				PreparedStatement updateEntry = conn.prepareStatement("UPDATE cities SET name = ?, currency = ?, language = ?, continent_id = ? WHERE country_id = ?;");
 		
 			
 			
@@ -61,16 +61,21 @@ public class UpdateCountries extends UpdateTable{
 							selectId.setString(1, place.getId());
 							if(super.isQuerryEmpty(selectId)){
 								//if yes delete the Entry for inserting th new one afterwards
-								deleteEntry.setString(1, place.getId());
-								deleteEntry.executeUpdate();
+								updateEntry.setString(1, place.getName());
+								updateEntry.setString(2, place.getCurrency());
+								updateEntry.setString(3, place.getLanguage());
+								updateEntry.setString(4, place.getContinent());
+								updateEntry.setString(5, place.getId());
+								updateEntry.executeUpdate();
+							}else{
+								//if not add the dataset to the table
+								insertEntry.setString(1, place.getId());
+								insertEntry.setString(2, place.getName());
+								insertEntry.setString(3, place.getCurrency());
+								insertEntry.setString(4, place.getLanguage());
+								insertEntry.setString(5, place.getContinent());
+								insertEntry.executeUpdate();
 							}
-							//add the updateed dataset to the table
-							insertEntry.setString(1, place.getId());
-							insertEntry.setString(2, place.getName());
-							insertEntry.setString(3, place.getCurrency());
-							insertEntry.setString(4, place.getLanguage());
-							insertEntry.setString(5, place.getContinent());
-							insertEntry.executeUpdate();
 						}
 					}catch(SQLException e){
 						logger.warn("Problem by writing following Country to Database:" + place.getName() + "   - " + e.toString());

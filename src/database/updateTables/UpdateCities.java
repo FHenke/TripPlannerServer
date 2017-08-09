@@ -42,14 +42,15 @@ public class UpdateCities extends UpdateTable {
 			try {
 				PreparedStatement selectIdenticalEntries = conn.prepareStatement("SELECT * FROM cities WHERE city_id = ? AND country_id = ? AND (iata_code = ? OR (iata_code IS NULL AND ? IS NULL)) AND name = ? AND ST_X(location) = ? AND ST_Y(location) = ?;");
 				PreparedStatement selectId = conn.prepareStatement("SELECT * FROM cities WHERE city_id = ?;");
-				PreparedStatement deleteEntry = conn.prepareStatement("DELETE FROM Cities WHERE city_id = ?;");
 				PreparedStatement insertEntry = conn.prepareStatement("INSERT INTO cities VALUES (?, ?, ?, ?, ST_GeomFromText(?, -1));");
+				PreparedStatement updateEntry = conn.prepareStatement("UPDATE cities SET country_id = ?, iata_code = ?, name = ?, location = ST_GeomFromText(?, -1) WHERE city_id = ?;");
 		
 			
 			
 				//iterates over all places in placelist to add them to the database if not already existing
 				for(Place place : placeList){
 					try{
+						System.out.println("city: " + place.getId() + " / " + place.getCountry() + " / " + place.getIata() + " / " + place.getName()  + " / " + place.getLatitude() + " / " + place.getLongitude());
 						//check if the exact entry exists in the database already
 						selectIdenticalEntries.setString(1, place.getId());
 						selectIdenticalEntries.setString(2, place.getCountry());
@@ -63,16 +64,24 @@ public class UpdateCities extends UpdateTable {
 							selectId.setString(1, place.getId());
 							if(super.isQuerryEmpty(selectId)){
 								//if yes drop the old entry for adding the new one later
-								deleteEntry.setString(1, place.getId());
-								deleteEntry.executeUpdate();
+								System.out.println("Drop because of modifications: " + place.getId() + " / " + place.getCountry() + " / " + place.getIata() + " / " + place.getName()  + " / " + place.getLatitude() + " / " + place.getLongitude());
+								updateEntry.setString(1, place.getCountry());
+								updateEntry.setString(2, place.getIata());
+								updateEntry.setString(3, place.getName());
+								updateEntry.setString(4, "Point(" + Double.toString(place.getLatitude()) + " " + Double.toString(place.getLongitude()) + ")");
+								updateEntry.setString(5, place.getId());
+								System.out.println(updateEntry.toString());
+								updateEntry.executeUpdate();
+								
+							}else{
+								//if not add the new data set
+								insertEntry.setString(1, place.getId());
+								insertEntry.setString(2, place.getCountry());
+								insertEntry.setString(3, place.getIata());
+								insertEntry.setString(4, place.getName());
+								insertEntry.setString(5, "Point(" + Double.toString(place.getLatitude()) + " " + Double.toString(place.getLongitude()) + ")" );
+								insertEntry.executeUpdate();
 							}
-							//if not add the new dataset
-							insertEntry.setString(1, place.getId());
-							insertEntry.setString(2, place.getCountry());
-							insertEntry.setString(3, place.getIata());
-							insertEntry.setString(4, place.getName());
-							insertEntry.setString(5, "Point(" + Double.toString(place.getLatitude()) + " " + Double.toString(place.getLongitude()) + ")" );
-							insertEntry.executeUpdate();
 						}
 					}catch(SQLException e){
 						logger.warn("Problem by writing following City to Database:" + place.getName() + "   - " + e.toString());

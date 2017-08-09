@@ -1,0 +1,114 @@
+<DistanceMatrixResponse>
+  <status>OK</status>
+  <origin_address>Hanover, Germany</origin_address>
+  <origin_address>Frankfurt, Germany</origin_address>
+  <origin_address>Berlin, Germany</origin_address>
+  <destination_address>Hanover, Germany</destination_address>
+  <destination_address>Frankfurt, Germany</destination_address>
+  <destination_address>Berlin, Germany</destination_address>
+  <row>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>0</value>
+        <text>1 min</text>
+      </duration>
+      <distance>
+        <value>0</value>
+        <text>1 m</text>
+      </distance>
+    </element>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>15600</value>
+        <text>4 hours 20 mins</text>
+      </duration>
+      <distance>
+        <value>347585</value>
+        <text>348 km</text>
+      </distance>
+    </element>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>10380</value>
+        <text>2 hours 53 mins</text>
+      </duration>
+      <distance>
+        <value>286764</value>
+        <text>287 km</text>
+      </distance>
+    </element>
+  </row>
+  <row>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>15600</value>
+        <text>4 hours 20 mins</text>
+      </duration>
+      <distance>
+        <value>350610</value>
+        <text>351 km</text>
+      </distance>
+    </element>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>0</value>
+        <text>1 min</text>
+      </duration>
+      <distance>
+        <value>0</value>
+        <text>1 m</text>
+      </distance>
+    </element>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>19560</value>
+        <text>5 hours 26 mins</text>
+      </duration>
+      <distance>
+        <value>529108</value>
+        <text>529 km</text>
+      </distance>
+    </element>
+  </row>
+  <row>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>6720</value>
+        <text>1 hour 52 mins</text>
+      </duration>
+      <distance>
+        <value>257240</value>
+        <text>257 km</text>
+      </distance>
+    </element>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>15780</value>
+        <text>4 hours 23 mins</text>
+      </duration>
+      <distance>
+        <value>570043</value>
+        <text>570 km</text>
+      </distance>
+    </element>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>0</value>
+        <text>1 min</text>
+      </duration>
+      <distance>
+        <value>0</value>
+        <text>1 m</text>
+      </distance>
+    </element>
+  </row>
+</DistanceMatrixResponse>

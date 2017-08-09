@@ -1,0 +1,8 @@
+2017-08-06 18:19:10.972 [main] WARN  database.updateTables.UpdateContinents - Problem by writing following City to Database:Heringsdorf   - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »cities« verletzt Fremdschlüssel-Constraint »airports_city_id_fkey« von Tabelle »airports«
+  Detail: Auf Schlüssel (city_id)=(HERI) wird noch aus Tabelle »airports« verwiesen.
+2017-08-06 18:19:10.974 [main] WARN  database.updateTables.UpdateContinents - Problem by reading or loading the XML file from the Skyscanner API - java.io.IOException: Problem by writing updated City to Database - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »cities« verletzt Fremdschlüssel-Constraint »airports_city_id_fkey« von Tabelle »airports«
+  Detail: Auf Schlüssel (city_id)=(HERI) wird noch aus Tabelle »airports« verwiesen.
+2017-08-06 18:19:47.532 [main] WARN  database.updateTables.UpdateContinents - Problem by writing following City to Database:Heringsdorf   - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »cities« verletzt Fremdschlüssel-Constraint »airports_city_id_fkey« von Tabelle »airports«
+  Detail: Auf Schlüssel (city_id)=(HERI) wird noch aus Tabelle »airports« verwiesen.
+2017-08-06 18:19:47.533 [main] WARN  database.updateTables.UpdateContinents - Problem by reading or loading the XML file from the Skyscanner API - java.io.IOException: Problem by writing updated City to Database - org.postgresql.util.PSQLException: FEHLER: Aktualisieren oder Löschen in Tabelle »cities« verletzt Fremdschlüssel-Constraint »airports_city_id_fkey« von Tabelle »airports«
+  Detail: Auf Schlüssel (city_id)=(HERI) wird noch aus Tabelle »airports« verwiesen.

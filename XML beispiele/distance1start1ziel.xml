@@ -1,0 +1,22 @@
+<DistanceMatrixResponse>
+  <status>OK</status>
+  <origin_address>Göttingen, Germany</origin_address>
+  <destination_address>Hanover, Germany</destination_address>
+  <row>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>4956</value>
+        <text>1 hour 23 mins</text>
+      </duration>
+      <distance>
+        <value>122861</value>
+        <text>123 km</text>
+      </distance>
+      <duration_in_traffic>
+        <value>4624</value>
+        <text>1 hour 17 mins</text>
+      </duration_in_traffic>
+    </element>
+  </row>
+</DistanceMatrixResponse>

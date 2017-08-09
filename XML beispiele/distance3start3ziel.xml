@@ -1,0 +1,150 @@
+<DistanceMatrixResponse>
+  <status>OK</status>
+  <origin_address>Hanover, Germany</origin_address>
+  <origin_address>Berlin, Germany</origin_address>
+  <origin_address>Paderborn, Germany</origin_address>
+  <destination_address>Hanover, Germany</destination_address>
+  <destination_address>Berlin, Germany</destination_address>
+  <destination_address>Paderborn, Germany</destination_address>
+  <row>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>0</value>
+        <text>1 min</text>
+      </duration>
+      <distance>
+        <value>0</value>
+        <text>1 m</text>
+      </distance>
+      <duration_in_traffic>
+        <value>1</value>
+        <text>1 min</text>
+      </duration_in_traffic>
+    </element>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>10918</value>
+        <text>3 hours 2 mins</text>
+      </duration>
+      <distance>
+        <value>284998</value>
+        <text>285 km</text>
+      </distance>
+      <duration_in_traffic>
+        <value>10320</value>
+        <text>2 hours 52 mins</text>
+      </duration_in_traffic>
+    </element>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>5851</value>
+        <text>1 hour 38 mins</text>
+      </duration>
+      <distance>
+        <value>147354</value>
+        <text>147 km</text>
+      </distance>
+      <duration_in_traffic>
+        <value>5483</value>
+        <text>1 hour 31 mins</text>
+      </duration_in_traffic>
+    </element>
+  </row>
+  <row>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>11009</value>
+        <text>3 hours 3 mins</text>
+      </duration>
+      <distance>
+        <value>286113</value>
+        <text>286 km</text>
+      </distance>
+      <duration_in_traffic>
+        <value>10414</value>
+        <text>2 hours 54 mins</text>
+      </duration_in_traffic>
+    </element>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>0</value>
+        <text>1 min</text>
+      </duration>
+      <distance>
+        <value>0</value>
+        <text>1 m</text>
+      </distance>
+      <duration_in_traffic>
+        <value>3</value>
+        <text>1 min</text>
+      </duration_in_traffic>
+    </element>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>15499</value>
+        <text>4 hours 18 mins</text>
+      </duration>
+      <distance>
+        <value>427696</value>
+        <text>428 km</text>
+      </distance>
+      <duration_in_traffic>
+        <value>14556</value>
+        <text>4 hours 3 mins</text>
+      </duration_in_traffic>
+    </element>
+  </row>
+  <row>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>5699</value>
+        <text>1 hour 35 mins</text>
+      </duration>
+      <distance>
+        <value>145115</value>
+        <text>145 km</text>
+      </distance>
+      <duration_in_traffic>
+        <value>5348</value>
+        <text>1 hour 29 mins</text>
+      </duration_in_traffic>
+    </element>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>15314</value>
+        <text>4 hours 15 mins</text>
+      </duration>
+      <distance>
+        <value>426225</value>
+        <text>426 km</text>
+      </distance>
+      <duration_in_traffic>
+        <value>14399</value>
+        <text>4 hours 0 mins</text>
+      </duration_in_traffic>
+    </element>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>0</value>
+        <text>1 min</text>
+      </duration>
+      <distance>
+        <value>0</value>
+        <text>1 m</text>
+      </distance>
+      <duration_in_traffic>
+        <value>0</value>
+        <text>1 min</text>
+      </duration_in_traffic>
+    </element>
+  </row>
+</DistanceMatrixResponse>

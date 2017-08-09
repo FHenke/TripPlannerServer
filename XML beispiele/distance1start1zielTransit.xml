@@ -1,0 +1,18 @@
+<DistanceMatrixResponse>
+  <status>OK</status>
+  <origin_address>Göttingen, Germany</origin_address>
+  <destination_address>Berlin, Germany</destination_address>
+  <row>
+    <element>
+      <status>OK</status>
+      <duration>
+        <value>14760</value>
+        <text>4 hours 6 mins</text>
+      </duration>
+      <distance>
+        <value>319895</value>
+        <text>320 km</text>
+      </distance>
+    </element>
+  </row>
+</DistanceMatrixResponse>

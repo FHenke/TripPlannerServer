@@ -1,0 +1,84 @@
+<AutoSuggestServiceResponseApiDto xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Places>
+    <PlaceDto>
+      <PlaceId>PARI-sky</PlaceId>
+      <PlaceName>Paris</PlaceName>
+      <CountryId>FR-sky</CountryId>
+      <RegionId />
+      <CityId>PARI-sky</CityId>
+      <CountryName>Frankreich</CountryName>
+    </PlaceDto>
+    <PlaceDto>
+      <PlaceId>CDG-sky</PlaceId>
+      <PlaceName>Paris-Charles de Gaulle</PlaceName>
+      <CountryId>FR-sky</CountryId>
+      <RegionId />
+      <CityId>PARI-sky</CityId>
+      <CountryName>Frankreich</CountryName>
+    </PlaceDto>
+    <PlaceDto>
+      <PlaceId>ORY-sky</PlaceId>
+      <PlaceName>Paris Orly</PlaceName>
+      <CountryId>FR-sky</CountryId>
+      <RegionId />
+      <CityId>PARI-sky</CityId>
+      <CountryName>Frankreich</CountryName>
+    </PlaceDto>
+    <PlaceDto>
+      <PlaceId>BVA-sky</PlaceId>
+      <PlaceName>Paris Beauvais</PlaceName>
+      <CountryId>FR-sky</CountryId>
+      <RegionId />
+      <CityId>PARI-sky</CityId>
+      <CountryName>Frankreich</CountryName>
+    </PlaceDto>
+    <PlaceDto>
+      <PlaceId>PIN-sky</PlaceId>
+      <PlaceName>Parintins</PlaceName>
+      <CountryId>BR-sky</CountryId>
+      <RegionId />
+      <CityId>PINA-sky</CityId>
+      <CountryName>Brasilien</CountryName>
+    </PlaceDto>
+    <PlaceDto>
+      <PlaceId>LTQ-sky</PlaceId>
+      <PlaceName>Le Touquet Paris Plag</PlaceName>
+      <CountryId>FR-sky</CountryId>
+      <RegionId />
+      <CityId>LETO-sky</CityId>
+      <CountryName>Frankreich</CountryName>
+    </PlaceDto>
+    <PlaceDto>
+      <PlaceId>BRI-sky</PlaceId>
+      <PlaceName>Bari</PlaceName>
+      <CountryId>IT-sky</CountryId>
+      <RegionId />
+      <CityId>BARI-sky</CityId>
+      <CountryName>Italien</CountryName>
+    </PlaceDto>
+    <PlaceDto>
+      <PlaceId>PK-sky</PlaceId>
+      <PlaceName>Pakistan</PlaceName>
+      <CountryId>PK-sky</CountryId>
+      <RegionId />
+      <CityId>-sky</CityId>
+      <CountryName>Pakistan</CountryName>
+    </PlaceDto>
+    <PlaceDto>
+      <PlaceId>PY-sky</PlaceId>
+      <PlaceName>Paraguay</PlaceName>
+      <CountryId>PY-sky</CountryId>
+      <RegionId />
+      <CityId>-sky</CityId>
+      <CountryName>Paraguay</CountryName>
+    </PlaceDto>
+    <PlaceDto>
+      <PlaceId>NRT-sky</PlaceId>
+      <PlaceName>Tokio Narita</PlaceName>
+      <CountryId>JP-sky</CountryId>
+      <RegionId />
+      <CityId>TYOA-sky</CityId>
+      <CountryName>Japan</CountryName>
+    </PlaceDto>
+  </Places>
+</AutoSuggestServiceResponseApiDto>

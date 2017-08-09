@@ -50,7 +50,6 @@ public class UpdateCities extends UpdateTable {
 				//iterates over all places in placelist to add them to the database if not already existing
 				for(Place place : placeList){
 					try{
-						System.out.println("city: " + place.getId() + " / " + place.getCountry() + " / " + place.getIata() + " / " + place.getName()  + " / " + place.getLatitude() + " / " + place.getLongitude());
 						//check if the exact entry exists in the database already
 						selectIdenticalEntries.setString(1, place.getId());
 						selectIdenticalEntries.setString(2, place.getCountry());
@@ -64,13 +63,11 @@ public class UpdateCities extends UpdateTable {
 							selectId.setString(1, place.getId());
 							if(super.isQuerryEmpty(selectId)){
 								//if yes drop the old entry for adding the new one later
-								System.out.println("Drop because of modifications: " + place.getId() + " / " + place.getCountry() + " / " + place.getIata() + " / " + place.getName()  + " / " + place.getLatitude() + " / " + place.getLongitude());
 								updateEntry.setString(1, place.getCountry());
 								updateEntry.setString(2, place.getIata());
 								updateEntry.setString(3, place.getName());
 								updateEntry.setString(4, "Point(" + Double.toString(place.getLatitude()) + " " + Double.toString(place.getLongitude()) + ")");
 								updateEntry.setString(5, place.getId());
-								System.out.println(updateEntry.toString());
 								updateEntry.executeUpdate();
 								
 							}else{

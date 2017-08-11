@@ -82,8 +82,7 @@ public class GoogleMapsDistance implements API {
 					Place destination = destinationList.get(destinationIndex);
 					
 					connection = new Connection(origin, destination);
-					Duration dur = new Duration ((Long.parseLong(connectionXML.getChild("duration").getChildText("value"))) * 1000);
-					connection.setDuration( dur);
+					connection.setDuration(new Duration ((Long.parseLong(connectionXML.getChild("duration").getChildText("value"))) * 1000));
 					connection.setDistance(Integer.parseInt(connectionXML.getChild("distance").getChildText("value")));
 					
 					connectionList.add(connection);

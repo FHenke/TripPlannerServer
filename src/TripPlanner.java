@@ -7,6 +7,10 @@ import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.jdom2.JDOMException;
+import org.joda.time.Duration;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 import api.SkyscannerLive;
 import api.testLive;
@@ -64,9 +68,21 @@ public class TripPlanner {
 	
 	private static void printConnectionList(LinkedBlockingQueue<Connection> connectionList){
 		for(Connection connection : connectionList){
-			System.out.println(connection.getOrigin().getCity() + " - " + connection.getDestination().getCity() + ": " + connection.getDistance() + " in " + DateFormat.getDateInstance().format(connection.getDuration()));
+			System.out.println(connection.getOrigin().getCity() + " - " + connection.getDestination().getCity() + ": " + connection.getDistance() + " in " + durationToString(connection.getDuration()));
 		}
 		
+	}
+	
+	private static String durationToString(Duration duration){
+		Period p = duration.toPeriod();
+		PeriodFormatter hm = new PeriodFormatterBuilder()
+		    .printZeroAlways()
+		    .minimumPrintedDigits(2) // gives the '01'
+		    .appendHours()
+		    .appendSeparator(":")
+		    .appendMinutes()
+		    .toFormatter();
+		return hm.print(p);
 	}
 
 }

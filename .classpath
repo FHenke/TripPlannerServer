@@ -25,5 +25,6 @@
 	<classpathentry kind="lib" path="C:/Users/Florian/Dropbox/Flo/Master/Masterarbeit/Packages/Java/Log4J/log4j-api-scala_2.10-2.8.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Florian/Dropbox/Flo/Master/Masterarbeit/Packages/Java/Log4J/log4j-api-2.8.2-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Florian/Dropbox/Flo/Master/Masterarbeit/Packages/Java/Log4J/log4j-api-2.8.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Florian/Dropbox/Flo/Master/Masterarbeit/Packages/Java/Joda Time/joda-time-2.9.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -4,6 +4,8 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.joda.time.Duration;
+
 public class Connection {
 	public final static int PLANE = 1;
 	public final static int BUS = 2;
@@ -27,7 +29,7 @@ public class Connection {
 	private Place origin;
 	private Place destination;
 	private double price;
-	private Time duration;
+	private Duration duration;
 	private Date arrivalDate;
 	private Date departureDate;
 	private int type;
@@ -83,7 +85,7 @@ public class Connection {
 	 * @param originDate
 	 * @param destinationDate
 	 */
-	public Connection(int type, Place origin, Place destination, double price, Time duration, Date originDate,
+	public Connection(int type, Place origin, Place destination, double price, Duration duration, Date originDate,
 			Date destinationDate) {
 		super();
 		this.type = type;
@@ -123,7 +125,7 @@ public class Connection {
 	/**
 	 * @return the duration
 	 */
-	public Time getDuration() {
+	public Duration getDuration() {
 		return duration;
 	}
 
@@ -264,7 +266,7 @@ public class Connection {
 	/**
 	 * @param duration the duration to set
 	 */
-	public void setDuration(Time duration) {
+	public void setDuration(Duration duration) {
 		this.duration = duration;
 	}
 

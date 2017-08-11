@@ -21,6 +21,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.filter.Filters;
 import org.jdom2.input.SAXBuilder;
+import org.joda.time.Duration;
 
 import utilities.Connection;
 import utilities.XMLUtilities;
@@ -81,7 +82,8 @@ public class GoogleMapsDistance implements API {
 					Place destination = destinationList.get(destinationIndex);
 					
 					connection = new Connection(origin, destination);
-					connection.setDuration(new Time ((Long.parseLong(connectionXML.getChild("duration").getChildText("value"))) * 1000) );
+					Duration dur = new Duration ((Long.parseLong(connectionXML.getChild("duration").getChildText("value"))) * 1000);
+					connection.setDuration( dur);
 					connection.setDistance(Integer.parseInt(connectionXML.getChild("distance").getChildText("value")));
 					
 					connectionList.add(connection);

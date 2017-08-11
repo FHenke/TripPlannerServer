@@ -33,8 +33,8 @@
         <text>285 km</text>
       </distance>
       <duration_in_traffic>
-        <value>10579</value>
-        <text>2 hours 56 mins</text>
+        <value>10692</value>
+        <text>2 hours 58 mins</text>
       </duration_in_traffic>
     </element>
     <element>
@@ -48,7 +48,7 @@
         <text>147 km</text>
       </distance>
       <duration_in_traffic>
-        <value>5498</value>
+        <value>5518</value>
         <text>1 hour 32 mins</text>
       </duration_in_traffic>
     </element>
@@ -65,8 +65,8 @@
         <text>286 km</text>
       </distance>
       <duration_in_traffic>
-        <value>10679</value>
-        <text>2 hours 58 mins</text>
+        <value>10780</value>
+        <text>3 hours 0 mins</text>
       </duration_in_traffic>
     </element>
     <element>
@@ -95,8 +95,8 @@
         <text>428 km</text>
       </distance>
       <duration_in_traffic>
-        <value>14894</value>
-        <text>4 hours 8 mins</text>
+        <value>15057</value>
+        <text>4 hours 11 mins</text>
       </duration_in_traffic>
     </element>
   </row>
@@ -112,7 +112,7 @@
         <text>145 km</text>
       </distance>
       <duration_in_traffic>
-        <value>5307</value>
+        <value>5301</value>
         <text>1 hour 28 mins</text>
       </duration_in_traffic>
     </element>
@@ -127,8 +127,8 @@
         <text>426 km</text>
       </distance>
       <duration_in_traffic>
-        <value>14654</value>
-        <text>4 hours 4 mins</text>
+        <value>14721</value>
+        <text>4 hours 5 mins</text>
       </duration_in_traffic>
     </element>
     <element>

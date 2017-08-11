@@ -74,14 +74,14 @@ public class GoogleMapsDistance implements API {
 			Place origin = originList.pollFirst();
 			destinationIndex = 0;
 			for(Element connectionXML : originXML.getDescendants(Filters.element("element"))){
-				// status is OK if there is a result, if a place cant be nfound it is ZERO_RESULT
+				// status is OK if there is a result, if a place cant be found it is ZERO_RESULT
 				if(connectionXML.getChildText("status").equals("OK")){
 					Connection connection;
 					
 					Place destination = destinationList.get(destinationIndex);
 					
 					connection = new Connection(origin, destination);
-					connection.setDuration(new Time(Long.parseLong(connectionXML.getChild("duration").getChildText("value"))));
+					connection.setDuration(new Time ((Long.parseLong(connectionXML.getChild("duration").getChildText("value"))) * 1000) );
 					connection.setDistance(Integer.parseInt(connectionXML.getChild("distance").getChildText("value")));
 					
 					connectionList.add(connection);

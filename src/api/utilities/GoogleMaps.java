@@ -125,14 +125,14 @@ public class GoogleMaps {
 	}
 	
 	public static String createDistanceURL(String origin, String destination, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language){
-		if(!transportation.equals(DRIVING) && !transportation.equals(WALKING) && !transportation.equals(BICYCLING) && !transportation.equals(TRANSIT) && !transportation.equals(null)){
+		if(!transportation.equals(DRIVING) && !transportation.equals(WALKING) && !transportation.equals(BICYCLING) && !transportation.equals(TRANSIT) && !transportation.equals("")){
 			throw new IllegalArgumentException("Transportation has not a valid content");
 		}
 		
 		String url = URL + "distancematrix/xml?origins=" + origin + "&destinations=" + destination + "&key=" + DISTANCE_API_KEY;
-		url += (!transportation.equals(null)) ? "&mode=" + transportation : "";
-		url += (!avoid.equals(null)) ? "&mode=" + avoid : "";
-		url += (!language.equals(null)) ? "&mode=" + language : "";
+		url += (!transportation.equals("")) ? "&mode=" + transportation : "";
+		url += (!avoid.equals("")) ? "&mode=" + avoid : "";
+		url += (!language.equals("")) ? "&mode=" + language : "";
 		if(date != null){
 			url += ((isDepartureDate) ? "&departure_time=" : "&arrival_time=") + (date.getTimeInMillis() / 1000);
 		}

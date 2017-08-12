@@ -21,8 +21,8 @@
     <element>
       <status>OK</status>
       <duration>
-        <value>6660</value>
-        <text>1 hour 51 mins</text>
+        <value>6840</value>
+        <text>1 hour 54 mins</text>
       </duration>
       <distance>
         <value>257240</value>
@@ -32,12 +32,12 @@
     <element>
       <status>OK</status>
       <duration>
-        <value>6660</value>
-        <text>1 hour 51 mins</text>
+        <value>8100</value>
+        <text>2 hours 15 mins</text>
       </duration>
       <distance>
-        <value>130263</value>
-        <text>130 km</text>
+        <value>162016</value>
+        <text>162 km</text>
       </distance>
     </element>
   </row>
@@ -80,23 +80,23 @@
     <element>
       <status>OK</status>
       <duration>
-        <value>9000</value>
-        <text>2 hours 30 mins</text>
+        <value>7680</value>
+        <text>2 hours 8 mins</text>
       </duration>
       <distance>
-        <value>249810</value>
-        <text>250 km</text>
+        <value>136838</value>
+        <text>137 km</text>
       </distance>
     </element>
     <element>
       <status>OK</status>
       <duration>
-        <value>15300</value>
-        <text>4 hours 15 mins</text>
+        <value>15000</value>
+        <text>4 hours 10 mins</text>
       </duration>
       <distance>
-        <value>511061</value>
-        <text>511 km</text>
+        <value>394078</value>
+        <text>394 km</text>
       </distance>
     </element>
     <element>

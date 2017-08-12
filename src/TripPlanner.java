@@ -39,7 +39,9 @@ public class TripPlanner {
 			//LinkedBlockingQueue<Connection> connectionList =  distance.getAllConnections( "Göttingen", "Dortmund", new GregorianCalendar(2017, 6, 29).getTime(), new GregorianCalendar(2017, 7, 25).getTime());
 			//LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), new GregorianCalendar(2017, 7, 22).getTime(), true, GoogleMaps.DRIVING, "de", GoogleMaps.FERRIES);
 			
-			LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), greg, true, GoogleMaps.TRANSIT, GoogleMaps.FERRIES, "de");
+			//LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), greg, true, GoogleMaps.TRANSIT, GoogleMaps.FERRIES, "de");
+			
+			LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), null, true, GoogleMaps.TRANSIT, GoogleMaps.FERRIES, "de");
 			//test.getAllConnections( "FRA", "JFK", new GregorianCalendar(2017, 8, 22).getTime(), null);
 			//test.getAutosuggest("pari");
 			printConnectionList(connectionList);

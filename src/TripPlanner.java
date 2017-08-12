@@ -27,6 +27,7 @@ public class TripPlanner {
 		api.GoogleMapsDirection direction = new api.GoogleMapsDirection();
 		
 		try{
+			//
 			GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 			greg.set(2017, 7, 22, 7, 20);
 			

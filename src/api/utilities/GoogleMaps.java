@@ -134,7 +134,6 @@ public class GoogleMaps {
 		url += (!avoid.equals(null)) ? "&mode=" + avoid : "";
 		url += (!language.equals(null)) ? "&mode=" + language : "";
 		if(date != null){
-			System.out.println(date.getTimeInMillis() / 1000);
 			url += ((isDepartureDate) ? "&departure_time=" : "&arrival_time=") + (date.getTimeInMillis() / 1000);
 		}
 				

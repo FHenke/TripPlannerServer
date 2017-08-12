@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.net.URLEncoder;
 import java.sql.Time;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -52,9 +53,9 @@ public class GoogleMapsDistance implements API {
 		//connections.addAll(c);
 		
 		
-		String urlOutbound = "https://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + origin + "&destinations=" + destination + "&mode=transit" + "&key=AIzaSyA2wxUVkdyzbBdcOdtIItCnco2vyJoVMVE";
+		String urlOutbound = "https://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + origin + "&destinations=" + destination + "&mode=transit&departure_time=1502546005" + "&key=AIzaSyA2wxUVkdyzbBdcOdtIItCnco2vyJoVMVE";
 		String urlInbound;
-		//url = "https://maps.googleapis.com/maps/api/distancematrix/xml?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626&key=AIzaSyA2wxUVkdyzbBdcOdtIItCnco2vyJoVMVE";
+		//urlOutbound = "https://maps.googleapis.com/maps/api/distancematrix/xml?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626&key=AIzaSyA2wxUVkdyzbBdcOdtIItCnco2vyJoVMVE";
 
 		Element rootFromAutosuggestXML = getInput(urlOutbound);
 		
@@ -62,7 +63,7 @@ public class GoogleMapsDistance implements API {
 		return connections;
 	}
 	
-	public LinkedBlockingQueue<Connection> getConnection(LinkedList<Place> originList, LinkedList<Place> destinationList, Date date, boolean isDepartureDate, String transportation, String avoid, String language) throws ClientProtocolException, IOException, IllegalStateException, JDOMException{
+	public LinkedBlockingQueue<Connection> getConnection(LinkedList<Place> originList, LinkedList<Place> destinationList, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language) throws ClientProtocolException, IOException, IllegalStateException, JDOMException{
 		//ToDo:insert body
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		int destinationIndex = 0;

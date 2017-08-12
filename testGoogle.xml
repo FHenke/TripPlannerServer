@@ -17,57 +17,41 @@
         <value>0</value>
         <text>1 m</text>
       </distance>
-      <duration_in_traffic>
-        <value>2</value>
-        <text>1 min</text>
-      </duration_in_traffic>
     </element>
     <element>
       <status>OK</status>
       <duration>
-        <value>11092</value>
-        <text>3 hours 5 mins</text>
+        <value>6660</value>
+        <text>1 hour 51 mins</text>
       </duration>
       <distance>
-        <value>284998</value>
-        <text>285 km</text>
+        <value>257240</value>
+        <text>257 km</text>
       </distance>
-      <duration_in_traffic>
-        <value>10692</value>
-        <text>2 hours 58 mins</text>
-      </duration_in_traffic>
     </element>
     <element>
       <status>OK</status>
       <duration>
-        <value>5866</value>
-        <text>1 hour 38 mins</text>
+        <value>6660</value>
+        <text>1 hour 51 mins</text>
       </duration>
       <distance>
-        <value>147354</value>
-        <text>147 km</text>
+        <value>130263</value>
+        <text>130 km</text>
       </distance>
-      <duration_in_traffic>
-        <value>5518</value>
-        <text>1 hour 32 mins</text>
-      </duration_in_traffic>
     </element>
   </row>
   <row>
     <element>
       <status>OK</status>
       <duration>
-        <value>11210</value>
-        <text>3 hours 7 mins</text>
+        <value>6840</value>
+        <text>1 hour 54 mins</text>
       </duration>
       <distance>
-        <value>286112</value>
-        <text>286 km</text>
+        <value>257239</value>
+        <text>257 km</text>
       </distance>
-      <duration_in_traffic>
-        <value>10780</value>
-        <text>3 hours 0 mins</text>
-      </duration_in_traffic>
     </element>
     <element>
       <status>OK</status>
@@ -79,57 +63,41 @@
         <value>0</value>
         <text>1 m</text>
       </distance>
-      <duration_in_traffic>
-        <value>3</value>
-        <text>1 min</text>
-      </duration_in_traffic>
     </element>
     <element>
       <status>OK</status>
       <duration>
-        <value>15699</value>
-        <text>4 hours 22 mins</text>
+        <value>15120</value>
+        <text>4 hours 12 mins</text>
       </duration>
       <distance>
-        <value>427695</value>
-        <text>428 km</text>
+        <value>387502</value>
+        <text>388 km</text>
       </distance>
-      <duration_in_traffic>
-        <value>15057</value>
-        <text>4 hours 11 mins</text>
-      </duration_in_traffic>
     </element>
   </row>
   <row>
     <element>
       <status>OK</status>
       <duration>
-        <value>5712</value>
-        <text>1 hour 35 mins</text>
+        <value>9000</value>
+        <text>2 hours 30 mins</text>
       </duration>
       <distance>
-        <value>145115</value>
-        <text>145 km</text>
+        <value>249810</value>
+        <text>250 km</text>
       </distance>
-      <duration_in_traffic>
-        <value>5301</value>
-        <text>1 hour 28 mins</text>
-      </duration_in_traffic>
     </element>
     <element>
       <status>OK</status>
       <duration>
-        <value>15506</value>
-        <text>4 hours 18 mins</text>
+        <value>15300</value>
+        <text>4 hours 15 mins</text>
       </duration>
       <distance>
-        <value>426225</value>
-        <text>426 km</text>
+        <value>511061</value>
+        <text>511 km</text>
       </distance>
-      <duration_in_traffic>
-        <value>14721</value>
-        <text>4 hours 5 mins</text>
-      </duration_in_traffic>
     </element>
     <element>
       <status>OK</status>
@@ -141,10 +109,6 @@
         <value>0</value>
         <text>1 m</text>
       </distance>
-      <duration_in_traffic>
-        <value>0</value>
-        <text>1 min</text>
-      </duration_in_traffic>
     </element>
   </row>
 </DistanceMatrixResponse>

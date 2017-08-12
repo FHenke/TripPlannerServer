@@ -6,6 +6,7 @@ package api.utilities;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -123,7 +124,7 @@ public class GoogleMaps {
 		return url;
 	}
 	
-	public static String createDistanceURL(String origin, String destination, Date date, boolean isDepartureDate, String transportation, String avoid, String language){
+	public static String createDistanceURL(String origin, String destination, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language){
 		if(!transportation.equals(DRIVING) && !transportation.equals(WALKING) && !transportation.equals(BICYCLING) && !transportation.equals(TRANSIT) && !transportation.equals(null)){
 			throw new IllegalArgumentException("Transportation has not a valid content");
 		}
@@ -133,7 +134,8 @@ public class GoogleMaps {
 		url += (!avoid.equals(null)) ? "&mode=" + avoid : "";
 		url += (!language.equals(null)) ? "&mode=" + language : "";
 		if(date != null){
-			url += ((isDepartureDate) ? "&departure_time=" : "&arrival_time=") + date.getTime();
+			System.out.println(date.getTimeInMillis() / 1000);
+			url += ((isDepartureDate) ? "&departure_time=" : "&arrival_time=") + (date.getTimeInMillis() / 1000);
 		}
 				
 		return url;

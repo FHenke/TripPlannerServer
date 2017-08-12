@@ -33,7 +33,7 @@ public class GoogleMapsDirection implements API {
 	
 	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, Date outboundDate, Date inboundDate) throws ClientProtocolException, IOException, JDOMException{
 		String url = "https://maps.googleapis.com/maps/api/directions/xml?origin=Göttingen&destination=Berlin&key=AIzaSyDhieKypOeAVC9O1rD2y7SoSEgESt0S8ao";
-		url = "https://maps.googleapis.com/maps/api/directions/xml?origin=" + origin + "&destination=" + destination + "&mode=transit" + "&key=AIzaSyDhieKypOeAVC9O1rD2y7SoSEgESt0S8ao";
+		url = "https://maps.googleapis.com/maps/api/directions/xml?origin=" + origin + "&destination=" + destination + "&mode=transit" + "&departure_time=1502546005&key=AIzaSyDhieKypOeAVC9O1rD2y7SoSEgESt0S8ao";
 		InputStream test = getInput(url);
 		
 		SAXBuilder builder = new SAXBuilder();

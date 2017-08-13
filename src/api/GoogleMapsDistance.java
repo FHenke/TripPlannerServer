@@ -45,22 +45,26 @@ public class GoogleMapsDistance implements API {
 		
 	}
 	
-	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, Date outboundDate, Date InboundDate) throws ClientProtocolException, IOException, JDOMException{
+	public LinkedBlockingQueue<Connection> getAllConnections(LinkedList<Place> origin, LinkedList<Place> destination, GregorianCalendar outboundDate, GregorianCalendar inboundDate) throws ClientProtocolException, IOException, JDOMException{
 		
 		//ToDo: function calls for getting the lists
 		
 		LinkedBlockingQueue<Connection> connections = null;
 		//connections.addAll(c);
 		
-		
+		/* To manuelly set Values in the URL for test purposes
 		String urlOutbound = "https://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + origin + "&destinations=" + destination + "&mode=transit&departure_time=1502546005" + "&key=AIzaSyA2wxUVkdyzbBdcOdtIItCnco2vyJoVMVE";
-		String urlInbound;
-		//urlOutbound = "https://maps.googleapis.com/maps/api/distancematrix/xml?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626&key=AIzaSyA2wxUVkdyzbBdcOdtIItCnco2vyJoVMVE";
-
 		Element rootFromAutosuggestXML = getInput(urlOutbound);
-		
 		XMLUtilities.writeXmlToFile(rootFromAutosuggestXML, "testGoogle.xml");
-		return connections;
+		 */
+		
+		LinkedBlockingQueue<Connection> urlOutbound = getConnection(origin, destination, outboundDate, true, "", "", "de");
+		LinkedBlockingQueue<Connection> urlInbound = getConnection(destination, origin, inboundDate, true, "", "", "de");
+		
+		urlOutbound.addAll(urlInbound);
+		
+		
+		return urlOutbound;
 	}
 	
 	public LinkedBlockingQueue<Connection> getConnection(LinkedList<Place> originList, LinkedList<Place> destinationList, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language) throws ClientProtocolException, IOException, IllegalStateException, JDOMException{

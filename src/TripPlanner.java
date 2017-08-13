@@ -23,6 +23,7 @@ public class TripPlanner {
 
 	public static void main(String[] args) {
 		api.SkyscannerCache test = new api.SkyscannerCache();
+		api.SkyscannerLive live = new api.SkyscannerLive();
 		api.GoogleMapsDistance distance = new api.GoogleMapsDistance();
 		api.GoogleMapsDirection direction = new api.GoogleMapsDirection();
 		
@@ -32,17 +33,18 @@ public class TripPlanner {
 			greg.set(2017, 7, 22, 7, 20);
 			
 			
-			//test.getAllConnections( "FRA", "JFK", new GregorianCalendar(2017, 7, 22).getTime(), new GregorianCalendar(2017, 7, 25).getTime());
-			//direction.getAllConnections( "Göttingen", "Hannover" + URLEncoder.encode("|", "UTF-8") + "Frankfurt" + URLEncoder.encode("|", "UTF-8") + "Berlin" + URLEncoder.encode("|", "UTF-8") + "Padderborn+Germany", new GregorianCalendar(2017, 7, 22).getTime(), new GregorianCalendar(2017, 7, 25).getTime());
+			//LinkedBlockingQueue<Connection> connectionList = test.getAllConnections( "FRA", "JFK", new GregorianCalendar(2017, 8, 22), new GregorianCalendar(2017, 8, 25));
+			LinkedBlockingQueue<Connection> connectionList = direction.getAllConnections( "Göttingen", "Hannover" + URLEncoder.encode("|", "UTF-8") + "Frankfurt" + URLEncoder.encode("|", "UTF-8") + "Berlin" + URLEncoder.encode("|", "UTF-8") + "Padderborn+Germany", new GregorianCalendar(2017, 7, 22), new GregorianCalendar(2017, 7, 25));
 			//direction.getAllConnections( "51.536102,9.925805", "52.377847,9.740254", new GregorianCalendar(2017, 7, 22).getTime(), new GregorianCalendar(2017, 7, 25).getTime());
 			//direction.getAllConnections( "Göttingen", "Dortmund", new GregorianCalendar(2017, 6, 29).getTime(), new GregorianCalendar(2017, 7, 25).getTime());
-			//LinkedBlockingQueue<Connection> connectionList =  distance.getAllConnections( "Göttingen", "Dortmund", new GregorianCalendar(2017, 6, 29).getTime(), new GregorianCalendar(2017, 7, 25).getTime());
+			// LinkedBlockingQueue<Connection> connectionList =  distance.getAllConnections( "Hannover", "Dortmund", new GregorianCalendar(2017, 8, 29), new GregorianCalendar(2017, 8, 25));
 			//LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), new GregorianCalendar(2017, 7, 22).getTime(), true, GoogleMaps.DRIVING, "de", GoogleMaps.FERRIES);
 			
 			//LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), greg, true, GoogleMaps.TRANSIT, GoogleMaps.FERRIES, "de");
 			
-			LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), null, true, GoogleMaps.TRANSIT, GoogleMaps.FERRIES, "de");
+			//LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), null, true, GoogleMaps.TRANSIT, GoogleMaps.FERRIES, "de");
 			//test.getAllConnections( "FRA", "JFK", new GregorianCalendar(2017, 8, 22).getTime(), null);
+			//live.getAllConnections( "FRA", "JFK", new GregorianCalendar(2017, 8, 22), null);
 			//test.getAutosuggest("pari");
 			printConnectionList(connectionList);
 			
@@ -76,23 +78,29 @@ public class TripPlanner {
 		System.out.println("Done");
 	}
 	
+	//for getConnection
 	private static void printConnectionList(LinkedBlockingQueue<Connection> connectionList){
 		for(Connection connection : connectionList){
-			System.out.println(connection.getOrigin().getCity() + " - " + connection.getDestination().getCity() + ": " + connection.getDistance() + " in " + durationToString(connection.getDuration()));
+			System.out.println(connection.getOrigin().getCity() + " - " + connection.getDestination().getCity() + ": " + connection.getDistance() + " in " + connection.durationToString());
 		}
 		
 	}
 	
-	private static String durationToString(Duration duration){
-		Period p = duration.toPeriod();
-		PeriodFormatter hm = new PeriodFormatterBuilder()
-		    .printZeroAlways()
-		    .minimumPrintedDigits(2) // gives the '01'
-		    .appendHours()
-		    .appendSeparator(":")
-		    .appendMinutes()
-		    .toFormatter();
-		return hm.print(p);
+	//for SkyCache
+	private static void printConnectionList2(LinkedBlockingQueue<Connection> connectionList){
+		for(Connection connection : connectionList){
+			System.out.println(connection.getOrigin().getCity() + " - " + connection.getDestination().getCity());
+		}
+		
 	}
+	
+	//Für getAllConnections
+	private static void printConnectionList3(LinkedBlockingQueue<Connection> connectionList){
+		for(Connection connection : connectionList){
+			System.out.println(connection.getOrigin().getName() + " - " + connection.getDestination().getName() + ": " + connection.getDistance() + " in " + connection.durationToString());
+		}
+		
+	}
+
 
 }

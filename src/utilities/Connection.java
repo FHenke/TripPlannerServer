@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.joda.time.Duration;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 public class Connection {
 	public final static int PLANE = 1;
@@ -351,5 +354,17 @@ public class Connection {
 		return (returnConnection == null) ? false : true;
 	}
 	
+	
+	public String durationToString(){
+		Period p = duration.toPeriod();
+		PeriodFormatter hm = new PeriodFormatterBuilder()
+		    .printZeroAlways()
+		    .minimumPrintedDigits(2) // gives the '01'
+		    .appendHours()
+		    .appendSeparator(":")
+		    .appendMinutes()
+		    .toFormatter();
+		return hm.print(p);
+	}
 	
 }

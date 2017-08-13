@@ -1,84 +1,148 @@
-<AutoSuggestServiceResponseApiDto xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<BrowseQuotesResponseAPIDto xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Currencies>
+    <CurrencyDto>
+      <Code>EUR</Code>
+      <Symbol>€</Symbol>
+      <ThousandsSeparator> </ThousandsSeparator>
+      <DecimalSeparator>,</DecimalSeparator>
+      <SymbolOnLeft>false</SymbolOnLeft>
+      <SpaceBetweenAmountAndSymbol>true</SpaceBetweenAmountAndSymbol>
+      <RoundingCoefficient>0</RoundingCoefficient>
+      <DecimalDigits>2</DecimalDigits>
+    </CurrencyDto>
+  </Currencies>
+  <Quotes>
+    <QuoteDto>
+      <QuoteId>1</QuoteId>
+      <MinPrice>460</MinPrice>
+      <Direct>true</Direct>
+      <OutboundLeg>
+        <CarrierIds>
+          <int>1713</int>
+        </CarrierIds>
+        <OriginId>52337</OriginId>
+        <DestinationId>60987</DestinationId>
+        <DepartureDate>2017-09-22T00:00:00</DepartureDate>
+      </OutboundLeg>
+      <InboundLeg>
+        <CarrierIds>
+          <int>1713</int>
+        </CarrierIds>
+        <OriginId>60987</OriginId>
+        <DestinationId>52337</DestinationId>
+        <DepartureDate>2017-09-25T00:00:00</DepartureDate>
+      </InboundLeg>
+      <QuoteDateTime>2017-08-12T14:41:00</QuoteDateTime>
+    </QuoteDto>
+    <QuoteDto>
+      <QuoteId>2</QuoteId>
+      <MinPrice>417</MinPrice>
+      <Direct>false</Direct>
+      <OutboundLeg>
+        <CarrierIds>
+          <int>1218</int>
+        </CarrierIds>
+        <OriginId>52337</OriginId>
+        <DestinationId>60987</DestinationId>
+        <DepartureDate>2017-09-22T00:00:00</DepartureDate>
+      </OutboundLeg>
+      <InboundLeg>
+        <CarrierIds>
+          <int>881</int>
+        </CarrierIds>
+        <OriginId>60987</OriginId>
+        <DestinationId>52337</DestinationId>
+        <DepartureDate>2017-09-25T00:00:00</DepartureDate>
+      </InboundLeg>
+      <QuoteDateTime>2017-08-11T20:17:00</QuoteDateTime>
+    </QuoteDto>
+  </Quotes>
   <Places>
     <PlaceDto>
-      <PlaceId>PARI-sky</PlaceId>
-      <PlaceName>Paris</PlaceName>
-      <CountryId>FR-sky</CountryId>
-      <RegionId />
-      <CityId>PARI-sky</CityId>
-      <CountryName>Frankreich</CountryName>
+      <PlaceId>52337</PlaceId>
+      <IataCode>FRA</IataCode>
+      <Name>Frankfurt am Main</Name>
+      <Type>Station</Type>
+      <SkyscannerCode>FRA</SkyscannerCode>
+      <CityName>Frankfurt am Main</CityName>
+      <CityId>FRAN</CityId>
+      <CountryName>Deutschland</CountryName>
     </PlaceDto>
     <PlaceDto>
-      <PlaceId>CDG-sky</PlaceId>
-      <PlaceName>Paris-Charles de Gaulle</PlaceName>
-      <CountryId>FR-sky</CountryId>
-      <RegionId />
-      <CityId>PARI-sky</CityId>
-      <CountryName>Frankreich</CountryName>
-    </PlaceDto>
-    <PlaceDto>
-      <PlaceId>ORY-sky</PlaceId>
-      <PlaceName>Paris Orly</PlaceName>
-      <CountryId>FR-sky</CountryId>
-      <RegionId />
-      <CityId>PARI-sky</CityId>
-      <CountryName>Frankreich</CountryName>
-    </PlaceDto>
-    <PlaceDto>
-      <PlaceId>BVA-sky</PlaceId>
-      <PlaceName>Paris Beauvais</PlaceName>
-      <CountryId>FR-sky</CountryId>
-      <RegionId />
-      <CityId>PARI-sky</CityId>
-      <CountryName>Frankreich</CountryName>
-    </PlaceDto>
-    <PlaceDto>
-      <PlaceId>PIN-sky</PlaceId>
-      <PlaceName>Parintins</PlaceName>
-      <CountryId>BR-sky</CountryId>
-      <RegionId />
-      <CityId>PINA-sky</CityId>
-      <CountryName>Brasilien</CountryName>
-    </PlaceDto>
-    <PlaceDto>
-      <PlaceId>LTQ-sky</PlaceId>
-      <PlaceName>Le Touquet Paris Plag</PlaceName>
-      <CountryId>FR-sky</CountryId>
-      <RegionId />
-      <CityId>LETO-sky</CityId>
-      <CountryName>Frankreich</CountryName>
-    </PlaceDto>
-    <PlaceDto>
-      <PlaceId>BRI-sky</PlaceId>
-      <PlaceName>Bari</PlaceName>
-      <CountryId>IT-sky</CountryId>
-      <RegionId />
-      <CityId>BARI-sky</CityId>
-      <CountryName>Italien</CountryName>
-    </PlaceDto>
-    <PlaceDto>
-      <PlaceId>PK-sky</PlaceId>
-      <PlaceName>Pakistan</PlaceName>
-      <CountryId>PK-sky</CountryId>
-      <RegionId />
-      <CityId>-sky</CityId>
-      <CountryName>Pakistan</CountryName>
-    </PlaceDto>
-    <PlaceDto>
-      <PlaceId>PY-sky</PlaceId>
-      <PlaceName>Paraguay</PlaceName>
-      <CountryId>PY-sky</CountryId>
-      <RegionId />
-      <CityId>-sky</CityId>
-      <CountryName>Paraguay</CountryName>
-    </PlaceDto>
-    <PlaceDto>
-      <PlaceId>NRT-sky</PlaceId>
-      <PlaceName>Tokio Narita</PlaceName>
-      <CountryId>JP-sky</CountryId>
-      <RegionId />
-      <CityId>TYOA-sky</CityId>
-      <CountryName>Japan</CountryName>
+      <PlaceId>60987</PlaceId>
+      <IataCode>JFK</IataCode>
+      <Name>New York John F Kennedy</Name>
+      <Type>Station</Type>
+      <SkyscannerCode>JFK</SkyscannerCode>
+      <CityName>New York</CityName>
+      <CityId>NYCA</CityId>
+      <CountryName>Vereinigte Staaten</CountryName>
     </PlaceDto>
   </Places>
-</AutoSuggestServiceResponseApiDto>
+  <Carriers>
+    <CarriersDto>
+      <CarrierId>105</CarrierId>
+      <Name>Thomas Cook Airlines</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>834</CarrierId>
+      <Name>Air Berlin</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>838</CarrierId>
+      <Name>Air France</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>857</CarrierId>
+      <Name>Finnair</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>881</CarrierId>
+      <Name>British Airways</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1033</CarrierId>
+      <Name>Aer Lingus</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1081</CarrierId>
+      <Name>Icelandair</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1218</CarrierId>
+      <Name>Iberia</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1324</CarrierId>
+      <Name>KLM</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1368</CarrierId>
+      <Name>Lufthansa</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1384</CarrierId>
+      <Name>SWISS</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1427</CarrierId>
+      <Name>EgyptAir</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1713</CarrierId>
+      <Name>Singapore Airlines</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1717</CarrierId>
+      <Name>Aeroflot</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1760</CarrierId>
+      <Name>TAP Portugal</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1793</CarrierId>
+      <Name>United</Name>
+    </CarriersDto>
+  </Carriers>
+</BrowseQuotesResponseAPIDto>

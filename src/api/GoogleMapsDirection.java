@@ -6,6 +6,7 @@ package api;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.http.HttpResponse;
@@ -31,7 +32,7 @@ public class GoogleMapsDirection implements API {
 		
 	}
 	
-	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, Date outboundDate, Date inboundDate) throws ClientProtocolException, IOException, JDOMException{
+	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, GregorianCalendar outboundDate, GregorianCalendar inboundDate) throws ClientProtocolException, IOException, JDOMException{
 		String url = "https://maps.googleapis.com/maps/api/directions/xml?origin=Göttingen&destination=Berlin&key=AIzaSyDhieKypOeAVC9O1rD2y7SoSEgESt0S8ao";
 		url = "https://maps.googleapis.com/maps/api/directions/xml?origin=" + origin + "&destination=" + destination + "&mode=transit" + "&departure_time=1502546005&key=AIzaSyDhieKypOeAVC9O1rD2y7SoSEgESt0S8ao";
 		InputStream test = getInput(url);

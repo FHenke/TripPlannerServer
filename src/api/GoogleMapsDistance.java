@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
 import java.sql.Time;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
@@ -52,30 +53,28 @@ public class GoogleMapsDistance implements API {
 		LinkedList<Place> originlist = new LinkedList<Place>();
 		originlist.add(new Place(origin));
 		LinkedList<Place> destinationlist = new LinkedList<Place>();
-		originlist.add(new Place(destination));		
-		
+		destinationlist.add(new Place(destination));		
 		
 		LinkedBlockingQueue<Connection> connections = null;
-		//connections.addAll(c);
 		
 		/* To manuelly set Values in the URL for test purposes
 		String urlOutbound = "https://maps.googleapis.com/maps/api/distancematrix/xml?origins=" + origin + "&destinations=" + destination + "&mode=transit&departure_time=1502546005" + "&key=AIzaSyA2wxUVkdyzbBdcOdtIItCnco2vyJoVMVE";
 		Element rootFromAutosuggestXML = getInput(urlOutbound);
 		XMLUtilities.writeXmlToFile(rootFromAutosuggestXML, "testGoogle.xml");
-		 */
+		 */		
 		
-		LinkedBlockingQueue<Connection> urlOutbound = getConnection(originlist, destinationlist, outboundDate, true, "", "", "de");
-		LinkedBlockingQueue<Connection> urlInbound = getConnection(destinationlist, originlist, inboundDate, true, "", "", "de");
+		//outbound connection
+		connections = getConnection(originlist, destinationlist, outboundDate, true, "", "", "de");
+		//inbound connection
+		connections.addAll(getConnection(destinationlist, originlist, inboundDate, true, "", "", "de"));
 		
-		urlOutbound.addAll(urlInbound);
-		
-		
-		return urlOutbound;
+		return connections;
 	}
 	
 	public LinkedBlockingQueue<Connection> getConnection(LinkedList<Place> originList, LinkedList<Place> destinationList, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language) throws ClientProtocolException, IOException, IllegalStateException, JDOMException{
 		//ToDo:insert body
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
+		int originIndex = 0;
 		int destinationIndex = 0;
 		
 		Element rootFromConnectionsXML = getInput(api.utilities.GoogleMaps.createDistanceURL(GoogleMaps.PlaceToGoogleMapsString(originList), GoogleMaps.PlaceToGoogleMapsString(destinationList), date, isDepartureDate, transportation, avoid, language));
@@ -83,7 +82,7 @@ public class GoogleMapsDistance implements API {
 		
 		for(Element originXML : rootFromConnectionsXML.getDescendants(Filters.element("row"))){
 			//gets and removes the first element of the list of origins
-			Place origin = originList.pollFirst();
+			Place origin = originList.get(originIndex);
 			destinationIndex = 0;
 			for(Element connectionXML : originXML.getDescendants(Filters.element("element"))){
 				// status is OK if there is a result, if a place cant be found it is ZERO_RESULT
@@ -100,7 +99,7 @@ public class GoogleMapsDistance implements API {
 				}
 				destinationIndex++;
 			}
-			
+			originIndex++;
 		}
 		
 		

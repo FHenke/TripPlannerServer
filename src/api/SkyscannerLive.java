@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -32,7 +33,7 @@ public class SkyscannerLive implements API {
 		
 	}
 	
-	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, Date originDate, Date destinationDate){
+	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, GregorianCalendar originDate, GregorianCalendar destinationDate){
 	
 		return null;
 	}
@@ -42,7 +43,8 @@ public class SkyscannerLive implements API {
 		HttpPost httpPost = new HttpPost("http://partners.api.skyscanner.net/apiservices/pricing/v1.0");
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();
 		//nvps.add(new BasicNameValuePair("Content-Type", "application/x-www-form-urlencoded"));
-		/*nvps.add(new BasicNameValuePair("cabinclass", "Economy"));
+		/**/
+		nvps.add(new BasicNameValuePair("cabinclass", "Economy"));
 		nvps.add(new BasicNameValuePair("country", "UK"));
 		nvps.add(new BasicNameValuePair("currency", "GBP"));
 		nvps.add(new BasicNameValuePair("locale", "en-GB"));
@@ -50,10 +52,10 @@ public class SkyscannerLive implements API {
 		nvps.add(new BasicNameValuePair("originplace", "EDI"));
 		nvps.add(new BasicNameValuePair("destinationplace", "LHR"));
 		nvps.add(new BasicNameValuePair("outbounddate", "2017-08-12"));
-		nvps.add(new BasicNameValuePair("outbounddate", "2017-09-12"));
+		nvps.add(new BasicNameValuePair("inbounddate", "2017-09-12"));
 		nvps.add(new BasicNameValuePair("adults", "1"));
 		nvps.add(new BasicNameValuePair("children", "0"));
-		nvps.add(new BasicNameValuePair("infants", "0"));*/
+		nvps.add(new BasicNameValuePair("infants", "0"));
 		nvps.add(new BasicNameValuePair("apikey", "yf305338938960673162289244070319"));
 		
 		

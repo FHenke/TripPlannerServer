@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -74,12 +75,12 @@ public class SkyscannerCache implements API {
 	/**
 	 * 
 	 */
-	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, Date outboundDate, Date inboundDate) throws IOException, JDOMException, Exception{
+	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, GregorianCalendar outboundDate, GregorianCalendar inboundDate) throws IOException, JDOMException, Exception{
 		
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		
 		//Dateformat.format() can't take null, therefore the distinction for inboundDate
-		url.setRoute(origin, destination, DATE_FORMAT.format(outboundDate), (inboundDate == null) ? null : DATE_FORMAT.format(inboundDate));
+		url.setRoute(origin, destination, DATE_FORMAT.format(outboundDate.getTimeInMillis()), (inboundDate == null) ? null : DATE_FORMAT.format(inboundDate.getTimeInMillis()));
 		
 		SAXBuilder builder = new SAXBuilder();
 		Document connectionXML = builder.build(getInput(url.getQuotesURL()));

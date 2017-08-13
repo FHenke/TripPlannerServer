@@ -34,7 +34,9 @@ public class Place {
 	
 	}
 	
-	
+	public Place(String name){
+		this.name = name;
+	}	
 	
 	/**
 	 * @param id
@@ -51,8 +53,7 @@ public class Place {
 		this.iata = iata;
 		this.type = type;
 	}
-
-
+	
 
 	public Place(String name, int type, int longitude, int latitude, String city, String country, String continent, String street, String housenumber){
 		this.name = name;

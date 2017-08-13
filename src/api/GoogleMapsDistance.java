@@ -45,9 +45,15 @@ public class GoogleMapsDistance implements API {
 		
 	}
 	
-	public LinkedBlockingQueue<Connection> getAllConnections(LinkedList<Place> origin, LinkedList<Place> destination, GregorianCalendar outboundDate, GregorianCalendar inboundDate) throws ClientProtocolException, IOException, JDOMException{
+	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, GregorianCalendar outboundDate, GregorianCalendar inboundDate) throws ClientProtocolException, IOException, JDOMException{
 		
 		//ToDo: function calls for getting the lists
+		
+		LinkedList<Place> originlist = new LinkedList<Place>();
+		originlist.add(new Place(origin));
+		LinkedList<Place> destinationlist = new LinkedList<Place>();
+		originlist.add(new Place(destination));		
+		
 		
 		LinkedBlockingQueue<Connection> connections = null;
 		//connections.addAll(c);
@@ -58,8 +64,8 @@ public class GoogleMapsDistance implements API {
 		XMLUtilities.writeXmlToFile(rootFromAutosuggestXML, "testGoogle.xml");
 		 */
 		
-		LinkedBlockingQueue<Connection> urlOutbound = getConnection(origin, destination, outboundDate, true, "", "", "de");
-		LinkedBlockingQueue<Connection> urlInbound = getConnection(destination, origin, inboundDate, true, "", "", "de");
+		LinkedBlockingQueue<Connection> urlOutbound = getConnection(originlist, destinationlist, outboundDate, true, "", "", "de");
+		LinkedBlockingQueue<Connection> urlInbound = getConnection(destinationlist, originlist, inboundDate, true, "", "", "de");
 		
 		urlOutbound.addAll(urlInbound);
 		

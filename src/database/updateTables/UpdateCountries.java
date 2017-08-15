@@ -9,10 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-
-import org.apache.http.client.ClientProtocolException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jdom2.JDOMException;
 
 import api.SkyscannerCache;

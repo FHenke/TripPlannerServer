@@ -4,11 +4,6 @@
 package api;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLEncoder;
-import java.sql.Time;
-import java.util.Collection;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -42,13 +37,15 @@ public class GoogleMapsDistance implements API {
 	public static final String BICYCLING = api.utilities.GoogleMaps.BICYCLING;
 	public static final String TRANSIT = api.utilities.GoogleMaps.TRANSIT;
 	
+	/**
+	 * Empty Constructor
+	 */
 	public GoogleMapsDistance(){
 		
 	}
 	
+
 	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, GregorianCalendar outboundDate, GregorianCalendar inboundDate) throws ClientProtocolException, IOException, JDOMException{
-		
-		//ToDo: function calls for getting the lists
 		
 		LinkedList<Place> originlist = new LinkedList<Place>();
 		originlist.add(new Place(origin));

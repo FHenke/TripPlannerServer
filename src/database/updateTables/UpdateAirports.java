@@ -40,7 +40,6 @@ public class UpdateAirports extends UpdateTable {
 			try {
 				PreparedStatement selectIdenticalEntries = conn.prepareStatement("SELECT * FROM airports WHERE airport_id = ? AND city_id = ? AND (iata_code = ? OR (iata_code IS NULL AND ? IS NULL)) AND name = ? AND ST_X(location) = ? AND ST_Y(location) = ?;");
 				PreparedStatement selectId = conn.prepareStatement("SELECT * FROM airports WHERE airport_id = ?;");
-				PreparedStatement deleteEntry = conn.prepareStatement("DELETE FROM airports WHERE airport_id = ?;");
 				PreparedStatement insertEntry = conn.prepareStatement("INSERT INTO airports VALUES (?, ?, ?, ?, ST_GeomFromText(?, -1));");
 				PreparedStatement updateEntry = conn.prepareStatement("UPDATE airports SET city_id = ?, iata_code = ?, name = ?, location = ST_GeomFromText(?, -1) WHERE airport_id = ?;");
 

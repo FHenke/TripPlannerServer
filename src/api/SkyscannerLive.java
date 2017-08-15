@@ -1,12 +1,8 @@
 package api;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -16,12 +12,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
@@ -77,23 +69,4 @@ public class SkyscannerLive implements API {
 		}
 	}
 	
-	/**
-	 * executes the Querry to Skyscanner API
-	 * @param url URL for the Querry
-	 * @return InputStream of the XML code that API responses
-	 * @throws IOException 
-	 * @throws ClientProtocolException 
-	 */
-	private static InputStream getInput(String url) throws ClientProtocolException, IOException {
-
-		HttpClient client = new DefaultHttpClient();
-		HttpPost request = new HttpPost(url);
-
-		// add request header
-		request.addHeader("Accept", "application/xml");
-
-		HttpResponse response = client.execute(request);
-		
-		return response.getEntity().getContent();
-	}
 }

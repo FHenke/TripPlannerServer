@@ -14,11 +14,11 @@
   <Quotes>
     <QuoteDto>
       <QuoteId>1</QuoteId>
-      <MinPrice>460</MinPrice>
+      <MinPrice>475</MinPrice>
       <Direct>true</Direct>
       <OutboundLeg>
         <CarrierIds>
-          <int>1713</int>
+          <int>838</int>
         </CarrierIds>
         <OriginId>52337</OriginId>
         <DestinationId>60987</DestinationId>
@@ -26,21 +26,21 @@
       </OutboundLeg>
       <InboundLeg>
         <CarrierIds>
-          <int>1713</int>
+          <int>1324</int>
         </CarrierIds>
         <OriginId>60987</OriginId>
         <DestinationId>52337</DestinationId>
-        <DepartureDate>2017-09-25T00:00:00</DepartureDate>
+        <DepartureDate>2017-10-22T00:00:00</DepartureDate>
       </InboundLeg>
-      <QuoteDateTime>2017-08-12T14:41:00</QuoteDateTime>
+      <QuoteDateTime>2017-08-16T10:10:00</QuoteDateTime>
     </QuoteDto>
     <QuoteDto>
       <QuoteId>2</QuoteId>
-      <MinPrice>417</MinPrice>
+      <MinPrice>401</MinPrice>
       <Direct>false</Direct>
       <OutboundLeg>
         <CarrierIds>
-          <int>1218</int>
+          <int>834</int>
         </CarrierIds>
         <OriginId>52337</OriginId>
         <DestinationId>60987</DestinationId>
@@ -48,13 +48,13 @@
       </OutboundLeg>
       <InboundLeg>
         <CarrierIds>
-          <int>881</int>
+          <int>834</int>
         </CarrierIds>
         <OriginId>60987</OriginId>
         <DestinationId>52337</DestinationId>
-        <DepartureDate>2017-09-25T00:00:00</DepartureDate>
+        <DepartureDate>2017-10-22T00:00:00</DepartureDate>
       </InboundLeg>
-      <QuoteDateTime>2017-08-11T20:17:00</QuoteDateTime>
+      <QuoteDateTime>2017-08-16T10:10:00</QuoteDateTime>
     </QuoteDto>
   </Quotes>
   <Places>
@@ -127,6 +127,10 @@
     <CarriersDto>
       <CarrierId>1427</CarrierId>
       <Name>EgyptAir</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1710</CarrierId>
+      <Name>Brussels Airlines</Name>
     </CarriersDto>
     <CarriersDto>
       <CarrierId>1713</CarrierId>

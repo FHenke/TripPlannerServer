@@ -185,10 +185,12 @@ public class SkyscannerCache implements API {
 							for(Element quotes:rootFromConnectionlist.getDescendants(Filters.element("QuoteDto"))){
 								if(quotes.getChildText("Direct").equals("true") && quotes.getChild("OutboundLeg").getChildText("DestinationId").equals(placeDto.getChildText("PlaceId"))){
 	
-									Date departureDate = Formatation.StringToDate("yyyy-MM-dd", (quotes.getChild("OutboundLeg").getChildText("DepartureDate")).replace('T', ' '));
+									GregorianCalendar departureDate = new GregorianCalendar();
+									departureDate.setTime(Formatation.StringToDate("yyyy-MM-dd", (quotes.getChild("OutboundLeg").getChildText("DepartureDate")).replace('T', ' ')));								
 									Date quoteDate = Formatation.StringToDate("yyyy-MM-dd", (quotes.getChildText("QuoteDateTime")).replace('T', ' '));
 									//converts the Date to Local date first (because dayOfWeek function from day is not working and Date is outdated replaced by LocalDate) and calculates the dayOfWeek afterwards
-									int dayOfWeek = (departureDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()).getDayOfWeek().getValue();
+									//Monday == 1 , .. , Sunday == 7 (departureDate.DAY_OF_WEEK returns 0 for Sunday 1 for Monday and so on)
+									int dayOfWeek = (departureDate.DAY_OF_WEEK == 0) ? 7 : departureDate.DAY_OF_WEEK;
 									
 									//generates the connection object for this connection
 									connection = new Connection(new Place(airport.getAttributeValue("Id"), airport.getAttributeValue("Id"), Place.AIRPORT), new Place(placeDto.getChildText("IataCode"), placeDto.getChildText("IataCode"), Place.AIRPORT), Double.parseDouble(quotes.getChildText("MinPrice")), departureDate, Connection.PLANE,
@@ -248,7 +250,9 @@ public class SkyscannerCache implements API {
 		connectionObject.setDirect((con.getChild("Direct").equals("true")) ? true : false);
 		connectionObject.setPrice(Double.parseDouble(con.getChildText("MinPrice")));
 		//reads an Date from the XML file, cuts the time in the end of and parses it into Date format
-		connectionObject.setDepartureDate(Formatation.StringToDate("yyyy-MM-dd", (con.getChild(direction).getChildText("DepartureDate")).replace('T', ' ')));
+		GregorianCalendar departureDate = new GregorianCalendar();
+		departureDate.setTime(Formatation.StringToDate("yyyy-MM-dd", (con.getChild(direction).getChildText("DepartureDate")).replace('T', ' ')));
+		connectionObject.setDepartureDate(departureDate);
 		//The Date String comes in the Format yyyy-MM-ddTkk:mm:ss therefore the T has to be replaced by a space before it can be parsed to Date
 		connectionObject.setQuoteDateTime(Formatation.StringToDate("yyyy-MM-dd kk:mm:ss", (con.getChildText("QuoteDateTime")).replace('T', ' ')));
 		

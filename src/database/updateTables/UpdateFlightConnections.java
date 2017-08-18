@@ -65,14 +65,14 @@ public class UpdateFlightConnections extends UpdateTable {
 						//check if the exact entry exists in the database already
 						selectIdenticalEntries.setString(1, connection.getOrigin().getId());
 						selectIdenticalEntries.setString(2, connection.getDestination().getId());
-						selectIdenticalEntries.setTimestamp(3, new java.sql.Timestamp(connection.getDepartureDate().getTime()));
+						selectIdenticalEntries.setTimestamp(3, new java.sql.Timestamp(connection.getDepartureDate().getTimeInMillis()));
 						selectIdenticalEntries.setDouble(4, connection.getPrice());
 						selectIdenticalEntries.setDouble(5, connection.getPrice());
 						selectIdenticalEntries.setTimestamp(6, new java.sql.Timestamp(connection.getQuoteDateTime().getTime()));
 						selectIdenticalEntries.setInt(7, connection.getWeekday());
 						selectIdenticalEntries.setInt(8, connection.getWeekday());
 						if(!super.isQuerryEmpty(selectIdenticalEntries)){
-							//if not check if the id exists in the database already
+							//if not check if the id (origin, destination, weekday) exists in the database already
 							selectId.setString(1, connection.getOrigin().getId());
 							selectId.setString(2, connection.getDestination().getId());
 							selectId.setInt(3, connection.getWeekday());
@@ -86,7 +86,7 @@ public class UpdateFlightConnections extends UpdateTable {
 							//if not add the new dataset
 							insertEntry.setString(1, connection.getOrigin().getId());
 							insertEntry.setString(2, connection.getDestination().getId());
-							insertEntry.setTimestamp(3, new java.sql.Timestamp(connection.getDepartureDate().getTime()));
+							insertEntry.setTimestamp(3, new java.sql.Timestamp(connection.getDepartureDate().getTimeInMillis()));
 							insertEntry.setDouble(4, connection.getPrice());
 							insertEntry.setTimestamp(5, new java.sql.Timestamp(connection.getQuoteDateTime().getTime()));
 							insertEntry.setInt(6, connection.getWeekday());

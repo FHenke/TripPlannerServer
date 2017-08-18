@@ -68,6 +68,21 @@ public class GoogleMapsDistance implements API {
 		return connections;
 	}
 	
+	/**
+	 * 
+	 * @param originList list of Places of origins.
+	 * @param destinationList List of places for departure.
+	 * @param date date and time of travel. Can be null.
+	 * @param isDepartureDate is the date the departure or arrival date.
+	 * @param transportation kind of Transportation that should be used. Use class constants from GoogleMaps. Can be "".
+	 * @param avoid kind of transportation that should be avoid. Use class constants from GoogleMaps. Can be "".
+	 * @param language return language (like "de", "fr", "en", ...). Can be "".
+	 * @return List of available connections.
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 * @throws IllegalStateException
+	 * @throws JDOMException
+	 */
 	public LinkedBlockingQueue<Connection> getConnection(LinkedList<Place> originList, LinkedList<Place> destinationList, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language) throws ClientProtocolException, IOException, IllegalStateException, JDOMException{
 		//ToDo:insert body
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
@@ -78,7 +93,6 @@ public class GoogleMapsDistance implements API {
 		
 		
 		for(Element originXML : rootFromConnectionsXML.getDescendants(Filters.element("row"))){
-			//gets and removes the first element of the list of origins
 			Place origin = originList.get(originIndex);
 			destinationIndex = 0;
 			for(Element connectionXML : originXML.getDescendants(Filters.element("element"))){
@@ -99,10 +113,8 @@ public class GoogleMapsDistance implements API {
 			originIndex++;
 		}
 		
-		
-		
-		XMLUtilities.writeXmlToFile(rootFromConnectionsXML, "testGoogle.xml");
-		
+		//To write the retunrned XML file into a file
+		//XMLUtilities.writeXmlToFile(rootFromConnectionsXML, "testGoogle.xml");
 		
 		return connectionList;
 	}
@@ -119,15 +131,8 @@ public class GoogleMapsDistance implements API {
 	 */
 	private static Element getInput(String url) throws ClientProtocolException, IOException, IllegalStateException, JDOMException {
 
-
-		
 		HttpClient client = new DefaultHttpClient();
 		HttpGet request = new HttpGet(url);
-		
-
-
-		// add request header
-		//request.addHeader("Accept", "application/xml");
 
 		HttpResponse response = client.execute(request);
 		

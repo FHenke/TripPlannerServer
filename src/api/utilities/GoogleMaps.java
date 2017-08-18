@@ -107,7 +107,7 @@ public class GoogleMaps {
 	}
 	
 	
-	public static String createDirectionURL(String origin, String destination, Date date, boolean isDepartureDate, String transportation, String language, String avoid){
+	public static String createDirectionURL(String origin, String destination, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language){
 		if(!transportation.equals(DRIVING) && !transportation.equals(WALKING) && !transportation.equals(BICYCLING) && !transportation.equals(TRANSIT) && !transportation.equals(null)){
 			throw new IllegalArgumentException("Transportation has not a valid content");
 		}
@@ -117,7 +117,7 @@ public class GoogleMaps {
 		url += (!avoid.equals(null)) ? "&mode=" + avoid : "";
 		url += (!language.equals(null)) ? "&mode=" + language : "";
 		if(date != null){
-			url += ((isDepartureDate) ? "&departure_time=" : "&arrival_time=") + date.getTime();
+			url += ((isDepartureDate) ? "&departure_time=" : "&arrival_time=") + (date.getTimeInMillis() / 1000);
 		}
 		
 		return url;

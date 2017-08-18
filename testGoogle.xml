@@ -1,114 +1,238 @@
-<DistanceMatrixResponse>
+<DirectionsResponse>
   <status>OK</status>
-  <origin_address>Hanover, Germany</origin_address>
-  <origin_address>Berlin, Germany</origin_address>
-  <origin_address>Paderborn, Germany</origin_address>
-  <destination_address>Hanover, Germany</destination_address>
-  <destination_address>Berlin, Germany</destination_address>
-  <destination_address>Paderborn, Germany</destination_address>
-  <row>
-    <element>
-      <status>OK</status>
+  <route>
+    <summary />
+    <leg>
+      <step>
+        <travel_mode>TRANSIT</travel_mode>
+        <start_location>
+          <lat>51.5368150</lat>
+          <lng>9.9260720</lng>
+        </start_location>
+        <end_location>
+          <lat>51.3131140</lat>
+          <lng>9.4468980</lng>
+        </end_location>
+        <polyline>
+          <points>cxpyH}tq{@ERFF`IzHhD`DZXZZJJdAnAx@z@Zb@|@lAf@~@d@|@\r@LVHXVbA\nA\pA~B`JT`ATbAlBbJNd@z@rCbAdDhAtDv@fC|@tCz@pCPd@Tt@p@lBz@`Cv@rB|@vBz@tBtAfDPf@^fATh@b@jAFPXv@^dA\dAj@dBj@jBj@pBj@zBv@~Ct@~Ct@zC^|ALTVz@t@~C~@jDRv@\rAt@xCt@nCn@dC`AtDdAdEJb@?B@FBHDJLn@Rr@l@zB`@|Ad@lBZ|Bf@vBd@fBn@zBr@hCb@bBbAhDz@jCr@~BfAjD~@lCz@~Bt@xBp@bBx@tBf@nATf@NXPb@z@rB|@tBz@rB|AdDhBxD`CnEzArCvAhC|@~A~@|AVd@T\R\Zf@r@jA`AtAn@hAn@|@n@|@d@n@T^~@pA`ApAz@dAz@|@p@z@z@dAfArAz@`A`AfAv@|@JLt@t@r@r@n@j@b@d@`@`@d@^^^j@l@z@v@nBdBZ\\\\^LLz@r@rArAbB|AtF~FdAbAp@h@tAnA`GvFxEpEj@j@x@v@pIbIbH`HnGpGlBbBlAhAx@z@hChCfAbAvFjFnElEnFhFpHbHlFbFzCxChDnDbEnE~A|ARVJLHHlC~CvAbBXZpClD~BzCZ`@|CbEnAdBPTh@t@rBtCz@lAv@dA`B|BhA~AxB|C@@Zh@`BvBnBlCvCbE~BbDPTBBtBxChCrDbCjDtBvCjBjCd@r@`@n@x@lAbAvA|CjEZd@BDHLb@l@RPvArBfBdCRVjCrDxCfEPVZ^d@p@l@~@RXxB`DnC~DrAlB`AvAxCjE~BdDFJ|@vAHJFJRXv@dADFxCnFfDzEXd@Zd@vCdE`JfM|@pAn@`An@~@p@|@lEvFxJfMPDHLZ`@f@p@JPNTrBpCpCzD~@pAnAfB~@nApAhBfCjDfCpDfBbCNPZb@bB~B\d@xAlBfB|BvAjBxAnBnAbBZb@Zb@Zb@pAdBTZhAzAlA~AfAzA`AtAbApAbAtAnAbBhAzALR^h@RVV^DFX^Xb@\f@j@|@n@bAx@nAj@z@fBnCfBxCvA~BRXxAhCfB`DbBxC^r@z@`Bf@`Ar@xAjAxBfBrD`BlD~AlDvA|CNZnBpEx@nBTh@l@xAn@|AbClG~AbElAjD\bA|AnEZ`AbBfFhBzFhBbGxA~EFPRp@fCrIr@`C|@xCPl@~CpKpCrJjBlGRp@z@zCv@lCPj@r@`ClAbE`AjD~@|Cf@`Bd@`B|@zCJ\p@|B`@vA~@dDRr@^lAb@xA|AnFlA`EdArDVz@h@hBvAvEPj@J^J`@~@bDDPpAhEf@bBn@zB^pAt@hCbBrFrBhH~@~CHZHXrAnEt@jCZdAN`@Nd@n@zB`AdDz@zCbAdDn@|Bd@~AL`@Lb@bAlDl@rBp@xB`AhDt@jC@BDNlBzGJXHZN`@Pj@VbAPh@HV?Dx@jChA|Dd@~AHRDNPp@@BNf@FP@@FVFXLZDRJXH\b@rA^pA@DJ\p@~BLb@`@xAZfAd@bBPp@hAfEhAhEbAbEz@lDr@|CLj@fAvE~@tE~@rEx@bEx@hEbAvFjAbHv@tERlAb@tCd@bDZnBLz@L|@Jz@f@zD@FPpAHv@Lz@Fj@b@`DRdBHh@ZnCb@rD`AvJl@xGl@rHd@bGf@|GFfAFz@VzDPzC@RJtBJtAZvFFpAJrBZpHPtEB|@XjG?FDdANpDVhGHxBH|A?LHjBNtDF|AVrGNnCPhEHvAR|DHdBBd@PrCN|BVdETdDb@lGx@xJl@vGl@hGBXh@vEf@~Ej@xEn@dFDZt@|Fv@pFF^dAfHdArG^zBV|Av@lEdAzFn@dDF\v@|Dd@`CLv@H\ZvA\|AtAnGPx@p@vCz@jD^~AFX`@~ABJd@hBdBtG`BdGHZ|@zCl@pBj@lBpAhEd@xAt@~BnBxFpBxFnBpFbBpEbBlErAlDPd@nA|C`BdEdAjCj@rAVp@pA~C|@|B|@vBd@hATl@DPpBdFrBbFHRdBhE`C~FTj@fCpGhBpEvBpFd@hAhAnC`B`EhApCvBnFbCfGzBtFxBrFz@tBt@hBhAtCTl@j@vA~BzFlAzCv@pB|CtHn@`BvAlDjCtGpA`Dx@pBdAhCVn@r@hBTl@^dAn@jBf@`BRr@Nh@?B@DDLd@fBVdA\xALb@Px@Jd@Nt@Hb@^dBLl@P`AZhBV|AVdBRnAL~@Ff@R~ANjAJv@Fj@V`C\lEJ|ADh@FtABZF|APpDX~GVbGNzCFvAH`BTbEXvD`@xDNpALhADXFf@Jr@Lz@Lv@Jj@BPDRVpAHf@b@lBZ~A@F@F@DBFR|@`@~A`@`Bv@fCnBvF~AdDtChHJPBFxIdQh@dANXNZVf@JTlGjM~CjHjDpKfArEdArGHv@`@rEXbFJtE@jEEdFAp@Cv@IlAOhCCZARGx@CRAHMpASjB_@fC{EtXoBzMEZo@lEO`AiAdHG\iEpXwAfJeGva@w@lFy@rFc@~COlBQfDClAALA`@A`@IhCIxEAbGBbCDhDHtCTrFbApRBR@RB^Dp@JdBNfBBb@BXBXD^H~@d@~D~@hF\~Av@xDBHjBdGzAjEXl@BFJTJTJPN\lC|EtCpE~ArBHNf@n@|@~@nApAvBxBzA|Al@l@NLPPJLNNPL\Vx@t@v@l@tA|@n@`@^Pz@`@b@NdAXRFx@Nl@HRB~@F@CT@`@@\A`@ATAh@Aj@Et@GlD[nCYhAWrBSx@ITCTCxAKr@Ej@AhAAJCFAXAv@Az@?~@?l@FXDpBXl@N`ATjC`AbDhBzEhD|EnEvAnApBhBxK|JnDbD~CtCnCbCfB`BBBPNRPpEpDt@l@pAdA`At@x@p@f@b@LLX^VTp@~@d@v@Tj@h@~Ad@jARj@Td@L\Tn@BHb@rBTxAR|@Jb@RhAJl@D\P~AL|@D^JdAHh@d@zDr@xEt@jDn@`CV|@`AhCpAjCBFj@z@f@v@b@n@tAbBVZvBbBnAn@TLPJnAb@|@Vd@Bb@D^BpADfAMTAbASLGZIn@_@p@g@?C</points>
+        </polyline>
+        <duration>
+          <value>1140</value>
+          <text>19 mins</text>
+        </duration>
+        <html_instructions>High speed train towards München Hbf</html_instructions>
+        <distance>
+          <value>44644</value>
+          <text>44.6 km</text>
+        </distance>
+        <transit_details>
+          <departure_stop>
+            <name>Göttingen</name>
+            <location>
+              <lat>51.5368150</lat>
+              <lng>9.9260720</lng>
+            </location>
+          </departure_stop>
+          <arrival_stop>
+            <name>Kassel-Wilhelmshöhe</name>
+            <location>
+              <lat>51.3131140</lat>
+              <lng>9.4468980</lng>
+            </location>
+          </arrival_stop>
+          <line>
+            <short_name>ICE</short_name>
+            <vehicle>
+              <name>High speed train</name>
+              <type>HIGH_SPEED_TRAIN</type>
+              <icon>//maps.gstatic.com/mapfiles/transit/iw2/6/rail2.png</icon>
+            </vehicle>
+            <agency>
+              <name>Deutsche Bahn AG</name>
+              <url>http://www.bahn.de/p_en/view/index.shtml</url>
+            </agency>
+          </line>
+          <num_stops>1</num_stops>
+          <headsign>München Hbf</headsign>
+          <departure_time>
+            <value>1502546100</value>
+            <text>3:55pm</text>
+            <time_zone>Europe/Berlin</time_zone>
+          </departure_time>
+          <arrival_time>
+            <value>1502547240</value>
+            <text>4:14pm</text>
+            <time_zone>Europe/Berlin</time_zone>
+          </arrival_time>
+        </transit_details>
+      </step>
+      <step>
+        <travel_mode>WALKING</travel_mode>
+        <start_location>
+          <lat>51.3131140</lat>
+          <lng>9.4468980</lng>
+        </start_location>
+        <end_location>
+          <lat>51.3122717</lat>
+          <lng>9.4480573</lng>
+        </end_location>
+        <polyline>
+          <points>}aexHcbtx@fDgF</points>
+        </polyline>
+        <duration>
+          <value>119</value>
+          <text>2 mins</text>
+        </duration>
+        <html_instructions>Walk to Flixbus Haltestelle Kassel Wilhelmshöhe</html_instructions>
+        <distance>
+          <value>123</value>
+          <text>0.1 km</text>
+        </distance>
+        <step>
+          <travel_mode>WALKING</travel_mode>
+          <start_location>
+            <lat>51.3131140</lat>
+            <lng>9.4468980</lng>
+          </start_location>
+          <end_location>
+            <lat>51.3122717</lat>
+            <lng>9.4480573</lng>
+          </end_location>
+          <polyline>
+            <points>}aexHcbtx@fDgF</points>
+          </polyline>
+          <duration>
+            <value>119</value>
+            <text>2 mins</text>
+          </duration>
+          <distance>
+            <value>123</value>
+            <text>0.1 km</text>
+          </distance>
+        </step>
+      </step>
+      <step>
+        <travel_mode>TRANSIT</travel_mode>
+        <start_location>
+          <lat>51.3122717</lat>
+          <lng>9.4480573</lng>
+        </start_location>
+        <end_location>
+          <lat>51.5196400</lat>
+          <lng>7.4587600</lng>
+        </end_location>
+        <polyline>
+          <points>u|dxHkitx@_AJSAC?QAWC]Ou@aA@OFqDH}DUUAn@S`K?H?HEbBC|@InGGr@AREnE?d@IfEIpDFlAExBAn@Ct@A~@Af@Av@ChAGlDA^C~@CpAAv@QnJMvAGzDNTLL~DvC|AbA|CxEt@pAJRxBnDrHnLnHzKJNdAhAxDjBv@Pd@BlAC|AMhDsBvAvADbBHtFb@pM`AvIh@vCfArFt@hC|@j@RNvC~@|DCvDdDlAfFBLbDdIHLp@|@|DvDzCfDHN`JnEdBy@hB}@bHeDhF}@`BAbFv@bCz@rBtArBvA|DpI|A~EpE`BnBqAhJZtAp@hCjAJBrCvAr@^vAv@vAj@SrBG~@sAzKfBxh@KpOEtq@}VjrAsDfHcHnMa@z@g@~@kBpDu{@rjDsGh_@cw@hhDYnAmUzt@sClG{HnOkDzFwg@dk@cFlDc@ZYPuMbH}J|DeuAiGaGc@mPd@_G|@ioEztAeArEuOzoAk@dN_Bzy@UhM{pBhyHcBlOmCjRsB`L_k@v{A{[l`@yBbByVbNkFjBarArQc@T_q@dv@eEnIyR`b@mExIu]~h@kH|Ge|@zu@oZne@gFvM{DpK}EnO[dAk@rBgDvLgJp`@SdA}CjPoYlfFE`AiLpxAGd@iOxr@uDtKuInTgFlLyOhf@qDjT_CfYg@jJEnAItBmAtZGvAoA~SgWtjAgFjLsS`e@iDxKyL|s@s@rMuAfe@s@~Oi@pHoBrOuB`LuAlFuCzIM^cSn]wOjRye@h_AwK`e@qEfXeF~ZyIbb@o{@xeCcC~MiJ~hA[zO[rc@EzPArFS|]mFnoAmA~LeCpS}BpNcAlFsClNw@nDcDjMcJl[o@jB{r@pgCqCbPqGjd@eBjO}PzgCMfBkGzm@o@pEst@`bCaRf[sOhVeBtC{DvGiAnBgNjXeFxLyAvDO`@gKx[i@nBgJh`@gClMaYriCIfBkBvx@Ozb@jDxjCNfk@I`Qa@xVcPzrBiMpz@uNnpAItAk@fKKtC{@b]WdT?zBCjTCnODzdGChPBba@?bM?`J?vB?hRBbMJrPXhZTjMtBpm@jBd\N|Br@|Jt@fKxFlt@LzAr@rIrCn^`B|U|MntG@jCdH``EDjBx@tUbA~YxCtz@n@nRnAx^b@dPtA`g@JbDhI~fFJxKtAvuANfNZ~XDpCDfEdC`zAZ|MzAti@b@zLpBvg@LvCjA`WvFrbANlCtu@|bGd@hBvCdL|Jl\~DpLhK~Xl@zAtMt\~@~B`HbRl@`Brc@~jBjCxRxCjYRzB~@~KvG`dA^dE`Fzb@`@jCr@xEhAjHJp@ZhBxIli@VdBdAhHjLjrCY`Ye@jSo@jV_Hx`CG~DfCbpCPjDlRv`C`@rDxBnR|Gbm@z@|HhBlPxF|j@rCj\xA`SNxBdBzYfAlUhCv|@DpB\~dCCxDu@d|@EjD[x^MbOObXCnNfEtfDFlALvCd@~JBrEXtG|@hTLfCRzDDdAz@rP\tGf@zF@f@FbBb@tMx@~`@BlBTnr@ErMgAjw@QbJji@`xIz@jHPxAHx@~@tH\dE\dEHbAzBza@VlJkWtxFw@~`@GfMZj]`@xN~@~Tt@nKT`DrHfp@hCnPNv@TpAvH|a@j@vCvFr]pLrcBFlGwBdsAuDzi@yB`i@C~DLj\B`BDdBv@vPX|EnEva@n@zDjFtV^|AxNzg@xQtq@~AdHvGhZRbAzJxh@|@fFfRvyA~AtX\jLHvG_Avq@w@tMcAlN_AvKw@rIuDr^eClVm@vFgAhLo@nJO~CElAb@t`@lCn^bF~o@VpDFx@ZnD\|Ex@nJjD`]LvEoAnGeNjH_B`@giA`ZeS`LoDbAD\t@dG|@dF~AnIvAdGvAjFFTvAjF\tA^tABJvJt\GZVNpGvTbFjS`@~PGvBIhBSbGA|CDvElDGxDIhCGtBGH?`AAxAANA|AhARjEIhBARoA~OUvDeAxWq@|KATOlBIlBKvAEb@YhGyAPoDpEaAdFYdBk@vEE^YnBmA|Fg@lFChADdEOBqAPy@i@e@KqAtDkAl@YHBf@@pAEx@QtCCHe@lDM~BBjBJhDDtBv@IB]Hg@</points>
+        </polyline>
+        <duration>
+          <value>7500</value>
+          <text>2 hours 5 mins</text>
+        </duration>
+        <html_instructions>Bus towards Düsseldorf</html_instructions>
+        <distance>
+          <value>161425</value>
+          <text>161 km</text>
+        </distance>
+        <transit_details>
+          <departure_stop>
+            <name>Flixbus Haltestelle Kassel Wilhelmshöhe</name>
+            <location>
+              <lat>51.3122717</lat>
+              <lng>9.4480573</lng>
+            </location>
+          </departure_stop>
+          <arrival_stop>
+            <name>Dortmund Central Bus Station</name>
+            <location>
+              <lat>51.5196400</lat>
+              <lng>7.4587600</lng>
+            </location>
+          </arrival_stop>
+          <line>
+            <name>Berlin-Halle-Kassel-NRW</name>
+            <short_name>FlixBus</short_name>
+            <vehicle>
+              <name>Bus</name>
+              <type>BUS</type>
+              <icon>//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png</icon>
+            </vehicle>
+            <agency>
+              <name>FlixBus</name>
+              <url>https://www.flixbus.com/?wt_mc=earned.earned.earned.maps.google.google.google.ad</url>
+              <phone>011 49 30 300137300</phone>
+            </agency>
+            <color>#64dd17</color>
+            <text_color>#ffffff</text_color>
+          </line>
+          <num_stops>1</num_stops>
+          <headsign>Düsseldorf</headsign>
+          <departure_time>
+            <value>1502548200</value>
+            <text>4:30pm</text>
+            <time_zone>Europe/Berlin</time_zone>
+          </departure_time>
+          <arrival_time>
+            <value>1502555700</value>
+            <text>6:35pm</text>
+            <time_zone>Europe/Berlin</time_zone>
+          </arrival_time>
+        </transit_details>
+      </step>
       <duration>
-        <value>0</value>
-        <text>1 min</text>
+        <value>9600</value>
+        <text>2 hours 40 mins</text>
       </duration>
       <distance>
-        <value>0</value>
-        <text>1 m</text>
+        <value>206192</value>
+        <text>206 km</text>
       </distance>
-    </element>
-    <element>
-      <status>OK</status>
-      <duration>
-        <value>6660</value>
-        <text>1 hour 51 mins</text>
-      </duration>
-      <distance>
-        <value>257237</value>
-        <text>257 km</text>
-      </distance>
-    </element>
-    <element>
-      <status>OK</status>
-      <duration>
-        <value>6660</value>
-        <text>1 hour 51 mins</text>
-      </duration>
-      <distance>
-        <value>130263</value>
-        <text>130 km</text>
-      </distance>
-    </element>
-  </row>
-  <row>
-    <element>
-      <status>OK</status>
-      <duration>
-        <value>6840</value>
-        <text>1 hour 54 mins</text>
-      </duration>
-      <distance>
-        <value>254708</value>
-        <text>255 km</text>
-      </distance>
-    </element>
-    <element>
-      <status>OK</status>
-      <duration>
-        <value>0</value>
-        <text>1 min</text>
-      </duration>
-      <distance>
-        <value>0</value>
-        <text>1 m</text>
-      </distance>
-    </element>
-    <element>
-      <status>OK</status>
-      <duration>
-        <value>15120</value>
-        <text>4 hours 12 mins</text>
-      </duration>
-      <distance>
-        <value>384971</value>
-        <text>385 km</text>
-      </distance>
-    </element>
-  </row>
-  <row>
-    <element>
-      <status>OK</status>
-      <duration>
-        <value>9000</value>
-        <text>2 hours 30 mins</text>
-      </duration>
-      <distance>
-        <value>249678</value>
-        <text>250 km</text>
-      </distance>
-    </element>
-    <element>
-      <status>OK</status>
-      <duration>
-        <value>15300</value>
-        <text>4 hours 15 mins</text>
-      </duration>
-      <distance>
-        <value>510938</value>
-        <text>511 km</text>
-      </distance>
-    </element>
-    <element>
-      <status>OK</status>
-      <duration>
-        <value>0</value>
-        <text>1 min</text>
-      </duration>
-      <distance>
-        <value>0</value>
-        <text>1 m</text>
-      </distance>
-    </element>
-  </row>
-</DistanceMatrixResponse>
+      <start_location>
+        <lat>51.5368150</lat>
+        <lng>9.9260720</lng>
+      </start_location>
+      <end_location>
+        <lat>51.5196400</lat>
+        <lng>7.4587600</lng>
+      </end_location>
+      <start_address>Göttingen, Germany</start_address>
+      <end_address>Dortmund, Germany</end_address>
+      <departure_time>
+        <value>1502546100</value>
+        <text>3:55pm</text>
+        <time_zone>Europe/Berlin</time_zone>
+      </departure_time>
+      <arrival_time>
+        <value>1502555700</value>
+        <text>6:35pm</text>
+        <time_zone>Europe/Berlin</time_zone>
+      </arrival_time>
+    </leg>
+    <copyrights>Map data ©2017 GeoBasis-DE/BKG (©2009), Google</copyrights>
+    <overview_polyline>
+      <points>cxpyH}tq{@vRjSvGpK`XraAxSfk@fUv|@bMzg@vWfu@j^rp@fYj]xhBveBhq@vp@zPxSze@rp@pfAd|Arj@ly@jh@fr@t|@tlA~]zl@~b@bcAn}@bzCrp@f|BdYdaAzNfi@hWltAtKjbA|GlnAdExaAzNx~AhR`gAdWzaApiAnwCn~@l`CpHx`@nF`{@fFhf@~BhKhXpo@fUbi@xDrV`@jZq@~LeMjy@{VxaByA~UdBzw@r@jKzHr`@zHzP~Yv\vKrFrGb@~]{CxICzFdAhVdPnd@za@bPrM|FrK~CtLbB|LxCjRzEtMpL~LpJhBlHaCfB{EWA}BwAAuKUdMm@v\kAhp@FpElEdD|HbKhVj_@|IjEjDQhDsBvAvANxIdBhXpBjKrBtDjDnA|DCvDdDpAtFlDrItKlL`JnEdBy@lKcFjI_AfJrBfFlDzGpPpE`BnBqA~LlA|IfEnDbB[rDsAzKfBxh@QfbA}VjrAsDfHeIjOsCpFu{@rjDsGh_@}w@xjDaZh}@gNjW{n@rp@q[nOg}AmHmXbBioEztAeArEaQ`_BuBdhA{pBhyHcBlOaGl_@_k@v{A{[l`@sZfQmyA~Tcr@zv@_Ypl@cd@xs@qeAx~@wa@ft@yK`\wQbt@qDpRuYnhFqLvyA_Un_A}P|a@yOhf@qDjTgDrd@OdEuAl]oA~SgWtjA{Zlr@cRv`AgFlnAeFt\kFhQqSn^wOjRye@h_AiRh~@_Qb~@o{@xeCcC~MeKzyAw@`|A{Hn}AcGbc@sLvi@sKx^mw@txCwJvt@kQbkC{Hlt@st@`bCaRf[yR~ZeGfKwX~l@qLh_@oNvn@kYzlC{Br|AzD`wDk@zh@cPzrBiMpz@_OdsAkCfcAArnHNlbCn@th@`FvjArJppAvH|bAjWh}M|O`~EhRtyMlGfoB`JzcBzv@ffGtOri@la@bgA`JbV`e@`nBxJ`~@zPnrBdD`TpJrl@pNt{CoKrfE~BbvC~RbfCtNdpApQxmBfIzqBUpkE_AlmAxEj}D`Cro@rDzq@vBrfBmA~eAxh@dcJvCtV`Ejp@sVbdG_Afo@rDtoAbNphApRzgAxL`lBwBdsAuDzi@}B`o@Pl_@fHr}@tXjhAd^hxAxL`p@fUlsBf@bUwBl`AqJleAkH~v@UlFpDd`A~Gz|@pGfv@oAnGeNjHglAb[uXdNz@bHlIf`@|ClLjKl^tNbi@XvTYbVfRa@tDEpBtGK|B}En{@g@hI_@lHiGbFmCbQsCdTIhEkCWwBhDeBv@QhIs@bLP~Gz@g@Hg@</points>
+    </overview_polyline>
+    <warning>Walking directions are in beta.    Use caution – This route may be missing sidewalks or pedestrian paths.</warning>
+    <bounds>
+      <southwest>
+        <lat>51.2792100</lat>
+        <lng>7.4583600</lng>
+      </southwest>
+      <northeast>
+        <lat>51.5971600</lat>
+        <lng>9.9260720</lng>
+      </northeast>
+    </bounds>
+  </route>
+  <geocoded_waypoint>
+    <geocoder_status>OK</geocoder_status>
+    <type>locality</type>
+    <type>political</type>
+    <place_id>ChIJx8qYb7jUpEcRMD6slG2sJQQ</place_id>
+  </geocoded_waypoint>
+  <geocoded_waypoint>
+    <geocoder_status>OK</geocoder_status>
+    <type>locality</type>
+    <type>political</type>
+    <place_id>ChIJEXrwv2AXuUcRUIdUMYHyJwQ</place_id>
+  </geocoded_waypoint>
+</DirectionsResponse>

@@ -1,6 +1,7 @@
 package utilities;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.joda.time.Duration;
@@ -32,8 +33,8 @@ public class Connection {
 	private Place destination;
 	private double price;
 	private Duration duration;
-	private Date arrivalDate;
-	private Date departureDate;
+	private GregorianCalendar arrivalDate;
+	private GregorianCalendar departureDate;
 	private int type;
 	private CarrierList carrier;
 	private boolean direct;
@@ -64,7 +65,7 @@ public class Connection {
 	 * @param quoteDateTime
 	 * @param weekday
 	 */
-	public Connection(Place origin, Place destination, double price, Date departureDate, int type,
+	public Connection(Place origin, Place destination, double price, GregorianCalendar departureDate, int type,
 			boolean direct, Date quoteDateTime, int weekday) {
 		super();
 		this.origin = origin;
@@ -84,19 +85,19 @@ public class Connection {
 	 * @param destination
 	 * @param price
 	 * @param duration
-	 * @param originDate
-	 * @param destinationDate
+	 * @param arrivalDate
+	 * @param departureionDate
 	 */
-	public Connection(int type, Place origin, Place destination, double price, Duration duration, Date originDate,
-			Date destinationDate) {
+	public Connection(int type, Place origin, Place destination, double price, Duration duration,
+			GregorianCalendar departureDate, GregorianCalendar arrivalDate) {
 		super();
 		this.type = type;
 		this.origin = origin;
 		this.destination = destination;
 		this.price = price;
 		this.duration = duration;
-		this.arrivalDate = originDate;
-		this.departureDate = destinationDate;
+		this.arrivalDate = arrivalDate;
+		this.departureDate = departureDate;
 	}
 
 
@@ -135,7 +136,7 @@ public class Connection {
 	/**
 	 * @return the arrivalDate
 	 */
-	public Date getArrivalDate() {
+	public GregorianCalendar getArrivalDate() {
 		return arrivalDate;
 	}
 
@@ -143,7 +144,7 @@ public class Connection {
 	/**
 	 * @return the departureDate
 	 */
-	public Date getDepartureDate() {
+	public GregorianCalendar getDepartureDate() {
 		return departureDate;
 	}
 
@@ -276,7 +277,7 @@ public class Connection {
 	/**
 	 * @param arrivalDate the arrivalDate to set
 	 */
-	public void setArrivalDate(Date arrivalDate) {
+	public void setArrivalDate(GregorianCalendar arrivalDate) {
 		this.arrivalDate = arrivalDate;
 	}
 
@@ -284,7 +285,7 @@ public class Connection {
 	/**
 	 * @param departureDate the departureDate to set
 	 */
-	public void setDepartureDate(Date departureDate) {
+	public void setDepartureDate(GregorianCalendar departureDate) {
 		this.departureDate = departureDate;
 	}
 

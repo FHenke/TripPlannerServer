@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.TimeZone;
@@ -30,7 +31,7 @@ public class TripPlanner {
 		try{
 			//
 			GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-			greg.set(2017, 7, 22, 7, 20);
+			greg.set(2017, 8, 22, 7, 20);
 			
 			
 			//LinkedBlockingQueue<Connection> connectionList = test.getAllConnections( "FRA", "JFK", new GregorianCalendar(2017, 8, 22), new GregorianCalendar(2017, 8, 25));
@@ -42,10 +43,16 @@ public class TripPlanner {
 			// LinkedBlockingQueue<Connection> connectionList =  distance.getAllConnections( "Hannover", "Dortmund", new GregorianCalendar(2017, 8, 29), new GregorianCalendar(2017, 8, 25));
 			//LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), new GregorianCalendar(2017, 7, 22).getTime(), true, GoogleMaps.DRIVING, "de", GoogleMaps.FERRIES);
 			
-			LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), greg, true, GoogleMaps.TRANSIT, GoogleMaps.FERRIES, "de");
+			//LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), greg, true, GoogleMaps.TRANSIT, GoogleMaps.FERRIES, "de");
 			
 			//LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), null, true, GoogleMaps.TRANSIT, GoogleMaps.FERRIES, "de");
+			//-----------------------------------
 			
+			//Google direction
+			LinkedBlockingQueue<Connection> connectionList = direction.getConnection(testObjects.HANNOVER(), testObjects.BERLIN(), greg, true, GoogleMaps.TRANSIT, "", "de");
+			printConnectionListGDirection(connectionList);
+			
+			//---------------------------------------
 			//Skyscanner
 			//cache.getAllConnections( "FRA", "JFK", new GregorianCalendar(2017, 8, 22), new GregorianCalendar(2017, 9, 22));
 			//live.getAllConnections( "FRA", "JFK", new GregorianCalendar(2017, 8, 22), null);
@@ -56,14 +63,14 @@ public class TripPlanner {
 			System.out.println(e);
 		}
 		
-		
+		/*
 		//++Updates the entries of the database from skyscanner
 		try{
 			UpdateDatabase.proceed(new  database.DatabaseConnection().getConnection());
 		}catch(IOException | SQLException e){
 			System.out.println(e);
 		}
-		/**/
+		*/
 		
 		
 		/*
@@ -102,6 +109,18 @@ public class TripPlanner {
 	private static void printConnectionList3(LinkedBlockingQueue<Connection> connectionList){
 		for(Connection connection : connectionList){
 			System.out.println(connection.getOrigin().getName() + " - " + connection.getDestination().getName() + ": " + connection.getDistance() + " in " + connection.durationToString());
+		}
+		
+	}
+	
+	//for getConnection
+	private static void printConnectionListGDirection(LinkedBlockingQueue<Connection> connectionList){
+		for(Connection connection : connectionList){
+			System.out.println(connection.getOrigin().getCity() + " - " + connection.getDestination().getCity() + ": " + connection.getDistance() + " in " + connection.durationToString());
+			if(connection.hasDepartureDate())
+				System.out.println("   Departure: " + Connection.dateToString(connection.getDepartureDate()) + " " + connection.getDepartureDate().getTimeZone().getDisplayName());
+			if(connection.hasArrivalDate())
+				System.out.println("   Arrival: " + Connection.dateToString(connection.getArrivalDate()) + " " + connection.getArrivalDate().getTimeZone().getDisplayName());
 		}
 		
 	}

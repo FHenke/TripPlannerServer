@@ -108,7 +108,7 @@ public class GoogleMaps {
 	
 	
 	public static String createDirectionURL(String origin, String destination, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language){
-		if(!transportation.equals(DRIVING) && !transportation.equals(WALKING) && !transportation.equals(BICYCLING) && !transportation.equals(TRANSIT) && !transportation.equals(null)){
+		if(!transportation.equals(DRIVING) && !transportation.equals(WALKING) && !transportation.equals(BICYCLING) && !transportation.equals(TRANSIT) && !transportation.equals("")){
 			throw new IllegalArgumentException("Transportation has not a valid content");
 		}
 		

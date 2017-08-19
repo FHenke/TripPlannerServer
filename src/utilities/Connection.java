@@ -1,11 +1,13 @@
 package utilities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.joda.time.Duration;
 import org.joda.time.Period;
+import org.joda.time.ReadablePeriod;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
@@ -17,7 +19,8 @@ public class Connection {
 	public final static int TAXI = 5;
 	public final static int PUBLIC_TRANSPORT = 6;
 	public final static int SHIP = 7;
-	public final static int FOOT = 8;
+	public final static int WALK = 8;
+	public final static int BICYCLE = 9;
 	public final static int OTHER = 99;
 	
 	public final static int MONDAY = 1;
@@ -33,8 +36,8 @@ public class Connection {
 	private Place destination;
 	private double price;
 	private Duration duration;
-	private GregorianCalendar arrivalDate;
-	private GregorianCalendar departureDate;
+	private GregorianCalendar arrivalDate = null;
+	private GregorianCalendar departureDate = null;
 	private int type;
 	private CarrierList carrier;
 	private boolean direct;
@@ -354,7 +357,18 @@ public class Connection {
 		return (returnConnection == null) ? false : true;
 	}
 	
+	public boolean hasArrivalDate(){
+		return (arrivalDate == null) ? false : true;
+	}
 	
+	public boolean hasDepartureDate(){
+		return (departureDate == null) ? false : true;
+	}
+	
+	/**
+	 * Returns the duration as a nice human readable String
+	 * @return nice human readable String representation of the duration (HH:mm)
+	 */
 	public String durationToString(){
 		Period p = duration.toPeriod();
 		PeriodFormatter hm = new PeriodFormatterBuilder()
@@ -367,4 +381,14 @@ public class Connection {
 		return hm.print(p);
 	}
 	
+	/**
+	 * Returns a nice human readable String from a Calendar object
+	 * @param calendar Calendar object that should be parsed in a string
+	 * @return nice human readbale String representation of a calendar object (yyyy.MM.dd HH:mm)
+	 */
+	public static String dateToString(GregorianCalendar calendar){
+		SimpleDateFormat formatter=new SimpleDateFormat("yyyy.MM.dd HH:mm");   // lowercase "dd"
+		String test = formatter.format(calendar.getTime() );
+	    return test;
+	}
 }

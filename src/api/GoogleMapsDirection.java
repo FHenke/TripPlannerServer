@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
+import java.util.TimeZone;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.http.HttpResponse;
@@ -35,7 +36,7 @@ import utilities.XMLUtilities;
  */
 public class GoogleMapsDirection implements API {
 	
-	protected static final Logger logger = LogManager.getLogger(UpdateContinents.class);
+	protected static final Logger logger = LogManager.getLogger(GoogleMapsDirection.class);
 	
 	/**
 	 * Empty Constructor
@@ -78,6 +79,8 @@ public class GoogleMapsDirection implements API {
 		
 		for(Element routeOption : rootFromConnectionsXML.getDescendants(Filters.element("leg"))){
 			
+			Connection connection = null;
+			
 			// tries to parse the coordinates of the returning xml file from start and endlocation into double
 			// if it is successful write it to the place objects otherwise set the coordinates from the places to MAX_VALUE. That represents null
 			// because in that case can't be ensured that the coordinates really represents the place
@@ -98,37 +101,64 @@ public class GoogleMapsDirection implements API {
 				destination.setLatitude(Double.MAX_VALUE);
 				destination.setLongitude(Double.MAX_VALUE);
 				
-				logger.warn("The Coordinates of one or more Places can't be parsed to Double. GoogleMapsDirection.java");
+				logger.warn("The Coordinates of one or more Places can't be parsed to Double.");
 			}
 			
-			Connection connection = new Connection(origin, destination);
+			connection = new Connection(origin, destination);
 			
 			// ToDo: insert start/end time/date into connection
-			/*try{
+			try{
+				//departure time
+				//GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("departure_time").getChildText("time_zone")));
+				//GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+				GregorianCalendar departureTime = new GregorianCalendar();
+				departureTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("departure_time").getChildText("value")) * 1000L);
+				connection.setDepartureDate(departureTime);
 				
-				// dateobjekt erstellen mit zeit
-				//dateobjekt zeitzone zuweisen
-				connection.setDepartureDate(departureDate);
-			}*/
+				//arrival time
+				GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("arrival_time").getChildText("time_zone")));
+				arrivalTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("arrival_time").getChildText("value")) * 1000L);
+				connection.setArrivalDate(arrivalTime);
+				
+			}catch(NumberFormatException e){
+				logger.warn("The departure and arrival time of one connections can't be set." + e);
+			}catch(NullPointerException e){
+				//No departure or arrivelTime available, everything ok
+			}
 			
 			//Duration
 			try{
-				connection.setDuration(new Duration ((Long.parseLong(routeOption.getChild("duration").getChildText("value"))) * 1000));
+				connection.setDuration(new Duration ((Long.parseLong(routeOption.getChild("duration").getChildText("value"))) * 1000L));
 			}catch(NullPointerException | NumberFormatException e){
-				logger.warn("The duration of one connections can't be parsed to long. GoogleMapsDirection.java");
+				logger.warn("The duration of one connections can't be parsed to long.");
 			}
 			
 			//Distance
 			try{
 				connection.setDistance(Integer.parseInt(routeOption.getChild("distance").getChildText("value")));
 			}catch(NullPointerException | NumberFormatException e){
-				logger.warn("The distance of one connections can't be parsed to integer. GoogleMapsDirection.java");
+				logger.warn("The distance of one connections can't be parsed to integer.");
 			}
 			
+			//connection.setType();
+			switch (transportation){
+				case GoogleMaps.TRANSIT:
+					connection.setType(Connection.PUBLIC_TRANSPORT);
+					break;
+				case GoogleMaps.DRIVING:
+					connection.setType(Connection.CAR);
+					break;
+				case GoogleMaps.WALKING:
+					connection.setType(Connection.WALK);
+					break;
+				case GoogleMaps.BICYCLING:
+					connection.setType(Connection.BICYCLE);
+					break;				
+			}
 			
 			// ToDo: insert subconnection
 
-			
+			/*
 			
 			for(Element connectionXML : routeOption.getDescendants(Filters.element("step"))){
 				// status is OK if there is a result, if a place cant be found it is ZERO_RESULT
@@ -140,11 +170,12 @@ public class GoogleMapsDirection implements API {
 					
 					connectionList.add(connection);
 				}
-			}
+			}*/
+			connectionList.add(connection);
 		}
 		
 		//To write the retunrned XML file into a file
-		//XMLUtilities.writeXmlToFile(rootFromConnectionsXML, "testGoogle.xml");
+		XMLUtilities.writeXmlToFile(rootFromConnectionsXML, "testGoogle.xml");
 		
 		return connectionList;
 	}

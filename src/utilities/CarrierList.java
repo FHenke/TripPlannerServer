@@ -8,8 +8,9 @@ package utilities;
  *
  */
 public class CarrierList {
-	private CarrierList nextCarrier; 
-	private String carrierName;
+	private CarrierList nextCarrier = null; 
+	private String carrierName = null;
+	private String url = null;
 	
 	/**
 	 * Empty constructor
@@ -24,6 +25,11 @@ public class CarrierList {
 	 */
 	public CarrierList(String carrierName){
 		this.carrierName = carrierName;
+	}
+	
+	public CarrierList(String carrierName, String url){
+		this.carrierName = carrierName;
+		this.url = url;
 	}
 
 	/**

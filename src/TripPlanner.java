@@ -49,8 +49,9 @@ public class TripPlanner {
 			//-----------------------------------
 			
 			//Google direction
-			LinkedBlockingQueue<Connection> connectionList = direction.getConnection(testObjects.HANNOVER(), testObjects.BERLIN(), greg, true, GoogleMaps.TRANSIT, "", "de");
+			LinkedBlockingQueue<Connection> connectionList = direction.getConnection(testObjects.GOETTINGEN(), testObjects.PADDERBORN(), greg, true, GoogleMaps.TRANSIT, "", "de");
 			printConnectionListGDirection(connectionList);
+			
 			
 			//---------------------------------------
 			//Skyscanner
@@ -116,11 +117,13 @@ public class TripPlanner {
 	//for getConnection
 	private static void printConnectionListGDirection(LinkedBlockingQueue<Connection> connectionList){
 		for(Connection connection : connectionList){
-			System.out.println(connection.getOrigin().getCity() + " - " + connection.getDestination().getCity() + ": " + connection.getDistance() + " in " + connection.durationToString());
+			System.out.println(connection.getOrigin().getName() + " - " + connection.getDestination().getName() + ": " + connection.getDistance() + " in " + connection.durationToString());
 			if(connection.hasDepartureDate())
 				System.out.println("   Departure: " + Connection.dateToString(connection.getDepartureDate()) + " " + connection.getDepartureDate().getTimeZone().getDisplayName());
 			if(connection.hasArrivalDate())
 				System.out.println("   Arrival: " + Connection.dateToString(connection.getArrivalDate()) + " " + connection.getArrivalDate().getTimeZone().getDisplayName());
+			printConnectionListGDirection(connection.getSubConnections());
+			System.out.println("-------------------------------------------------------------------------------");
 		}
 		
 	}

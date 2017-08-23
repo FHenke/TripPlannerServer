@@ -42,10 +42,12 @@ public class Connection {
 	private CarrierList carrier;
 	private boolean direct;
 	private Date quoteDateTime;
-	private LinkedBlockingQueue<Connection> subConnections;
-	private LinkedBlockingQueue<Connection> returnConnection;
+	private LinkedBlockingQueue<Connection> subConnections = new LinkedBlockingQueue<Connection>();;
+	private LinkedBlockingQueue<Connection> returnConnection = new LinkedBlockingQueue<Connection>();;
 	private int weekday;
 	private int distance; //distance in meter
+	private String polyline = null;
+	private String htmlInstructions = null;
 	
 	/**
 	 * empty constructor
@@ -214,17 +216,51 @@ public class Connection {
 		return distance;
 	}
 	
+	/**
+	 * @return the polyline
+	 */
+	public String getPolyline() {
+		return polyline;
+	}
+
+
+	/**
+	 * @return the htmlInstructions
+	 */
+	public String getHtmlInstructions() {
+		return htmlInstructions;
+	}	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/**
+	 * @param polyline the polyline to set
+	 */
+	public void setPolyline(String polyline) {
+		this.polyline = polyline;
+	}
+
+
+
+	/**
+	 * @param htmlInstructions the htmlInstructions to set
+	 */
+	public void setHtmlInstructions(String htmlInstructions) {
+		this.htmlInstructions = htmlInstructions;
+	}
 	
-	
-	
-	
-	
-
-
-
-
-
-
 
 	/**
 	 * @param distance the distance to set
@@ -363,6 +399,17 @@ public class Connection {
 	
 	public boolean hasDepartureDate(){
 		return (departureDate == null) ? false : true;
+	}
+	
+	
+	
+	
+	/**
+	 * adds a subconnection to the subconnectionlist
+	 * @param subconnection
+	 */
+	public void addSubconnection(Connection subconnection){
+		this.subConnections.add(subconnection);
 	}
 	
 	/**

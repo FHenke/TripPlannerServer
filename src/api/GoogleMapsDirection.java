@@ -26,6 +26,7 @@ import org.joda.time.Duration;
 
 import api.utilities.GoogleMaps;
 import database.updateTables.UpdateContinents;
+import utilities.CarrierList;
 import utilities.Connection;
 import utilities.Place;
 import utilities.XMLUtilities;
@@ -77,103 +78,204 @@ public class GoogleMapsDirection implements API {
 		
 		Element rootFromConnectionsXML = getInput(api.utilities.GoogleMaps.createDirectionURL(GoogleMaps.PlaceToGoogleMapsString(origin), GoogleMaps.PlaceToGoogleMapsString(destination), date, isDepartureDate, transportation, avoid, language));
 		
-		for(Element routeOption : rootFromConnectionsXML.getDescendants(Filters.element("leg"))){
-			
-			Connection connection = null;
-			
-			// tries to parse the coordinates of the returning xml file from start and endlocation into double
-			// if it is successful write it to the place objects otherwise set the coordinates from the places to MAX_VALUE. That represents null
-			// because in that case can't be ensured that the coordinates really represents the place
-			try{
-				double startLattitude = Double.parseDouble(routeOption.getChild("start_location").getChildText("lat"));
-				double startLongitude = Double.parseDouble(routeOption.getChild("start_location").getChildText("lng"));
-				double endLattitude = Double.parseDouble(routeOption.getChild("end_location").getChildText("lat"));
-				double endLongitude = Double.parseDouble(routeOption.getChild("end_location").getChildText("lng"));
-				
-				origin.setLatitude(startLattitude);
-				origin.setLongitude(startLongitude);
-				destination.setLatitude(endLattitude);
-				destination.setLongitude(endLongitude);
-				
-			}catch(NullPointerException | NumberFormatException e){
-				origin.setLatitude(Double.MAX_VALUE);
-				origin.setLongitude(Double.MAX_VALUE);
-				destination.setLatitude(Double.MAX_VALUE);
-				destination.setLongitude(Double.MAX_VALUE);
-				
-				logger.warn("The Coordinates of one or more Places can't be parsed to Double.");
-			}
-			
-			connection = new Connection(origin, destination);
-			
-			// ToDo: insert start/end time/date into connection
-			try{
-				//departure time
-				//GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("departure_time").getChildText("time_zone")));
-				//GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-				GregorianCalendar departureTime = new GregorianCalendar();
-				departureTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("departure_time").getChildText("value")) * 1000L);
-				connection.setDepartureDate(departureTime);
-				
-				//arrival time
-				GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("arrival_time").getChildText("time_zone")));
-				arrivalTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("arrival_time").getChildText("value")) * 1000L);
-				connection.setArrivalDate(arrivalTime);
-				
-			}catch(NumberFormatException e){
-				logger.warn("The departure and arrival time of one connections can't be set." + e);
-			}catch(NullPointerException e){
-				//No departure or arrivelTime available, everything ok
-			}
-			
-			//Duration
-			try{
-				connection.setDuration(new Duration ((Long.parseLong(routeOption.getChild("duration").getChildText("value"))) * 1000L));
-			}catch(NullPointerException | NumberFormatException e){
-				logger.warn("The duration of one connections can't be parsed to long.");
-			}
-			
-			//Distance
-			try{
-				connection.setDistance(Integer.parseInt(routeOption.getChild("distance").getChildText("value")));
-			}catch(NullPointerException | NumberFormatException e){
-				logger.warn("The distance of one connections can't be parsed to integer.");
-			}
-			
-			//connection.setType();
-			switch (transportation){
-				case GoogleMaps.TRANSIT:
-					connection.setType(Connection.PUBLIC_TRANSPORT);
-					break;
-				case GoogleMaps.DRIVING:
-					connection.setType(Connection.CAR);
-					break;
-				case GoogleMaps.WALKING:
-					connection.setType(Connection.WALK);
-					break;
-				case GoogleMaps.BICYCLING:
-					connection.setType(Connection.BICYCLE);
-					break;				
-			}
-			
-			// ToDo: insert subconnection
-
-			/*
-			
-			for(Element connectionXML : routeOption.getDescendants(Filters.element("step"))){
-				// status is OK if there is a result, if a place cant be found it is ZERO_RESULT
-				if(connectionXML.getChildText("status").equals("OK")){
-					
-					
-					connection.setDuration(new Duration ((Long.parseLong(routeOption.getChild("duration").getChildText("value"))) * 1000));
-					connection.setDistance(Integer.parseInt(routeOption.getChild("distance").getChildText("value")));
-					
-					connectionList.add(connection);
-				}
-			}*/
-			connectionList.add(connection);
-		}
 		
+		// status is OK if there is a result, if a place cant be found it is ZERO_RESULT
+		if(rootFromConnectionsXML.getChildText("status").equals("OK")){
+			for(Element routeOption : rootFromConnectionsXML.getDescendants(Filters.element("leg"))){
+				
+				Connection connection = null;
+				
+				// tries to parse the coordinates of the returning xml file from start and endlocation into double
+				// if it is successful write it to the place objects otherwise set the coordinates from the places to MAX_VALUE. That represents null
+				// because in that case can't be ensured that the coordinates really represents the place
+				try{
+					double startLatitude = Double.parseDouble(routeOption.getChild("start_location").getChildText("lat"));
+					double startLongitude = Double.parseDouble(routeOption.getChild("start_location").getChildText("lng"));
+					double endLatitude = Double.parseDouble(routeOption.getChild("end_location").getChildText("lat"));
+					double endLongitude = Double.parseDouble(routeOption.getChild("end_location").getChildText("lng"));
+					String startName = routeOption.getChildText("start_address");
+					String endName = routeOption.getChildText("end_address");
+					
+					origin.setLatitude(startLatitude);
+					origin.setLongitude(startLongitude);
+					origin.setName(startName);
+					destination.setLatitude(endLatitude);
+					destination.setLongitude(endLongitude);
+					destination.setName(endName);
+					
+				}catch(NullPointerException | NumberFormatException e){
+					origin.setLatitude(Double.MAX_VALUE);
+					origin.setLongitude(Double.MAX_VALUE);
+					destination.setLatitude(Double.MAX_VALUE);
+					destination.setLongitude(Double.MAX_VALUE);
+					
+					logger.warn("The Coordinates of one or more Places can't be parsed to Double.");
+				}
+				
+				connection = new Connection(origin, destination);
+				
+				//start/end time/date
+				try{
+					//departure time
+					GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("departure_time").getChildText("time_zone")));
+					departureTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("departure_time").getChildText("value")) * 1000L);
+					connection.setDepartureDate(departureTime);
+					
+					//arrival time
+					GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("arrival_time").getChildText("time_zone")));
+					arrivalTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("arrival_time").getChildText("value")) * 1000L);
+					connection.setArrivalDate(arrivalTime);
+					
+				}catch(NumberFormatException e){
+					logger.warn("The departure and arrival time of one connections can't be set." + e);
+				}catch(NullPointerException e){
+					//No departure or arrivelTime available, everything ok
+				}
+				
+				//Duration
+				try{
+					connection.setDuration(new Duration ((Long.parseLong(routeOption.getChild("duration").getChildText("value"))) * 1000L));
+				}catch(NullPointerException | NumberFormatException e){
+					logger.warn("The duration of one connection can't be parsed to long.");
+				}
+				
+				//Distance
+				try{
+					connection.setDistance(Integer.parseInt(routeOption.getChild("distance").getChildText("value")));
+				}catch(NullPointerException | NumberFormatException e){
+					logger.warn("The distance of one connection can't be parsed to integer.");
+				}
+				
+				//travel mode
+				switch (transportation){
+					case GoogleMaps.TRANSIT:
+						connection.setType(Connection.PUBLIC_TRANSPORT);
+						break;
+					case GoogleMaps.DRIVING:
+						connection.setType(Connection.CAR);
+						break;
+					case GoogleMaps.WALKING:
+						connection.setType(Connection.WALK);
+						break;
+					case GoogleMaps.BICYCLING:
+						connection.setType(Connection.BICYCLE);
+						break;				
+				}
+				
+				//subconnection
+				for(Element subconnectionXML : routeOption.getDescendants(Filters.element("step"))){
+					
+						Connection subconnection = null;
+						Place startLocation = null;
+						Place endLocation = null;
+						
+						// tries to get coordinates and name from start and end location and writes them to a place object to generate an connection object afterwards
+						// if it is not successful write only the coordinates to the place objects
+						// transit mode has coordinates and name, the other modes only have coordinates
+						try{
+							double startLatitude = Double.parseDouble(subconnectionXML.getChild("transit_details").getChild("departure_stop").getChild("location").getChildText("lat"));
+							double startLongitude = Double.parseDouble(subconnectionXML.getChild("transit_details").getChild("departure_stop").getChild("location").getChildText("lng"));
+							double endLatitude = Double.parseDouble(subconnectionXML.getChild("transit_details").getChild("arrival_stop").getChild("location").getChildText("lat"));
+							double endLongitude = Double.parseDouble(subconnectionXML.getChild("transit_details").getChild("arrival_stop").getChild("location").getChildText("lng"));
+							
+							String startName = subconnectionXML.getChild("transit_details").getChild("departure_stop").getChildText("name");
+							String endName = subconnectionXML.getChild("transit_details").getChild("arrival_stop").getChildText("name");
+							
+							startLocation = new Place(startName, startLongitude, startLatitude);
+							endLocation = new Place(endName, endLongitude, endLatitude);
+							
+						}catch(NullPointerException | NumberFormatException e){
+							double startLatitude = Double.parseDouble(subconnectionXML.getChild("start_location").getChildText("lat"));
+							double startLongitude = Double.parseDouble(subconnectionXML.getChild("start_location").getChildText("lng"));
+							double endLatitude = Double.parseDouble(subconnectionXML.getChild("end_location").getChildText("lat"));
+							double endLongitude = Double.parseDouble(subconnectionXML.getChild("end_location").getChildText("lng"));
+							
+							startLocation = new Place(startLongitude, startLatitude);
+							endLocation = new Place(endLongitude, endLatitude);
+						}
+						
+						subconnection = new Connection(startLocation, endLocation);
+						
+						//Duration
+						try{
+							subconnection.setDuration(new Duration ((Long.parseLong(subconnectionXML.getChild("duration").getChildText("value"))) * 1000L));
+						}catch(NullPointerException | NumberFormatException e){
+							logger.warn("The duration of one subconnection can't be parsed to long." + e);
+						}
+						
+						//Distance
+						try{
+							subconnection.setDistance(Integer.parseInt(subconnectionXML.getChild("distance").getChildText("value")));
+						}catch(NullPointerException | NumberFormatException e){
+							logger.warn("The distance of one subconnection can't be parsed to integer." + e);
+						}
+						
+						//Start/end time/date
+						try{
+							//departure time
+							GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("departure_time").getChildText("time_zone")));
+							departureTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("departure_time").getChildText("value")) * 1000L);
+							subconnection.setDepartureDate(departureTime);
+							
+							//arrival time
+							GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("arrival_time").getChildText("time_zone")));
+							arrivalTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("arrival_time").getChildText("value")) * 1000L);
+							subconnection.setArrivalDate(arrivalTime);
+							
+						}catch(NumberFormatException e){
+							logger.warn("The departure and arrival time of one connection can't be set." + e);
+						}catch(NullPointerException e){
+							//No departure or arrivelTime available, everything ok
+						}
+						
+						//quotedateTime
+						//quoteDateTime is still of type Date therefore first a GregorianCalendar is generated and then a Date, if it changes at any time it can be simple changed here
+						subconnection.setQuoteDateTime((new GregorianCalendar(TimeZone.getTimeZone("UTC"))).getTime());
+						
+						//travelMode
+						switch (subconnectionXML.getChildText("travel_mode")){
+							case "TRANSIT":
+								subconnection.setType(Connection.PUBLIC_TRANSPORT);
+								break;
+							case "DRIVING":
+								subconnection.setType(Connection.CAR);
+								break;
+							case "WALKING":
+								subconnection.setType(Connection.WALK);
+								break;
+							case "BICYCLING":
+								subconnection.setType(Connection.BICYCLE);
+								break;				
+						}
+						
+						//agency
+						try{
+							subconnection.setCarrier(new CarrierList(subconnectionXML.getChild("transit_details").getChild("line").getChild("agency").getChildText("name"), subconnectionXML.getChild("transit_details").getChild("line").getChild("agency").getChildText("url")));
+						}catch(NullPointerException e){
+							//do nothing, no agency avaiable (agency is available only for transit)
+						}
+							
+							
+						//polyline
+						try{
+							subconnection.setPolyline(subconnectionXML.getChild("polyline").getChildText("points"));
+						}catch(NullPointerException e){
+							//do nothing, no polyline available (should be available usually)
+						}
+						
+						//html instruction
+						try{
+							subconnection.setHtmlInstructions(subconnectionXML.getChildText("html_instructions"));	
+						}catch(NullPointerException e){
+							//do nothing, no HTMLInstructions available (should be available usually)
+						}
+
+						//add the subconnection to the connection
+						connection.addSubconnection(subconnection);
+				}
+				connectionList.add(connection);
+			}
+		}
 		//To write the retunrned XML file into a file
 		XMLUtilities.writeXmlToFile(rootFromConnectionsXML, "testGoogle.xml");
 		

@@ -94,6 +94,11 @@ public class GoogleMapsDistance implements API {
 		
 		for(Element originXML : rootFromConnectionsXML.getDescendants(Filters.element("row"))){
 			Place origin = originList.get(originIndex);
+			
+			if(!origin.hasCoordinates()){
+				origin = GoogleMapsGeocoding.addCoordinatesToPlace(origin);
+			}
+			
 			destinationIndex = 0;
 			for(Element connectionXML : originXML.getDescendants(Filters.element("element"))){
 				// status is OK if there is a result, if a place cant be found it is ZERO_RESULT
@@ -101,6 +106,10 @@ public class GoogleMapsDistance implements API {
 					Connection connection;
 					
 					Place destination = destinationList.get(destinationIndex);
+					
+					if(!destination.hasCoordinates()){
+						destination = GoogleMapsGeocoding.addCoordinatesToPlace(destination);
+					}
 					
 					connection = new Connection(origin, destination);
 					connection.setDuration(new Duration ((Long.parseLong(connectionXML.getChild("duration").getChildText("value"))) * 1000));
@@ -114,7 +123,7 @@ public class GoogleMapsDistance implements API {
 		}
 		
 		//To write the retunrned XML file into a file
-		//XMLUtilities.writeXmlToFile(rootFromConnectionsXML, "testGoogle.xml");
+		XMLUtilities.writeXmlToFile(rootFromConnectionsXML, "testGoogle.xml");
 		
 		return connectionList;
 	}

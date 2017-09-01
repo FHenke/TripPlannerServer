@@ -18,6 +18,8 @@ import api.SkyscannerLive;
 import api.testLive;
 import api.utilities.GoogleMaps;
 import database.updateTables.*;
+import sockets.JsonConverter;
+import sockets.LineCoordinatesOnly;
 import utilities.Connection;
 
 public class TripPlanner {
@@ -31,7 +33,7 @@ public class TripPlanner {
 		try{
 			//
 			GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-			greg.set(2017, 8, 22, 7, 20);
+			greg.set(2017, 9, 22, 7, 20);
 			
 			
 			//LinkedBlockingQueue<Connection> connectionList = test.getAllConnections( "FRA", "JFK", new GregorianCalendar(2017, 8, 22), new GregorianCalendar(2017, 8, 25));
@@ -40,8 +42,17 @@ public class TripPlanner {
 			
 			//direction.getAllConnections( "Göttingen", "Dortmund", new GregorianCalendar(2017, 8, 29, 15, 20), new GregorianCalendar(2017, 8, 25, 15, 20));
 			
-			// LinkedBlockingQueue<Connection> connectionList =  distance.getAllConnections( "Hannover", "Dortmund", new GregorianCalendar(2017, 8, 29), new GregorianCalendar(2017, 8, 25));
-			//LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), new GregorianCalendar(2017, 7, 22).getTime(), true, GoogleMaps.DRIVING, "de", GoogleMaps.FERRIES);
+			
+			//Google distance
+			//LinkedBlockingQueue<Connection> connectionList =  distance.getAllConnections( "Hannover", "Dortmund", new GregorianCalendar(2017, 8, 29), new GregorianCalendar(2017, 8, 25));
+			//printConnectionList3(connectionList);
+			LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_USA(), testObjects.PLACELIST_USA(), greg, true, GoogleMaps.DRIVING, "de", GoogleMaps.FERRIES);
+			printConnectionList(connectionList);
+			
+			System.out.println(JsonConverter.getJson(connectionList));
+			
+			
+			
 			
 			//LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), greg, true, GoogleMaps.TRANSIT, GoogleMaps.FERRIES, "de");
 			
@@ -49,9 +60,9 @@ public class TripPlanner {
 			//-----------------------------------
 			
 			//Google direction
-			LinkedBlockingQueue<Connection> connectionList = direction.getConnection(testObjects.GOETTINGEN(), testObjects.PADDERBORN(), greg, true, GoogleMaps.TRANSIT, "", "de");
+			/*LinkedBlockingQueue<Connection> connectionList = direction.getConnection(testObjects.GOETTINGEN(), testObjects.PADDERBORN(), greg, true, GoogleMaps.TRANSIT, "", "de");
 			printConnectionListGDirection(connectionList);
-			
+			System.out.println(JsonConverter.getJson(connectionList));*/
 			
 			//---------------------------------------
 			//Skyscanner
@@ -60,9 +71,14 @@ public class TripPlanner {
 			//cache.getAutosuggest("pari");
 			//printConnectionList(connectionList);
 			
+			
+			
 		}catch(Exception e){
 			System.out.println(e);
 		}
+		
+		//version2();
+		//testSockets();
 		
 		/*
 		//++Updates the entries of the database from skyscanner
@@ -90,6 +106,19 @@ public class TripPlanner {
 		System.out.println("Done");
 	}
 	
+	private static void testSockets(){
+		try {
+			LineCoordinatesOnly.testSend();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e);
+		}
+	}
+	
+	private static void version2(){
+		LineCoordinatesOnly.version2();
+	}
+	
 	//for getConnection
 	private static void printConnectionList(LinkedBlockingQueue<Connection> connectionList){
 		for(Connection connection : connectionList){
@@ -110,6 +139,7 @@ public class TripPlanner {
 	private static void printConnectionList3(LinkedBlockingQueue<Connection> connectionList){
 		for(Connection connection : connectionList){
 			System.out.println(connection.getOrigin().getName() + " - " + connection.getDestination().getName() + ": " + connection.getDistance() + " in " + connection.durationToString());
+			System.out.println(connection.getOrigin().getLatitude() + ":" + connection.getOrigin().getLongitude());
 		}
 		
 	}

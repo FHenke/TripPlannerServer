@@ -71,7 +71,7 @@ public class GoogleMaps {
 			if(placeObject.hasStreet()){
 				placeString = concatStringWithDelimiter(placeString, placeObject.getStreet(), "+");
 			}else{
-				//If there is no street try if there is a name and use it instead of the street and housenumber
+				//If there is no street try if there is a name and use it instead of the street and house number
 				if(placeObject.hasName()){
 					placeString = concatStringWithDelimiter(placeString, placeObject.getName(), "+");
 				}

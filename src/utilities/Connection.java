@@ -3,6 +3,7 @@ package utilities;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.joda.time.Duration;
@@ -326,6 +327,12 @@ public class Connection {
 	 */
 	public void setDepartureDate(GregorianCalendar departureDate) {
 		this.departureDate = departureDate;
+	}
+	
+	public void setDepartureDate(String departureDateString){
+		GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+		greg.set(2017, 9, 22, 7, 20);
+		this.departureDate = greg;
 	}
 
 

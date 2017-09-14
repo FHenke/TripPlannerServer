@@ -46,10 +46,10 @@ public class TripPlanner {
 			//Google distance
 			//LinkedBlockingQueue<Connection> connectionList =  distance.getAllConnections( "Hannover", "Dortmund", new GregorianCalendar(2017, 8, 29), new GregorianCalendar(2017, 8, 25));
 			//printConnectionList3(connectionList);
-			LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_USA(), testObjects.PLACELIST_USA(), greg, true, GoogleMaps.DRIVING, "de", GoogleMaps.FERRIES);
+			/*LinkedBlockingQueue<Connection> connectionList = distance.getConnection(testObjects.PLACELIST_3(), testObjects.PLACELIST_3(), greg, true, GoogleMaps.DRIVING, "de", GoogleMaps.FERRIES);
 			printConnectionList(connectionList);
 			
-			System.out.println(JsonConverter.getJson(connectionList));
+			System.out.println(JsonConverter.getJson(connectionList));*/
 			
 			
 			
@@ -60,7 +60,7 @@ public class TripPlanner {
 			//-----------------------------------
 			
 			//Google direction
-			/*LinkedBlockingQueue<Connection> connectionList = direction.getConnection(testObjects.GOETTINGEN(), testObjects.PADDERBORN(), greg, true, GoogleMaps.TRANSIT, "", "de");
+			/*LinkedBlockingQueue<Connection> connectionList = direction.getConnection(testObjects.GOETTINGEN(), testObjects.PADDERBORN(), greg, true, GoogleMaps.DRIVING, "", "de");
 			printConnectionListGDirection(connectionList);
 			System.out.println(JsonConverter.getJson(connectionList));*/
 			
@@ -77,7 +77,7 @@ public class TripPlanner {
 			System.out.println(e);
 		}
 		
-		//version2();
+		version2();
 		//testSockets();
 		
 		/*

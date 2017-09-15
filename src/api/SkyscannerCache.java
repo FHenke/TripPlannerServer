@@ -5,6 +5,7 @@ package api;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +32,8 @@ import org.jdom2.filter.Filters;
 import org.jdom2.input.SAXBuilder;
 
 import api.utilities.SkyscannerURL;
+import database.DatabaseConnection;
+import database.Querry;
 import database.updateTables.UpdateContinents;
 import utilities.*;
 
@@ -274,6 +277,16 @@ public class SkyscannerCache implements API {
 		}
 		if(place.getChildText("IataCode") != null){
 			placeObject.setIata(place.getChildText("IataCode"));
+			Querry querry;
+			try {
+				querry = new Querry((new DatabaseConnection()).getConnection());
+				placeObject.setLatitude(querry.getLatitudeFromPlace(placeObject));
+				placeObject.setLongitude((querry.getLongitudeFromPlace(placeObject)));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		if(place.getChildText("CityName") != null){
 			placeObject.setCity(place.getChildText("CityName"));

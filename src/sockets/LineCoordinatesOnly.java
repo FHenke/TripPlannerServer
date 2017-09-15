@@ -52,6 +52,7 @@ public class LineCoordinatesOnly {
 
         	connection.close();
         	socket.close();
+        	System.out.println("Closing...");
         	System.out.println("Running");
             
              
@@ -59,7 +60,7 @@ public class LineCoordinatesOnly {
             System.out.println("Fail!: " + e.toString());
         }
 
-        System.out.println("Closing...");
+        
         
         version2();
         

@@ -14,50 +14,30 @@
   <Quotes>
     <QuoteDto>
       <QuoteId>1</QuoteId>
-      <MinPrice>475</MinPrice>
+      <MinPrice>43</MinPrice>
       <Direct>true</Direct>
       <OutboundLeg>
         <CarrierIds>
           <int>838</int>
         </CarrierIds>
-        <OriginId>52337</OriginId>
-        <DestinationId>60987</DestinationId>
-        <DepartureDate>2017-09-22T00:00:00</DepartureDate>
-      </OutboundLeg>
-      <InboundLeg>
-        <CarrierIds>
-          <int>1324</int>
-        </CarrierIds>
-        <OriginId>60987</OriginId>
+        <OriginId>44759</OriginId>
         <DestinationId>52337</DestinationId>
-        <DepartureDate>2017-10-22T00:00:00</DepartureDate>
-      </InboundLeg>
-      <QuoteDateTime>2017-08-16T10:10:00</QuoteDateTime>
-    </QuoteDto>
-    <QuoteDto>
-      <QuoteId>2</QuoteId>
-      <MinPrice>401</MinPrice>
-      <Direct>false</Direct>
-      <OutboundLeg>
-        <CarrierIds>
-          <int>834</int>
-        </CarrierIds>
-        <OriginId>52337</OriginId>
-        <DestinationId>60987</DestinationId>
-        <DepartureDate>2017-09-22T00:00:00</DepartureDate>
+        <DepartureDate>2017-11-22T00:00:00</DepartureDate>
       </OutboundLeg>
-      <InboundLeg>
-        <CarrierIds>
-          <int>834</int>
-        </CarrierIds>
-        <OriginId>60987</OriginId>
-        <DestinationId>52337</DestinationId>
-        <DepartureDate>2017-10-22T00:00:00</DepartureDate>
-      </InboundLeg>
-      <QuoteDateTime>2017-08-16T10:10:00</QuoteDateTime>
+      <QuoteDateTime>2017-09-08T00:15:04</QuoteDateTime>
     </QuoteDto>
   </Quotes>
   <Places>
+    <PlaceDto>
+      <PlaceId>44759</PlaceId>
+      <IataCode>CDG</IataCode>
+      <Name>Paris-Charles de Gaulle</Name>
+      <Type>Station</Type>
+      <SkyscannerCode>CDG</SkyscannerCode>
+      <CityName>Paris</CityName>
+      <CityId>PARI</CityId>
+      <CountryName>Frankreich</CountryName>
+    </PlaceDto>
     <PlaceDto>
       <PlaceId>52337</PlaceId>
       <IataCode>FRA</IataCode>
@@ -68,85 +48,11 @@
       <CityId>FRAN</CityId>
       <CountryName>Deutschland</CountryName>
     </PlaceDto>
-    <PlaceDto>
-      <PlaceId>60987</PlaceId>
-      <IataCode>JFK</IataCode>
-      <Name>New York John F Kennedy</Name>
-      <Type>Station</Type>
-      <SkyscannerCode>JFK</SkyscannerCode>
-      <CityName>New York</CityName>
-      <CityId>NYCA</CityId>
-      <CountryName>Vereinigte Staaten</CountryName>
-    </PlaceDto>
   </Places>
   <Carriers>
     <CarriersDto>
-      <CarrierId>105</CarrierId>
-      <Name>Thomas Cook Airlines</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>834</CarrierId>
-      <Name>Air Berlin</Name>
-    </CarriersDto>
-    <CarriersDto>
       <CarrierId>838</CarrierId>
       <Name>Air France</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>857</CarrierId>
-      <Name>Finnair</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>881</CarrierId>
-      <Name>British Airways</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1033</CarrierId>
-      <Name>Aer Lingus</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1081</CarrierId>
-      <Name>Icelandair</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1218</CarrierId>
-      <Name>Iberia</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1324</CarrierId>
-      <Name>KLM</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1368</CarrierId>
-      <Name>Lufthansa</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1384</CarrierId>
-      <Name>SWISS</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1427</CarrierId>
-      <Name>EgyptAir</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1710</CarrierId>
-      <Name>Brussels Airlines</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1713</CarrierId>
-      <Name>Singapore Airlines</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1717</CarrierId>
-      <Name>Aeroflot</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1760</CarrierId>
-      <Name>TAP Portugal</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1793</CarrierId>
-      <Name>United</Name>
     </CarriersDto>
   </Carriers>
 </BrowseQuotesResponseAPIDto>

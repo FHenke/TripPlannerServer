@@ -60,7 +60,7 @@ public class TripPlanner {
 			//-----------------------------------
 			
 			//Google direction
-			/*LinkedBlockingQueue<Connection> connectionList = direction.getConnection(testObjects.GOETTINGEN(), testObjects.PADDERBORN(), greg, true, GoogleMaps.DRIVING, "", "de");
+			/*LinkedBlockingQueue<Connection> connectionList = direction.getConnection(testObjects.GOETTINGEN(), testObjects.ROSDORF(), greg, true, GoogleMaps.TRANSIT, "", "de");
 			printConnectionListGDirection(connectionList);
 			System.out.println(JsonConverter.getJson(connectionList));*/
 			
@@ -77,8 +77,7 @@ public class TripPlanner {
 			System.out.println(e);
 		}
 		
-		version2();
-		//testSockets();
+		openSocket();
 		
 		/*
 		//++Updates the entries of the database from skyscanner
@@ -100,22 +99,11 @@ public class TripPlanner {
 		}
 		*/
 		
-		//testLive.test();
-		
-		//test.test();
 		System.out.println("Done");
 	}
+
 	
-	private static void testSockets(){
-		try {
-			LineCoordinatesOnly.testSend();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
-		}
-	}
-	
-	private static void version2(){
+	private static void openSocket(){
 		LineCoordinatesOnly.version2();
 	}
 	

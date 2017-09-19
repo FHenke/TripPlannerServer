@@ -75,7 +75,9 @@ public class GoogleMapsDirection implements API {
 	public LinkedBlockingQueue<Connection> getConnection(Place origin, Place destination, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language) throws ClientProtocolException, IOException, IllegalStateException, JDOMException{
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		
-		Element rootFromConnectionsXML = getInput(api.utilities.GoogleMaps.createDirectionURL(GoogleMaps.PlaceToGoogleMapsString(origin), GoogleMaps.PlaceToGoogleMapsString(destination), date, isDepartureDate, transportation, avoid, language));
+		String url = api.utilities.GoogleMaps.createDirectionURL(GoogleMaps.PlaceToGoogleMapsString(origin), GoogleMaps.PlaceToGoogleMapsString(destination), date, isDepartureDate, transportation, avoid, language);
+		System.out.println(url);
+		Element rootFromConnectionsXML = getInput(url);
 		
 		
 		// status is OK if there is a result, if a place cant be found it is ZERO_RESULT
@@ -145,6 +147,13 @@ public class GoogleMapsDirection implements API {
 					logger.warn("The distance of one connection can't be parsed to integer.");
 				}
 				
+				//Distance
+				try{
+					connection.setPolyline(routeOption.getParentElement().getChild("overview_polyline").getChildText("points"));
+				}catch(NullPointerException | NumberFormatException e){
+					logger.warn("The overview polyline of one connection can't be read.");
+				}
+				
 				//travel mode
 				switch (transportation){
 					case GoogleMaps.TRANSIT:
@@ -160,6 +169,8 @@ public class GoogleMapsDirection implements API {
 						connection.setType(Connection.BICYCLE);
 						break;				
 				}
+				
+				
 				
 				//subconnection
 				for(Element subconnectionXML : routeOption.getDescendants(Filters.element("step"))){

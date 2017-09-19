@@ -44,3 +44,4 @@
 2017-08-19 11:42:18.981 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set. GoogleMapsDirection.java
 2017-08-19 11:43:43.254 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
 2017-08-19 15:01:55.433 [main] WARN  api.GoogleMapsDirection - The Coordinates of one or more Places can't be parsed to Double.
+2017-09-18 13:36:27.725 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.

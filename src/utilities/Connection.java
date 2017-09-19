@@ -43,12 +43,12 @@ public class Connection {
 	private CarrierList carrier;
 	private boolean direct;
 	private Date quoteDateTime;
-	private LinkedBlockingQueue<Connection> subConnections = new LinkedBlockingQueue<Connection>();;
-	private LinkedBlockingQueue<Connection> returnConnection = new LinkedBlockingQueue<Connection>();;
 	private int weekday;
 	private int distance; //distance in meter
 	private String polyline = null;
 	private String htmlInstructions = null;
+	private LinkedBlockingQueue<Connection> subConnections = new LinkedBlockingQueue<Connection>();
+	private LinkedBlockingQueue<Connection> returnConnection = new LinkedBlockingQueue<Connection>();
 	
 	/**
 	 * empty constructor

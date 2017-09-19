@@ -53,7 +53,6 @@ public class LineCoordinatesOnly {
         	connection.close();
         	socket.close();
         	System.out.println("Closing...");
-        	System.out.println("Running");
             
              
         } catch (IOException e)  {

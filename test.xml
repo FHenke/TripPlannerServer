@@ -14,30 +14,32 @@
   <Quotes>
     <QuoteDto>
       <QuoteId>1</QuoteId>
-      <MinPrice>43</MinPrice>
+      <MinPrice>1106</MinPrice>
       <Direct>true</Direct>
       <OutboundLeg>
         <CarrierIds>
-          <int>838</int>
+          <int>835</int>
         </CarrierIds>
-        <OriginId>44759</OriginId>
+        <OriginId>96322</OriginId>
         <DestinationId>52337</DestinationId>
-        <DepartureDate>2017-11-22T00:00:00</DepartureDate>
+        <DepartureDate>2017-10-18T00:00:00</DepartureDate>
       </OutboundLeg>
-      <QuoteDateTime>2017-09-08T00:15:04</QuoteDateTime>
+      <QuoteDateTime>2017-09-06T08:15:32</QuoteDateTime>
+    </QuoteDto>
+    <QuoteDto>
+      <QuoteId>2</QuoteId>
+      <MinPrice>381</MinPrice>
+      <Direct>false</Direct>
+      <OutboundLeg>
+        <CarrierIds />
+        <OriginId>96322</OriginId>
+        <DestinationId>52337</DestinationId>
+        <DepartureDate>2017-10-18T00:00:00</DepartureDate>
+      </OutboundLeg>
+      <QuoteDateTime>2017-09-17T17:34:03</QuoteDateTime>
     </QuoteDto>
   </Quotes>
   <Places>
-    <PlaceDto>
-      <PlaceId>44759</PlaceId>
-      <IataCode>CDG</IataCode>
-      <Name>Paris-Charles de Gaulle</Name>
-      <Type>Station</Type>
-      <SkyscannerCode>CDG</SkyscannerCode>
-      <CityName>Paris</CityName>
-      <CityId>PARI</CityId>
-      <CountryName>Frankreich</CountryName>
-    </PlaceDto>
     <PlaceDto>
       <PlaceId>52337</PlaceId>
       <IataCode>FRA</IataCode>
@@ -48,11 +50,33 @@
       <CityId>FRAN</CityId>
       <CountryName>Deutschland</CountryName>
     </PlaceDto>
+    <PlaceDto>
+      <PlaceId>96322</PlaceId>
+      <IataCode>YVR</IataCode>
+      <Name>Vancouver International</Name>
+      <Type>Station</Type>
+      <SkyscannerCode>YVR</SkyscannerCode>
+      <CityName>Vancouver</CityName>
+      <CityId>YVRA</CityId>
+      <CountryName>Kanada</CountryName>
+    </PlaceDto>
   </Places>
   <Carriers>
     <CarriersDto>
-      <CarrierId>838</CarrierId>
-      <Name>Air France</Name>
+      <CarrierId>835</CarrierId>
+      <Name>Air Canada</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>981</CarrierId>
+      <Name>Condor</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1081</CarrierId>
+      <Name>Icelandair</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1368</CarrierId>
+      <Name>Lufthansa</Name>
     </CarriersDto>
   </Carriers>
 </BrowseQuotesResponseAPIDto>

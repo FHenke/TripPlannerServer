@@ -51,6 +51,16 @@ public class testObjects {
 		return place;
 	}
 	
+	public static final Place ROSDORF(){
+		Place place = new Place();
+		
+		place.setCity("Rosdorf");
+		place.setCountry("Germany");
+		place.setId("ROS");
+		
+		return place;
+	}
+	
 	public static final Place BERLIN(){
 		Place place = new Place();
 		

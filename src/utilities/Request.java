@@ -7,6 +7,8 @@ public class Request extends Connection {
 
 	private String methode = "";
 	private String departureDateString = "";
+	private String returnDateString = "";
+	private String transportation = "";
 	
 	
 	
@@ -38,6 +40,50 @@ public class Request extends Connection {
 		greg.set(Integer.parseInt(dateArray[0]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[3]), Integer.parseInt(dateArray[4]));
 		
 		return greg;
+	}
+
+
+
+
+	/**
+	 * @return the arrivalDateString
+	 */
+	public GregorianCalendar getReturnDateString() {
+		String[] dateArray = returnDateString.split(" ");
+		GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+		greg.set(Integer.parseInt(dateArray[0]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[3]), Integer.parseInt(dateArray[4]));
+		
+		return greg;
+	}
+
+
+
+
+	/**
+	 * @return the transportation
+	 */
+	public String getTransportation() {
+		return transportation;
+	}
+
+
+
+
+	/**
+	 * @param arrivalDateString the arrivalDateString to set
+	 */
+	public void setReturnDateString(String arrivalDateString) {
+		this.returnDateString = arrivalDateString;
+	}
+
+
+
+
+	/**
+	 * @param transportation the transportation to set
+	 */
+	public void setTransportation(String transportation) {
+		this.transportation = transportation;
 	}
 
 

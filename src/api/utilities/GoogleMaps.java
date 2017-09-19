@@ -114,8 +114,9 @@ public class GoogleMaps {
 		
 		String url = URL + "directions/xml?origin=" + origin + "&destination=" + destination + "&key=" + DIRECTION_API_KEY;
 		url += (!transportation.equals(null)) ? "&mode=" + transportation : "";
-		url += (!avoid.equals(null)) ? "&mode=" + avoid : "";
-		url += (!language.equals(null)) ? "&mode=" + language : "";
+		url += (!avoid.equals(null)) ? "&avoid=" + avoid : "";
+		url += (!language.equals(null)) ? "&language=" + language : "";
+		//url += (!language.equals(null)) ? "&language=" + language : "";
 		if(date != null){
 			url += ((isDepartureDate) ? "&departure_time=" : "&arrival_time=") + (date.getTimeInMillis() / 1000);
 		}
@@ -130,8 +131,8 @@ public class GoogleMaps {
 		
 		String url = URL + "distancematrix/xml?origins=" + origin + "&destinations=" + destination + "&key=" + DISTANCE_API_KEY;
 		url += (!transportation.equals("")) ? "&mode=" + transportation : "";
-		url += (!avoid.equals("")) ? "&mode=" + avoid : "";
-		url += (!language.equals("")) ? "&mode=" + language : "";
+		url += (!avoid.equals("")) ? "&avoid=" + avoid : "";
+		url += (!language.equals("")) ? "&language=" + language : "";
 		if(date != null){
 			url += ((isDepartureDate) ? "&departure_time=" : "&arrival_time=") + (date.getTimeInMillis() / 1000);
 		}

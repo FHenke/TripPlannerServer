@@ -28,7 +28,7 @@ public class RequestHandler {
 		if(request.getMethode().equalsIgnoreCase("GoogleMapsOnly")){
 			try {
 				api.GoogleMapsDirection direction = new api.GoogleMapsDirection();
-				connectionList = direction.getConnection(request.getOrigin(), request.getDestination(), request.getDepartureDateString(), true, getGoogleTransportationString(request.getTransportation()), "", "de");
+				connectionList = direction.getConnection(request.getOrigin(), request.getDestination(), request.getDepartureDateString(), true, getGoogleTransportationString(request.getTransportation()), "", "de", request.isShowAlternatives());
 			} catch (IllegalStateException | IOException | JDOMException e) {
 				System.out.println("FAIL");
 				e.printStackTrace();
@@ -54,7 +54,7 @@ public class RequestHandler {
 		if(request.getMethode().equalsIgnoreCase("GoogleMapsDirection")){
 			try {
 				api.GoogleMapsDirection direction = new api.GoogleMapsDirection();
-				connectionList = direction.getConnection(request.getOrigin(), request.getDestination(), request.getDepartureDateString(), true, getGoogleTransportationString(request.getTransportation()), "", "de");
+				connectionList = direction.getConnection(request.getOrigin(), request.getDestination(), request.getDepartureDateString(), true, getGoogleTransportationString(request.getTransportation()), "", "de", request.isShowAlternatives());
 			} catch (IllegalStateException | IOException | JDOMException e) {
 				System.out.println("FAIL");
 				e.printStackTrace();

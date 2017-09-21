@@ -107,12 +107,12 @@ public class GoogleMaps {
 	}
 	
 	
-	public static String createDirectionURL(String origin, String destination, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language){
+	public static String createDirectionURL(String origin, String destination, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language, boolean alternative){
 		if(!transportation.equals(DRIVING) && !transportation.equals(WALKING) && !transportation.equals(BICYCLING) && !transportation.equals(TRANSIT) && !transportation.equals("")){
 			throw new IllegalArgumentException("Transportation has not a valid content");
 		}
 		
-		String url = URL + "directions/xml?origin=" + origin + "&destination=" + destination + "&key=" + DIRECTION_API_KEY;
+		String url = URL + "directions/xml?origin=" + origin + "&destination=" + destination + "&alternatives=" + alternative + "&key=" + DIRECTION_API_KEY;
 		url += (!transportation.equals(null)) ? "&mode=" + transportation : "";
 		url += (!avoid.equals(null)) ? "&avoid=" + avoid : "";
 		url += (!language.equals(null)) ? "&language=" + language : "";

@@ -14,32 +14,44 @@
   <Quotes>
     <QuoteDto>
       <QuoteId>1</QuoteId>
-      <MinPrice>1106</MinPrice>
+      <MinPrice>134</MinPrice>
       <Direct>true</Direct>
       <OutboundLeg>
         <CarrierIds>
-          <int>835</int>
+          <int>1368</int>
         </CarrierIds>
-        <OriginId>96322</OriginId>
+        <OriginId>44759</OriginId>
         <DestinationId>52337</DestinationId>
         <DepartureDate>2017-10-18T00:00:00</DepartureDate>
       </OutboundLeg>
-      <QuoteDateTime>2017-09-06T08:15:32</QuoteDateTime>
+      <QuoteDateTime>2017-09-20T05:09:57</QuoteDateTime>
     </QuoteDto>
     <QuoteDto>
       <QuoteId>2</QuoteId>
-      <MinPrice>381</MinPrice>
+      <MinPrice>98</MinPrice>
       <Direct>false</Direct>
       <OutboundLeg>
-        <CarrierIds />
-        <OriginId>96322</OriginId>
+        <CarrierIds>
+          <int>1515</int>
+        </CarrierIds>
+        <OriginId>44759</OriginId>
         <DestinationId>52337</DestinationId>
         <DepartureDate>2017-10-18T00:00:00</DepartureDate>
       </OutboundLeg>
-      <QuoteDateTime>2017-09-17T17:34:03</QuoteDateTime>
+      <QuoteDateTime>2017-09-18T13:05:51</QuoteDateTime>
     </QuoteDto>
   </Quotes>
   <Places>
+    <PlaceDto>
+      <PlaceId>44759</PlaceId>
+      <IataCode>CDG</IataCode>
+      <Name>Paris-Charles de Gaulle</Name>
+      <Type>Station</Type>
+      <SkyscannerCode>CDG</SkyscannerCode>
+      <CityName>Paris</CityName>
+      <CityId>PARI</CityId>
+      <CountryName>Frankreich</CountryName>
+    </PlaceDto>
     <PlaceDto>
       <PlaceId>52337</PlaceId>
       <IataCode>FRA</IataCode>
@@ -50,33 +62,35 @@
       <CityId>FRAN</CityId>
       <CountryName>Deutschland</CountryName>
     </PlaceDto>
-    <PlaceDto>
-      <PlaceId>96322</PlaceId>
-      <IataCode>YVR</IataCode>
-      <Name>Vancouver International</Name>
-      <Type>Station</Type>
-      <SkyscannerCode>YVR</SkyscannerCode>
-      <CityName>Vancouver</CityName>
-      <CityId>YVRA</CityId>
-      <CountryName>Kanada</CountryName>
-    </PlaceDto>
   </Places>
   <Carriers>
     <CarriersDto>
-      <CarrierId>835</CarrierId>
-      <Name>Air Canada</Name>
+      <CarrierId>819</CarrierId>
+      <Name>Aegean Airlines</Name>
     </CarriersDto>
     <CarriersDto>
-      <CarrierId>981</CarrierId>
-      <Name>Condor</Name>
+      <CarrierId>838</CarrierId>
+      <Name>Air France</Name>
     </CarriersDto>
     <CarriersDto>
-      <CarrierId>1081</CarrierId>
-      <Name>Icelandair</Name>
+      <CarrierId>881</CarrierId>
+      <Name>British Airways</Name>
     </CarriersDto>
     <CarriersDto>
       <CarrierId>1368</CarrierId>
       <Name>Lufthansa</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1375</CarrierId>
+      <Name>LOT</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1515</CarrierId>
+      <Name>Czech Airlines</Name>
+    </CarriersDto>
+    <CarriersDto>
+      <CarrierId>1707</CarrierId>
+      <Name>SAS</Name>
     </CarriersDto>
   </Carriers>
 </BrowseQuotesResponseAPIDto>

@@ -9,6 +9,7 @@ public class Request extends Connection {
 	private String departureDateString = "";
 	private String returnDateString = "";
 	private String transportation = "";
+	private boolean showAlternatives = false;
 	
 	
 	
@@ -64,6 +65,26 @@ public class Request extends Connection {
 	 */
 	public String getTransportation() {
 		return transportation;
+	}
+
+
+
+
+	/**
+	 * @return the showAlternatives
+	 */
+	public boolean isShowAlternatives() {
+		return showAlternatives;
+	}
+
+
+
+
+	/**
+	 * @param showAlternatives the showAlternatives to set
+	 */
+	public void setShowAlternatives(boolean showAlternatives) {
+		this.showAlternatives = showAlternatives;
 	}
 
 

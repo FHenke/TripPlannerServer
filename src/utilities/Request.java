@@ -8,7 +8,7 @@ public class Request extends Connection {
 	private String methode = "";
 	private String departureDateString = "";
 	private String returnDateString = "";
-	private String transportation = "";
+	private boolean[] transportation;
 	private boolean showAlternatives = false;
 	
 	
@@ -63,7 +63,7 @@ public class Request extends Connection {
 	/**
 	 * @return the transportation
 	 */
-	public String getTransportation() {
+	public boolean[] getTransportation() {
 		return transportation;
 	}
 
@@ -103,7 +103,7 @@ public class Request extends Connection {
 	/**
 	 * @param transportation the transportation to set
 	 */
-	public void setTransportation(String transportation) {
+	public void setTransportation(boolean[] transportation) {
 		this.transportation = transportation;
 	}
 
@@ -125,6 +125,43 @@ public class Request extends Connection {
 	 */
 	public void setMethode(String methode) {
 		this.methode = methode;
+	}
+	
+
+	/**
+	 * Returns different modes of Transportation
+	 * @return if Transportation Car is set true
+	 */
+	public boolean transportationIsCar(){
+		return transportation[0];
+	}
+	/**
+	 * Returns different modes of Transportation
+	 * @return if Transportation Public Transport is set true
+	 */
+	public boolean transportationIsPublicTransit(){
+		return transportation[1];
+	}
+	/**
+	 * Returns different modes of Transportation
+	 * @return if Transportation Bicycle is set true
+	 */
+	public boolean transportationIsBicycle(){
+		return transportation[2];
+	}
+	/**
+	 * Returns different modes of Transportation
+	 * @return if Transportation Walk is set true
+	 */
+	public boolean transportationIsWalk(){
+		return transportation[3];
+	}
+	/**
+	 * Returns different modes of Transportation
+	 * @return if Transportation Airplane is set true
+	 */
+	public boolean transportationIsAirplane(){
+		return transportation[4];
 	}
 
 	

@@ -18,47 +18,39 @@ public class RequestHandler {
 		
 	}
 	
+	@SuppressWarnings("null")
 	public LinkedBlockingQueue<Connection> solveRequest(Request request){
-		/*api.SkyscannerCache cache = new api.SkyscannerCache();
-		api.SkyscannerLive live = new api.SkyscannerLive();
-		api.GoogleMapsDistance distance = new api.GoogleMapsDistance();*/
-		LinkedBlockingQueue<Connection> connectionList = null;
-		
-		//If Method is GoogleMapsOnly uses Google Maps Direction Service
-		if(request.getMethode().equalsIgnoreCase("GoogleMapsOnly")){
-			try {
-				api.GoogleMapsDirection direction = new api.GoogleMapsDirection();
-				connectionList = direction.getConnection(request.getOrigin(), request.getDestination(), request.getDepartureDateString(), true, getGoogleTransportationString(request.getTransportation()), "", "de", request.isShowAlternatives());
-			} catch (IllegalStateException | IOException | JDOMException e) {
-				System.out.println("FAIL");
-				e.printStackTrace();
-			}
-		}
+		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		
 		//If Method is GoogleMapsDistance uses Google Maps Distance Service only
 		if(request.getMethode().equalsIgnoreCase("GoogleMapsDistance")){
-			try {
+			GoogleMapsDistance distance = new GoogleMapsDistance();
+			connectionList.addAll(distance.getConnectionList(request));
+			/*try {
 				api.GoogleMapsDistance distance = new api.GoogleMapsDistance();
 				LinkedList<Place> originPlaceList = new LinkedList<Place>();
 				originPlaceList.add(request.getOrigin());
 				LinkedList<Place> destinationPlaceList = new LinkedList<Place>();
 				destinationPlaceList.add(request.getDestination());
-				connectionList = distance.getConnection(originPlaceList, destinationPlaceList, request.getDepartureDateString(), true, getGoogleTransportationString(request.getTransportation()), "", "de");
+				connectionList = distance.getConnection(originPlaceList, destinationPlaceList, request.getDepartureDateString(), true, api.utilities.GoogleMaps.DRIVING, "", "de");
 			} catch (IllegalStateException | IOException | JDOMException e) {
 				System.out.println("FAIL");
 				e.printStackTrace();
-			}
+			}*/
 		}
 		
 		//If Method is GoogleMapsDirecton uses Google Maps Direction Service only
 		if(request.getMethode().equalsIgnoreCase("GoogleMapsDirection")){
-			try {
+			GoogleMapsDirection direction = new GoogleMapsDirection();
+			connectionList.addAll(direction.getConnectionList(request));
+			
+			/*try {
 				api.GoogleMapsDirection direction = new api.GoogleMapsDirection();
-				connectionList = direction.getConnection(request.getOrigin(), request.getDestination(), request.getDepartureDateString(), true, getGoogleTransportationString(request.getTransportation()), "", "de", request.isShowAlternatives());
+				connectionList = direction.getConnection(request.getOrigin(), request.getDestination(), request.getDepartureDateString(), true, api.utilities.GoogleMaps.DRIVING, "", "de", request.isShowAlternatives());
 			} catch (IllegalStateException | IOException | JDOMException e) {
 				System.out.println("FAIL");
 				e.printStackTrace();
-			}
+			}*/
 		}
 		
 		
@@ -75,10 +67,7 @@ public class RequestHandler {
 				e.printStackTrace();
 			}
 		}
-		
-		
 
-		
 		return connectionList;
 	}
 	

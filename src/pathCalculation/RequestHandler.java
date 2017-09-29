@@ -26,31 +26,12 @@ public class RequestHandler {
 		if(request.getMethode().equalsIgnoreCase("GoogleMapsDistance")){
 			GoogleMapsDistance distance = new GoogleMapsDistance();
 			connectionList.addAll(distance.getConnectionList(request));
-			/*try {
-				api.GoogleMapsDistance distance = new api.GoogleMapsDistance();
-				LinkedList<Place> originPlaceList = new LinkedList<Place>();
-				originPlaceList.add(request.getOrigin());
-				LinkedList<Place> destinationPlaceList = new LinkedList<Place>();
-				destinationPlaceList.add(request.getDestination());
-				connectionList = distance.getConnection(originPlaceList, destinationPlaceList, request.getDepartureDateString(), true, api.utilities.GoogleMaps.DRIVING, "", "de");
-			} catch (IllegalStateException | IOException | JDOMException e) {
-				System.out.println("FAIL");
-				e.printStackTrace();
-			}*/
 		}
 		
 		//If Method is GoogleMapsDirecton uses Google Maps Direction Service only
 		if(request.getMethode().equalsIgnoreCase("GoogleMapsDirection")){
 			GoogleMapsDirection direction = new GoogleMapsDirection();
 			connectionList.addAll(direction.getConnectionList(request));
-			
-			/*try {
-				api.GoogleMapsDirection direction = new api.GoogleMapsDirection();
-				connectionList = direction.getConnection(request.getOrigin(), request.getDestination(), request.getDepartureDateString(), true, api.utilities.GoogleMaps.DRIVING, "", "de", request.isShowAlternatives());
-			} catch (IllegalStateException | IOException | JDOMException e) {
-				System.out.println("FAIL");
-				e.printStackTrace();
-			}*/
 		}
 		
 		
@@ -69,22 +50,6 @@ public class RequestHandler {
 		}
 
 		return connectionList;
-	}
-	
-	
-	private String getGoogleTransportationString(String transportation){
-		String googleTransportation = "";
-		switch(transportation){
-			case "BusOnly": googleTransportation = api.utilities.GoogleMaps.TRANSIT;
-							break;
-			case "CarOnly": googleTransportation = api.utilities.GoogleMaps.DRIVING;
-							break;
-			case "WalkingOnly": googleTransportation = api.utilities.GoogleMaps.WALKING;
-							break;
-			case "BicyclingOnly": googleTransportation = api.utilities.GoogleMaps.BICYCLING;
-							break;
-		}
-		return googleTransportation;
 	}
 }
 

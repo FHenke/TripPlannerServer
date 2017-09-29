@@ -47,13 +47,24 @@ public class GoogleMapsDirection implements API {
 	}
 	
 	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, GregorianCalendar outboundDate, GregorianCalendar inboundDate) throws ClientProtocolException, IOException, JDOMException{
-		String url = "https://maps.googleapis.com/maps/api/directions/xml?origin=Göttingen&destination=Berlin&key=AIzaSyDhieKypOeAVC9O1rD2y7SoSEgESt0S8ao";
-		url = "https://maps.googleapis.com/maps/api/directions/xml?origin=" + origin + "&destination=" + destination + "&mode=transit" + "&departure_time=1502546005&key=AIzaSyDhieKypOeAVC9O1rD2y7SoSEgESt0S8ao";
-
-		Element rootFromAutosuggestXML = getInput(url);
+		LinkedBlockingQueue<Connection> connections = null;
 		
-		XMLUtilities.writeXmlToFile(rootFromAutosuggestXML, "testGoogle.xml");
-		return null;
+		Place originObject = new Place(origin);
+		Place destinationObject = new Place(destination);
+		
+		/*String url = "https://maps.googleapis.com/maps/api/directions/xml?origin=Göttingen&destination=Berlin&key=AIzaSyDhieKypOeAVC9O1rD2y7SoSEgESt0S8ao";
+		Element rootFromAutosuggestXML = getInput(url);
+		XMLUtilities.writeXmlToFile(rootFromAutosuggestXML, "testGoogle.xml");*/	
+		
+		//outbound connection
+		connections = getConnection(originObject, destinationObject, outboundDate, true, "", "", "de", false);
+		//inbound connection
+		connections.addAll(destinationObject, originObject, inboundDate, true, "", "", "de", false));
+		
+		return connections;
+		
+		
+
 	}
 	
 	

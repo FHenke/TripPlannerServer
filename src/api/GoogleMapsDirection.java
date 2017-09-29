@@ -59,7 +59,7 @@ public class GoogleMapsDirection implements API {
 		//outbound connection
 		connections = getConnection(originObject, destinationObject, outboundDate, true, "", "", "de", false);
 		//inbound connection
-		connections.addAll(destinationObject, originObject, inboundDate, true, "", "", "de", false));
+		connections.addAll(getConnection(destinationObject, originObject, inboundDate, true, "", "", "de", false));
 		
 		return connections;
 		

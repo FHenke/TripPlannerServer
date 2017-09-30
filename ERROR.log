@@ -45,3 +45,27 @@
 2017-08-19 11:43:43.254 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
 2017-08-19 15:01:55.433 [main] WARN  api.GoogleMapsDirection - The Coordinates of one or more Places can't be parsed to Double.
 2017-09-18 13:36:27.725 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-09-29 21:36:24.806 [main] WARN  api.GoogleMapsDirection - The Coordinates of one or more Places can't be parsed to Double.
+2017-09-29 21:36:24.808 [main] WARN  api.GoogleMapsDirection - The duration of one connection can't be parsed to long.
+2017-09-29 21:36:24.809 [main] WARN  api.GoogleMapsDirection - The distance of one connection can't be parsed to integer.
+2017-09-29 21:36:24.809 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-09-29 21:36:24.818 [main] WARN  api.GoogleMapsDirection - The Coordinates of one or more Places can't be parsed to Double.
+2017-09-29 21:36:24.818 [main] WARN  api.GoogleMapsDirection - The duration of one connection can't be parsed to long.
+2017-09-29 21:36:24.818 [main] WARN  api.GoogleMapsDirection - The distance of one connection can't be parsed to integer.
+2017-09-29 21:36:24.818 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-09-29 21:36:24.824 [main] WARN  api.GoogleMapsDirection - The Coordinates of one or more Places can't be parsed to Double.
+2017-09-29 21:36:24.824 [main] WARN  api.GoogleMapsDirection - The duration of one connection can't be parsed to long.
+2017-09-29 21:36:24.825 [main] WARN  api.GoogleMapsDirection - The distance of one connection can't be parsed to integer.
+2017-09-29 21:36:24.825 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-09-29 21:36:48.145 [main] WARN  api.GoogleMapsDirection - The Coordinates of one or more Places can't be parsed to Double.
+2017-09-29 21:36:48.146 [main] WARN  api.GoogleMapsDirection - The duration of one connection can't be parsed to long.
+2017-09-29 21:36:48.146 [main] WARN  api.GoogleMapsDirection - The distance of one connection can't be parsed to integer.
+2017-09-29 21:36:48.147 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-09-29 21:36:48.161 [main] WARN  api.GoogleMapsDirection - The Coordinates of one or more Places can't be parsed to Double.
+2017-09-29 21:36:48.161 [main] WARN  api.GoogleMapsDirection - The duration of one connection can't be parsed to long.
+2017-09-29 21:36:48.161 [main] WARN  api.GoogleMapsDirection - The distance of one connection can't be parsed to integer.
+2017-09-29 21:36:48.162 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-09-29 21:36:48.168 [main] WARN  api.GoogleMapsDirection - The Coordinates of one or more Places can't be parsed to Double.
+2017-09-29 21:36:48.168 [main] WARN  api.GoogleMapsDirection - The duration of one connection can't be parsed to long.
+2017-09-29 21:36:48.168 [main] WARN  api.GoogleMapsDirection - The distance of one connection can't be parsed to integer.
+2017-09-29 21:36:48.169 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.

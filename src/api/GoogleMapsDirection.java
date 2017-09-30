@@ -62,9 +62,6 @@ public class GoogleMapsDirection implements API {
 		connections.addAll(getConnection(destinationObject, originObject, inboundDate, true, "", "", "de", false));
 		
 		return connections;
-		
-		
-
 	}
 	
 	
@@ -144,6 +141,8 @@ public class GoogleMapsDirection implements API {
 					//No departure or arrivelTime available, everything ok
 				}
 				
+				
+				
 				//Duration
 				try{
 					connection.setDuration(new Duration ((Long.parseLong(routeOption.getChild("duration").getChildText("value"))) * 1000L));
@@ -161,6 +160,13 @@ public class GoogleMapsDirection implements API {
 				//Distance
 				try{
 					connection.setPolyline(routeOption.getParentElement().getChild("overview_polyline").getChildText("points"));
+				}catch(NullPointerException | NumberFormatException e){
+					logger.warn("The overview polyline of one connection can't be read.");
+				}
+				
+				//Distance
+				try{
+					connection.setSummary(routeOption.getParentElement().getChildText("summary"));
 				}catch(NullPointerException | NumberFormatException e){
 					logger.warn("The overview polyline of one connection can't be read.");
 				}

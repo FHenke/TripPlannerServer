@@ -47,6 +47,7 @@ public class Connection {
 	private int distance; //distance in meter
 	private String polyline = null;
 	private String htmlInstructions = null;
+	private String summary = null;
 	private LinkedBlockingQueue<Connection> subConnections = new LinkedBlockingQueue<Connection>();
 	private LinkedBlockingQueue<Connection> returnConnection = new LinkedBlockingQueue<Connection>();
 	
@@ -233,6 +234,12 @@ public class Connection {
 	}	
 
 
+	/**
+	 * @return the summary
+	 */
+	public String getSummary() {
+		return summary;
+	}
 
 
 
@@ -243,6 +250,18 @@ public class Connection {
 
 
 
+
+
+
+
+
+
+	/**
+	 * @param summary the summary to set
+	 */
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 
 
 

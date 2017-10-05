@@ -68,6 +68,15 @@ public class GoogleMapsDistance implements API {
 		return connections;
 	}
 	
+	public LinkedBlockingQueue<Connection> getConnection(Place origin, Place destination, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language) throws ClientProtocolException, IOException, IllegalStateException, JDOMException{
+		LinkedList<Place> originlist = new LinkedList<Place>();
+		originlist.add(origin);
+		LinkedList<Place> destinationlist = new LinkedList<Place>();
+		destinationlist.add(destination);
+		
+		return getConnection(originlist, destinationlist, date, isDepartureDate, transportation, avoid, language);
+	}
+	
 	/**
 	 * 
 	 * @param originList list of Places of origins.

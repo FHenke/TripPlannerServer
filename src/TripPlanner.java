@@ -17,7 +17,9 @@ import org.joda.time.format.PeriodFormatterBuilder;
 import api.SkyscannerLive;
 import api.testLive;
 import api.utilities.GoogleMaps;
+import database.DatabaseConnection;
 import database.updateTables.*;
+import database.utilities.ClosestAirportListElement;
 import sockets.JsonConverter;
 import sockets.LineCoordinatesOnly;
 import utilities.Connection;
@@ -29,6 +31,23 @@ public class TripPlanner {
 		api.SkyscannerLive live = new api.SkyscannerLive();
 		api.GoogleMapsDistance distance = new api.GoogleMapsDistance();
 		api.GoogleMapsDirection direction = new api.GoogleMapsDirection();
+		
+		/*
+		try {
+			database.ClosestAirports closeAirports = new database.ClosestAirports((new DatabaseConnection()).getConnection());
+			
+			closeAirports.createAirportsBeeline(testObjects.ROSDORF(), 9);
+			closeAirports.setAirportOtherDistance(1, GoogleMaps.DRIVING);
+			closeAirports.orderListByDuration();
+			
+			for(ClosestAirportListElement airport : closeAirports.getAirportList()){
+				//System.out.println(airport.getAirport().getName() + " - " + airport.getDuration().getStandardHours() + ":" + airport.getDuration().getStandardMinutes() % 60);
+				System.out.println(airport.getAirport().getName() + " - " + airport.getConnection().getDistance());
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
 		
 		try{
 			//
@@ -77,6 +96,7 @@ public class TripPlanner {
 			System.out.println(e);
 		}
 		
+		// +++ Starting the Server +++
 		openSocket();
 		
 		/*

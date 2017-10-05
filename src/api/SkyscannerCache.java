@@ -43,7 +43,7 @@ import utilities.*;
  */
 public class SkyscannerCache implements API {
 	
-	protected static final Logger logger = LogManager.getLogger(UpdateContinents.class);
+	protected static final Logger logger = LogManager.getLogger(SkyscannerCache.class);
 
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	private static final String INBOUND = "InboundLeg";

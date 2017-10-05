@@ -36,11 +36,24 @@ public class RequestHandler {
 		
 		
 		//If Method is SkyscannerCacheOnly uses Skyscanner Cache Service only
-		if(request.getMethode().equalsIgnoreCase("SkyscannerCacheOnly")){
+		/*if(request.getMethode().equalsIgnoreCase("SkyscannerCacheOnly")){
 			try {
 				api.SkyscannerCache direction = new api.SkyscannerCache();
 				connectionList = direction.getAllConnections(request.getOrigin().getIata(), request.getDestination().getIata(), request.getDepartureDateString(), null);
 			} catch (IllegalStateException | IOException | JDOMException e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			}
+		}*/
+		
+		if(request.getMethode().equalsIgnoreCase("All")){
+			try {
+				SkyscannerCache skyCache = new SkyscannerCache();
+				return skyCache.getConnectionList(request);
+			} catch (IllegalStateException e) {
 				System.out.println("FAIL");
 				e.printStackTrace();
 			} catch (Exception e) {

@@ -14,44 +14,32 @@
   <Quotes>
     <QuoteDto>
       <QuoteId>1</QuoteId>
-      <MinPrice>134</MinPrice>
+      <MinPrice>1187</MinPrice>
       <Direct>true</Direct>
       <OutboundLeg>
         <CarrierIds>
-          <int>1368</int>
+          <int>835</int>
         </CarrierIds>
-        <OriginId>44759</OriginId>
-        <DestinationId>52337</DestinationId>
-        <DepartureDate>2017-10-18T00:00:00</DepartureDate>
+        <OriginId>52337</OriginId>
+        <DestinationId>96451</DestinationId>
+        <DepartureDate>2017-11-09T00:00:00</DepartureDate>
       </OutboundLeg>
-      <QuoteDateTime>2017-09-20T05:09:57</QuoteDateTime>
+      <QuoteDateTime>2017-09-11T16:03:44</QuoteDateTime>
     </QuoteDto>
     <QuoteDto>
       <QuoteId>2</QuoteId>
-      <MinPrice>98</MinPrice>
+      <MinPrice>432</MinPrice>
       <Direct>false</Direct>
       <OutboundLeg>
-        <CarrierIds>
-          <int>1515</int>
-        </CarrierIds>
-        <OriginId>44759</OriginId>
-        <DestinationId>52337</DestinationId>
-        <DepartureDate>2017-10-18T00:00:00</DepartureDate>
+        <CarrierIds />
+        <OriginId>52337</OriginId>
+        <DestinationId>96451</DestinationId>
+        <DepartureDate>2017-11-09T00:00:00</DepartureDate>
       </OutboundLeg>
-      <QuoteDateTime>2017-09-18T13:05:51</QuoteDateTime>
+      <QuoteDateTime>2017-09-11T16:03:44</QuoteDateTime>
     </QuoteDto>
   </Quotes>
   <Places>
-    <PlaceDto>
-      <PlaceId>44759</PlaceId>
-      <IataCode>CDG</IataCode>
-      <Name>Paris-Charles de Gaulle</Name>
-      <Type>Station</Type>
-      <SkyscannerCode>CDG</SkyscannerCode>
-      <CityName>Paris</CityName>
-      <CityId>PARI</CityId>
-      <CountryName>Frankreich</CountryName>
-    </PlaceDto>
     <PlaceDto>
       <PlaceId>52337</PlaceId>
       <IataCode>FRA</IataCode>
@@ -62,35 +50,25 @@
       <CityId>FRAN</CityId>
       <CountryName>Deutschland</CountryName>
     </PlaceDto>
+    <PlaceDto>
+      <PlaceId>96451</PlaceId>
+      <IataCode>YYC</IataCode>
+      <Name>Calgary</Name>
+      <Type>Station</Type>
+      <SkyscannerCode>YYC</SkyscannerCode>
+      <CityName>Calgary</CityName>
+      <CityId>YYCA</CityId>
+      <CountryName>Kanada</CountryName>
+    </PlaceDto>
   </Places>
   <Carriers>
     <CarriersDto>
-      <CarrierId>819</CarrierId>
-      <Name>Aegean Airlines</Name>
+      <CarrierId>835</CarrierId>
+      <Name>Air Canada</Name>
     </CarriersDto>
     <CarriersDto>
-      <CarrierId>838</CarrierId>
-      <Name>Air France</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>881</CarrierId>
-      <Name>British Airways</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1368</CarrierId>
-      <Name>Lufthansa</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1375</CarrierId>
-      <Name>LOT</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1515</CarrierId>
-      <Name>Czech Airlines</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1707</CarrierId>
-      <Name>SAS</Name>
+      <CarrierId>981</CarrierId>
+      <Name>Condor</Name>
     </CarriersDto>
   </Carriers>
 </BrowseQuotesResponseAPIDto>

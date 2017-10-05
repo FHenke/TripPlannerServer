@@ -84,7 +84,6 @@ public class GoogleMapsDirection implements API {
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		
 		String url = api.utilities.GoogleMaps.createDirectionURL(GoogleMaps.PlaceToGoogleMapsString(origin), GoogleMaps.PlaceToGoogleMapsString(destination), date, isDepartureDate, transportation, avoid, language, alternatives);
-		System.out.println(url);
 		Element rootFromConnectionsXML = getInput(url);
 		
 		
@@ -107,10 +106,14 @@ public class GoogleMapsDirection implements API {
 					
 					origin.setLatitude(startLatitude);
 					origin.setLongitude(startLongitude);
-					origin.setName(startName);
+					if(origin.getType() != Place.AIRPORT){
+						origin.setName(startName);
+					}
 					destination.setLatitude(endLatitude);
 					destination.setLongitude(endLongitude);
-					destination.setName(endName);
+					if(destination.getType() != Place.AIRPORT){
+						destination.setName(endName);
+					}
 					
 				}catch(NullPointerException | NumberFormatException e){
 					origin.setLatitude(Double.MAX_VALUE);

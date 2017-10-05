@@ -57,6 +57,8 @@ public class testObjects {
 		place.setCity("Rosdorf");
 		place.setCountry("Germany");
 		place.setId("ROS");
+		place.setLatitude(51.50457);
+		place.setLongitude(9.90207);
 		
 		return place;
 	}

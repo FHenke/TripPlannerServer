@@ -126,6 +126,17 @@ public class GoogleMapsDirection implements API {
 				
 				connection = new Connection(origin, destination);
 				
+				//Duration
+				try{
+					connection.setDuration(new Duration ((Long.parseLong(routeOption.getChild("uration_in_traffic").getChildText("value"))) * 1000L));
+				}catch(NullPointerException | NumberFormatException e){
+					try{
+						connection.setDuration(new Duration ((Long.parseLong(routeOption.getChild("duration").getChildText("value"))) * 1000L));
+					}catch(NullPointerException | NumberFormatException ex){
+						logger.warn("The duration of one connection can't be parsed to long. " + ex);
+					}
+				}
+				
 				//start/end time/date
 				try{
 					//departure time
@@ -145,17 +156,21 @@ public class GoogleMapsDirection implements API {
 				}catch(NumberFormatException e){
 					logger.warn("The departure and arrival time of one connections can't be set." + e);
 				}catch(NullPointerException e){
-					//No departure or arrivelTime available, everything ok
+					GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+					if(isDepartureDate)
+						departureTime.setTimeInMillis(date.getTimeInMillis());
+					else
+						departureTime.setTimeInMillis(date.getTimeInMillis() - connection.getDuration().getMillis());
+					connection.setDepartureDate(departureTime);
+					
+					GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+					if(isDepartureDate)
+						arrivalTime.setTimeInMillis(date.getTimeInMillis() + connection.getDuration().getMillis());
+					else
+						arrivalTime.setTimeInMillis(date.getTimeInMillis());
+					connection.setArrivalDate(arrivalTime);
 				}
 				
-				
-				
-				//Duration
-				try{
-					connection.setDuration(new Duration ((Long.parseLong(routeOption.getChild("duration").getChildText("value"))) * 1000L));
-				}catch(NullPointerException | NumberFormatException e){
-					logger.warn("The duration of one connection can't be parsed to long.");
-				}
 				
 				//Distance
 				try{

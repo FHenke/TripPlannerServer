@@ -160,14 +160,14 @@ public class GoogleMapsDirection implements API {
 					logger.warn("The distance of one connection can't be parsed to integer.");
 				}
 				
-				//Distance
+				//overview polyline
 				try{
 					connection.setPolyline(routeOption.getParentElement().getChild("overview_polyline").getChildText("points"));
 				}catch(NullPointerException | NumberFormatException e){
 					logger.warn("The overview polyline of one connection can't be read.");
 				}
 				
-				//Distance
+				//summary
 				try{
 					connection.setSummary(routeOption.getParentElement().getChildText("summary"));
 				}catch(NullPointerException | NumberFormatException e){
@@ -306,7 +306,7 @@ public class GoogleMapsDirection implements API {
 				connectionList.add(connection);
 			}
 		}
-		//To write the retunrned XML file into a file
+		//To write the returned XML file into a file
 		XMLUtilities.writeXmlToFile(rootFromConnectionsXML, "testGoogle.xml");
 		
 		return connectionList;

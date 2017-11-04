@@ -14,61 +14,45 @@
   <Quotes>
     <QuoteDto>
       <QuoteId>1</QuoteId>
-      <MinPrice>1187</MinPrice>
+      <MinPrice>89</MinPrice>
       <Direct>true</Direct>
       <OutboundLeg>
         <CarrierIds>
-          <int>835</int>
+          <int>1556</int>
         </CarrierIds>
-        <OriginId>52337</OriginId>
-        <DestinationId>96451</DestinationId>
+        <OriginId>96234</OriginId>
+        <DestinationId>95991</DestinationId>
         <DepartureDate>2017-11-09T00:00:00</DepartureDate>
       </OutboundLeg>
-      <QuoteDateTime>2017-09-11T16:03:44</QuoteDateTime>
-    </QuoteDto>
-    <QuoteDto>
-      <QuoteId>2</QuoteId>
-      <MinPrice>432</MinPrice>
-      <Direct>false</Direct>
-      <OutboundLeg>
-        <CarrierIds />
-        <OriginId>52337</OriginId>
-        <DestinationId>96451</DestinationId>
-        <DepartureDate>2017-11-09T00:00:00</DepartureDate>
-      </OutboundLeg>
-      <QuoteDateTime>2017-09-11T16:03:44</QuoteDateTime>
+      <QuoteDateTime>2017-09-10T14:45:39</QuoteDateTime>
     </QuoteDto>
   </Quotes>
   <Places>
     <PlaceDto>
-      <PlaceId>52337</PlaceId>
-      <IataCode>FRA</IataCode>
-      <Name>Frankfurt am Main</Name>
+      <PlaceId>95991</PlaceId>
+      <IataCode>YOW</IataCode>
+      <Name>Ottawa International</Name>
       <Type>Station</Type>
-      <SkyscannerCode>FRA</SkyscannerCode>
-      <CityName>Frankfurt am Main</CityName>
-      <CityId>FRAN</CityId>
-      <CountryName>Deutschland</CountryName>
+      <SkyscannerCode>YOW</SkyscannerCode>
+      <CityName>Ottawa</CityName>
+      <CityId>YOWA</CityId>
+      <CountryName>Kanada</CountryName>
     </PlaceDto>
     <PlaceDto>
-      <PlaceId>96451</PlaceId>
-      <IataCode>YYC</IataCode>
-      <Name>Calgary</Name>
+      <PlaceId>96234</PlaceId>
+      <IataCode>YTZ</IataCode>
+      <Name>Toronto Island</Name>
       <Type>Station</Type>
-      <SkyscannerCode>YYC</SkyscannerCode>
-      <CityName>Calgary</CityName>
-      <CityId>YYCA</CityId>
+      <SkyscannerCode>YTZ</SkyscannerCode>
+      <CityName>Toronto</CityName>
+      <CityId>YTOA</CityId>
       <CountryName>Kanada</CountryName>
     </PlaceDto>
   </Places>
   <Carriers>
     <CarriersDto>
-      <CarrierId>835</CarrierId>
-      <Name>Air Canada</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>981</CarrierId>
-      <Name>Condor</Name>
+      <CarrierId>1556</CarrierId>
+      <Name>Porter Airlines</Name>
     </CarriersDto>
   </Carriers>
 </BrowseQuotesResponseAPIDto>

@@ -6,8 +6,8 @@ import java.util.TimeZone;
 public class Request extends Connection {
 
 	private String methode = "";
-	private String departureDateString = "";
-	private String returnDateString = "";
+	private long departureDateEpochTime = 0;
+	private long returnDateEpochTime = 0;
 	private boolean[] transportation;
 	private boolean showAlternatives = false;
 	
@@ -35,10 +35,10 @@ public class Request extends Connection {
 	 * @return the departureDate
 	 */
 	public GregorianCalendar getDepartureDateString() {
-		String[] dateArray = departureDateString.split(" |/|\\:");
+		//String[] dateArray = departureDateString.split(" |/|\\:");
 		GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-		greg.set(Integer.parseInt(dateArray[0]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[3]), Integer.parseInt(dateArray[4]));
-		
+		//greg.set(Integer.parseInt(dateArray[0]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[3]), Integer.parseInt(dateArray[4]));
+		greg.setTimeInMillis(departureDateEpochTime);
 		return greg;
 	}
 
@@ -50,9 +50,10 @@ public class Request extends Connection {
 	 */
 	public GregorianCalendar getReturnDateString() {
 		try{
-			String[] dateArray = returnDateString.split(" |\\|\\:");
+			//String[] dateArray = returnDateString.split(" |\\|\\:");
 			GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-			greg.set(Integer.parseInt(dateArray[0]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[3]), Integer.parseInt(dateArray[4]));
+			//greg.set(Integer.parseInt(dateArray[0]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[3]), Integer.parseInt(dateArray[4]));
+			greg.setTimeInMillis(returnDateEpochTime);
 			return greg;
 		}catch(Exception e){
 			//happens if there is no return connection requested
@@ -96,8 +97,8 @@ public class Request extends Connection {
 	/**
 	 * @param arrivalDateString the arrivalDateString to set
 	 */
-	public void setReturnDateString(String arrivalDateString) {
-		this.returnDateString = arrivalDateString;
+	public void setReturnDateString(long returnDateMillisec) {
+		this.returnDateEpochTime = returnDateMillisec;
 	}
 
 
@@ -116,8 +117,8 @@ public class Request extends Connection {
 	/**
 	 * @param departureDate the departureDate to set
 	 */
-	public void setDepartureDateString(String departureDateString) {
-		this.departureDateString = departureDateString;
+	public void setDepartureDateString(long departureDateMillisec) {
+		this.departureDateEpochTime = departureDateMillisec;
 	}
 
 

@@ -99,9 +99,9 @@ public class TripPlanner {
 		// +++ Starting the Server +++
 		openSocket();
 		
-		/*
+		
 		//++Updates the entries of the database from skyscanner
-		try{
+		/*try{
 			UpdateDatabase.proceed(new  database.DatabaseConnection().getConnection());
 		}catch(IOException | SQLException e){
 			System.out.println(e);
@@ -124,7 +124,7 @@ public class TripPlanner {
 
 	
 	private static void openSocket(){
-		LineCoordinatesOnly.version2();
+		LineCoordinatesOnly.version1();
 	}
 	
 	//for getConnection

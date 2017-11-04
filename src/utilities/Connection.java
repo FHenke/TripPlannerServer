@@ -50,6 +50,7 @@ public class Connection {
 	private String summary = null;
 	private LinkedBlockingQueue<Connection> subConnections = new LinkedBlockingQueue<Connection>();
 	private LinkedBlockingQueue<Connection> returnConnection = new LinkedBlockingQueue<Connection>();
+	private int id;
 	
 	/**
 	 * empty constructor
@@ -57,6 +58,7 @@ public class Connection {
 	public Connection(Place origin, Place destination){
 		this.origin = origin;
 		this.destination = destination;
+		this.id = IdGenerator.getNewID();
 	}
 	
 	
@@ -83,6 +85,7 @@ public class Connection {
 		this.direct = direct;
 		this.quoteDateTime = quoteDateTime;
 		this.weekday = weekday;
+		this.id = IdGenerator.getNewID();
 	}
 	
 	
@@ -105,8 +108,16 @@ public class Connection {
 		this.duration = duration;
 		this.arrivalDate = arrivalDate;
 		this.departureDate = departureDate;
+		this.id = IdGenerator.getNewID();
 	}
 
+	
+	/**
+	 * @return the ID
+	 */
+	public int getId() {
+		return id;
+	}
 
 	/**
 	 * @return the origin

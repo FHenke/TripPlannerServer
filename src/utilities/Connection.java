@@ -32,6 +32,9 @@ public class Connection {
 	public final static int SATURDAY = 6;
 	public final static int SUNDAY = 7;
 	
+	public final static String ADD = "add";
+	public final static String REMOVE = "remove";
+	
 	
 	private Place origin;
 	private Place destination;
@@ -51,6 +54,7 @@ public class Connection {
 	private LinkedBlockingQueue<Connection> subConnections = new LinkedBlockingQueue<Connection>();
 	private LinkedBlockingQueue<Connection> returnConnection = new LinkedBlockingQueue<Connection>();
 	private int id;
+	private String action;
 	
 	/**
 	 * empty constructor
@@ -59,6 +63,7 @@ public class Connection {
 		this.origin = origin;
 		this.destination = destination;
 		this.id = IdGenerator.getNewID();
+		this.action = ADD;
 	}
 	
 	
@@ -86,6 +91,7 @@ public class Connection {
 		this.quoteDateTime = quoteDateTime;
 		this.weekday = weekday;
 		this.id = IdGenerator.getNewID();
+		this.action = ADD;
 	}
 	
 	
@@ -109,6 +115,17 @@ public class Connection {
 		this.arrivalDate = arrivalDate;
 		this.departureDate = departureDate;
 		this.id = IdGenerator.getNewID();
+		this.action = ADD;
+	}
+	
+	/**
+	 * Constructor for passing an action to a ID
+	 * @param id ID of the Connection
+	 * @param action Action to perform (usually remove)
+	 */
+	public Connection(int id, String action){
+		this.id = id;
+		this.action = action;
 	}
 
 	
@@ -264,6 +281,24 @@ public class Connection {
 
 
 
+
+
+
+	/**
+	 * @return the action
+	 */
+	public String getAction() {
+		return action;
+	}
+
+
+
+	/**
+	 * @param action the action to set
+	 */
+	public void setAction(String action) {
+		this.action = action;
+	}
 
 
 

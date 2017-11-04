@@ -129,12 +129,16 @@ public class GoogleMapsDirection implements API {
 				//start/end time/date
 				try{
 					//departure time
-					GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("departure_time").getChildText("time_zone")));
+					//Sets the departure time in local time and not UTC
+					//GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("departure_time").getChildText("time_zone")));
+					GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 					departureTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("departure_time").getChildText("value")) * 1000L);
 					connection.setDepartureDate(departureTime);
 					
 					//arrival time
-					GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("arrival_time").getChildText("time_zone")));
+					//Sets the arrival time in local time and not UTC
+					//GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("arrival_time").getChildText("time_zone")));
+					GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 					arrivalTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("arrival_time").getChildText("value")) * 1000L);
 					connection.setArrivalDate(arrivalTime);
 					

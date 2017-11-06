@@ -156,19 +156,23 @@ public class GoogleMapsDirection implements API {
 				}catch(NumberFormatException e){
 					logger.warn("The departure and arrival time of one connections can't be set." + e);
 				}catch(NullPointerException e){
-					GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-					if(isDepartureDate)
-						departureTime.setTimeInMillis(date.getTimeInMillis());
-					else
-						departureTime.setTimeInMillis(date.getTimeInMillis() - connection.getDuration().getMillis());
-					connection.setDepartureDate(departureTime);
-					
-					GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-					if(isDepartureDate)
-						arrivalTime.setTimeInMillis(date.getTimeInMillis() + connection.getDuration().getMillis());
-					else
-						arrivalTime.setTimeInMillis(date.getTimeInMillis());
-					connection.setArrivalDate(arrivalTime);
+					try{
+						GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+						if(isDepartureDate)
+							departureTime.setTimeInMillis(date.getTimeInMillis());
+						else
+							departureTime.setTimeInMillis(date.getTimeInMillis() - connection.getDuration().getMillis());
+						connection.setDepartureDate(departureTime);
+						
+						GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+						if(isDepartureDate)
+							arrivalTime.setTimeInMillis(date.getTimeInMillis() + connection.getDuration().getMillis());
+						else
+							arrivalTime.setTimeInMillis(date.getTimeInMillis());
+						connection.setArrivalDate(arrivalTime);
+					}catch(NullPointerException ex){
+						logger.warn("The departure and arrival time of one connections can't be set." + ex);
+					}
 				}
 				
 				
@@ -189,6 +193,13 @@ public class GoogleMapsDirection implements API {
 				//summary
 				try{
 					connection.setSummary(routeOption.getParentElement().getChildText("summary"));
+				}catch(NullPointerException | NumberFormatException e){
+					logger.warn("The overview polyline of one connection can't be read.");
+				}
+				
+				//fare
+				try{
+					connection.addPrice(Double.parseDouble(routeOption.getParentElement().getChild("fare").getChildText("value")));
 				}catch(NullPointerException | NumberFormatException e){
 					logger.warn("The overview polyline of one connection can't be read.");
 				}
@@ -306,11 +317,12 @@ public class GoogleMapsDirection implements API {
 							
 							
 						//polyline
-						try{
+						//detailed polyline is not necessary but needs hige transmission rate, therefor deactivate it
+						/*try{
 							subconnection.setPolyline(subconnectionXML.getChild("polyline").getChildText("points"));
 						}catch(NullPointerException e){
 							//do nothing, no polyline available (should be available usually)
-						}
+						}*/
 						
 						//html instruction
 						try{

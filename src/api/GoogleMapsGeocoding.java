@@ -37,7 +37,7 @@ public class GoogleMapsGeocoding {
 		//ToDo:insert body
 		String address = api.utilities.GoogleMaps.PlaceToGoogleMapsString(place);
 		
-		String url = "https://maps.googleapis.com/maps/api/geocode/xml?address=" + address + "&key=AIzaSyA5LLfNS2yxCwnQSSCbpmFjaSVP6inmLKg";
+		String url = "https://maps.googleapis.com/maps/api/geocode/xml?address=" + address + "&key=AIzaSyDhieKypOeAVC9O1rD2y7SoSEgESt0S8ao";
 		
 		Element rootFromGeocodingXML = getInput(url);
 		

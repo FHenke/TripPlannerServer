@@ -29,7 +29,7 @@ public class SkyscannerCache {
 		
 	}
 	
-	public LinkedBlockingQueue<Connection> getConnectionList(Request request){
+	public LinkedBlockingQueue<Connection> getConnectionList(Request request, LinkedBlockingQueue<Connection> connection){
 		try {
 			DatabaseConnection databaseConnection = new DatabaseConnection();
 			api.SkyscannerCache skyCache = new api.SkyscannerCache();
@@ -65,7 +65,7 @@ public class SkyscannerCache {
 						LinkedBlockingQueue<Connection> result = skyCache.getAllConnections(originToAirportList.get(i1).getAirport().getIata(), airportToDestinationList.get(c).getAirport().getIata(), request.getDepartureDateString(), null);
 						if(!result.isEmpty()){
 							
-							LinkedBlockingQueue<Connection> connection = new LinkedBlockingQueue<Connection>();
+							//LinkedBlockingQueue<Connection> connection = new LinkedBlockingQueue<Connection>();
 							connection.add(originToAirportList.get(i1).getConnection());
 							connection.add(result.element());
 							connection.add(airportToDestinationList.get(c).getConnection());
@@ -76,7 +76,7 @@ public class SkyscannerCache {
 						System.out.println(originToAirportList.get(c).getAirport().getIata() + " - " + airportToDestinationList.get(i2).getAirport().getIata() + " - " + request.getDepartureDateString().getTimeInMillis());
 						LinkedBlockingQueue<Connection> result = skyCache.getAllConnections(originToAirportList.get(c).getAirport().getIata(), airportToDestinationList.get(i2).getAirport().getIata(), request.getDepartureDateString(), null);
 						if(!result.isEmpty()){
-							LinkedBlockingQueue<Connection> connection = new LinkedBlockingQueue<Connection>();
+							//LinkedBlockingQueue<Connection> connection = new LinkedBlockingQueue<Connection>();
 							connection.add(originToAirportList.get(c).getConnection());
 							connection.add(result.element());
 							connection.add(airportToDestinationList.get(i2).getConnection());

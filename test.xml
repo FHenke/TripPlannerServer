@@ -14,53 +14,43 @@
   <Quotes>
     <QuoteDto>
       <QuoteId>1</QuoteId>
-      <MinPrice>134</MinPrice>
+      <MinPrice>553</MinPrice>
       <Direct>false</Direct>
       <OutboundLeg>
-        <CarrierIds>
-          <int>1368</int>
-        </CarrierIds>
-        <OriginId>56141</OriginId>
-        <DestinationId>84892</DestinationId>
-        <DepartureDate>2017-11-08T00:00:00</DepartureDate>
+        <CarrierIds />
+        <OriginId>52337</OriginId>
+        <DestinationId>96234</DestinationId>
+        <DepartureDate>2017-11-14T00:00:00</DepartureDate>
       </OutboundLeg>
-      <QuoteDateTime>2017-11-04T10:11:48</QuoteDateTime>
+      <QuoteDateTime>2017-11-06T14:49:57</QuoteDateTime>
     </QuoteDto>
   </Quotes>
   <Places>
     <PlaceDto>
-      <PlaceId>56141</PlaceId>
-      <IataCode>HAM</IataCode>
-      <Name>Hamburg International</Name>
+      <PlaceId>52337</PlaceId>
+      <IataCode>FRA</IataCode>
+      <Name>Frankfurt am Main</Name>
       <Type>Station</Type>
-      <SkyscannerCode>HAM</SkyscannerCode>
-      <CityName>Hamburg</CityName>
-      <CityId>HAMB</CityId>
+      <SkyscannerCode>FRA</SkyscannerCode>
+      <CityName>Frankfurt am Main</CityName>
+      <CityId>FRAN</CityId>
       <CountryName>Deutschland</CountryName>
     </PlaceDto>
     <PlaceDto>
-      <PlaceId>84892</PlaceId>
-      <IataCode>TXL</IataCode>
-      <Name>Berlin-Tegel</Name>
+      <PlaceId>96234</PlaceId>
+      <IataCode>YTZ</IataCode>
+      <Name>Toronto Island</Name>
       <Type>Station</Type>
-      <SkyscannerCode>TXL</SkyscannerCode>
-      <CityName>Berlin</CityName>
-      <CityId>BERL</CityId>
-      <CountryName>Deutschland</CountryName>
+      <SkyscannerCode>YTZ</SkyscannerCode>
+      <CityName>Toronto</CityName>
+      <CityId>YTOA</CityId>
+      <CountryName>Kanada</CountryName>
     </PlaceDto>
   </Places>
   <Carriers>
     <CarriersDto>
-      <CarrierId>881</CarrierId>
-      <Name>British Airways</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1047</CarrierId>
-      <Name>eurowings</Name>
-    </CarriersDto>
-    <CarriersDto>
-      <CarrierId>1368</CarrierId>
-      <Name>Lufthansa</Name>
+      <CarrierId>835</CarrierId>
+      <Name>Air Canada</Name>
     </CarriersDto>
   </Carriers>
 </BrowseQuotesResponseAPIDto>

@@ -34,7 +34,7 @@ public class GoogleMaps {
 	public static final int GOOGLE_MAPS_DISTANCE_API = 1;
 	public static final int GOOGLE_MAPS_DIRECTION_API = 2;	
 	private static final String DIRECTION_API_KEY = "AIzaSyDhieKypOeAVC9O1rD2y7SoSEgESt0S8ao";
-	private static final String DISTANCE_API_KEY = "AIzaSyA2wxUVkdyzbBdcOdtIItCnco2vyJoVMVE";
+	private static final String DISTANCE_API_KEY = "AIzaSyDhieKypOeAVC9O1rD2y7SoSEgESt0S8ao";
 	private static final String URL = "https://maps.googleapis.com/maps/api/";
 	
 	protected static final Logger logger = LogManager.getLogger(UpdateContinents.class);

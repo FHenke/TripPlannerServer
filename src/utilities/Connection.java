@@ -38,7 +38,7 @@ public class Connection {
 	
 	private Place origin;
 	private Place destination;
-	private double price;
+	private double price = 0;
 	private Duration duration;
 	private GregorianCalendar arrivalDate = null;
 	private GregorianCalendar departureDate = null;
@@ -509,5 +509,13 @@ public class Connection {
 		SimpleDateFormat formatter=new SimpleDateFormat("yyyy.MM.dd HH:mm");   // lowercase "dd"
 		String test = formatter.format(calendar.getTime() );
 	    return test;
+	}
+	
+	/**
+	 * Adds a value to the current price
+	 * @param price
+	 */
+	public void addPrice(double price){
+		this.price += price;
 	}
 }

@@ -52,7 +52,7 @@ public class RequestHandler {
 		if(request.getMethode().equalsIgnoreCase("All")){
 			try {
 				SkyscannerCache skyCache = new SkyscannerCache();
-				return skyCache.getConnectionList(request);
+				return skyCache.getConnectionList(request, connectionList);
 			} catch (IllegalStateException e) {
 				System.out.println("FAIL");
 				e.printStackTrace();

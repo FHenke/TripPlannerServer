@@ -389,3 +389,285 @@
 2017-11-07 00:36:42.153 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
 2017-11-07 00:36:42.389 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
 2017-11-07 00:36:42.389 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:29.052 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:29.053 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:29.440 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:29.440 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:29.838 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:29.842 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:30.255 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:30.255 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:30.653 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:30.653 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:31.084 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:31.085 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:31.486 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:31.486 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:31.868 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:31.868 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:32.328 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:32.328 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:32.747 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:32.748 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:33.386 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:33.386 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:33.739 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:33.740 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:34.075 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:34.076 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:34.403 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:34.403 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:34.809 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:34.809 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:35.257 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:35.257 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:35.714 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:35.715 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:36.130 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:36.131 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:36.590 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:36.590 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 02:54:37.021 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 02:54:37.022 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:17.107 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:17.108 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:17.611 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:17.612 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:18.009 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:18.009 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:18.407 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:18.407 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:18.828 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:18.828 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:19.222 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:19.222 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:19.570 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:19.570 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:19.941 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:19.941 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:20.339 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:20.339 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:20.756 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:20.756 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:21.388 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:21.388 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:21.720 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:21.720 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:22.012 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:22.012 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:22.392 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:22.392 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:22.819 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:22.819 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:23.230 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:23.230 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:23.622 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:23.622 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:24.007 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:24.007 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:24.381 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:24.381 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:24.788 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:24.788 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:44.509 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:44.509 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:44.921 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:44.921 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:45.427 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:45.428 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:46.021 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:46.021 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:46.592 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:46.592 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:46.969 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:46.970 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:47.348 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:47.349 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:47.730 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:47.730 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:48.122 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:48.122 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:48.464 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:48.464 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:48.961 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:48.962 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:49.161 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:49.161 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:49.349 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:49.349 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:49.556 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:49.556 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:49.782 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:49.783 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:50.011 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:50.011 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:50.226 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:50.226 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:50.462 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:50.462 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:50.695 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:50.695 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:10:50.936 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:10:50.937 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:35.414 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:35.416 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:35.680 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:35.680 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:35.945 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:35.945 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:36.192 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:36.193 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:36.434 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:36.434 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:36.671 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:36.672 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:36.903 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:36.903 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:37.251 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:37.251 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:37.600 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:37.600 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:37.836 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:37.836 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:38.398 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:38.398 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:38.622 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:38.622 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:38.823 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:38.823 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:39.078 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:39.079 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:39.299 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:39.300 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:39.552 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:39.552 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:39.824 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:39.825 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:40.086 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:40.087 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:40.348 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:40.349 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:11:40.609 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:11:40.610 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:49.298 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:49.299 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:49.710 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:49.710 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:50.077 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:50.077 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:50.446 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:50.446 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:50.773 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:50.774 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:51.242 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:51.242 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:51.680 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:51.681 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:52.147 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:52.148 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:52.588 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:52.588 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:53.071 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:53.071 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:53.745 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:53.745 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:54.060 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:54.060 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:54.350 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:54.350 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:54.729 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:54.729 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:55.055 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:55.055 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:55.431 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:55.431 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:55.752 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:55.752 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:56.102 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:56.102 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:56.468 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:56.469 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:16:56.809 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:16:56.810 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:30.036 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:30.038 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:30.488 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:30.488 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:30.870 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:30.870 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:31.277 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:31.278 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:31.684 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:31.686 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:32.051 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:32.051 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:32.594 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:32.594 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:33.135 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:33.135 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:33.668 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:33.668 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:34.074 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:34.074 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:34.695 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:34.696 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:35.027 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:35.027 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:35.401 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:35.401 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:35.765 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:35.766 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:36.169 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:36.169 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:36.576 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:36.577 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:36.948 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:36.948 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:37.378 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:37.379 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:37.771 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:37.772 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:20:38.168 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:20:38.168 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:23.061 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:23.062 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:23.339 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:23.339 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:23.589 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:23.589 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:23.817 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:23.818 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:24.050 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:24.050 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:24.413 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:24.413 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:24.688 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:24.689 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:24.976 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:24.976 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:25.302 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:25.302 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:25.569 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:25.570 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:26.130 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:26.130 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:26.559 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:26.559 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:26.844 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:26.844 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:27.099 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:27.099 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:27.698 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:27.698 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:27.955 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:27.955 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:28.197 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:28.197 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:28.449 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:28.449 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:28.649 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:28.649 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:21:28.890 [main] WARN  api.GoogleMapsDirection - The departure and arrival time of one connections can't be set.java.lang.NullPointerException
+2017-11-07 03:21:28.890 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:23:43.191 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.
+2017-11-07 03:23:43.192 [main] WARN  api.GoogleMapsDirection - The overview polyline of one connection can't be read.

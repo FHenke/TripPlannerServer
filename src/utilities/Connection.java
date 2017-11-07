@@ -55,9 +55,12 @@ public class Connection {
 	private LinkedBlockingQueue<Connection> returnConnection = new LinkedBlockingQueue<Connection>();
 	private int id;
 	private String action;
+	private int beeline = Integer.MAX_VALUE;
 	
 	/**
-	 * empty constructor
+	 * 
+	 * @param origin
+	 * @param destination
 	 */
 	public Connection(Place origin, Place destination){
 		this.origin = origin;
@@ -449,6 +452,18 @@ public class Connection {
 	}
 
 	
+	public int getBeeline() {
+		return beeline;
+	}
+
+
+
+	public void setBeeline(int beeline) {
+		this.beeline = beeline;
+	}
+
+
+
 	/**
 	 * Checks if subconnections available
 	 * @return true if subconnections available, false otherwise

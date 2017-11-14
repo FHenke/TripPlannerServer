@@ -39,5 +39,10 @@
 			<accessrule kind="accessible" pattern="org/httpmime"/>
 		</accessrules>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Florian/Dropbox/Flo/Master/Masterarbeit/Packages/Java/commons-codec-1.11/commons-codec-1.11.jar">
+		<accessrules>
+			<accessrule kind="accessible" pattern="org/apache/commons/*"/>
+		</accessrules>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

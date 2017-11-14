@@ -33,15 +33,17 @@ public class SkyscannerCache {
 		try {
 			DatabaseConnection databaseConnection = new DatabaseConnection();
 			api.SkyscannerCache skyCache = new api.SkyscannerCache();
+			api.EStream eStream = new api.EStream();
+			
 			//get closest airport from origin
 			ClosestAirports closeOriginAirports = new ClosestAirports(databaseConnection.getConnection());
-			LinkedBlockingQueue<Connection> originAirportBeeline = closeOriginAirports.createAirportsBeeline(request.getOrigin(), 10, -1);
+			LinkedBlockingQueue<Connection> originAirportBeeline = closeOriginAirports.createAirportsBeeline(request.getOrigin(), 1, -1);
 			closeOriginAirports.setAirportOtherDistance(GoogleMaps.DRIVING);
 			Connection[] originToAirportList = closeOriginAirports.orderListByDistance();
 			
 			//get closest airport from destination
 			ClosestAirports closeDestinationAirports = new ClosestAirports(databaseConnection.getConnection());
-			LinkedBlockingQueue<Connection> destinationAirportBeeline = closeDestinationAirports.createAirportsBeeline(request.getDestination(), 10, 1);
+			LinkedBlockingQueue<Connection> destinationAirportBeeline = closeDestinationAirports.createAirportsBeeline(request.getDestination(), 3, 1);
 			closeDestinationAirports.setAirportOtherDistance(GoogleMaps.DRIVING);
 			Connection[] airportToDestinationList = closeDestinationAirports.orderListByDistance();
 			
@@ -66,24 +68,30 @@ public class SkyscannerCache {
 				for(int c = 0; c <= counter; c++){
 					if(lastChanged == 1){
 						//System.out.println(originToAirportList[i1].getDestination().getIata() + " - " + airportToDestinationList[c].getOrigin().getIata() + " - " + request.getDepartureDateString().getTimeInMillis());
-						LinkedBlockingQueue<Connection> result = skyCache.getAllConnections(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), request.getDepartureDateString(), null);
+						//LinkedBlockingQueue<Connection> result = skyCache.getAllConnections(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), request.getDepartureDateString(), null);
+						LinkedBlockingQueue<Connection> result = eStream.getAllConnections(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), request.getDepartureDateString(), null);
 						// if a flight connection was found take this connection
 						if(!result.isEmpty()){
 							//LinkedBlockingQueue<Connection> connection = new LinkedBlockingQueue<Connection>();
 							connection.add(originToAirportList[i1]);
-							connection.add(result.element());
+							for(utilities.Connection con : result){
+								connection.add(con);
+							}
 							connection.add(airportToDestinationList[c]);
 							return connection;
 						}
 					}
 					if(lastChanged == 2){
 						//System.out.println(originToAirportList[c].getDestination().getIata() + " - " + airportToDestinationList[i2].getOrigin().getIata() + " - " + request.getDepartureDateString().getTimeInMillis());
-						LinkedBlockingQueue<Connection> result = skyCache.getAllConnections(originToAirportList[c].getDestination().getIata(), airportToDestinationList[i2].getOrigin().getIata(), request.getDepartureDateString(), null);
+						//LinkedBlockingQueue<Connection> result = skyCache.getAllConnections(originToAirportList[c].getDestination().getIata(), airportToDestinationList[i2].getOrigin().getIata(), request.getDepartureDateString(), null);
+						LinkedBlockingQueue<Connection> result = eStream.getAllConnections(originToAirportList[c].getDestination().getIata(), airportToDestinationList[i2].getOrigin().getIata(), request.getDepartureDateString(), null);
 						// if a flight connection was found take this connection
 						if(!result.isEmpty()){
 							//LinkedBlockingQueue<Connection> connection = new LinkedBlockingQueue<Connection>();
 							connection.add(originToAirportList[c]);
-							connection.add(result.element());
+							for(utilities.Connection con : result){
+								connection.add(con);
+							}
 							connection.add(airportToDestinationList[i2]);
 							return connection;
 						}
@@ -120,11 +128,8 @@ public class SkyscannerCache {
 			
 
 		} catch (SQLException e) {
-			logger.error("It was not possible to generate a connecthionwith the Database \n" + e);
+			logger.error("It was not possible to generate a connecthion with the Database \n" + e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JDOMException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {

@@ -1,5 +1,6 @@
 package utilities;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -11,6 +12,9 @@ import org.joda.time.Period;
 import org.joda.time.ReadablePeriod;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
+
+import api.utilities.eStream.Proposal;
+import api.utilities.eStream.Segment;
 
 public class Connection {
 	public final static int PLANE = 1;
@@ -56,6 +60,7 @@ public class Connection {
 	private int id;
 	private String action;
 	private int beeline = Integer.MAX_VALUE;
+	private String currecy = "";
 	
 	/**
 	 * 
@@ -130,6 +135,26 @@ public class Connection {
 		this.id = id;
 		this.action = action;
 	}
+	
+	
+	
+	public Connection(Proposal fare, Segment flight) throws SQLException{
+		
+		if(fare != null){
+			this.price = fare.getTotalFareAmout();
+			this.currecy = fare.getCurrency();
+		}
+		this.origin = flight.getOriginPlace();
+		this.destination = flight.getDestinationPlace();
+		this.duration = new Duration(flight.getDuration());
+		this.departureDate = flight.getGregorianDepartureTime();
+		this.arrivalDate = flight.getGregorianArrivalTime();
+		this.summary = flight.getFullFlightNumber();
+		
+		this.type = Connection.PLANE;
+		
+	}
+	
 
 	
 	/**

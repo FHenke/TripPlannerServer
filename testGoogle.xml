@@ -1,1440 +1,519 @@
 <DirectionsResponse>
   <status>OK</status>
   <route>
-    <summary>A7</summary>
+    <summary>A4</summary>
     <leg>
       <step>
         <travel_mode>DRIVING</travel_mode>
         <start_location>
-          <lat>51.5062496</lat>
-          <lng>9.9004251</lng>
+          <lat>51.9604370</lat>
+          <lng>4.4422353</lng>
         </start_location>
         <end_location>
-          <lat>51.5061751</lat>
-          <lng>9.8995835</lng>
+          <lat>51.9507211</lat>
+          <lng>4.4178281</lng>
         </end_location>
         <polyline>
-          <points>ayjyHutl{@BLBf@Bb@@j@?b@</points>
+          <points>woc|H_sbZ~@|CbAnDpElOxHnW`BxFnOhh@?LHTTx@^rAl@xBf@jBl@xBFTHTX~@BDv@pCb@zAHVd@zAp@xB|A~E\fAt@bCXx@Vz@</points>
         </polyline>
         <duration>
-          <value>7</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Auf &lt;b&gt;Göttinger Str.&lt;/b&gt; nach &lt;b&gt;Westen&lt;/b&gt; Richtung &lt;b&gt;Rosenbaumweg&lt;/b&gt; starten</html_instructions>
-        <distance>
-          <value>59</value>
-          <text>59 m</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.5061751</lat>
-          <lng>9.8995835</lng>
-        </start_location>
-        <end_location>
-          <lat>51.5060974</lat>
-          <lng>9.8962230</lng>
-        </end_location>
-        <polyline>
-          <points>sxjyHkol{@B~CC|A@bA?pABlA@`ABz@?ZBb@</points>
-        </polyline>
-        <duration>
-          <value>29</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Masch&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>233</value>
-          <text>0,2 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.5060974</lat>
-          <lng>9.8962230</lng>
-        </start_location>
-        <end_location>
-          <lat>51.5171622</lat>
-          <lng>9.8933566</lng>
-        </end_location>
-        <polyline>
-          <points>cxjyHkzk{@]@u@?o@@I?_ABE?}BJmDTK@M?c@@E@K@MDGHGVO|AO`BKz@ODg@JaBTeBXu@JUBoLbBK?WByARqBZsC^SBkBVYDc@Fa@Bm@HMCICSIOGKIKIKKKMEEIM</points>
-        </polyline>
-        <duration>
-          <value>125</value>
+          <value>121</value>
           <text>2 Minuten</text>
         </duration>
-        <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Siekweg&lt;/b&gt;</html_instructions>
+        <html_instructions>Auf &lt;b&gt;Doenkade&lt;/b&gt;/&lt;b&gt;N209&lt;/b&gt; nach &lt;b&gt;Südwesten&lt;/b&gt; Richtung &lt;b&gt;Schieveensedijk&lt;/b&gt;/&lt;b&gt;Vliegveldweg&lt;/b&gt; starten</html_instructions>
         <distance>
-          <value>1319</value>
-          <text>1,3 km</text>
+          <value>1992</value>
+          <text>2,0 km</text>
         </distance>
-        <maneuver>turn-right</maneuver>
       </step>
       <step>
         <travel_mode>DRIVING</travel_mode>
         <start_location>
-          <lat>51.5171622</lat>
-          <lng>9.8933566</lng>
+          <lat>51.9507211</lat>
+          <lng>4.4178281</lng>
         </start_location>
         <end_location>
-          <lat>51.5186198</lat>
-          <lng>9.8925181</lng>
+          <lat>52.0352442</lat>
+          <lng>4.3530146</lng>
         </end_location>
         <polyline>
-          <points>g}lyHohk{@KUKRORQRq@l@g@Z]Rc@Rk@Ja@B</points>
+          <points>_sa|Hmz}YD^?D?F?D?D?FAPCd@CVANCJAHERGTIVGPKVKTO\Sb@QZOVSZCDGHyBtBSPA@A@GZgAt@uKzHuCvBiDbCqVhQUNUPaAr@yFbEuEbDkCrBaBlA_G`EoEdDYNWPaAl@uF`EcCdBq@f@kBrAcAr@kBrA_@Vg@XUJc@Ts@Zw@X_AZi@P}E~AwAb@gA`@kEtAoC|@mC|@gBj@eGpB_GlBsA`@qDjAq@VkCz@sEvAaHzBkFbBmCz@o@ReA\iGtBsDjAgCz@iC~@sC|@yBr@cBf@yHbCwFpBkBn@sA`@sCz@oA`@oKhDc@Nc@LsC~@uEzAw@X}Br@sDjAcAb@c@Pg@Vk@Xu@b@w@d@]Vc@Za@Z]Xg@b@m@n@_@^MN{@`AQTe@h@WXQTyDvE[^e@l@k@r@c@h@{@dAk@p@_AjAcApA]b@u@|@s@x@c@j@q@v@y@`AWZMNKLEDABMPA?GJEDIJsPnSkAxAmAvA[`@?@QRyAfBeBxBa@f@g@j@g@l@o@v@m@t@{@fAy@`As@|@q@x@e@j@o@x@c@f@g@l@w@`AaAjAoCfD{@dAGFMPo@t@wAfBCBc@h@e@h@q@z@y@bAs@|@c@j@q@x@QTa@f@c@f@c@j@a@f@q@x@c@f@o@x@i@n@i@n@i@p@Y\i@p@}@hAQRMNGHCBaAjA_BlBwBlCqChDiC|CeAnAk@p@o@v@q@x@s@x@oArA}@z@e@`@s@h@k@`@e@Xy@f@{@`@i@T}@\}@Xg@L_ATqAVsAV{@P</points>
         </polyline>
         <duration>
-          <value>20</value>
-          <text>1 Minute</text>
+          <value>394</value>
+          <text>7 Minuten</text>
         </duration>
-        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;K50&lt;/b&gt;</html_instructions>
+        <html_instructions>Auf &lt;b&gt;A13&lt;/b&gt; über die Auffahrt &lt;b&gt;Delft&lt;/b&gt;/&lt;b&gt;Den Haag&lt;/b&gt;</html_instructions>
         <distance>
-          <value>182</value>
-          <text>0,2 km</text>
+          <value>10566</value>
+          <text>10,6 km</text>
         </distance>
-        <maneuver>turn-left</maneuver>
       </step>
       <step>
         <travel_mode>DRIVING</travel_mode>
         <start_location>
-          <lat>51.5186198</lat>
-          <lng>9.8925181</lng>
+          <lat>52.0352442</lat>
+          <lng>4.3530146</lng>
         </start_location>
         <end_location>
-          <lat>51.5269603</lat>
-          <lng>9.8868613</lng>
+          <lat>52.0576152</lat>
+          <lng>4.3706837</lng>
         </end_location>
         <polyline>
-          <points>kfmyHgck{@{BPOBwDp@A@A@MLE?SFYHMBSBUBUF[FMBe@Ne@PULSJOJWPc@`@s@t@_AdAmAzAMDA?o@t@UVQTmB|BGDEHqD~DOTKHk@`@uAv@_@PQ@C?[NC@m@NeAb@</points>
+          <points>gcr|HieqYyAX_Cb@oB\_@Fi@Ha@Dw@F_@ByAF{A?kB?gC?wB?_AAm@A_@Cu@IUEk@Ki@MaAY}@_@g@W_@Uk@]k@a@g@a@e@a@e@g@u@{@[_@gAwA}BmDm@_AMSu@iAu@iAg@w@i@w@{BmDiAeBeAeBeEqGcBiC_BcCsAqBe@s@[i@QMA??A[e@OW[m@Q[m@iAm@kAi@gAo@mAOYQ[[k@QYOUMSOSSYa@e@QSSUQOQSSOQO]YkA{@kA{@]We@]e@]a@]_@]e@a@e@c@mCgCgAiA{BeCA?</points>
         </polyline>
         <duration>
-          <value>92</value>
+          <value>105</value>
           <text>2 Minuten</text>
         </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Siekhöhenallee&lt;/b&gt;</html_instructions>
+        <html_instructions>Am Autobahnkreuz &lt;b&gt;Knooppunt Ypenburg&lt;/b&gt; &lt;b&gt;links&lt;/b&gt; halten und den Schildern &lt;b&gt;A4&lt;/b&gt;/&lt;b&gt;E19&lt;/b&gt; in Richtung &lt;b&gt;Amsterdam&lt;/b&gt; folgen</html_instructions>
         <distance>
-          <value>1026</value>
-          <text>1,0 km</text>
+          <value>2909</value>
+          <text>2,9 km</text>
         </distance>
+        <maneuver>ramp-left</maneuver>
       </step>
       <step>
         <travel_mode>DRIVING</travel_mode>
         <start_location>
-          <lat>51.5269603</lat>
-          <lng>9.8868613</lng>
+          <lat>52.0576152</lat>
+          <lng>4.3706837</lng>
         </start_location>
         <end_location>
-          <lat>51.5257643</lat>
-          <lng>9.8805580</lng>
+          <lat>52.3381808</lat>
+          <lng>4.8315176</lng>
         </end_location>
         <polyline>
-          <points>oznyH{_j{@_A\QDWFH`@TtADPNx@BF\hBR~@RbA^rBl@fDF^P~@P`AXvANx@Z|AXvA</points>
+          <points>cov|HwstYwAcB{@cAgAoAY_@QOQEmCaDyAgB_@e@wBmCOQAAAAUWIKIKQUSWoAyAOSOQOQMOAAIKmB{Bu@_A_E_Fk@o@CEQUw@cAkAuAeAsAo@y@kAwAgAsAq@_AuAoBcA{AWa@kAiB]o@_@o@g@aAg@cAg@eA_@{@k@uA]y@Si@_@_AaAkCs@sBe@uA}@qC}@sC{@qCc@wAs@}BaCcIiAwDa@wAyBeICGACGYCIKa@eCsJEQAIGSCIOo@y@}Cm@wBc@wAo@uBSm@y@gCaAiCq@_BWm@eAyBa@y@a@w@k@eAiBeDYe@Wc@_@m@_@m@s@eAy@oAwAoBaEeFgAwAeCeDqAiBi@u@_AuAcA{Aw@mAk@_AmAsBs@kA}@aBUc@iBuDg@iAaBeDgCqFqBsEiDyH_CoFqBsEeEsJaFaLiD{HaB{DgAiCc@iAaEeKqCiHoDaJgDuIqEgLmE}KaEgK_@cAsDgJeAoCeCiGuCmHi@oAaB{DuAyCy@gBm@oAuBcEmBoD]o@{AiC}@{AeAcBg@w@mAiBgAcB}@mAsAkBm@{@_AmAgBgCuAmBsAkBkAaBwAmBoAgB{AwBo@{@kCqDsAmBaAsA_AqAu@eAaAsAoAeBgAyAaAuAqAkBu@iA_BeCmAoBsA{Bq@kAaByCg@aA{@aBgAyBeAuByAwCg@eAuAoCo@qAoAeCo@oA}@iB}@gBmAaCcAsBgAyBm@qAKSgBkDqAmCyBkE_AiBWg@Ue@eBcDeKoSw@}Ai@sAcBoDeAaDyBmGWw@mAuDwBiGuEwM}CsIgAmCeHyPeFaMqBuEoCeFmCiEqBsC{DmE_BgBcAeAcAcAeBmBcAgAaAgAsJqMqGuMq@mB}AoEWs@Us@i@qBe@iBa@eBu@qDk@yC}@wE[cBU{AWyAq@uDW_BCMMk@Kk@cBaJuAiG_B}FY_AYaAW}@Y}@u@cCi@_Bi@cBc@oAk@gBm@gBq@sB{@oCsAkESi@Qg@oRmk@e@qA_@}@eAsCW}@oCqH{ByFu@oBw@qBcD_IuA}Ci@kAe@aAmAkCsCyF_BuCeAoBe@{@y@sAw@sA_BeCwA{Bw@eAgF}GqCkDiC}CsAuA}BkCg@k@g@k@wCuDSYqE{GuHuMuAqCmAqCgCsGe@qAqB{FcAcDcAaDeBqHOk@Ok@oI_[oFwQwMub@qGoTMa@AAOe@u@kCu@kCgC{GyBkFwDuHUc@yFwJsDkF{B{C_@e@kAuAwA{AgGaGy@y@_ByAuAoAiT{RuFeF{CmCuCkCuFcFuFcFGGAAA?MOCAAAGGsEeEsEgE_@]a@]oF_FmBcBWWiFyEuAoAw@u@mAgAECs@o@_A}@sAiAq@k@gA}@aAw@qAcA_BmAiBsA_@WcCcB_BeAmBmAoAw@oAu@qAs@e@YaAi@wAu@{Au@_CkAq@[}As@oAk@oAi@}Ay@uB_AwBcAwBgAsBmA_BiAw@o@u@o@i@c@}@}@o@o@yAaBcAoAw@eAq@_A_A{AcA_BaE{GaA_Bq@gA_@o@_@m@a@q@o@gAa@o@o@gAa@q@gBwC_@o@g@{@}BuD_BkC}G_LeC_Em@cAuCsEcAaBcDgFoB}Cm@}@c@s@aBiCaA{AqAmBsBwCuAmBeB_CuBuCcBaC{AyBcCqD_CwDaBiCmAoBmLcRuF}IwEsHuEuH_BeCaDeFwBkDi@}@m@}@oCoEuQ{YcDiF{@uAuBiDeDmFyA_CoMwSyGuKm@}@}CeF}E{HcBoC}NyU_PmWkG}JaA}AcG}JeBuCw@oAi@}@e@q@kCiEoCmE_CyD_CwDqCoEoCmEkB{CsAuBaMeSiHmLgBsC{DkG{@uAuNqUqAqBUa@IKOWiCeEcFcIc@q@{BuDsBmD_DgFMU[g@IMAEGIACOWW_@s@eA_@k@[g@e@u@e@u@i@y@c@s@w@oAs@gA}@wAk@}@w@qAe@w@w@mAe@y@o@aA{@wAc@s@}@uAw@sAu@kA{@uAaA}Ae@u@Wa@kLcRwDiG{@sAw@eA[c@aBwBaBgBeAgAg@c@g@e@w@o@e@a@y@k@WQOKmAw@iCyAuBiAi@[[SqAq@IEcAg@uAy@q@_@y@e@w@c@]QiAq@gAk@q@_@i@Y[Qq@_@k@[gCsAyBmAw@a@_@UYOsC{A]Q_@SiBu@aFqB}As@q@]eCqAsCaBYOkAq@qAs@QKQIk@Yk@Yg@Yg@Wa@Wa@WaC}AcC_By@u@{@w@yAyAqAwAaBoByAkBg@q@m@_Ao@eAo@gAo@kA_@u@aAqBo@wA[s@Yu@i@sAu@qBe@wAe@yAm@uBk@yBu@wCe@_C[}AWqAWuAe@qCMw@QwAM{@[uCI{@QwBG}@OwBG{@uCcf@i@mJm@sJk@oJGaA_@oGI}AKwBKaBQeCMeBYgDU}BQmBIo@Iq@UcBIo@Iq@WcBWaBO_AY_BO_A[{AQaAS{@o@yC_@wAU}@i@uBYaAc@{Ac@yAgAaDmAgDeAiCeAeCkAgCkA_CmA}BkA}B_AcBaA_Cc@s@iAwBmA}Bu@wA_CoEcDmGcAoBq@sAa@aAQSMQe@cAi@sAo@cBQg@Uw@c@yAWgAOo@Sw@_@iBWwAY_BIs@OcAK}@KcAQqBGy@OyBMqDE}AC}AAeAAeBA}C?sBBoB@kB?kB@uA?sABeGBoV@kA?mA?E@uDB_O</points>
         </polyline>
         <duration>
-          <value>89</value>
-          <text>1 Minute</text>
+          <value>1592</value>
+          <text>27 Minuten</text>
         </duration>
-        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Kasseler Landstraße&lt;/b&gt;/&lt;b&gt;B3&lt;/b&gt;</html_instructions>
+        <html_instructions>An der Gabelung &lt;b&gt;links&lt;/b&gt; halten und weiter auf &lt;b&gt;A4&lt;/b&gt;/&lt;b&gt;E19&lt;/b&gt;</html_instructions>
         <distance>
-          <value>523</value>
-          <text>0,5 km</text>
-        </distance>
-        <maneuver>turn-left</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.5257643</lat>
-          <lng>9.8805580</lng>
-        </start_location>
-        <end_location>
-          <lat>52.2984523</lat>
-          <lng>9.8848776</lng>
-        </end_location>
-        <polyline>
-          <points>_snyHoxh{@FXTKNIf@WHCLED?HAJAJ?d@?tB@P@H?JBLBHBDBFDDBFDBDDDBHDFBHDJ@HBJBL?H@F?L?N?NAD?HAFAJCHCHAFEHEJEFEFIFIDGDIBG@G@Q@M?Q?E?E?C?C@EBEDoAAO?w@AC?OAC?[?G?s@A_FGG?cIKkHK{ACg@?W?}LEG?IAiEAiHAM?O?cJ?sG?m@?YA[?eJAqD?e@?}@?wKAyA?}B?gW@I?mEE[?qHGG?uMCmA?cB@wCAeA?I?G?i@?e@?C?uAAo@AcA@cE?a@?sAF]?yAB{ABiAC_AIg@GQEMCkA[gBi@_@OqCsAq@c@g@]e@[aC{BWUgAsAm@u@k@u@e@s@o@eA[o@sAmCEIq@{A_@cAwAqEgAmEa@kBScASkAs@kFe@uF[cECU?ACe@IiAYcDcAiNi@sGc@eEq@uEi@kC_@wAu@qCi@gB}@oCcA_Cs@eBqAiCw@yAk@eAm@eAa@u@}AoCw@uA}@}AkAyBu@cAKOwAmBgAuAOOOOEEGG?AOMKM[YeCyBeBqAm@c@oCeBaCmAsCkAoA]oB_@eCa@q@GcAAm@CkBFW@SBsBNSDc@Hq@LoBh@qCfAkAr@qAv@gDbCmB~AeEhDqPdNo@f@gAx@y@h@k@\_Al@w@^a@Pg@Rq@X_@NYJq@XaA\mAZ{@TcAVw@Ne@HOBA?A?UBE@yAJmAHeADeA@{AAsACuAIK?gAEyAMaAOm@MMEUGc@MeAYwBk@CAm@OuAc@aDaAcF_B{C_A_Be@cAYYKiBi@sAa@SISGICYK_@MkA[c@Km@M}@M}@K_@E_@C}@I_AI]EeAI{BS_Fa@[C]Ci@I_@E[Ec@G_AO]Ga@G}@U_@K_@K]K_@M_@M]M_@OwBaA{@c@{@g@o@a@eBeAaF_DyCmBeBgAgDuBwFoDk@]oAw@qCgB}A_A}E}Ce@YmIiFkEqCuBuAcC}Ac@[c@[aBeAc@WiB_A_Bq@GC_@Kg@Qk@MiAWwAQcAIa@EyBOgCOq@G{AKoCUcGo@kBS}ASeDe@sBYsAOYCUAg@C]A{@AgAA_BDa@BwANUBUDa@Hu@Ly@PqA\s@R}@XsBn@m@RIB_ErAaEpAgBl@{Af@gBl@cBj@gA`@o@Rg@P{@XcA\iBl@cAZuAd@kDjA[Ji@RcBh@cAZiDjA_DbAgCr@_C`@wAPcAFW?W@sBAw@E]C_AK[Ey@Og@Ka@Ky@W_A[y@]aAa@{@a@eAe@mAi@sAm@iAk@kAg@}Au@_Bu@kAi@mB_AQIQIi@YwBaAyFkCuDeBo@W_Ac@{CwAo@YkB{@iGsCsAm@cBu@qAi@mCgAkB{@qSkJy@]}@_@w@[m@Uu@Ug@Qm@Sm@Ow@SUGUGwBc@_C_@cC[{BSm@Gq@G_BO_AMc@C]Gi@I[E_@GYG]I_@I_@I]K_@M_@M_@M_@Oe@SYO]O_@U]S]S]U]W[W[W[WYW[Y[][[[[MMKM[]UY[_@]a@W]Y]Y]W_@W[q@}@]c@Y_@Y_@[]W]q@y@]a@Y][[Y[o@s@a@a@YY][q@o@w@s@]W_@[[Wy@k@_@Y]UUO]S[Uy@e@_@UoAo@WMWMa@QqAk@{@[]Oa@M{@Ya@K[K_@I}@Uc@Ky@Oc@I_@G]Gg@Gu@K_@C}@I_@C_@Ce@Ca@A_AEa@A]?_@Ac@AsIImIMc@?e@AcAAq@A_BA}@C]Aa@Ac@Ca@Aa@C_BG_AI_AKaAK{@Kc@G{@M_BYkAU_ASeAUm@Qw@ScAYgA]q@S}Ak@_@Om@UeAc@cAc@y@_@}@a@_Ae@gBaAGEaB_Au@e@}@m@cBiAmA}@aAu@sBaBiAcAu@q@_@_@][oAmAu@y@iAmAWWo@s@e@k@m@s@sAcBs@}@s@_Ae@q@g@u@s@cA_AuA_@m@oAqBYi@[i@{@yAm@gA}@eBs@wAYi@o@uAw@gBw@eBc@cAc@gAq@cBy@wBEIYw@e@sAe@wAO_@_@kAa@oAw@gCQm@Mg@Oe@Ok@Ma@qA{EuAcFc@aBi@sBUu@Su@U{@sAgFMi@oAkEsAoEu@mCIUi@kBi@mB_@uAk@{BQi@a@}A]qAc@_Ba@}AYeA}@}COo@Mc@Me@Uw@a@yA_@wAq@eCa@}A_@sAe@eBo@aCYgAGWIWU{@[qA[wA]_BS}@_@kBOw@Mo@s@qEMs@o@_FMy@Io@Gk@Ks@Iw@Io@Iu@Iq@Gs@QiBO_BEq@MuAS}CIsAKgBOwCCw@Eu@GkBCw@Cq@Eq@K}CGoBCo@OwCKqBEq@Gy@Gu@Gw@Gg@Gw@Iq@Iu@Q_BKm@Gi@CQWyAMs@Os@Km@Mm@Oq@Mi@Oo@Ok@Om@Ok@Qo@a@uAUq@Oi@Si@Sm@Sg@Sg@Qe@Ym@Qa@Ui@Ug@m@kA[k@k@aAWc@U_@Yc@Ya@[a@Ya@s@{@[_@[_@Y[Y[_@]YY_@]YW]Y]Y[U_@Y{@k@[S]Qa@S_@S_@Q_@Q[M_@O_@O]Mc@Om@Sm@S_@K_@MUGWGOG_AWaAY_Co@{@U_@M}@UaAY[K_@Ka@KwAc@e@M_@K_Be@aBg@a@My@WcA[_AWaBg@_AWaA[_@K_AYcA[]MeA_@{@_@_@O_@Q_@O]Q{@a@q@]_@SUMQK]Q[S]SWOe@YYQ_@W]S]W]WYS_@W_@Yw@o@_@Y_@[u@o@WU_@]]]w@u@[Y[]Y[]]Y[[]u@{@[_@u@{@q@{@mA{Ai@q@Y_@Y_@i@q@wBqCwA_BgCsCaAeAsD{DoKeK{CgCeAw@eA{@mA{@SQkCgBkBuAoD}B{A_AsBoAoC{AgFmCw@_@_Ak@cDoBiAu@m@c@KGGGwAiAmCeCcCeCuA_BeByByAoB}AaCeAcBOUQYOYUc@S]EIm@kAo@mAaAqBo@qAQa@g@gA]u@y@kBYo@e@kA}@yB}@}Bi@wAy@{Bs@sBc@qAi@_Bs@{Bi@cBc@}AeAsDcAsD_@{Ao@eCYkAYoAi@_Ck@mCk@wC_@eB_AqFw@oEU{Aw@kFk@eEWsBOoAQsAO}AUuBEYa@iEM}AY_DSsCO{BScDOkCOgCe@{JGuASoEWeGMcCIcBQcCKuAIcA[}CScBMiAYqBa@sCe@uCg@kCQ{@U_Aa@iB[kAW_AeAmDk@aB}@cCe@mA]w@a@aA}@mBi@aAkAyBMSKSy@sA{AwBiAyAoA}AiAkAq@s@}@w@YWYW{@q@aAu@gCeBeBiAcAo@e@]{@o@a@Ye@]a@Yy@o@WQWSYWc@]cByAeA}@sBqB_A_As@s@qAuAGIIK_@]}BqC}@kAqAaBgBiCeCqDcBkCaAaBkEwHOYOWeB_DoDmGiAiB_AyAeA_B}BaDwBsCw@aAs@{@UYSUkD{DmBkBqCkC_A{@_@YUUUQgA}@}@s@cAu@s@i@}AcAy@i@cDmBcDeByDkBgBw@o@Yq@Yo@Wy@]mDwAmDyAaCcAeEgBo@Ys@[iKgEqAi@_SkIcCcA_IcDeCaAkAe@aKyDyCcAgDiAm@USGcM}DgEoA{DkA}HwB{@U}@UqLsCg@Kg@KsHaBgCg@[GYGYEyE{@iGcAaHgAuG_A{Fk@}IeAqDa@iCU{CU{BO_CMcBG{BK}BIqEQOAMAI?E?WA_AA_CQsBIeDMcCM_ESoCO_CQwBOiBQqAKa@Cg@GyBUeBQsAOiGw@sCa@cC_@[GA?OCsEu@a@GaAScB]mBa@_Do@oFgA]G[IkOqCiG}@e@Ge@Im@KoAU_AO}Ci@oBYa@EaI_Ac@Ew@IgIaA_@E_@EeAKeMoA}Fg@yGg@s@Ga@Cc@Ey@EaHe@cEUkAEcESuDOw@EyJi@gEUqHk@yC[mCYwC_@eDg@iCi@sA[kAUwDaAaCw@gBg@i@ScAa@eBo@gCeAk@U{Aq@wAq@SIOIu@a@}@c@yAy@SMUOoFeDYSAAMIMGsIaGe@[uA}@wBqA}@g@yBmAsCuA_Bu@wAm@_Bm@{Ai@cBi@}Ae@o@SmBg@cBa@oAYa@IeDm@aC[_CW}BQSCkBIaBGcBE}ACeB@{@?Q?Q?{ENaGb@aFl@eDh@yH`BKBKBy@T_L~C}HbC}JvC_KpCwA\cATaB\_BZ}AVeBXwARaAJmALkAJmCNaABaABeCB}@A_AAGAG?}AE_AGaAGcAKwAMeAO{@Kw@OuBa@{@QMEMC}Bm@y@WaA[iAa@qAg@}Aq@{As@aAe@_Ag@mBiA_BcA_Aq@uB{A{@q@oCyBeFiEiDwCgFeEuCwBsAaACAuBwAyA_AmBiAk@]m@]mCyAsCwA{BeA{BaA}B_Ae@SeC}@}EaBC?u@U]K]KaEcAyBg@mAWsAWaB[_BYaBW_BWkBUuBYeBQaD]k@GsAKkAKu@IyBQgFa@}AKuE]yCUkBK_AIcAGkAMoDYk@Ce@CaBSwAMyAQwASyDi@_C]y@Oe@I}AY{Be@}Bi@cBc@GAKEICICsBm@uBq@mA_@qFwBwCqAwBeAyAs@yAw@u@e@IC[Q}@i@SMkCaBUMYQq@c@_@W_Am@uBwAw@g@{AcAwAaAwAaAwA_A{@k@[UoBqAy@i@}@k@_@Wy@i@{@i@y@e@yA}@mC}A}BmAw@_@UOi@Wy@a@wAs@]Oe@Uy@]GEUKuB}@wAm@gBq@y@]_A]w@WeBo@YIc@OCAQGYKIA_A[qC{@gAY{Cw@wAa@_FmAyA]}A_@a@K_@I_@I_Ck@{A_@sLyC}FeB{@W}@[aBi@mFsB{BaAuDgB_Ae@y@c@_Ai@u@c@yA}@]S]U]U]U[SsA_A{@m@aAu@iCqB[UoBcBw@q@oAeA}@y@sAmAy@u@u@s@o@o@][mCiCkCeCu@u@mBiBmAiAmEeEeAcAmC_C{AwAcDiCqB{A}AgAYSCC_@WiBoA_CyAWQCAKIq@a@sBkAeFsCiEwBi@UmD{A[Ma@KeAc@o@UuC_AkBk@a@K_AW_Ba@yAa@a@Gy@Q_B]WCCAc@KcCc@aBWsBYcFk@mF_@aCImCGiD?sADeABE?E?U@oAFaAFa@BaCR{APaC\_ANeAPuAZuBb@iCt@yDnA_C|@_A`@cBr@qAl@uAt@_Bz@}A~@yBvAA@c@XSNC@OJ_ExCoAhAwChC_E|DwD~DmD|DWZORg@j@sDxEyDnFm@z@eBhC]h@kDrFwEdI{@~AyC~Fe@bAk@hA{AdD[p@mBlE}BxFuApDi@tAQb@GRITi@zAGN_@dA[|@c@rAeBnFeAhDcAlD_AhDs@fC_ApDgAhE{@jDmAxEcClJyCjKsApEy@nCSp@Ur@s@~Ba@jA_@jAyAlEYz@[x@w@zBWv@Yt@wC|H{@|B}@zBcBbEc@dAm@xAyAlD}@nBi@jAs@`BGJi@jAw@bBw@~Aa@z@y@bBmAbCoAdC{AtCmAzBcAhBy@zA_@l@k@dA_BjC_@n@i@z@kApB}@vAgBnCaBdCYb@q@bAeEdGiAbBiAbBgAbBo@dAeA`B_A~Aq@lAkAzBg@bAaApBi@jA{@nBu@jBk@vAm@|Ae@tAq@rBs@~Be@`Ba@vAa@~Aa@zAc@nBWhA]xA[|AYzAYxAw@lEET]rB]xBa@~C[jCYvCWlCUrCOxBQdCQxCOvCMzCCn@GlBKtCEjBG|CGbEEpECjECpEAlG@lG@bG@nE@xED|HB|HDpHBzH@pG@zF?fGCfGChGEdGGfGEdCI~DKjEGdCK|CMpDKxBKjCKjBOnC_@|F]rE]dEa@fEe@nEUjBg@`Ek@fEU`Bm@`Eq@|Du@dEgA|F[zAw@vD_@|Am@nCm@bCW`As@nCSr@Qp@w@pCwAtEaCrHcBjFoA~Dc@tAiAtDqBhHc@zAeAzDgAhEOr@Qp@Qv@]xAk@hCuApG}@rEk@rC{ApICPqA|He@zCeAlHgAjIWvBe@bEe@hEw@vHqAtNqAbO_AfKq@xGgAhK]pCm@nE]fCa@nCk@fDo@fDiAxF_AfEe@fBa@bBa@vAYhAkAxDiApDo@hBaAnCaAhCgBfEy@fBs@zA}@fBwAjCqA~Ba@p@a@p@eA~A_B~BmAbBk@t@a@h@_@b@m@t@sAzAmApAoApAs@p@sAlAeCrBk@b@m@`@aC`BqCdBgAl@q@^yBfAiAh@cAd@iBv@aFrBkBt@WJsChA}HvCkC`A{ClA{@ZUHeFpB_FnBqMfFsDrA]LqEdBaC~@u@Xq@Vo@ToBv@eA`@mEfByD|Ac@Rc@R}CrA}BdAeCjAaD`BiAl@uAv@uBlAqBjAwA|@uCnBwAbAcBlAeCrBsCdCwAtAoAnAwBzB{@|@sA|Ao@v@u@~@gC~CcB~BeClDqCnEa@p@a@p@w@pA]n@]l@sAbCc@x@q@pAUb@o@jAgBrD_@v@a@v@s@zAi@jAWf@e@dAWl@CFe@bAg@hA}BjF_@~@a@~@g@hAeBfE}@zBaB`EWn@Wl@uBhFg@nAi@tAe@hA{@tBWp@Uh@c@hAWl@e@hAi@tAe@fAk@tAUh@Uh@g@jA}@rBUh@Sf@g@jAi@jAWl@Uh@e@bAYl@e@dAYl@Sb@S`@k@lAWf@Uf@Sb@Wd@Sd@Wb@Ud@U`@k@hAWf@k@dAcAlBYd@Wd@mBdDkB|Ck@z@m@`As@bAo@`Aq@~@[b@q@|@q@~@eArAyAdBk@r@_@b@QNa@b@q@t@_@^cAbAe@b@YXWR_@^]X_@Za@\q@h@[T_@Xm@d@eAt@}@j@[R_@To@^e@VyAv@wBdA}@^}An@_AZy@X_@Ja@Ly@T_@Hi@No@Nk@Lw@Ne@HeAR{@L{@LqANg@Dk@Fy@F_AHe@D_DPaBHyAFc@@}@BeDF}CDeD@iA?Y@_B?oA?iNBkFB{CD}@@kBBwABeCDaBDaBD{AFcBHcADaBHaADy@F_AF}@Fg@D}@H{@HaAH_AJeAL_BR{@L}@NeAN}@P{Bb@{AZuBd@wBf@eD|@eBh@YJeH`CYJ}Ah@wBz@uDdBsDdBkCrAmCrAyAv@o@Z{I|EoC|AsFbDmEhCkHfE}BtAmAr@oBhAmGlDULWLcB~@mB`AeCnAuB`AqAj@_GdCuDvAgBn@{CbAkA\aBf@aD|@aHjBqAZeDv@oM`Dy@P_Dr@_E~@_Cl@wA\mAViDz@cCl@oA\iD~@_Bf@qExAmBp@wAh@{@\aC`AqAj@uGzCoCvAs@^gBbA_B~@uD~BaAl@wAbA_C`Bm@d@GDyAhA_BpAkA`Aq@j@iC~BgC`CMJSRURORw@v@iAhAuB~BiCtC}@dAiD`Ei@t@g@n@o@z@kA|As@`Aq@`Aq@~@o@bAq@`AkAfBs@hAU^o@bAm@`Aq@jAsAxBsA~BwAdCwAdCkAvBe@|@EFw@vAkCbFm@hAy@~AuAlCoAbCgC`Fe@~@QZQ^o@lA{BjEMTuCrF</points>
-        </polyline>
-        <duration>
-          <value>3528</value>
-          <text>59 Minuten</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;A7&lt;/b&gt; Richtung &lt;b&gt;Hannover&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>105760</value>
-          <text>106 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.2984523</lat>
-          <lng>9.8848776</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3084887</lat>
-          <lng>9.8234942</lng>
-        </end_location>
-        <polyline>
-          <points>ipe~Hosi{@]TKFQRo@x@Y\EBED[\s@n@i@`@i@`@i@\eB`AkAp@y@l@a@Zm@j@]`@u@z@W\s@fAWd@k@fAYn@k@vAe@vAi@nBWdA]fBSjAKt@It@I~@Gn@ATCVGdACv@I`EInFEjFEhDEzEAl@AxACjBM|LEnDEvECxACzBA|BGdGCbCEjDCdBAdBCjBKnKIdHC`DIdIEbDIbHCrBClCCfDEhDCxCIrGIbIG`HIzIO|MEnEOtMA~@CzACr@Ar@Cr@Cr@Cr@Er@Cp@Ev@Gv@Gt@Ep@Gn@Gr@Ix@Il@Ip@Ip@In@Kv@Kn@Kp@Kl@Mp@Mn@Kl@On@Mn@Ol@Ol@Oj@Ol@Oj@Ql@Ql@Od@Un@Sl@Qf@_@fAYv@Yt@[v@Sf@</points>
-        </polyline>
-        <duration>
-          <value>151</value>
-          <text>3 Minuten</text>
-        </duration>
-        <html_instructions>An der Gabelung &lt;b&gt;rechts&lt;/b&gt; halten, weiter auf &lt;b&gt;A37&lt;/b&gt; und der Beschilderung für &lt;b&gt;Hannover&lt;/b&gt;/&lt;b&gt;Messe&lt;/b&gt; folgen</html_instructions>
-        <distance>
-          <value>4586</value>
-          <text>4,6 km</text>
-        </distance>
-        <maneuver>fork-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3084887</lat>
-          <lng>9.8234942</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3464619</lat>
-          <lng>9.7977736</lng>
-        </end_location>
-        <polyline>
-          <points>aog~Hys}z@Wn@[t@_B`E_F~LgCpGy@nBk@tAOXIRS\MXOXSZ[h@SX[^QT{@bAe@j@s@r@i@d@m@d@c@X_@V]Rc@Ve@Tg@TIB]NWHe@Lw@RQDQBODQBOBQBQ@OBaAHkCP}GJqAAg@@sCDiEHwABkBHkCDoLP{DFkB?qCFc@@gAFgEJeAFi@DiAJqANkATq@Pm@Pk@R}@Xs@\a@PYLQLQLo@`@}@l@i@`@}@t@a@^KJa@`@c@b@g@l@_@d@QT]d@SVq@`Ao@bAS\u@lAeAbBq@lAy@rAw@nAa@j@oAdB{AnBs@|@s@x@_@`@c@b@SR_@\{AtAuDzCy@l@iAv@y@l@g@ZcBnAwCvBmA|@gMdJ]VkA~@{@r@mB~A</points>
-        </polyline>
-        <duration>
-          <value>186</value>
-          <text>3 Minuten</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;B6&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>4775</value>
-          <text>4,8 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3464619</lat>
-          <lng>9.7977736</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3548648</lat>
-          <lng>9.7890701</lng>
-        </end_location>
-        <polyline>
-          <points>k|n~Hasxz@sHhGkThQyCdCeAbAw@v@e@h@aAjAs@bAm@`Ac@r@y@`Bg@jAgAvC</points>
-        </polyline>
-        <duration>
-          <value>42</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Messeschnellweg&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>1115</value>
-          <text>1,1 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3548648</lat>
-          <lng>9.7890701</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3688313</lat>
-          <lng>9.7787352</lng>
-        </end_location>
-        <polyline>
-          <points>{pp~Hu|vz@{@|Bg@lAg@lAS`@Yp@Yl@Q\]h@OT_@j@u@x@w@t@e@`@e@Zk@^OH_DdBQFQHuH|DwBdAoHxD_HlD{@b@}@d@y@`@{@d@cB|@}@h@iFnDk@ZEDOFc@RQFSFe@Ne@Hk@Jc@DU@cAH</points>
-        </polyline>
-        <duration>
-          <value>76</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Messeschnellweg&lt;/b&gt;/&lt;b&gt;B3&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>1735</value>
-          <text>1,7 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3688313</lat>
-          <lng>9.7787352</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3708624</lat>
-          <lng>9.7786568</lng>
-        </end_location>
-        <polyline>
-          <points>ehs~Hc|tz@i@Og@CI?gBFqEZ</points>
-        </polyline>
-        <duration>
-          <value>35</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Ausfahrt Richtung &lt;b&gt;H.-Kleefeld&lt;/b&gt;/&lt;b&gt;Zentrum&lt;/b&gt;/&lt;b&gt;Congress-Centrum/Zoo&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>227</value>
-          <text>0,2 km</text>
-        </distance>
-        <maneuver>ramp-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3708624</lat>
-          <lng>9.7786568</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3712663</lat>
-          <lng>9.7783779</lng>
-        </end_location>
-        <polyline>
-          <points>{ts~Hs{tz@s@TGDEFGFGJ</points>
-        </polyline>
-        <duration>
-          <value>36</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>An der Gabelung &lt;b&gt;links&lt;/b&gt; halten, Beschilderung in Richtung &lt;b&gt;H.-Zentrum&lt;/b&gt;/&lt;b&gt;Congress-Centrum&lt;/b&gt;/&lt;b&gt;Tierärztliche&lt;/b&gt;/&lt;b&gt;Hochschule&lt;/b&gt; folgen</html_instructions>
-        <distance>
-          <value>50</value>
-          <text>50 m</text>
+          <value>45579</value>
+          <text>45,6 km</text>
         </distance>
         <maneuver>fork-left</maneuver>
       </step>
       <step>
         <travel_mode>DRIVING</travel_mode>
         <start_location>
-          <lat>52.3712663</lat>
-          <lng>9.7783779</lng>
+          <lat>52.3381808</lat>
+          <lng>4.8315176</lng>
         </start_location>
         <end_location>
-          <lat>52.3705464</lat>
-          <lng>9.7622525</lng>
+          <lat>52.3371394</lat>
+          <lng>4.8462292</lng>
         </end_location>
         <polyline>
-          <points>mws~H{ytz@QAE?OABj@Bd@@Z@b@HfGPbI@V@T?DBlARlIBVF|CPfI`@jQNpGBz@PlID~AFhD</points>
+          <points>shm~H_tn\E}B@kC@iBBgB@iABaA@c@@c@?QBm@@g@Bc@@_@@c@B[Bg@@a@FeABa@F_ADi@Fw@Bc@Da@Dc@JeAJeAJaAH_AHq@Hs@D_@B]De@JcAHaABc@Dc@Ba@FcADcABeA@gA@eA@iBAcBAcBEiBAaAAKAIAEAE</points>
         </polyline>
         <duration>
-          <value>170</value>
-          <text>3 Minuten</text>
-        </duration>
-        <html_instructions>Leicht &lt;b&gt;links&lt;/b&gt; abbiegen auf &lt;b&gt;Hans-Böckler-Allee&lt;/b&gt;/&lt;b&gt;Pferdeturm&lt;/b&gt;&lt;div style="font-size:0.9em"&gt;Weiter auf Hans-Böckler-Allee&lt;/div&gt;</html_instructions>
-        <distance>
-          <value>1124</value>
-          <text>1,1 km</text>
-        </distance>
-        <maneuver>turn-slight-left</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3705464</lat>
-          <lng>9.7622525</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3704861</lat>
-          <lng>9.7613816</lng>
-        </end_location>
-        <polyline>
-          <points>}rs~Hauqz@B\FnC</points>
-        </polyline>
-        <duration>
-          <value>14</value>
+          <value>39</value>
           <text>1 Minute</text>
         </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Braunschweiger Pl.&lt;/b&gt;</html_instructions>
+        <html_instructions>&lt;b&gt;Links&lt;/b&gt; halten und weiter auf &lt;b&gt;A4&lt;/b&gt;</html_instructions>
         <distance>
-          <value>60</value>
-          <text>60 m</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3704861</lat>
-          <lng>9.7613816</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3700799</lat>
-          <lng>9.7536734</lng>
-        </end_location>
-        <polyline>
-          <points>qrs~Hsoqz@BhA@L?L?RB|ADnBBv@@`B@h@F~ADtA@lABnAD~BFlBBxAHfC@\FxC?\</points>
-        </polyline>
-        <duration>
-          <value>96</value>
-          <text>2 Minuten</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Marienstraße&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>526</value>
-          <text>0,5 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3700799</lat>
-          <lng>9.7536734</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3780205</lat>
-          <lng>9.7486488</lng>
-        </end_location>
-        <polyline>
-          <points>_ps~Hm_pz@OvAADELKPGJGJMPMNGPi@f@OHwAp@c@PYLe@PgARw@Fe@@c@?mBAiA?]@k@FSBYDUHYHYLWNMFQJULQLYP_@VOJUPOLe@^YTA@u@l@_@Z[VcAz@iA`A}@p@YVWX_@f@</points>
-        </polyline>
-        <duration>
-          <value>171</value>
-          <text>3 Minuten</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Berliner Allee&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>982</value>
+          <value>1015</value>
           <text>1,0 km</text>
-        </distance>
-        <maneuver>turn-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3780205</lat>
-          <lng>9.7486488</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3805924</lat>
-          <lng>9.7406221</lng>
-        </end_location>
-        <polyline>
-          <points>sau~Ha`oz@Wp@e@fAQh@Qn@Mj@Kr@Il@In@MpAMtAEZAJAHCRCZEVWnBe@rCGXI^I^AF_@bB[lAuA`FMb@]~@Qb@IJGB</points>
-        </polyline>
-        <duration>
-          <value>46</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Leicht &lt;b&gt;links&lt;/b&gt; abbiegen auf &lt;b&gt;Berliner Allee&lt;/b&gt;/&lt;b&gt;Raschplatzhochstraße&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>623</value>
-          <text>0,6 km</text>
-        </distance>
-        <maneuver>turn-slight-left</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3805924</lat>
-          <lng>9.7406221</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3820106</lat>
-          <lng>9.7382096</lng>
-        </end_location>
-        <polyline>
-          <points>uqu~H{mmz@MXIRi@lAYj@[t@KNs@~Ao@fAs@jA</points>
-        </polyline>
-        <duration>
-          <value>35</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Leicht &lt;b&gt;links&lt;/b&gt; abbiegen auf &lt;b&gt;Hamburger Allee&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>228</value>
-          <text>0,2 km</text>
-        </distance>
-        <maneuver>turn-slight-left</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3820106</lat>
-          <lng>9.7382096</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3786613</lat>
-          <lng>9.7308944</lng>
-        </end_location>
-        <polyline>
-          <points>qzu~Hy~lz@KPFPJVp@pAp@pAj@lAPb@\~@LZN^Xv@Zv@f@~@JXvAbDLZTl@b@nAr@|B~AjGXvA</points>
-        </polyline>
-        <duration>
-          <value>135</value>
-          <text>2 Minuten</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Celler Str.&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>632</value>
-          <text>0,6 km</text>
-        </distance>
-        <maneuver>turn-left</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3786613</lat>
-          <lng>9.7308944</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3778517</lat>
-          <lng>9.7283242</lng>
-        </end_location>
-        <polyline>
-          <points>seu~Haqkz@v@nDh@hCL\ZhBT~@</points>
-        </polyline>
-        <duration>
-          <value>32</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Otto-Brenner-Straße&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>196</value>
-          <text>0,2 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3778517</lat>
-          <lng>9.7283242</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3767523</lat>
-          <lng>9.7282669</lng>
-        </end_location>
-        <polyline>
-          <points>q`u~H_akz@p@QVCPCL@VDxAZ</points>
-        </polyline>
-        <duration>
-          <value>36</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Hausmannstraße&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>124</value>
-          <text>0,1 km</text>
-        </distance>
-        <maneuver>turn-left</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3767523</lat>
-          <lng>9.7282669</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3759136</lat>
-          <lng>9.7317718</lng>
-        </end_location>
-        <polyline>
-          <points>uyt~Hu`kz@H[`AqGr@cFf@iD</points>
-        </polyline>
-        <duration>
-          <value>77</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Lange Laube&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>256</value>
-          <text>0,3 km</text>
-        </distance>
-        <maneuver>turn-left</maneuver>
-      </step>
-      <duration>
-        <value>5228</value>
-        <text>1 Stunde, 27 Minuten</text>
-      </duration>
-      <distance>
-        <value>126341</value>
-        <text>126 km</text>
-      </distance>
-      <start_location>
-        <lat>51.5062496</lat>
-        <lng>9.9004251</lng>
-      </start_location>
-      <end_location>
-        <lat>52.3759136</lat>
-        <lng>9.7317718</lng>
-      </end_location>
-      <start_address>Göttinger Str. 1-3, 37124 Rosdorf, Deutschland</start_address>
-      <end_address>Münzstraße 3, 30159 Hannover, Deutschland</end_address>
-      <duration_in_traffic>
-        <value>5190</value>
-        <text>1 Stunde, 27 Minuten</text>
-      </duration_in_traffic>
-    </leg>
-    <copyrights>Kartendaten © 2017 GeoBasis-DE/BKG (©2009), Google</copyrights>
-    <overview_polyline>
-      <points>ayjyHutl{@NjNH|GB~@sA@_CDeIb@cAJo@`F[`AiC`@aRlC}OtB{DMi@i@q@BiCpBmFt@mGxAcE`AwHpHcFvFyF`GkCjAsCdAqAb@Mh@n@hDdB`JxDpStASf@KhFHr@l@PnDq@dAyANiOCskAg@g`COeLWeNgGmL{NkDwHuEoQ{CyZkDgb@qDkQcMmY{MuTqCaDuHiGuN}GkJkAeEH}El@_L|Ekf@|_@_JbE_KdCmL`@uMeAaPsEca@kL_]eD{GeBeTsLkbAyn@kM_GwSmBe^aEyLL{e@pNkj@|QcLnB{EEwJqBsb@yRojAkh@mJyCmU{CcPqD{LiJkL{NgQsPuSuJ}RqCgh@w@eMcAwOgDiNkFgPmJqOuMcLuMyV}b@qO{b@cUiy@}[ooAcGeg@sCan@uDwYsHoVqMsS}NkKuq@mSgViJmNmJcQsQmPeSaXoWmFaEg`@uUuQuM_ReVoGcMuTwl@cJs^uIai@wCyYyCij@gCm_@aFwYiIgVmLwR{LmL}N_KeMuKsL{Men@_aAiRuRaMgJuXaNcf@eSy}@c^ai@{Om_@kIq|@qLgn@uCi\uB}ZyDcz@iOsYaEcn@cGi\mBap@wEqZeHoQoHud@kYcYoL{WcFcUo@aOr@mU|D}t@zSyTdDePTuP{AqOaE{S{Kcd@i^}TqMyXqK{UiFiy@yHkScBeXgEsN}DcYeMi_@iVca@wU}X{K{t@kRyMcE_RcIaKeGib@c^{ZqY{SgOgTmLeSgHqMyC}JaBaV}AwNZsUhDoZxLeNjJ}YjZ_^ri@eT~e@{DrKob@p{Aq[n{@_[hn@mc@~q@cMfWoIxWcGpYgEh^iB`_@c@xq@ZhdAc@hz@aBbd@mGdp@gJvg@}Ir\_Slp@yIp`@iLbu@aNjvAqJjk@kKr]aPz\qLnPyQxP_WdNorA~g@yVzJ}ZnOm[zUiT~VcPtWyJzRoVvk@sb@`cA}Sn_@qVjZcRdNiP|GcKzB}LpAg\x@u}@bAc`@xDq_@bKm]|OoiA~n@{a@`Oco@tO__@~Jo\zNmUbOkRjPoSfUuKfOk^dn@_NxW{LnS{S|PeHjQ_B|L}AnpAiEz|DkCvX_G~UeXhq@kElGwHhGwLvCojAxBcNvB_IbEcH|GuHhLyMjRmOnM}]lWgm@rg@gEdGeFbMwEzJuLhJ{c@fUcQhK{FpA_DIuJ~@g@XMnAf@lWxBr`A`Afe@h@tVoAvDyCtBkDdAcKPmJ`FyIhHaExIcDpV{EbQuC|FcDdGvBlEvE|KxIxXjC`MfAl@h@GhCF|C_T</points>
-    </overview_polyline>
-    <bounds>
-      <southwest>
-        <lat>51.5060974</lat>
-        <lng>9.7284065</lng>
-      </southwest>
-      <northeast>
-        <lat>52.3820732</lat>
-        <lng>10.1939978</lng>
-      </northeast>
-    </bounds>
-  </route>
-  <route>
-    <summary>B3</summary>
-    <leg>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.5062496</lat>
-          <lng>9.9004251</lng>
-        </start_location>
-        <end_location>
-          <lat>51.5061751</lat>
-          <lng>9.8995835</lng>
-        </end_location>
-        <polyline>
-          <points>ayjyHutl{@BLBf@Bb@@j@?b@</points>
-        </polyline>
-        <duration>
-          <value>7</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Auf &lt;b&gt;Göttinger Str.&lt;/b&gt; nach &lt;b&gt;Westen&lt;/b&gt; Richtung &lt;b&gt;Rosenbaumweg&lt;/b&gt; starten</html_instructions>
-        <distance>
-          <value>59</value>
-          <text>59 m</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.5061751</lat>
-          <lng>9.8995835</lng>
-        </start_location>
-        <end_location>
-          <lat>51.5060974</lat>
-          <lng>9.8962230</lng>
-        </end_location>
-        <polyline>
-          <points>sxjyHkol{@B~CC|A@bA?pABlA@`ABz@?ZBb@</points>
-        </polyline>
-        <duration>
-          <value>29</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Masch&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>233</value>
-          <text>0,2 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.5060974</lat>
-          <lng>9.8962230</lng>
-        </start_location>
-        <end_location>
-          <lat>51.5171622</lat>
-          <lng>9.8933566</lng>
-        </end_location>
-        <polyline>
-          <points>cxjyHkzk{@]@u@?o@@I?_ABE?}BJmDTK@M?c@@E@K@MDGHGVO|AO`BKz@ODg@JaBTeBXu@JUBoLbBK?WByARqBZsC^SBkBVYDc@Fa@Bm@HMCICSIOGKIKIKKKMEEIM</points>
-        </polyline>
-        <duration>
-          <value>125</value>
-          <text>2 Minuten</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Siekweg&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>1319</value>
-          <text>1,3 km</text>
-        </distance>
-        <maneuver>turn-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.5171622</lat>
-          <lng>9.8933566</lng>
-        </start_location>
-        <end_location>
-          <lat>51.5186198</lat>
-          <lng>9.8925181</lng>
-        </end_location>
-        <polyline>
-          <points>g}lyHohk{@KUKRORQRq@l@g@Z]Rc@Rk@Ja@B</points>
-        </polyline>
-        <duration>
-          <value>20</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;K50&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>182</value>
-          <text>0,2 km</text>
-        </distance>
-        <maneuver>turn-left</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.5186198</lat>
-          <lng>9.8925181</lng>
-        </start_location>
-        <end_location>
-          <lat>51.5269603</lat>
-          <lng>9.8868613</lng>
-        </end_location>
-        <polyline>
-          <points>kfmyHgck{@{BPOBwDp@A@A@MLE?SFYHMBSBUBUF[FMBe@Ne@PULSJOJWPc@`@s@t@_AdAmAzAMDA?o@t@UVQTmB|BGDEHqD~DOTKHk@`@uAv@_@PQ@C?[NC@m@NeAb@</points>
-        </polyline>
-        <duration>
-          <value>92</value>
-          <text>2 Minuten</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Siekhöhenallee&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>1026</value>
-          <text>1,0 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.5269603</lat>
-          <lng>9.8868613</lng>
-        </start_location>
-        <end_location>
-          <lat>51.5257643</lat>
-          <lng>9.8805580</lng>
-        </end_location>
-        <polyline>
-          <points>oznyH{_j{@_A\QDWFH`@TtADPNx@BF\hBR~@RbA^rBl@fDF^P~@P`AXvANx@Z|AXvA</points>
-        </polyline>
-        <duration>
-          <value>89</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Kasseler Landstraße&lt;/b&gt;/&lt;b&gt;B3&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>523</value>
-          <text>0,5 km</text>
-        </distance>
-        <maneuver>turn-left</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.5257643</lat>
-          <lng>9.8805580</lng>
-        </start_location>
-        <end_location>
-          <lat>51.7342389</lat>
-          <lng>9.9746464</lng>
-        </end_location>
-        <polyline>
-          <points>_snyHoxh{@FXTKNIf@WHCLED?HAJAJ?d@?tB@P@H?JBLBHBDBFDDBFDBDDDBHDFBHDJ@HBJBL?H@F?L?N?NAD?HAFAJCHCHAFEHEJEFEFIFIDGDIBG@G@Q@M?Q?E?E?C?C@EBEDoAAO?w@AC?OAC?[?G?s@A_FGG?cIKkHK{ACg@?W?}LEG?IAiEAiHAM?O?cJ?sG?m@?YA[?eJAqD?e@?}@?wKAyA?}B?gW@I?mEE[?qHGG?uMCmA?cB@wCAeA?I?G?i@?e@?C?uAAo@AcA@cE?a@?sAF]?yAB{ABiAC_AIg@GQEMCkA[gBi@_@OqCsAq@c@g@]e@[aC{BWUgAsAm@u@k@u@e@s@o@eA[o@sAmCEIq@{A_@cAwAqEgAmEa@kBScASkAs@kFe@uF[cECU?ACe@IiAYcDcAiNi@sGc@eEq@uEi@kC_@wAu@qCi@gB}@oCcA_Cs@eBqAiCw@yAk@eAm@eAa@u@}AoCw@uA}@}AkAyBu@cAKOwAmBgAuAOOOOEEGG?AOMKM[YeCyBeBqAm@c@oCeBaCmAsCkAoA]oB_@eCa@q@GcAAm@CkBFW@SBsBNSDc@Hq@LoBh@qCfAkAr@qAv@gDbCmB~AeEhDqPdNo@f@gAx@y@h@k@\_Al@w@^a@Pg@Rq@X_@NYJq@XaA\mAZ{@TcAVw@Ne@HOBA?A?UBE@yAJmAHeADeA@{AAsACuAIK?gAEyAMaAOm@MMEUGc@MeAYwBk@CAm@OuAc@aDaAcF_B{C_A_Be@cAYYKiBi@sAa@SISGICYK_@MkA[c@Km@M}@M}@K_@E_@C}@I_AI]EeAI{BS_Fa@[C]Ci@I_@E[Ec@G_AO]Ga@G}@U_@K_@K]K_@M_@M]M_@OwBaA{@c@{@g@o@a@eBeAaF_DyCmBeBgAgDuBwFoDk@]oAw@qCgB}A_A}E}Ce@YmIiFkEqCuBuAcC}Ac@[c@[aBeAc@WiB_A_Bq@GC_@Kg@Qk@MiAWwAQcAIa@EyBOgCOq@G{AKoCUcGo@kBS}ASeDe@sBYsAOYCUAg@C]A{@AgAA_BDa@BwANUBUDa@Hu@Ly@PqA\s@R}@XsBn@m@RIB_ErAaEpAgBl@{Af@gBl@cBj@gA`@o@Rg@P{@XcA\iBl@cAZuAd@kDjA[Ji@RcBh@cAZiDjA_DbAgCr@_C`@wAPcAFW?W@sBAw@E]C_AK[Ey@Og@Ka@Ky@W_A[y@]aAa@{@a@eAe@mAi@sAm@iAk@kAg@}Au@_Bu@kAi@mB_AQIQIi@YwBaAyFkCuDeBo@W_Ac@{CwAo@YkB{@iGsCsAm@cBu@qAi@mCgAkB{@qSkJy@]}@_@w@[m@Uu@Ug@Qm@Sm@Ow@SUGUGwBc@_C_@cC[{BSm@Gq@G_BO_AMc@C]Gi@I[E_@GYG]I_@I_@I]K_@M_@M_@M_@Oe@SYO]O_@U]S]S]U]W[W[W[WYW[Y[][[[[MMKM[]UY[_@]a@W]Y]Y]W_@W[q@}@]c@Y_@Y_@[]W]q@y@]a@Y][[Y[o@s@a@a@YY][q@o@w@s@]W_@[[Wy@k@_@Y]UUO]S[Uy@e@_@UoAo@WMWMa@QqAk@{@[]Oa@M{@Ya@K[K_@I}@Uc@Ky@Oc@I_@G]Gg@Gu@K_@C}@I_@C_@Ce@Ca@A_AEa@A]?_@Ac@AsIImIMc@?e@AcAAq@A_BA}@C]Aa@Ac@Ca@Aa@C_BG_AI_AKaAK{@Kc@G{@M_BYkAU_ASeAUm@Qw@ScAYgA]q@S}Ak@_@Om@UeAc@cAc@y@_@}@a@_Ae@gBaAGEaB_Au@e@}@m@cBiAmA}@aAu@sBaBiAcAu@q@_@_@][oAmAu@y@iAmAWWo@s@e@k@m@s@sAcBs@}@s@_Ae@q@g@u@s@cA_AuA_@m@oAqBYi@[i@{@yAm@gA}@eBs@wAYi@o@uAw@gBw@eBc@cAc@gAq@cBy@wBEIYw@e@sAe@wAO_@_@kAa@oAw@gCQm@Mg@Oe@Ok@Ma@qA{EuAcFc@aBi@sBUu@Su@U{@sAgFMi@oAkEsAoEu@mCIUi@kBi@mB_@uAk@{BQi@a@}A]qAc@_Ba@}AYeA}@}COo@Mc@Me@Uw@a@yA_@wA</points>
-        </polyline>
-        <duration>
-          <value>1073</value>
-          <text>18 Minuten</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;A7&lt;/b&gt; Richtung &lt;b&gt;Hannover&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>26723</value>
-          <text>26,7 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.7342389</lat>
-          <lng>9.9746464</lng>
-        </start_location>
-        <end_location>
-          <lat>51.7323225</lat>
-          <lng>9.9747330</lng>
-        </end_location>
-        <polyline>
-          <points>_jwzHqd{{@Au@EWG[Ge@CYA[C_@?Y@S@Q@QDQDQDMDMFIFGFIFEHCJEHAHAJ@H?JDHDFFDBBBHJr@fAz@rAj@~@FHDJ@BHLLRJRHPFLDJHT</points>
-        </polyline>
-        <duration>
-          <value>32</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Bei Ausfahrt &lt;b&gt;69-Northeim-Nord&lt;/b&gt; auf &lt;b&gt;B3&lt;/b&gt; in Richtung &lt;b&gt;Northeim&lt;/b&gt;/&lt;b&gt;Alfeld&lt;/b&gt;/&lt;b&gt;Einbeck&lt;/b&gt;/&lt;b&gt;Hameln&lt;/b&gt; fahren</html_instructions>
-        <distance>
-          <value>410</value>
-          <text>0,4 km</text>
-        </distance>
-        <maneuver>ramp-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.7323225</lat>
-          <lng>9.9747330</lng>
-        </start_location>
-        <end_location>
-          <lat>51.8335899</lat>
-          <lng>9.8329011</lng>
-        </end_location>
-        <polyline>
-          <points>_~vzHae{{@N~@BR@J?L?JCHCJEHILgCt@qA^{Bn@cEfAODk@PeAZgA^SHu@Vm@RMDQLc@NYJg@NqA^aAXoBj@}Bl@iAZgAZeAV{Bp@yAb@oCt@sA^kAZs@PyAb@_AVsA`@iBf@i@L]JODaIfC{Bn@]JMAq@P[HODoA\_AVMBa@JKDuDhAi@NOJi@NcAX_AV]Js@Ri@Nk@Pq@PMDaEhAi@Nw@Rq@R_AVqA^o@Py@Ts@RgAZkA\s@Pe@L[J_G`BMDy@Ti@NSF[H[Hq@R_@JYH_@Lq@RYHWHOFSJMF[PSNWRQL]ZONy@v@UTSR}AvAQNONi@h@QPOLc@`@URe@`@g@\[Tc@ZkAt@y@j@WRo@d@UTQRML_@f@SXWd@Q\MVO^Yp@Wr@k@~Aw@zBGPe@tA[bA{AhEs@nBQh@e@pAm@dBEJcAtCi@zAs@lBITy@~Bw@xBYx@Wp@O`@IT[x@MVMVWd@INQXi@t@k@p@g@j@}@dAi@n@_CnC{AdB}@`AsA|AuA~AsCdDm@r@gAnAQVY`@[h@[l@Qb@Sh@Od@Sj@aA`Dq@tBg@`Bc@pA_@`AO`@Ub@OVQXQVUVUVWTSNc@Ze@RGBq@Ro@N_@Fu@LsARiC`@aANk@Jg@JWHc@NUH]PYLyTrLaCnA}Ax@c@R_@Ni@Pq@R]Fo@Jk@FeAHqL|@WDg@FUBQDg@LWHUJ]NGD]RUL_@XSRKHa@b@[^k@x@m@|@o@~@u@hA{@pAu@hAGHKHgAxAcCbD[b@]d@{@`AwA~Ak@l@KPg@^_@V_Aj@g@XuAp@_Af@[RSBg@\CBC@EDE@IFYT[TiA~@y@r@KL[^m@p@q@t@m@r@KR_SbTiApAa@f@a@l@]l@Wd@Ud@Wh@Qd@Sf@]hASp@Kb@On@Kj@Y~AS`BI~@IhAIdBCzAAV?h@?@@t@?Z@bABr@H|AHhAJhAJdARnBf@tDLx@Lv@NtARxABNVrBN~ANzAJtADj@N`CJrBFtBHrCBzA@vB@`B?tA?^B`J?|A?x@@H?D?~@?~@@vJ@jFBnH?pB@`D?hC@xA?jA?H@tB?zB?vA@v@?d@?b@?lA@bA?dA?b@@pE@lD?fB?hB@dA?hC@fA?dB?f@?bB@tB?lA@vC@nD?x@?zA@|A?dA?bA?vA@z@?nA@bA?nA?vB@tB?V?pBCNA`A@rA?X?z@@p@?nB@`@?jB?b@DT?jC@xF@jA?|A?|@@nD@lC?dA?dA?jB?`AAdA?dA?bAAdAAdAAfAAbAChBCbAAdAG|ACz@EvAE`AEfAKhBG~@GfAO`BIdAEb@Q`BK~@MbAKx@O~@Ih@YhBUjAYtAOx@S|@St@Sz@a@zAUv@Sn@Of@Up@Ob@Qh@a@dAKX[t@Yr@O\c@bAc@~@c@~@Ub@OZOV]n@U`@U`@S`@]j@[f@S\]j@_@j@_@l@]h@c@n@g@t@Yb@OTQTQV_@h@OTc@l@_@f@c@l@_@f@a@f@c@j@a@f@a@f@QTa@d@a@h@e@h@wAbBa@`@u@z@UT]`@QPWV]^WX_@\YZm@l@UR_@\[Z_@^c@`@w@r@e@`@c@`@y@p@e@`@y@p@w@n@{AjAi@`@c@\{@l@e@\e@Zg@\o@b@}A`Am@^MJQHQJg@ZI?YNw@^MFcE`COHGHQHgAf@_@R{An@}Bz@o@T}@Xg@N_AVg@Lk@N}AZqAT[BYDm@HYBe@D{@Fu@B}BBU?o@?c@AUAUAa@Cs@Ek@GSCiBYWESESGUGi@MSIUGg@QSIUIUKe@SWMe@We@Uo@c@m@_@a@[c@][WUSIKGM[]SU</points>
-        </polyline>
-        <duration>
-          <value>877</value>
-          <text>15 Minuten</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;B3&lt;/b&gt; (Schilder nach &lt;b&gt;Alfeld&lt;/b&gt;/&lt;b&gt;Einbeck&lt;/b&gt;/&lt;b&gt;Hameln&lt;/b&gt;/&lt;b&gt;B64&lt;/b&gt;)</html_instructions>
-        <distance>
-          <value>17565</value>
-          <text>17,6 km</text>
-        </distance>
-        <maneuver>turn-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.8335899</lat>
-          <lng>9.8329011</lng>
-        </start_location>
-        <end_location>
-          <lat>51.8321233</lat>
-          <lng>9.8341171</lng>
-        </end_location>
-        <polyline>
-          <points>}vj{Hsn_{@CMCKCGAIAGAK?M@UFSVc@d@i@NKj@i@t@o@^QNCL?VFFBBDBDVt@</points>
-        </polyline>
-        <duration>
-          <value>24</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; Richtung &lt;b&gt;K658&lt;/b&gt; abbiegen (Schilder nach &lt;b&gt;Einbeck&lt;/b&gt;/&lt;b&gt;Bartshausen&lt;/b&gt;)</html_instructions>
-        <distance>
-          <value>244</value>
-          <text>0,2 km</text>
-        </distance>
-        <maneuver>turn-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.8321233</lat>
-          <lng>9.8341171</lng>
-        </start_location>
-        <end_location>
-          <lat>51.8390657</lat>
-          <lng>9.8225246</lng>
-        </end_location>
-        <polyline>
-          <points>wmj{Hgv_{@kCjCCDEPKLs@bA_@n@CDEJ[h@Yh@qGfNc@z@Sb@Wd@{JlTS`@Ul@Wf@u@~AgBxDyBtE</points>
-        </polyline>
-        <duration>
-          <value>59</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;K658&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>1113</value>
-          <text>1,1 km</text>
-        </distance>
-        <maneuver>turn-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.8390657</lat>
-          <lng>9.8225246</lng>
-        </start_location>
-        <end_location>
-          <lat>51.8395804</lat>
-          <lng>9.8220263</lng>
-        </end_location>
-        <polyline>
-          <points>eyk{Hwm}z@OTe@l@]RQH</points>
-        </polyline>
-        <duration>
-          <value>4</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Bartshäuser Str.&lt;/b&gt;/&lt;b&gt;K658&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>67</value>
-          <text>67 m</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.8395804</lat>
-          <lng>9.8220263</lng>
-        </start_location>
-        <end_location>
-          <lat>51.8429994</lat>
-          <lng>9.8199819</lng>
-        </end_location>
-        <polyline>
-          <points>k|k{Huj}z@aAl@g@ZqBpAUJmAJqBDw@Bs@Dg@HKHKNCFw@zBQl@</points>
-        </polyline>
-        <duration>
-          <value>27</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;K658&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>427</value>
-          <text>0,4 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.8429994</lat>
-          <lng>9.8199819</lng>
-        </start_location>
-        <end_location>
-          <lat>51.8472881</lat>
-          <lng>9.8135144</lng>
-        </end_location>
-        <polyline>
-          <points>wql{H{}|z@YTa@^]R_@RSD[BQ@O@MBIFMLMVO|@Kn@[hAWj@[`@[X]h@M|@M\S\QZGJKd@Ij@InAQ~@Qd@OZMVABS\c@|@]v@o@nA_@b@q@^YNSJ</points>
-        </polyline>
-        <duration>
-          <value>62</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Bartshäuser Str.&lt;/b&gt;/&lt;b&gt;K658&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>689</value>
-          <text>0,7 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.8472881</lat>
-          <lng>9.8135144</lng>
-        </start_location>
-        <end_location>
-          <lat>51.8667272</lat>
-          <lng>9.8100866</lng>
-        </end_location>
-        <polyline>
-          <points>qlm{Hmu{z@a@Ts@Zk@Ta@Je@HaBNuBPUFSJiAl@aAl@KBQ@{BLmAHy@Fi@N_Al@EBKFIFIDe@Vw@Zs@Jo@Fc@Ls@TaBl@QFoJbDmExAiDhA{@XOHyBbCYZMPi@l@{A`Bk@j@c@Va@FOAyD}AiFsBq@YYKQG_A_@sIiDkAe@wEkB</points>
-        </polyline>
-        <duration>
-          <value>125</value>
-          <text>2 Minuten</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;K658&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>2277</value>
-          <text>2,3 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.8667272</lat>
-          <lng>9.8100866</lng>
-        </start_location>
-        <end_location>
-          <lat>51.8697855</lat>
-          <lng>9.8111100</lng>
-        </end_location>
-        <polyline>
-          <points>afq{Ha`{z@_@KQE}@OCAC?W?I?_@@u@BW?e@QUKSIa@Ko@Sg@SWUYc@Ya@S@q@F</points>
-        </polyline>
-        <duration>
-          <value>32</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Löhnefinkstraße&lt;/b&gt;/&lt;b&gt;K658&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>357</value>
-          <text>0,4 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.8697855</lat>
-          <lng>9.8111100</lng>
-        </start_location>
-        <end_location>
-          <lat>51.9271136</lat>
-          <lng>9.6386329</lng>
-        </end_location>
-        <polyline>
-          <points>eyq{Hmf{z@@v@?z@Az@?b@Cd@C^E^Kt@Gb@]lBGZG^I\KXMd@]z@o@jBcBtEg@tAw@xBcApCgB~EKX{IhViA~Cu@rBi@vAe@nAK\KXGVOn@CNCNANEb@Cb@oBt_@[fGGr@ATCRAPEXMl@U~@aBlGa@zAOn@Qn@eA`Eu@rCu@vCc@`BS|@Qv@QbAUnAKn@q@~DMz@StAM~@IbAIvA{@~OIhAKhAEb@}@|G}BhQq@fFg@~D_AhHiAlICVG\Kh@Oz@kErTiAvFG^[zAiDxNaAdE[zA]pB[zBQbBE^]|CYnCMfAEZG\SfAuAbG[xAIh@Gh@Gt@IdAC`ACnAGdCCtBA`AIdIAjAEtBC`ACjAIfC[tIGlBIjCAf@E`BA`A?zA?|EAnCAp@Az@E`BGbBIbBGrAQ|BObBYxCa@nEa@lEMxAM~AEr@Ah@CjAEfCKlKCxCCnAA`@G|@Cd@Ed@K~@MbAUjBc@tCU~AYdBkAdH_@~Ba@~BG`@Ox@I`@K`@W`A[nA{@zCw@nCa@vAcAnDa@xAi@hBu@hCw@lCc@zA[jAYlAU|@_BvGqGzW}ArG_BtGgAnEOn@o@jCc@rCCTKj@Qz@ADOn@Un@Sj@O\S^QVSV{@hAg@h@m@v@o@z@[f@k@dAsBhE}@lBi@lAiCrFSb@_@`A}B~G}@jC_DdJKRKZm@hBOf@aAxCe@vAmAtDk@`BoB|FI`@wD|KcEtLeB|EqAbDk@pAy@dBkA|Bc@x@i@~@aBlCqArBaCvDo@dAgAhBc@|@e@~@k@rAk@~@o@z@]\YTe@Zi@XgGjCk@VyItD]Bm@@i@Ie@QcA]QEWEQAW?_@BSDs@ZSNQPQV_@l@MXYv@a@nAeA~Cy@fCqA|DoEhNe@xAg@xAu@`CiBxFe@`BQj@Mb@mAxEK`@ERGZId@Ed@KdAEp@ALQxAO`AQr@i@lB_@lAIXMj@Oz@MdAG~AMlDE~@Kv@Kn@YhAUdA_@hCg@pD]zBUnA[tAs@nC{@`C]~@GRKd@?|@Az@@pFCt@Cb@Gb@M^[|@]bAUt@K\CR?`@</points>
-        </polyline>
-        <duration>
-          <value>778</value>
-          <text>13 Minuten</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Burgstraße&lt;/b&gt;/&lt;b&gt;B64&lt;/b&gt;&lt;div style="font-size:0.9em"&gt;Weiter auf B64&lt;/div&gt;</html_instructions>
-        <distance>
-          <value>14032</value>
-          <text>14,0 km</text>
-        </distance>
-        <maneuver>turn-left</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.9271136</lat>
-          <lng>9.6386329</lng>
-        </start_location>
-        <end_location>
-          <lat>51.9296848</lat>
-          <lng>9.6339525</lng>
-        </end_location>
-        <polyline>
-          <points>m_}{Hmpyy@A??AA?A?A??@A??@A??@?@A??@?@?@?@?@?@?@?@@??@?@@??@@?@@@?@??A@??A@??A@??ABR?F@\C\QfASjAKf@Mf@M^KXGLINGHGDGBQFQHIBGDIFIHGJITGPO`@M\EJCDCB]\[RMJ_@\MNOTMTKTQ`@aA`B</points>
-        </polyline>
-        <duration>
-          <value>70</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Im Kreisverkehr &lt;b&gt;zweite&lt;/b&gt; Ausfahrt (&lt;b&gt;Steinweg&lt;/b&gt;/&lt;b&gt;B64&lt;/b&gt;) nehmen&lt;div style="font-size:0.9em"&gt;Weiter auf B64&lt;/div&gt;</html_instructions>
-        <distance>
-          <value>475</value>
-          <text>0,5 km</text>
-        </distance>
-        <maneuver>roundabout-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.9296848</lat>
-          <lng>9.6339525</lng>
-        </start_location>
-        <end_location>
-          <lat>51.9322993</lat>
-          <lng>9.6345490</lng>
-        </end_location>
-        <polyline>
-          <points>oo}{Hesxy@QFQFSBWD]BG?G@c@Dk@@S?M?MAMEIEKIIGQOo@i@OKOKMGICKEWIUE[GOC</points>
-        </polyline>
-        <duration>
-          <value>32</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Leicht &lt;b&gt;rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Scharfoldendorfer Str.&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>303</value>
-          <text>0,3 km</text>
-        </distance>
-        <maneuver>turn-slight-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.9322993</lat>
-          <lng>9.6345490</lng>
-        </start_location>
-        <end_location>
-          <lat>51.9402987</lat>
-          <lng>9.6328763</lng>
-        </end_location>
-        <polyline>
-          <points>{_~{H}vxy@GA]C[AWA_@?gABsAPg@F_@FYHKD[Lq@Zg@RWLg@V[POHWV]`@w@bAa@b@a@d@UTQPKJIDIBKBODI@I@I?MAQC[Oo@k@i@a@g@YSGKCQAM@K@MDWPQJWNWJOFODOBO?SAUEk@OAAEAi@Oe@KOCQAK@W?</points>
-        </polyline>
-        <duration>
-          <value>74</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Hauptstraße&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>943</value>
-          <text>0,9 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>51.9402987</lat>
-          <lng>9.6328763</lng>
-        </start_location>
-        <end_location>
-          <lat>52.0053208</lat>
-          <lng>9.6750352</lng>
-        </end_location>
-        <polyline>
-          <points>{q_|Holxy@AQMcACMCGYc@_@q@[{@So@cAwCOc@OUMQ]WKGyCq@{FyAq@MaEaA_Du@_@IcDw@_Ba@}@U_A[{@a@c@Wk@e@s@q@YY_KwKeAiAgAmAgAmAc@c@g@c@_@S[Oa@G]Ga@AiA?k@Ai@Gk@O}@_@{@e@kB_AeBq@cBo@mC{@qA]g@AW@SBSHSHSNQPORSV]j@y@bBi@fAa@f@YZYTUJQHUH}@Vy@VUJSLSNw@l@c@ZSJWH[HWDeAD}@Bk@?}@JSDWFQFWJ_EdCuAr@s@Zg@R[LYJgDvAMDI?G?ECEEEICMAK@K@GBKHQFK|AcBb@e@p@u@PSPWb@k@l@cAzAoCz@cBj@iAt@sAb@s@NUvAcBPWXc@r@oAfCyEn@eAd@g@r@{@`@k@Xg@N]L]BKBS@O@QAWCYQcAS_AK_@s@sCQs@Ec@Es@?SAuAAy@Cc@Ia@K_@K[Qi@Qc@O[IEMGKCSAmBM{BKcA?_ELmDLg@LUH_@N[L[La@NUHSFUHSDWFc@FWBi@Fa@Bk@DyBJ{AFq@@e@@[?Q?KAIAMAICMEIEQKKI[WKMSMQMOKMEMEKCOCOAM?M@I@KDODOHULc@TULo@ZMHMFKBKBK@I?IAOCSEcAW[IKCYEMCKCSCUAQAI?K?E?G@E@G?GBIBGBOJsBxAaAp@y@j@[TGHGFEHGJGRIRGPMVGJILEDGFIDIFMFMJUPURUROPMLKNIHGFIFGBI@E?GAECEAECCEIICICGCICIAKCKAMC[?UASAU?OASAOAMAKAICICGCIIKIMMKKK_C_CCCSQa@]{@k@o@c@w@i@a@WSKMGKCUCYEA?c@ESAcAIq@GOAIAKASGKCQG]OMGMEOEYE]?I@G@G@MBKBKDQHOFID]Pe@V]RcAh@aBz@wAv@}Az@WLUH]Lc@NWFWDOBOBQ@k@Ci@CWCMAc@Gc@K[K]OQK[O]Ya@_@a@[OQKOMQMOS_@Q]MWSc@Uk@Qg@Uw@W_AWcA]qAk@qB[}@IS]{@Sg@Ue@[k@O[QYMU]e@Ya@i@o@WY[]]YYWQMOKWSa@W_@SYMUKg@SSG{@We@Mk@Kq@MaAM_AMwAO_AKsC[k@Go@Ig@Ek@CA?[Ca@Ec@Gi@IQCKCKCKCICEEIEEEEEECKKy@cAUWa@c@c@i@c@g@WYGKGIGKIMGOM[IYIYG_@Ge@AUAMAa@Ak@?a@?_AAu@CcEAyA?c@AcAAaACkBCiAAc@A_@Ce@A]C_@C_@Eg@C]E_@Ea@Ee@Gg@Gc@Ms@QaAUaAQu@K_@Oe@Qo@Qe@Wo@Uk@Ug@Wg@O[OWMQe@u@_@e@_@e@e@g@e@c@QOc@]UOQMUMc@Uk@Wy@Yo@SWIUGmIwB</points>
-        </polyline>
-        <duration>
-          <value>588</value>
-          <text>10 Minuten</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Ithstraße&lt;/b&gt;/&lt;b&gt;B240&lt;/b&gt;&lt;div style="font-size:0.9em"&gt;Weiter auf B240&lt;/div&gt;</html_instructions>
-        <distance>
-          <value>10391</value>
-          <text>10,4 km</text>
-        </distance>
-        <maneuver>turn-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.0053208</lat>
-          <lng>9.6750352</lng>
-        </start_location>
-        <end_location>
-          <lat>52.0810685</lat>
-          <lng>9.7435553</lng>
-        </end_location>
-        <polyline>
-          <points>ghl|H_t`z@?A?A?A?A?A?C?AAA?A?A?AAA?AAA?A?AAAA??AAAAAA??AA?AAA?A?A?A?A?A@A?A??@A??@A@A??@A@?@A@?@A@?@?@A@?@?@?@?@?B?@?@?@?@?@?B?@?@@@?@?@@@?@@@?@GHGJEHGLELGNYt@IXGPGNA@MZUh@Uf@Wn@IRABc@jAKRy@fB]t@O^]~@s@jB_@`AYr@[t@[t@MZKXEJCLCLENKj@YhBk@fDa@`Co@`Ea@bCEVEPEPENCHELGJGLEJGLOTQXGJMRGJMNKNOPKNKJMNIHIHIJIHGFGDIHGFIFIDIFIDKBIBK?Q?GCCACAIEGGIIi@o@}BkCgAoAgBsBeAmAw@}@u@{@u@{@a@e@u@y@u@u@c@a@s@q@}@y@g@g@qCiCyAsAg@a@OKKGGEMGGAIAGAIAI?M?OAOASCKEMEGEGEKKW[OMMM}@u@_@[YUYW_@c@_@_@WSKKGGEGCECECGCIOg@ESEOCECGEICGCEEGEEGEIIIG}@o@UQQKIEEEGAEACAIAKCW?K@OBMDUHOHOJm@`@QJMHIDGBIBQQMMi@k@aAeAm@o@aAcAq@q@]]a@a@]]YY_@_@[[UQMKOKICGCUGMEMCi@KYGQGOEQEMEYOe@UqAq@eCuAi@Yc@WeBaAmBaA[O[QWMc@SUGWGOAMAMAMASAYASCKCICKEGCEEEEGEGGGIEGCGEICGEKEMCMCKCOE]Io@MoAMuAIcAG{@Ec@CQCMCMCIGQI[c@iBOc@Mc@Qe@Um@i@oA]y@i@qAe@aA_@y@_@w@Ug@IQGUW{@Mg@G]I[GWK[K[ISQ[Sc@IMEEECCC}@s@a@[a@W{A}@{A_A]SSKQG}@c@YOKIGGKGi@i@EEAA_@_@g@k@MQS]{AkCOYWa@OS[[QO}@w@eEuD]YYW_Aw@_BoAkA_Ay@o@y@o@[U]W[UQMQMIEKEIEKEGCICKEICIAIAKCWCS?K?U?O@M@QBMB_@Ji@Pg@Pi@Ri@Rg@Ri@R_@NSHQFOHQHMHKFMHOJULQL]R]PUJMBKDMBSBMBO?M@OAU?OAMAKAOCSGm@U]OWQm@]mAu@s@i@y@q@c@a@q@m@qAsAg@e@q@i@WSu@i@_D{BqE{C}AeAIOmBsAMGuBsAi@[a@We@]c@]c@_@[[[[a@c@gB}BKMiAqAMEaA}@iA_AiA_A_BkAm@a@s@e@oAo@qAk@qAe@qAe@aC{@eBo@kAc@wAg@w@[YKg@WSMSQWUWYSYQWOWWe@_@o@S[QW]_@e@_@m@a@mDkBSMSMe@_@QSQSS[MWS]aAyBOYM][a@UQWSOMQSMQQWwDkH}AyC_@i@SYQUSWSUYa@Wa@O[Q_@wC_I]_Ao@qB}@wCu@_Ck@mBUu@Sm@Uu@[y@]{@mBcF[y@aAsBsAiCq@aB_@m@[i@Qa@Q_@S_@MU_@c@iD{CoAgAe@e@a@]i@k@[i@S_@Wq@[u@Wm@Qe@Qe@K]Kc@Ku@Gs@C_@E_ACi@GmAMuAk@oFeAkKUoBIy@ScBOeAoAcKQaBScBQmBK}AOmBMgBMeBKcAOqA[sCA_@OsAk@kFCSUsCImAIkAEi@</points>
-        </polyline>
-        <duration>
-          <value>719</value>
-          <text>12 Minuten</text>
-        </duration>
-        <html_instructions>Im Kreisverkehr &lt;b&gt;zweite&lt;/b&gt; Ausfahrt (&lt;b&gt;An der Sandgrube&lt;/b&gt;/&lt;b&gt;B240&lt;/b&gt;) nehmen&lt;div style="font-size:0.9em"&gt;Weiter auf B240&lt;/div&gt;</html_instructions>
-        <distance>
-          <value>11387</value>
-          <text>11,4 km</text>
-        </distance>
-        <maneuver>roundabout-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.0810685</lat>
-          <lng>9.7435553</lng>
-        </start_location>
-        <end_location>
-          <lat>52.0819428</lat>
-          <lng>9.7433899</lng>
-        </end_location>
-        <polyline>
-          <points>ua{|Hg`nz@IB_@BiALy@J</points>
-        </polyline>
-        <duration>
-          <value>10</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Links&lt;/b&gt; Richtung &lt;b&gt;B3&lt;/b&gt; abbiegen</html_instructions>
-        <distance>
-          <value>98</value>
-          <text>0,1 km</text>
-        </distance>
-        <maneuver>turn-left</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.0819428</lat>
-          <lng>9.7433899</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3377273</lat>
-          <lng>9.7208273</lng>
-        </end_location>
-        <polyline>
-          <points>cg{|He_nz@wANYBW@a@@a@Ao@A[Lm@EqCSeAGkBGuAEuAA_A?aC?yC?sC?aC?uA?iB?aG@wE?}\Vq@?yCDu@BcAF_@Bg@F_@He@Hm@Nk@PuAh@]Ng@Ve@Xk@^g@\{@r@URYX[ZUVi@l@Y^Y^_@j@c@p@m@fA_@r@[r@]t@Yt@Yt@Yx@Wt@Uz@W~@]|A]|Ac@~Bg@`Dc@dDe@hDMbAOdA[xBe@bDY`BWzA_@jBWdA[vA]nA[hAeAfDo@hB]z@s@dBk@nAk@jAcAhBi@~@e@t@[d@a@j@q@~@u@|@gAlAu@v@aA|@o@j@e@^m@b@qA|@g@XeAj@{@b@o@Xo@VO?yC|@QFqCp@gAT_APMJsAPK?i@Dk@DaAD_BF_A@s@?w@AuACuAGkAKs@Gi@G_BU]EIAYEy@Me@K}@SSG}Ac@kAc@w@[i@WEAUKcB{@aAi@i@]m@_@e@[KG[We@]g@_@e@_@g@a@c@a@y@s@w@u@u@w@w@y@s@y@c@i@_AkAu@eAo@{@QWQWqAsBoBgDwAcCwAaCe@w@g@u@c@m@m@y@i@k@QSSUa@a@c@_@]Yo@e@w@e@c@Wy@_@m@U[KOOAAgBc@q@MQCaBScAG}AEsISgGM}DAKBqFMy@AcBES?I?kDKSAs@E_@GWGUEQGWGSIYM[OYOSKSMQMSOe@c@k@i@_A_AcBiBm@o@kCqCUUoCuCqDyDq@s@u@w@m@i@e@_@]We@YUKOIQIYM]Kk@Mm@Mc@GAAQAOG]K[KSKoAo@iAm@UKWKKEMEOEUCo@Ea@Ae@@iCFmELwDLqCLiBFaBFuBLWBeDToIj@S?U?WAYEWEsBg@YGkEiAkA[{Cu@QEOE[Io@Sc@OUKWMYQg@]SQi@e@a@]kD}CwFgFu@s@][][u@o@sDeDkC_C_Ao@o@a@k@YQIYKw@W]Ia@Km@I_@Ea@CeAC{@A}PQ{DCkBAA?q@AoEE_JIgA?Q?}PKUAyIIgNMcPOcHGqBCsBAq@AuHGg@?{DEiDE[CSCg@GmAUiBa@oFgA_Ce@iDs@k@Mi@Ia@Cc@CQ@O?QBYBaANeBVuAT}Dl@aG|@}@NwBb@]LUHa@No@Xy@b@iAh@YLIBUJ]JMBYDSBY?Y?SASA[GgG{Aw@SYG_@G_@Co@A{@?}G@[?c@Ec@GSGOEWKOG_By@eAg@aAg@cBy@kAm@iAm@_Ae@y@c@_@WwBwAgBkAsA}@o@a@e@Wi@Um@Q{@O_CWsC[yC[oAO[Ie@MSGWKy@c@WOg@Yg@Yu@a@{A{@[QSMo@]mAq@g@W}@g@eCuAyA{@c@Uu@a@[S{BoA_Ag@q@_@y@c@WKUIWI_@Im@K{GgAeDk@cBWq@KmAUgAOa@Ik@G[AS?a@@YBc@Fo@H_@F_@Da@Fa@Dm@By@?uAGk@Cy@EoH]k@Ck@G[GUEsA]wAa@u@SAAwAg@s@Wq@_@y@_@[Qk@_@QQsAkAs@q@k@o@k@q@i@s@g@u@k@aAc@m@_@s@_@{@Yq@]w@Si@Ww@Y{@Qk@Mg@Ok@Mc@S_AOw@Q{@UyASqAMeAUoBOgBOmBKyAMqBKiBGoAOyD_@uIK_CKmBS{CSsCQcBQaBGa@Ik@Qw@?CGa@Ig@Oy@c@wBOq@Su@K_@Qk@Sq@Sm@e@qAa@cAa@_AKWQ]i@cAUa@g@w@s@aAYa@UWw@{@c@e@[YYUi@c@]UMKg@[m@]UMi@Wa@Qs@Wc@Qk@Qy@Ss@O}@Mk@Is@Ia@Eo@GqAGYAy@Cg@AyA?eD@KEKEO?u@BU@qBJo@FqAHGBKDaAHaAJcAN{B\gBZsBd@kBd@kA\w@VWFgA^uAd@UJgBp@KDq@Xm@XwAp@cAf@aAh@s@`@gAn@mBlAq@b@]Ve@\UNg@`@g@b@e@d@m@n@o@r@w@`Ao@z@_@n@a@p@OZWh@g@fAe@hAKRKVSj@Qh@Ur@W|@Md@Uv@Ib@GTWhAShAMr@_@`CMhAGj@Gn@Gr@Ed@K`BEr@Ej@I|AGhAGlAE~@IbAGp@Ej@Gh@MjAStAIh@G`@UnAMr@GXIZQt@KJEHK^Qr@Y|@Wv@]bAQd@Uh@[p@Q`@Q\i@fAS`@Y`@INW^IRg@n@c@h@i@n@a@`@}@v@m@f@a@XYRUN_@Re@Vi@VWJWHm@PYJgAZcA\gAZyA`@eCp@eD~@gCp@sBj@iBh@aARKASBMBuA^y@Vk@Pa@L_@Pg@Ts@d@KHOJQNGJu@f@aAp@a@Xq@d@m@`@iCfBs@f@w@j@q@h@e@b@OPY\W\g@l@u@~@_AlA{AlBcEnFk@t@aBtB_EfF}ArBk@t@e@j@a@j@QTORKF[\i@r@CBoA~AQTu@`AKLO\EHc@j@_@f@kFzGgCdDy@bAa@h@_@d@[^e@l@k@r@_@f@YVCD]\UPYJSDUDO?GAa@ACAOCiAe@ICSESAQ?S@]DwAPK@GBIDIDKHEDIJCDABMVO^IPABABGJU^UXQRONa@^WTq@l@[X]Vy@r@aAx@SPOJa@\WPMJi@^_@Ve@Xw@b@eAj@[P[P]Rq@^yAx@c@Vi@Xg@X_@T[Rk@b@QN]\u@t@c@d@q@p@WVGHi@f@a@`@OJYVc@Ze@\m@f@y@n@_At@a@Xs@h@{@n@a@Zw@l@q@f@iBtAkDlCg@\URWPULe@Tg@RmA\a@HaCn@c@JgDx@wA`@GBe@LKB[HWHIBu@Tq@VuAj@aAh@wBzAMJyAbAwB|AsEdDu@h@OLCB]Tw@j@yA`AQLKHMJqBvAc@ZQLe@\s@f@EB]V{@n@o@f@y@j@A@a@VkAx@mDjCmA|@_@XwDlCq@XOFOFSFsBd@QFI@YHk@La@JgAZOAWHmA`@ODIDIJUHQHsAf@}@VcAVIBoBb@OBC?o@Fy@F]@_@?YAg@?SAmBOiB]EGWIAAUGqAk@}B_Am@UGEMKKIQSKMIMMYEKEIAKCII_@</points>
-        </polyline>
-        <duration>
-          <value>1814</value>
-          <text>30 Minuten</text>
-        </duration>
-        <html_instructions>Auf &lt;b&gt;B3&lt;/b&gt; über die Auffahrt &lt;b&gt;Hannover&lt;/b&gt;/&lt;b&gt;Elze&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>32377</value>
-          <text>32,4 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3377273</lat>
-          <lng>9.7208273</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3460645</lat>
-          <lng>9.7194860</lng>
-        </end_location>
-        <polyline>
-          <points>yem~Heriz@@G?EAG?G?GAEAGAECKEIGIEEGEGCGAI?G@GBGDA@A@A@A@A@A@?@QHIDSJSFMDKBO@M@M?K?QAgBOgBMiBGa@?gA@_ABWBQBu@JqAVgAVaAXy@\eA\_C|@{@ZyCnAk@HUBS@UASC</points>
-        </polyline>
-        <duration>
-          <value>89</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Im Kreisverkehr &lt;b&gt;zweite&lt;/b&gt; Ausfahrt (&lt;b&gt;Frankfurter Allee&lt;/b&gt;/&lt;b&gt;B6&lt;/b&gt;/&lt;b&gt;B65&lt;/b&gt;) nehmen</html_instructions>
-        <distance>
-          <value>970</value>
-          <text>1,0 km</text>
-        </distance>
-        <maneuver>roundabout-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3460645</lat>
-          <lng>9.7194860</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3520966</lat>
-          <lng>9.7196374</lng>
-        </end_location>
-        <polyline>
-          <points>{yn~Hyiiz@EECCGCIAGCG?G?E@G@GDCBEBGFEJ]POFKBMBM@Q@S?UA}ACqHUaJa@MA_@AIAA?SAcCO</points>
-        </polyline>
-        <duration>
-          <value>65</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Im Kreisverkehr &lt;b&gt;zweite&lt;/b&gt; Ausfahrt (&lt;b&gt;Friedrich-Ebert-Straße&lt;/b&gt;/&lt;b&gt;B6&lt;/b&gt;) nehmen</html_instructions>
-        <distance>
-          <value>678</value>
-          <text>0,7 km</text>
-        </distance>
-        <maneuver>roundabout-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3520966</lat>
-          <lng>9.7196374</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3573939</lat>
-          <lng>9.7230676</lng>
-        </end_location>
-        <polyline>
-          <points>s_p~Hwjiz@IEGCMEMAQAgEOk@G]Ie@KUKSMQMKKMMGGEIa@q@IOCCsBwDGKa@g@UY_@_@[YYQiAm@sAa@w@[u@S</points>
-        </polyline>
-        <duration>
-          <value>47</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>Ausfahrt Richtung &lt;b&gt;Zentrum&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>654</value>
-          <text>0,7 km</text>
-        </distance>
-        <maneuver>ramp-right</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3573939</lat>
-          <lng>9.7230676</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3624421</lat>
-          <lng>9.7224134</lng>
-        </end_location>
-        <polyline>
-          <points>u`q~He`jz@a@BaADgANSFSDUHYLm@ZwBfA{BjAkAj@_@NSFMBODMBO@O@O?MAKCOCSI]Su@o@m@q@o@w@</points>
-        </polyline>
-        <duration>
-          <value>92</value>
-          <text>2 Minuten</text>
-        </duration>
-        <html_instructions>Auf &lt;b&gt;Ritter-Brüning-Straße&lt;/b&gt; fahren</html_instructions>
-        <distance>
-          <value>596</value>
-          <text>0,6 km</text>
-        </distance>
-        <maneuver>merge</maneuver>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3624421</lat>
-          <lng>9.7224134</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3690170</lat>
-          <lng>9.7312327</lng>
-        </end_location>
-        <polyline>
-          <points>g`r~Ha|iz@OU[_@SWMOQUU[U[eA{AMQKO]g@oAgBc@m@[e@W]KOOOQSOQSSSSUUQQSQSOc@]y@m@OMUOOMMKMMMIKK[YEEOQQQUWOQSUOSUYSYU[SYQYU]MUMSKQKSKSMWISMYCGGOMYGQMc@Mc@I[Ke@CKGUGYG]CSG_@EW</points>
-        </polyline>
-        <duration>
-          <value>111</value>
-          <text>2 Minuten</text>
-        </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Lavesallee&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>961</value>
-          <text>1,0 km</text>
-        </distance>
-      </step>
-      <step>
-        <travel_mode>DRIVING</travel_mode>
-        <start_location>
-          <lat>52.3690170</lat>
-          <lng>9.7312327</lng>
-        </start_location>
-        <end_location>
-          <lat>52.3693544</lat>
-          <lng>9.7319140</lng>
-        </end_location>
-        <polyline>
-          <points>kis~Heskz@Mq@GUUe@IMEEEE</points>
-        </polyline>
-        <duration>
-          <value>30</value>
-          <text>1 Minute</text>
-        </duration>
-        <html_instructions>&lt;b&gt;Links&lt;/b&gt; halten und weiter auf &lt;b&gt;Friederikenpl.&lt;/b&gt;</html_instructions>
-        <distance>
-          <value>61</value>
-          <text>61 m</text>
         </distance>
         <maneuver>keep-left</maneuver>
       </step>
       <step>
         <travel_mode>DRIVING</travel_mode>
         <start_location>
-          <lat>52.3693544</lat>
-          <lng>9.7319140</lng>
+          <lat>52.3371394</lat>
+          <lng>4.8462292</lng>
         </start_location>
         <end_location>
-          <lat>52.3741451</lat>
-          <lng>9.7283171</lng>
+          <lat>52.3352396</lat>
+          <lng>4.9374048</lng>
         </end_location>
         <polyline>
-          <points>mks~Hmwkz@SMQAG@E?C?E@E@KDGDKFMLaAjACD}@`A]^]Zu@n@iAz@iAt@a@Tg@RYLWJQJMFs@d@oBxAA?c@\_At@]V</points>
+          <points>cbm~H}oq\ASAy@C{@CuAC}@Aa@As@Cy@Ay@KwEGgCCgAG}CIsECgACmBEiBCgBKaFKsFEgBEiBAYCi@CU?MAMAU?]Am@MoFGiCGwCEcCKuFCaAW{PMsGC_CE_CKyFMwHIiFEcFE}H?K?I?_AAyA?{@?{@@eA?eA?mA?}@?i@@_@?]?eA@sC@eB?A@iB@eA@}@@gABmABgADeAFcALeBHgAJaALeANaAT}ARgARaAf@wBNc@Pm@X{@d@oA^aARm@jAyCdAqCPe@JYl@}Aj@yAf@qAl@_BbAgCVo@Pg@`@cA`@eAvAqDlB_FJYJYp@eBFQFQ`AgCx@qBXo@Vo@`@aAv@oBpAiDRg@vAkDBOBMJ[Z}@Z_AVs@ZgAZiAXgATcAR{@ToARuANcAPoANoAJw@HcAH}@FcALcBJqBFqAFsAFkBBgAFaBBoABuB?U@}@?sBAaBAu@EcBCoAQ_DA[AIAIEi@AKCWCWCUOuAY_CSwASqASaAyAaHc@uB]sAQm@Qw@CIc@gB?CeAqEOc@SaASw@Mo@Sy@GUaAaEWeAy@cDeAgEEOi@uB{AgGg@yBCI_@}A}@sDKc@Kc@YmAm@gC_@{Am@gCaAaEK_@Ka@cAuD</points>
         </polyline>
         <duration>
-          <value>113</value>
-          <text>2 Minuten</text>
+          <value>256</value>
+          <text>4 Minuten</text>
         </duration>
-        <html_instructions>Geradeaus auf &lt;b&gt;Leibnizufer&lt;/b&gt;</html_instructions>
+        <html_instructions>Weiter auf &lt;b&gt;A10&lt;/b&gt;</html_instructions>
         <distance>
-          <value>594</value>
-          <text>0,6 km</text>
+          <value>6741</value>
+          <text>6,7 km</text>
         </distance>
-        <maneuver>straight</maneuver>
       </step>
       <step>
         <travel_mode>DRIVING</travel_mode>
         <start_location>
-          <lat>52.3741451</lat>
-          <lng>9.7283171</lng>
+          <lat>52.3352396</lat>
+          <lng>4.9374048</lng>
         </start_location>
         <end_location>
-          <lat>52.3757097</lat>
-          <lng>9.7267815</lng>
+          <lat>52.3360108</lat>
+          <lng>4.9429565</lng>
         </end_location>
         <polyline>
-          <points>mit~H_akz@GFC@EDQPOLkAbAi@f@c@d@c@b@_@`@UXOP</points>
+          <points>gvl~Hwic]I{@AE?GOi@Og@EQSy@I]I]ESCSEUEWASAMAQAOAO?QAO?S?O?k@Bu@@UBmABm@@S?Q?m@?UAO?MAE?IAGAUKq@Ga@EYKk@</points>
         </polyline>
         <duration>
-          <value>37</value>
+          <value>24</value>
           <text>1 Minute</text>
         </duration>
-        <html_instructions>Weiter auf &lt;b&gt;Brühlstraße&lt;/b&gt;</html_instructions>
+        <html_instructions>Bei Ausfahrt &lt;b&gt;12&lt;/b&gt; auf &lt;b&gt;s112&lt;/b&gt; in Richtung &lt;b&gt;Amsterdam-Centrum&lt;/b&gt;/&lt;b&gt;Duivendrecht&lt;/b&gt;/&lt;b&gt;Diemen-Zuid&lt;/b&gt;/&lt;b&gt;Amsterdam-Zuidoost&lt;/b&gt; fahren</html_instructions>
         <distance>
-          <value>203</value>
+          <value>398</value>
+          <text>0,4 km</text>
+        </distance>
+        <maneuver>ramp-right</maneuver>
+      </step>
+      <step>
+        <travel_mode>DRIVING</travel_mode>
+        <start_location>
+          <lat>52.3360108</lat>
+          <lng>4.9429565</lng>
+        </start_location>
+        <end_location>
+          <lat>52.3483832</lat>
+          <lng>4.9192425</lng>
+        </end_location>
+        <polyline>
+          <points>a{l~Hold]EE?ACCAGK_@AIISSe@ILWd@GJGLeAtBEJEJKVu@nBaAhCSf@Ul@IRmArCGLMJC@AD[j@mBnDOVOVo@dAm@bAq@fA}@|AaA~A}@xAo@dA}@|AcA`BmF~IOVOVeC`EkAnBkAnB_IvM{@vA[f@Wd@U^CDEDCFEDOXQVy@lAw@lAOVOTq@jA[j@IRMXSj@M^Mj@Mv@Eb@Ef@A\C\?VAJ?`@@l@?LBh@H`ADd@Dv@NpB?DLjBFx@L~A@JBR?LALCj@</points>
+        </polyline>
+        <duration>
+          <value>175</value>
+          <text>3 Minuten</text>
+        </duration>
+        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Gooiseweg&lt;/b&gt;/&lt;b&gt;s112&lt;/b&gt; (Schilder nach &lt;b&gt;Centrum&lt;/b&gt;)</html_instructions>
+        <distance>
+          <value>2303</value>
+          <text>2,3 km</text>
+        </distance>
+        <maneuver>turn-left</maneuver>
+      </step>
+      <step>
+        <travel_mode>DRIVING</travel_mode>
+        <start_location>
+          <lat>52.3483832</lat>
+          <lng>4.9192425</lng>
+        </start_location>
+        <end_location>
+          <lat>52.3600458</lat>
+          <lng>4.9086829</lng>
+        </end_location>
+        <polyline>
+          <points>kho~Hgx_]Ib@UfASt@EHCHEFEFEHg@l@MNKNEFGHwAvB]h@KLKPYh@_@p@Wf@KRQZUb@Uf@S`@]v@Q^ABa@z@mAbCEJCBEFCDCDGFEDCBE@QHMFOFOH]NQFMHSJMHEDEBIFUPKHOHKD]Ni@RSH_@Na@PEBE@s@ZMDYJKFC@EBSJUJm@XCBcBz@GBa@R_Ah@EBSLGDSJIDUJ]P}@d@IDWPEBC@EB_@RWL[JWLA@A?CBEBEBOJGDEDCBIBULmB`A]RSLE@KFKFw@^MHOFIBEBEBKFG@u@`@YN</points>
+        </polyline>
+        <duration>
+          <value>208</value>
+          <text>3 Minuten</text>
+        </duration>
+        <html_instructions>Im Kreisverkehr &lt;b&gt;erste&lt;/b&gt; Ausfahrt (&lt;b&gt;Wibautstraat&lt;/b&gt;/&lt;b&gt;s112&lt;/b&gt;) nehmen</html_instructions>
+        <distance>
+          <value>1521</value>
+          <text>1,5 km</text>
+        </distance>
+        <maneuver>roundabout-right</maneuver>
+      </step>
+      <step>
+        <travel_mode>DRIVING</travel_mode>
+        <start_location>
+          <lat>52.3600458</lat>
+          <lng>4.9086829</lng>
+        </start_location>
+        <end_location>
+          <lat>52.3610710</lat>
+          <lng>4.9080717</lng>
+        </end_location>
+        <polyline>
+          <points>iqq~Hgv}\UJYNk@Xk@XcAh@</points>
+        </polyline>
+        <duration>
+          <value>25</value>
+          <text>1 Minute</text>
+        </duration>
+        <html_instructions>Weiter auf &lt;b&gt;Rhijnspoorplein&lt;/b&gt;</html_instructions>
+        <distance>
+          <value>121</value>
+          <text>0,1 km</text>
+        </distance>
+      </step>
+      <step>
+        <travel_mode>DRIVING</travel_mode>
+        <start_location>
+          <lat>52.3610710</lat>
+          <lng>4.9080717</lng>
+        </start_location>
+        <end_location>
+          <lat>52.3622783</lat>
+          <lng>4.9073827</lng>
+        </end_location>
+        <polyline>
+          <points>uwq~Hmr}\]PQHk@VKFC@A@k@VWL_@P_@P</points>
+        </polyline>
+        <duration>
+          <value>22</value>
+          <text>1 Minute</text>
+        </duration>
+        <html_instructions>Weiter auf &lt;b&gt;Weesperplein&lt;/b&gt;</html_instructions>
+        <distance>
+          <value>142</value>
+          <text>0,1 km</text>
+        </distance>
+      </step>
+      <step>
+        <travel_mode>DRIVING</travel_mode>
+        <start_location>
+          <lat>52.3622783</lat>
+          <lng>4.9073827</lng>
+        </start_location>
+        <end_location>
+          <lat>52.3661896</lat>
+          <lng>4.9049610</lng>
+        </end_location>
+        <polyline>
+          <points>g_r~Hcn}\WLULEBMHEBEDE@CBUJULc@TEBE@E@QHGBOHSHWNOJKFIDULOHq@\]PMFWLoAn@u@`@MFWP_@RQJMH]RMFIFYL</points>
+        </polyline>
+        <duration>
+          <value>53</value>
+          <text>1 Minute</text>
+        </duration>
+        <html_instructions>Weiter auf &lt;b&gt;Weesperstraat&lt;/b&gt;</html_instructions>
+        <distance>
+          <value>465</value>
+          <text>0,5 km</text>
+        </distance>
+      </step>
+      <step>
+        <travel_mode>DRIVING</travel_mode>
+        <start_location>
+          <lat>52.3661896</lat>
+          <lng>4.9049610</lng>
+        </start_location>
+        <end_location>
+          <lat>52.3675562</lat>
+          <lng>4.9041472</lng>
+        </end_location>
+        <polyline>
+          <points>uwr~H__}\QHQHo@VWJMDMF{@b@y@b@CBCBKJ</points>
+        </polyline>
+        <duration>
+          <value>31</value>
+          <text>1 Minute</text>
+        </duration>
+        <html_instructions>Weiter auf &lt;b&gt;Jonas Daniël Meijerplein&lt;/b&gt;</html_instructions>
+        <distance>
+          <value>162</value>
           <text>0,2 km</text>
         </distance>
       </step>
       <step>
         <travel_mode>DRIVING</travel_mode>
         <start_location>
-          <lat>52.3757097</lat>
-          <lng>9.7267815</lng>
+          <lat>52.3675562</lat>
+          <lng>4.9041472</lng>
         </start_location>
         <end_location>
-          <lat>52.3763699</lat>
-          <lng>9.7297836</lng>
+          <lat>52.3682844</lat>
+          <lng>4.9039869</lng>
         </end_location>
         <polyline>
-          <points>est~Hkwjz@}@}BAGAE?E@KB]Jq@DKBGBI@IBQF_@BW@W?W@i@@oAw@g@w@i@IB</points>
+          <points>g`s~H}y|\EHEFIRMPIRILCDEBEDMEKGYa@KIGO</points>
         </polyline>
         <duration>
-          <value>97</value>
+          <value>29</value>
+          <text>1 Minute</text>
+        </duration>
+        <html_instructions>Weiter auf &lt;b&gt;Mr. Visserplein&lt;/b&gt;</html_instructions>
+        <distance>
+          <value>102</value>
+          <text>0,1 km</text>
+        </distance>
+      </step>
+      <step>
+        <travel_mode>DRIVING</travel_mode>
+        <start_location>
+          <lat>52.3682844</lat>
+          <lng>4.9039869</lng>
+        </start_location>
+        <end_location>
+          <lat>52.3695270</lat>
+          <lng>4.9011762</lng>
+        </end_location>
+        <polyline>
+          <points>wds~H}x|\[JEJADGP]hAM^IVM^IXKZEPGPCPQj@Sn@Qj@Qh@IXELCLCJ</points>
+        </polyline>
+        <duration>
+          <value>66</value>
+          <text>1 Minute</text>
+        </duration>
+        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Jodenbreestraat&lt;/b&gt;</html_instructions>
+        <distance>
+          <value>239</value>
+          <text>0,2 km</text>
+        </distance>
+        <maneuver>turn-left</maneuver>
+      </step>
+      <step>
+        <travel_mode>DRIVING</travel_mode>
+        <start_location>
+          <lat>52.3695270</lat>
+          <lng>4.9011762</lng>
+        </start_location>
+        <end_location>
+          <lat>52.3720637</lat>
+          <lng>4.9004158</lng>
+        </end_location>
+        <polyline>
+          <points>qls~Hkg|\CPCDAFIRMPGFIFWJGBKBIBQBm@BQ@CA]BsAJM@O@Q@O@S@MBK?QBO?K@K?K?K?GA</points>
+        </polyline>
+        <duration>
+          <value>68</value>
+          <text>1 Minute</text>
+        </duration>
+        <html_instructions>Weiter auf &lt;b&gt;Sint Antoniesbreestraat&lt;/b&gt;</html_instructions>
+        <distance>
+          <value>297</value>
+          <text>0,3 km</text>
+        </distance>
+      </step>
+      <step>
+        <travel_mode>DRIVING</travel_mode>
+        <start_location>
+          <lat>52.3720637</lat>
+          <lng>4.9004158</lng>
+        </start_location>
+        <end_location>
+          <lat>52.3721283</lat>
+          <lng>4.8994467</lng>
+        </end_location>
+        <polyline>
+          <points>k|s~Hsb|\M`AAFCHEVEZEXDHDHDDDD</points>
+        </polyline>
+        <duration>
+          <value>34</value>
+          <text>1 Minute</text>
+        </duration>
+        <html_instructions>&lt;b&gt;Links&lt;/b&gt; abbiegen auf &lt;b&gt;Nieuwmarkt&lt;/b&gt;</html_instructions>
+        <distance>
+          <value>76</value>
+          <text>76 m</text>
+        </distance>
+        <maneuver>turn-left</maneuver>
+      </step>
+      <step>
+        <travel_mode>DRIVING</travel_mode>
+        <start_location>
+          <lat>52.3721283</lat>
+          <lng>4.8994467</lng>
+        </start_location>
+        <end_location>
+          <lat>52.3698915</lat>
+          <lng>4.8973715</lng>
+        </end_location>
+        <polyline>
+          <points>y|s~Hq|{\JHXRRNHFFDFFLJLJFDFFLLRRDDJHLJLLJFLLHHRPZZd@d@^^TRJLBBFDLLHHNP</points>
+        </polyline>
+        <duration>
+          <value>96</value>
           <text>2 Minuten</text>
         </duration>
-        <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Escherstraße&lt;/b&gt;</html_instructions>
+        <html_instructions>Weiter auf &lt;b&gt;Kloveniersburgwal&lt;/b&gt;</html_instructions>
         <distance>
-          <value>270</value>
+          <value>286</value>
           <text>0,3 km</text>
+        </distance>
+      </step>
+      <step>
+        <travel_mode>DRIVING</travel_mode>
+        <start_location>
+          <lat>52.3698915</lat>
+          <lng>4.8973715</lng>
+        </start_location>
+        <end_location>
+          <lat>52.3703099</lat>
+          <lng>4.8956445</lng>
+        </end_location>
+        <polyline>
+          <points>yns~Hqo{\Gh@MlAMvAEXCZCPCNADEFABCBADA@ABADABED</points>
+        </polyline>
+        <duration>
+          <value>35</value>
+          <text>1 Minute</text>
+        </duration>
+        <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Rusland&lt;/b&gt;</html_instructions>
+        <distance>
+          <value>129</value>
+          <text>0,1 km</text>
         </distance>
         <maneuver>turn-right</maneuver>
       </step>
       <step>
         <travel_mode>DRIVING</travel_mode>
         <start_location>
-          <lat>52.3763699</lat>
-          <lng>9.7297836</lng>
+          <lat>52.3703099</lat>
+          <lng>4.8956445</lng>
         </start_location>
         <end_location>
-          <lat>52.3759136</lat>
-          <lng>9.7317718</lng>
+          <lat>52.3703920</lat>
+          <lng>4.8952375</lng>
         </end_location>
         <polyline>
-          <points>iwt~Hcjkz@r@cFf@iD</points>
+          <points>mqs~Hwd{\CHADAHCTC^</points>
         </polyline>
         <duration>
-          <value>51</value>
+          <value>9</value>
           <text>1 Minute</text>
         </duration>
-        <html_instructions>&lt;b&gt;Rechts&lt;/b&gt; abbiegen auf &lt;b&gt;Lange Laube&lt;/b&gt;</html_instructions>
+        <html_instructions>Weiter auf &lt;b&gt;Sint Agnietenstraat&lt;/b&gt;</html_instructions>
         <distance>
-          <value>144</value>
-          <text>0,1 km</text>
+          <value>29</value>
+          <text>29 m</text>
         </distance>
-        <maneuver>turn-right</maneuver>
       </step>
       <duration>
-        <value>7494</value>
-        <text>2 Stunden, 5 Minuten</text>
+        <value>3382</value>
+        <text>56 Minuten</text>
       </duration>
       <distance>
-        <value>128351</value>
-        <text>128 km</text>
+        <value>75072</value>
+        <text>75,1 km</text>
       </distance>
       <start_location>
-        <lat>51.5062496</lat>
-        <lng>9.9004251</lng>
+        <lat>51.9604370</lat>
+        <lng>4.4422353</lng>
       </start_location>
       <end_location>
-        <lat>52.3759136</lat>
-        <lng>9.7317718</lng>
+        <lat>52.3703920</lat>
+        <lng>4.8952375</lng>
       </end_location>
-      <start_address>Göttinger Str. 1-3, 37124 Rosdorf, Deutschland</start_address>
-      <end_address>Münzstraße 3, 30159 Hannover, Deutschland</end_address>
-      <duration_in_traffic>
-        <value>7382</value>
-        <text>2 Stunden, 3 Minuten</text>
-      </duration_in_traffic>
+      <start_address>Doenkade, 3045 Rotterdam, Niederlande</start_address>
+      <end_address>Sint Agnietenstraat 6, 1012 EG Amsterdam, Niederlande</end_address>
     </leg>
-    <copyrights>Kartendaten © 2017 GeoBasis-DE/BKG (©2009), Google</copyrights>
+    <copyrights>Kartendaten © 2017 Google</copyrights>
     <overview_polyline>
-      <points>ayjyHutl{@NjNH|GoA`AeMh@sBlFgWpF}OtBwGs@eS`G{NrJiRdQsFrCtCjOxDpS|B_@|Gv@PnDkCtA}{Ak@g`COeLWeNgGmL{NaKg[yNmpA_\co@qCaDkXgPqPaA}RjGkq@`f@mXfDw^yGca@kL_]eDa]yOkbAyn@kM_GwSmB_l@sD{e@pNkj@|Q_ShBwJqBsb@yRojAkh@_r@gNgZeZgQsPuSuJ}RqCgh@w@}]kFq_@yQu\k\yV}b@ue@e}AiN_h@BaK|DjArErKm_A`ZypBfk@a^t[y^paAm^dc@oLlZeVjGk`@jSeVnCiLbHsW`]sOnJ_c@fh@}Dj\xEvf@lBvrBVxlDkChd@}Hz]}X`h@gb@pd@_V|PwYzMaYrCqOkCmM}IvEaIp@PsBlEeDxF_Xrk@_M~RcO~C_EtGwCz@sD`JcGtRqHvFuMfDwSrE{]vLyKlKyi@aSiFm@iCaB}A^c@zI_DnL{]fbAiJv_AwLfn@mJf~@gM~t@{Pd_AiFfjB}Dd{@yJhm@s`@`|AoKf^{]lx@cd@`oAaPfXwOdMqMrEeD_AoE~@qYx{@aHn]iKvp@y@~PuBnICAC?CFAHFL_BjKiOzOmHoBgN?sM`K}HsB_Hx@eDuBeEsKsj@iPsVsW{H{AsS{HsFZoNvMuW`JiJxA`Uy\tMyVcEmXcImBgQ~AkSnBoFeCeHrBuHaAuPfNiCh@e@uFmM_LoJyAsGz@aTrHcKkGuJuXsKuKoZwE{FwAmHaMmDwq@aKkQwSyHc@_@G~@{Pdb@wLvc@}CrAsWuYmZeUyIkJeDlAeCg@sNyM{_@mOqGcZaJ_VsMyKgLwMcYsUqEs@{LhE{G`CyQ}Km`@{Xq\sW}V}MoQaRmPyWaUkn@qVa^oFeWqKwdAgCuX}HLuj@e@gy@j@{IzBoPlQ}Lxj@eFtX_KbWuX`X{[hGuYaCaUgLuX}\iUqWiJ}Bsf@}@eRcC}^a_@cL_EgGkCc[r@gXxAeS}EeZeU}PwMiJgAszBkBy[_@oYyF}a@fGyGtCmL}AwPg@yHqCsb@kSePwCyI_Fw[uPia@}Dc`@eCuU_S{I{ZeGe_A{GoXsNgRkViGyXd@mb@|K_Z~SaKjV_Ev_@sD~VyI~S}P`Mkf@tMcUdOua@~g@cSpWwPhQ}JOeE`Gue@f]sRtOyMrJeQvEa^tSqRfNm[|QgTjG_Pw@oJ{HiAaByBdAgXd@{TtFyDjAaf@yBaLcLwJeFqHzAkP`EqOaSaSkSeJwVg]tUiF|EcCo@A_@j@iDFqBwB}CzAmK</points>
+      <points>woc|H_sbZ`g@|cBtEnPxH`WdC`IDr@QbC{AbEy@tAwCrCI\}MpJga@tYef@v]oUfPiEpCoEfBy^tL_m@tR_e@nOkT|GkQ~Fga@rMcIxCwDzBkCtBwC`DiKhMwKzM_]za@oVpZwk@fs@wMbPkHvIsFbGkDfC}E|BwFtAiJfB{Et@mGRkLAyCUuEsA_DmBiDgDoGeJwMqS}MqSuAkB_FgJmDgGeDmDaJaHaHwGqGmHaBoBc@U_K}LcBsBgGkHaOyQuFeH}FwImCeFqCqGiDiJ}EmOeM{b@qDsN{C}K_EuLqDaIqEiIkCeE{K}NaI{KuF}IqFgKcKuTwc@ucAqh@_sA_LeYwJsUkIkP}FyJePqU}e@{p@uHkLoGcLaPw[mi@ifAaBqDiDqIwIeWsJkXmJgUwIwS}GoLmHaJcDmDoHaIsJqMqGuMoC}H}BcIaEiS{BoMu@eEyDkRyB}HaCaIcD{JoFwP{Tqp@mGaQmK{WsFwL_J{PiHiL{PmTaHyHkDoEqE{GuHuMcDcHmDeJuD_LiDsM_@wA_Qwm@yViy@eAqD}DgLqHaPoG{K{KcOyNqN{w@{s@gMkLoXwVwMeL{H}FaLoHiGmDeJsE{IcEmFcCkFuCwFmEkG_HmFaIuIsNmJyOq\wi@oUc^uKeOaMmRyo@sdAicBwnC}iAwjBit@okA{Xkd@iL{QyX}c@wTc^wGiImEaEgCkBsPkJ{MsH}NaIkE}BiMoFgP}IgDeBiImFaH_HqGmIoDoGgDsHkDwJuDgOqBwKiAaJiHkjAuCef@kAcMs@wFkD_SoCeLiDyKeH_QeH_N}FiL}KeTsB{DqCcHaBiGeByIq@yFw@wMMgJBmNJkl@@_]J}IPwGj@oJfAiLx@eJToFB{ISeIWsMiBc|@uBukAc@ca@AoDByMHmQNcHj@sHfAmH|AkGbHgR`Sch@lJ}UvE_N~AqGjAyHn@iGh@kJd@cSIoJYuG_A{IuCmOeBoHsDuOeHiYwGsX}DmPWaAmAqFa@_Bm@gC]yCHqMk@gEw@wBoCrFaDnImB`EmG|KoSd]yXzd@qChEeBdD}@nDQfC?rBR~C~@tMOjBs@pCaBxBkFxIeD`HsBtDyB`AgBlA_EbBkChA{GjDiIfEgGhDcJpEaRjJ}LtGkDzA}BnAa@p@e@x@KHYMe@k@GO[JGPe@zAo@pB]pAaBrFSr@w@l@qCVaEXy@DW?U~@QdA?b@JN~@r@f@`@~AvAfD`Dl@j@VVNPGh@[dDIt@On@Ub@OnA</points>
     </overview_polyline>
     <bounds>
       <southwest>
-        <lat>51.5061230</lat>
-        <lng>9.6324306</lng>
+        <lat>51.9506878</lat>
+        <lng>4.3523271</lng>
       </southwest>
       <northeast>
-        <lat>52.3763699</lat>
-        <lng>9.9765805</lng>
+        <lat>52.3722198</lat>
+        <lng>4.9435643</lng>
       </northeast>
     </bounds>
   </route>
   <geocoded_waypoint>
     <geocoder_status>OK</geocoder_status>
-    <type>street_address</type>
-    <place_id>Ei9Hw7Z0dGluZ2VyIFN0ci4gMS0zLCAzNzEyNCBSb3Nkb3JmLCBEZXV0c2NobGFuZA</place_id>
+    <type>route</type>
+    <place_id>ChIJm_w8OBjLxUcRv4va7DtrNFQ</place_id>
   </geocoded_waypoint>
   <geocoded_waypoint>
     <geocoder_status>OK</geocoder_status>
     <type>street_address</type>
-    <place_id>ChIJE1XUQLt0sEcRccPJB5r8CbY</place_id>
+    <place_id>ChIJA2fwYb8JxkcRD6XEvlC7jRc</place_id>
   </geocoded_waypoint>
 </DirectionsResponse>

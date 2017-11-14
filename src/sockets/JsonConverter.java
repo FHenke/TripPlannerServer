@@ -24,8 +24,6 @@ public class JsonConverter {
 	
 	public static Request jasonToRequest(String jsonRequest){
 		Gson gson = new Gson();
-		/*GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setDateFormat("yyyy-mm-dd HH:MM");*/
 		Request request = gson.fromJson(jsonRequest, Request.class);
 		return request;
 	}

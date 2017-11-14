@@ -14,6 +14,9 @@ import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
+import com.google.gson.JsonSyntaxException;
+
+import api.EStream;
 import api.SkyscannerLive;
 import api.testLive;
 import api.utilities.GoogleMaps;
@@ -31,6 +34,12 @@ public class TripPlanner {
 		api.SkyscannerLive live = new api.SkyscannerLive();
 		api.GoogleMapsDistance distance = new api.GoogleMapsDistance();
 		api.GoogleMapsDirection direction = new api.GoogleMapsDirection();
+		
+		GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+		greg.set(2017, 12-1, 18, 7, 20);
+		
+		GregorianCalendar greg2 = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+		greg2.set(2017, 12-1, 22, 7, 20);
 		
 		/*
 		try {
@@ -50,9 +59,6 @@ public class TripPlanner {
 		}*/
 		
 		try{
-			//
-			GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-			greg.set(2017, 9, 22, 7, 20);
 			
 			
 			//LinkedBlockingQueue<Connection> connectionList = test.getAllConnections( "FRA", "JFK", new GregorianCalendar(2017, 8, 22), new GregorianCalendar(2017, 8, 25));
@@ -98,6 +104,16 @@ public class TripPlanner {
 		
 		// +++ Starting the Server +++
 		openSocket();
+		
+		
+		// eStream
+		/*try {
+			EStream eStream = new EStream();
+			eStream.getAllConnections("MUC", "HAM", greg, null);
+		} catch (JsonSyntaxException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		
 		
 		//++Updates the entries of the database from skyscanner

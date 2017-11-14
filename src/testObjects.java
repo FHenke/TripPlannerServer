@@ -69,6 +69,7 @@ public class testObjects {
 		place.setCity("Berlin");
 		place.setCountry("Germany");
 		place.setId("BER");
+		place.setIata("SXF");
 		
 		return place;
 	}

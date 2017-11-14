@@ -171,7 +171,8 @@ public class GoogleMapsDirection implements API {
 							arrivalTime.setTimeInMillis(date.getTimeInMillis());
 						connection.setArrivalDate(arrivalTime);
 					}catch(NullPointerException ex){
-						logger.warn("The departure and arrival time of one connections can't be set." + ex);
+						if(date != null)
+							logger.warn("The departure and arrival time of one connections can't be set." + ex);
 					}
 				}
 				
@@ -194,14 +195,14 @@ public class GoogleMapsDirection implements API {
 				try{
 					connection.setSummary(routeOption.getParentElement().getChildText("summary"));
 				}catch(NullPointerException | NumberFormatException e){
-					logger.warn("The overview polyline of one connection can't be read.");
+					logger.warn("The summary of one connection can't be read.");
 				}
 				
 				//fare
 				try{
 					connection.addPrice(Double.parseDouble(routeOption.getParentElement().getChild("fare").getChildText("value")));
 				}catch(NullPointerException | NumberFormatException e){
-					logger.warn("The overview polyline of one connection can't be read.");
+					//usually fare is not available
 				}
 				
 				//travel mode

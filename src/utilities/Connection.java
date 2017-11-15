@@ -2,6 +2,7 @@ package utilities;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -60,7 +61,7 @@ public class Connection {
 	private int id;
 	private String action;
 	private int beeline = Integer.MAX_VALUE;
-	private String currecy = "";
+	private String currency = "";
 	
 	/**
 	 * 
@@ -142,7 +143,7 @@ public class Connection {
 		
 		if(fare != null){
 			this.price = fare.getTotalFareAmout();
-			this.currecy = fare.getCurrency();
+			this.currency = fare.getCurrency();
 		}
 		this.origin = flight.getOriginPlace();
 		this.destination = flight.getDestinationPlace();
@@ -150,9 +151,13 @@ public class Connection {
 		this.departureDate = flight.getGregorianDepartureTime();
 		this.arrivalDate = flight.getGregorianArrivalTime();
 		this.summary = flight.getFullFlightNumber();
+		//GregorianCalendar returns 1 for Sunday, 2 for Monday and so on
+		this.weekday = (flight.getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1 == 0) ? 7 : flight.getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1;
+		this.carrier = new CarrierList(flight.getOperatingCarrier());
 		
+		this.quoteDateTime = new Date();
 		this.type = Connection.PLANE;
-		
+		this.action = ADD;
 	}
 	
 
@@ -317,6 +322,24 @@ public class Connection {
 	 */
 	public String getAction() {
 		return action;
+	}
+
+
+
+	/**
+	 * @return the currency
+	 */
+	public String getCurrency() {
+		return currency;
+	}
+
+
+
+	/**
+	 * @param currency the currency to set
+	 */
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
 
@@ -511,6 +534,10 @@ public class Connection {
 	
 	public boolean hasDepartureDate(){
 		return (departureDate == null) ? false : true;
+	}
+	
+	public boolean hasPrice(){
+		return (price == 0) ? false : true;
 	}
 	
 	

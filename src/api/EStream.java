@@ -47,7 +47,7 @@ private int successConnections = 0;
 	
 	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, GregorianCalendar outboundDate, GregorianCalendar inboundDate) throws JsonSyntaxException, IOException{
 		String requestString = getRequestURL(origin, destination, outboundDate, inboundDate);
-		ResultSet resultSet = getResultSet(requestString, 100);
+		ResultSet resultSet = getResultSet(requestString, 10);
 		
 		//System.out.println(resultSet.getProposals()[0].getLegs()[0].getSegments()[0].getFlightNumber());
 		
@@ -57,6 +57,34 @@ private int successConnections = 0;
 			} else{
 				System.out.println(resultSet.getMessage());
 				return new LinkedBlockingQueue<Connection>();
+			}	
+		}else{
+			return new LinkedBlockingQueue<Connection>();
+		}
+		
+	}
+	
+	/**
+	 * returns only direct flights, if a flight is not direct it is seperated in its single flights but in this case no price is available
+	 * @param origin IATA code of origin airport
+	 * @param destination IATA code of destination airport
+	 * @param outboundDate outbound date
+	 * @return List of all found flights, each connection element is direct, empty list if no result was found, null if an error occured like max requests exceeded
+	 * @throws JsonSyntaxException
+	 * @throws IOException
+	 */
+	public LinkedBlockingQueue<Connection> getAllDirectFlights(String origin, String destination, GregorianCalendar outboundDate) throws JsonSyntaxException, IOException{
+		String requestString = getRequestURL(origin, destination, outboundDate, null);
+		ResultSet resultSet = getResultSet(requestString, 10);
+		
+		//System.out.println(resultSet.getProposals()[0].getLegs()[0].getSegments()[0].getFlightNumber());
+		
+		if(resultSet != null){
+			if(resultSet.getMessage().equals("success")){
+				return getAllDirectConnections(resultSet);
+			} else{
+				System.out.println(resultSet.getMessage());
+				return null;
 			}	
 		}else{
 			return new LinkedBlockingQueue<Connection>();
@@ -85,17 +113,12 @@ private int successConnections = 0;
 	
 	private LinkedBlockingQueue<Connection> getAllDirectConnections(ResultSet results){
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
-		// points out whether the first connection is a direct connection or not.
-		// if it is a direct connection the price is valid for this connection,
-		// if not the price is valid for a connected flight and cant be used in this case.
-		boolean directFirstConnection = false;
-		if(results.getProposals()[0].getLegs()[0].getSegments().length == 1)
-			directFirstConnection = true;
 		
 		for(Proposal proposal : results.getProposals()){
 			for(Segment segment : proposal.getLegs()[0].getSegments()){
 				try{
-					if(directFirstConnection){
+					//if the connection is direct it exists exact one segment otherwise it is a connected flight
+					if(proposal.getLegs()[0].getSegments().length == 1){
 						Connection connection = new Connection(proposal, segment);
 						connectionList.add(connection);
 					}else{
@@ -160,8 +183,8 @@ private int successConnections = 0;
 	 */
 	private ResultSet getResultSet(String requestString, int timeout) throws JsonSyntaxException, IOException{
 		String urlResponse = getInput(requestString);
-		XMLUtilities.writeStringToFile(urlResponse, "eStream" + KeyToken);
-		System.out.println(urlResponse);
+		XMLUtilities.writeStringToFile(urlResponse, "eStream");
+		//System.out.println(urlResponse);
 		//Converts the received JSON file into an Object
 	    Gson gson = new Gson();
 		CacheResponse cacheResponse = gson.fromJson(urlResponse, CacheResponse.class);

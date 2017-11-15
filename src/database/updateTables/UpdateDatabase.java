@@ -22,7 +22,9 @@ public class UpdateDatabase {
 		System.out.println("Cities updated!");
 		new UpdateAirports(dbConnection).proceed();
 		System.out.println("Airports updated!");
-		new UpdateFlightConnections(dbConnection).proceed();
+		//new UpdateFlightConnections(dbConnection).proceed();
+		//System.out.println("Flight Connections updated!");
+		new UpdateFlights(dbConnection).proceed();
 		System.out.println("Flight Connections updated!");
 
 	}

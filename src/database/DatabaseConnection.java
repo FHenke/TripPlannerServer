@@ -6,28 +6,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import api.EStream;
+
 public class DatabaseConnection {
+	protected static final Logger logger = LogManager.getLogger(DatabaseConnection.class);
+	
 	private static final String DATABASE_NAME = "TripPlanner";
 	private static final String DATABASE_HOST = "localhost";
 	private static final String DATABASE_USER = "postgres";
 	private static final String DATABASE_KEY = "TripPlanner";
 	private static final String DATABASE_PORT = "5432";
 	
-	private Connection conn = null;
+	private static Connection conn = ConnectToDatabase();
 	
 	/**
 	 * Empty constructor, Connects to the Database by using the default values
 	 * @throws SQLException Error by connecting to the Database
 	 */
 	public DatabaseConnection() throws SQLException{
-		ConnectToDatabase();
+		//ConnectToDatabase();
 	}
 	
 	/**
 	 * Builds the url used for connecting to a postgresqldatabase with JDBC using the classvariables
 	 * @return URL for connecting with a postgresql Database via JDBC
 	 */
-	private String BuildJdbcUrl(){
+	private static String BuildJdbcUrl(){
 		return "jdbc:postgresql://" + DATABASE_HOST + ":" + DATABASE_PORT + "/" + DATABASE_NAME;
 	}
 	
@@ -35,11 +42,16 @@ public class DatabaseConnection {
 	 * Connects to A Postgresql Database via aJDBC by using the class variables
 	 * @throws SQLException a Error occured by connecting to the Database
 	 */
-	private void ConnectToDatabase() throws SQLException{
-		conn = DriverManager.getConnection(BuildJdbcUrl(), DATABASE_USER, DATABASE_KEY);
+	private static Connection ConnectToDatabase(){
+		try {
+			return DriverManager.getConnection(BuildJdbcUrl(), DATABASE_USER, DATABASE_KEY);
+		} catch (SQLException e) {
+			logger.error("Database connection can't be established: " + e.toString());
+		}
+		return null;
 	}
 	
-	public Connection getConnection(){
+	public static Connection getConnection(){
 		return conn;
 	}
 	

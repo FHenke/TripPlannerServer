@@ -62,6 +62,7 @@ public class Connection {
 	private String action;
 	private int beeline = Integer.MAX_VALUE;
 	private String currency = "";
+	private String code = null;
 	
 	/**
 	 * 
@@ -154,6 +155,9 @@ public class Connection {
 		//GregorianCalendar returns 1 for Sunday, 2 for Monday and so on
 		this.weekday = (flight.getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1 == 0) ? 7 : flight.getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1;
 		this.carrier = new CarrierList(flight.getOperatingCarrier());
+		if(flight.getMarketingCarrier().equals(flight.getOperatingCarrier())){
+			this.code = flight.getFullFlightNumber();
+		}
 		
 		this.quoteDateTime = new Date();
 		this.type = Connection.PLANE;
@@ -331,6 +335,24 @@ public class Connection {
 	 */
 	public String getCurrency() {
 		return currency;
+	}
+
+
+
+	/**
+	 * @return the code
+	 */
+	public String getCode() {
+		return code;
+	}
+
+
+
+	/**
+	 * @param code the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 

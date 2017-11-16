@@ -56,13 +56,18 @@ public class UpdateFlights extends UpdateTable {
 					}
 					
 					System.out.println("Step: " + counter.get());
-					if(counter.get() == 3)
+					if(counter.get() == 1800)
 						return;
 					
 					LinkedBlockingQueue<Connection> flightList = eStream.getAllDirectFlights(connection[0], connection[1], new GregorianCalendar(2018, 03, 05, 0, 0, 0));
 					
 					if(flightList == null)
 						return;
+					
+					if(flightList.isEmpty())
+						System.out.println("No connection found");
+					else
+						System.out.println("--> connection found");
 					
 					//Iterates over all flights found for this connection
 					for(Connection flight : flightList){
@@ -76,7 +81,7 @@ public class UpdateFlights extends UpdateTable {
 							selectIdenticalEntries.setInt(6, flight.getWeekday());
 							selectIdenticalEntries.setInt(7, (int) flight.getDuration().getMillis());
 							selectIdenticalEntries.setString(8, flight.getCurrency());
-							selectIdenticalEntries.setString(6, flight.getCarrier().getCarrierName());
+							selectIdenticalEntries.setString(9, flight.getCarrier().getCarrierName());
 							selectIdenticalEntries.setTimestamp(10, new java.sql.Timestamp(flight.getQuoteDateTime().getTime()));
 							if(!super.isQuerryEmpty(selectIdenticalEntries)){
 								//if not check if the id (origin, destination, weekday) exists in the database already
@@ -85,7 +90,7 @@ public class UpdateFlights extends UpdateTable {
 								selectId.setTimestamp(3, new java.sql.Timestamp(flight.getDepartureDate().getTimeInMillis()));
 								selectId.setString(4, flight.getCarrier().getCarrierName());
 								selectId.setInt(5, (int) flight.getDuration().getMillis());
-								if(super.isQuerryEmpty(selectId) && flight.hasPrice()){
+								if(super.hasQuerryResults(selectId) && flight.hasPrice()){
 									//if yes drop the old entry for adding the new one later
 									deleteEntry.setString(1, flight.getOrigin().getIata());
 									deleteEntry.setString(2, flight.getDestination().getIata());
@@ -95,7 +100,7 @@ public class UpdateFlights extends UpdateTable {
 									deleteEntry.executeUpdate();
 								}
 								//if not add the new dataset
-								if(flight.hasPrice()){
+								if(!super.hasQuerryResults(selectId) || flight.hasPrice()){
 									insertEntry.setString(1, flight.getOrigin().getIata());
 									insertEntry.setString(2, flight.getDestination().getIata());
 									insertEntry.setTimestamp(3, new java.sql.Timestamp(flight.getDepartureDate().getTimeInMillis()));
@@ -108,6 +113,7 @@ public class UpdateFlights extends UpdateTable {
 									insertEntry.setString(10, flight.getCurrency());
 									insertEntry.setString(11, flight.getCarrier().getCarrierName());
 									insertEntry.executeUpdate();
+									//System.out.println("Inserted entry for: (" + flight.getOrigin().getName() + "-" + flight.getDestination().getName() + ")");
 								}
 							}
 						}catch(SQLException e){

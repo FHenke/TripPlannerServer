@@ -26,7 +26,24 @@ public abstract class UpdateTable implements UpdateableTable{
 		this.conn = conn;
 	}
 	
+	/**
+	 * 
+	 * @param querry
+	 * @return false if querry is empty, returns true if querry is NOT empty
+	 * @throws SQLException
+	 */
 	protected boolean isQuerryEmpty(PreparedStatement querry) throws SQLException{
+		//if no next element is available the querry returned no results in this case it returns next
+		return querry.executeQuery().next();
+	}
+	
+	/**
+	 * 
+	 * @param querry
+	 * @return false if querry has no elements, returns true if query has elements
+	 * @throws SQLException
+	 */
+	protected boolean hasQuerryResults(PreparedStatement querry) throws SQLException{
 		//if no next element is available the querry returned no results in this case it returns next
 		return querry.executeQuery().next();
 	}

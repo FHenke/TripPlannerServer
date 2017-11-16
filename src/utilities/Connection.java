@@ -143,7 +143,7 @@ public class Connection {
 	public Connection(Proposal fare, Segment flight) throws SQLException{
 		
 		if(fare != null){
-			this.price = fare.getTotalFareAmout();
+			this.price = fare.getTotalFareAmount();
 			this.currency = fare.getCurrency();
 		}
 		this.origin = flight.getOriginPlace();

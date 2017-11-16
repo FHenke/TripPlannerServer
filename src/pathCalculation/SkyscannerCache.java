@@ -34,6 +34,7 @@ public class SkyscannerCache {
 			DatabaseConnection databaseConnection = new DatabaseConnection();
 			api.SkyscannerCache skyCache = new api.SkyscannerCache();
 			api.EStream eStream = new api.EStream();
+			Connection headConnection;
 			
 			//get closest airport from origin
 			ClosestAirports closeOriginAirports = new ClosestAirports(databaseConnection.getConnection());
@@ -72,12 +73,18 @@ public class SkyscannerCache {
 						LinkedBlockingQueue<Connection> result = eStream.getAllConnections(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), request.getDepartureDateString(), null);
 						// if a flight connection was found take this connection
 						if(!result.isEmpty()){
-							//LinkedBlockingQueue<Connection> connection = new LinkedBlockingQueue<Connection>();
-							connection.add(originToAirportList[i1]);
+							headConnection = new Connection(originToAirportList[i1].getOrigin(), airportToDestinationList[c].getDestination());
+							
+							headConnection.getSubConnections().add(originToAirportList[i1]);
 							for(utilities.Connection con : result){
-								connection.add(con);
+								headConnection.getSubConnections().add(con);
 							}
-							connection.add(airportToDestinationList[c]);
+							headConnection.getSubConnections().add(airportToDestinationList[c]);
+							
+							//some more information for head connection
+							headConnection.setSummary("Car, Plain, Car");
+							
+							connection.add(headConnection);
 							return connection;
 						}
 					}
@@ -87,12 +94,18 @@ public class SkyscannerCache {
 						LinkedBlockingQueue<Connection> result = eStream.getAllConnections(originToAirportList[c].getDestination().getIata(), airportToDestinationList[i2].getOrigin().getIata(), request.getDepartureDateString(), null);
 						// if a flight connection was found take this connection
 						if(!result.isEmpty()){
-							//LinkedBlockingQueue<Connection> connection = new LinkedBlockingQueue<Connection>();
-							connection.add(originToAirportList[c]);
+							headConnection = new Connection(originToAirportList[c].getOrigin(), airportToDestinationList[i2].getDestination());
+							
+							headConnection.getSubConnections().add(originToAirportList[c]);
 							for(utilities.Connection con : result){
-								connection.add(con);
+								headConnection.getSubConnections().add(con);
 							}
-							connection.add(airportToDestinationList[i2]);
+							headConnection.getSubConnections().add(airportToDestinationList[i2]);
+							
+							//some more information for head connection
+							headConnection.setSummary("Car, Plain, Car");
+							
+							connection.add(headConnection);
 							return connection;
 						}
 					}

@@ -3,7 +3,7 @@ package api.utilities.eStream;
 public class Proposal {
 	
 	private String Currency;
-	private double TotalFareAmout;
+	private double TotalFareAmount;
 	private Leg[] Legs;
 	/**
 	 * 
@@ -18,10 +18,10 @@ public class Proposal {
 	 * @param totalFareAmout
 	 * @param legs
 	 */
-	public Proposal(String currency, double totalFareAmout, Leg[] legs) {
+	public Proposal(String currency, double totalFareAmount, Leg[] legs) {
 		super();
 		Currency = currency;
-		TotalFareAmout = totalFareAmout;
+		TotalFareAmount = totalFareAmount;
 		Legs = legs;
 	}
 	/**
@@ -33,8 +33,8 @@ public class Proposal {
 	/**
 	 * @return the totalFareAmout
 	 */
-	public double getTotalFareAmout() {
-		return TotalFareAmout;
+	public double getTotalFareAmount() {
+		return TotalFareAmount;
 	}
 	/**
 	 * @return the legs
@@ -52,8 +52,8 @@ public class Proposal {
 	/**
 	 * @param totalFareAmout the totalFareAmout to set
 	 */
-	public void setTotalFareAmout(double totalFareAmout) {
-		TotalFareAmout = totalFareAmout;
+	public void setTotalFareAmount(double totalFareAmount) {
+		TotalFareAmount = totalFareAmount;
 	}
 	/**
 	 * @param legs the legs to set

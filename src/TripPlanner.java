@@ -117,11 +117,11 @@ public class TripPlanner {
 		
 		
 		//++Updates the entries of the database from skyscanner
-		/**/try{
+		try{
 			UpdateDatabase.proceed(new  database.DatabaseConnection().getConnection());
 		}catch(IOException | SQLException e){
 			System.out.println(e);
-		}
+		}/**/
 		
 		
 		

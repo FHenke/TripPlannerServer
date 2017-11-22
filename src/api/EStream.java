@@ -20,6 +20,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joda.time.Duration;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -28,7 +29,9 @@ import api.utilities.eStream.CacheResponse;
 import api.utilities.eStream.Proposal;
 import api.utilities.eStream.ResultSet;
 import api.utilities.eStream.Segment;
+import database.Querry;
 import utilities.Connection;
+import utilities.Place;
 import utilities.XMLUtilities;
 
 public class EStream implements API {
@@ -138,16 +141,58 @@ private int successConnections = 0;
 	
 	private LinkedBlockingQueue<Connection> getOnlyCheepestConnection(ResultSet results){
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
+		Connection headConnection;
+		Duration duration = new Duration(0);
+		GregorianCalendar lastArrivalDate = null;
+		String summary = "";
 		
-		for(Segment segment : results.getProposals()[0].getLegs()[0].getSegments()){
+		//Generate head connection
+		Segment[] segments = results.getProposals()[0].getLegs()[0].getSegments();
+		Place origin;
+		try {
+			origin = Querry.setAirportinformationFromDatabase(new Place(segments[0].getOrigin(), segments[0].getOrigin(), Place.AIRPORT));
+			Place destination = Querry.setAirportinformationFromDatabase(new Place(segments[segments.length - 1].getDestination(), segments[segments.length - 1].getDestination(), Place.AIRPORT));
+			GregorianCalendar departureDate = segments[0].getGregorianDepartureTime();
+			GregorianCalendar arrivalDate = segments[segments.length - 1].getGregorianArrivalTime();
+			headConnection = new Connection(Connection.PLANE, origin, destination, results.getProposals()[0].getTotalFareAmount(), departureDate, arrivalDate);
+		} catch (SQLException e1) {
+			logger.error("Connection (" + segments[0].getOrigin() + "-" + segments[segments.length - 1].getDestination() + ") can't generate headConnection because of SQL Exception: " + e1.toString());
+			return new LinkedBlockingQueue<Connection>();
+		}
+		
+		headConnection.setDirect(true);
+		
+		for(Segment segment : segments){
 			try{
 				Connection connection = new Connection(results.getProposals()[0], segment);
-				connectionList.add(connection);
+				headConnection.getSubConnections().add(connection);
+				
+				//summary += segment.getFullFlightNumber() + " ";
+				
+				
+				//calculates the duration by adding the flight time and the stop time by subtracting the arrival time from the last flight from the departure time from the current flight
+				duration.plus(segment.getDuration());
+				if(lastArrivalDate != null){
+					duration.plus(segment.getGregorianDepartureTime().getTimeInMillis() - lastArrivalDate.getTimeInMillis());
+					//runs only in this loop if it is the second segment which means that the flight is not direct
+					headConnection.setDirect(false);
+					summary += connection.getOrigin().getName() + " ";
+				}
+				lastArrivalDate = segment.getGregorianArrivalTime();
+				
 			}catch(SQLException e){
 				logger.error("Connection (" + segment.getOrigin() + "-" + segment.getDestination() + ") can't be added to Connection list because of SQL Exception: " + e.toString());
 				return new LinkedBlockingQueue<Connection>();
 			}
 		}
+		
+		if(summary.equals(""))
+			summary = "direct";
+		
+		headConnection.setSummary(summary);
+		connectionList.add(headConnection);
+		
+		
 		
 		return connectionList;
 	}

@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
  */
 public abstract class UpdateTable implements UpdateableTable{
 	
-	protected static final Logger logger = LogManager.getLogger(UpdateContinents.class);
+	protected static final Logger logger = LogManager.getLogger(UpdateTable.class);
 	
 	protected Connection conn = null;
 	

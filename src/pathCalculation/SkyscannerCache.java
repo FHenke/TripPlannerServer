@@ -2,6 +2,7 @@ package pathCalculation;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -31,25 +32,26 @@ public class SkyscannerCache {
 	
 	public LinkedBlockingQueue<Connection> getConnectionList(Request request, LinkedBlockingQueue<Connection> connection){
 		try {
-			DatabaseConnection databaseConnection = new DatabaseConnection();
 			api.SkyscannerCache skyCache = new api.SkyscannerCache();
 			api.EStream eStream = new api.EStream();
 			Connection headConnection;
 			
 			//get closest airport from origin
-			ClosestAirports closeOriginAirports = new ClosestAirports(databaseConnection.getConnection());
-			LinkedBlockingQueue<Connection> originAirportBeeline = closeOriginAirports.createAirportsBeeline(request.getOrigin(), 1, -1);
+			ClosestAirports closeOriginAirports = new ClosestAirports();
+			LinkedBlockingQueue<Connection> originAirportBeeline = closeOriginAirports.createAirportsBeeline(request.getOrigin(), 3, -1);
 			closeOriginAirports.setAirportOtherDistance(GoogleMaps.DRIVING);
 			Connection[] originToAirportList = closeOriginAirports.orderListByDistance();
 			
 			//get closest airport from destination
-			ClosestAirports closeDestinationAirports = new ClosestAirports(databaseConnection.getConnection());
+			ClosestAirports closeDestinationAirports = new ClosestAirports();
 			LinkedBlockingQueue<Connection> destinationAirportBeeline = closeDestinationAirports.createAirportsBeeline(request.getDestination(), 3, 1);
 			closeDestinationAirports.setAirportOtherDistance(GoogleMaps.DRIVING);
 			Connection[] airportToDestinationList = closeDestinationAirports.orderListByDistance();
+
 			
-			for(Connection a : airportToDestinationList){
-				System.out.println(a.getOrigin().getName() + " : " + a.getDistance() / 1000);
+			
+			for(Connection a : originToAirportList){
+				System.out.println(a.getOrigin().getName() + " - " + a.getDestination().getName() + " : " + a.getDistance());
 			}
 			
 			
@@ -68,7 +70,6 @@ public class SkyscannerCache {
 			
 				for(int c = 0; c <= counter; c++){
 					if(lastChanged == 1){
-						//System.out.println(originToAirportList[i1].getDestination().getIata() + " - " + airportToDestinationList[c].getOrigin().getIata() + " - " + request.getDepartureDateString().getTimeInMillis());
 						//LinkedBlockingQueue<Connection> result = skyCache.getAllConnections(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), request.getDepartureDateString(), null);
 						LinkedBlockingQueue<Connection> result = eStream.getAllConnections(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), request.getDepartureDateString(), null);
 						// if a flight connection was found take this connection
@@ -96,6 +97,13 @@ public class SkyscannerCache {
 						if(!result.isEmpty()){
 							headConnection = new Connection(originToAirportList[c].getOrigin(), airportToDestinationList[i2].getDestination());
 							
+							//headConnection.getSubConnections().addAll(Arrays.asList(originToAirportList));
+							//headConnection.getSubConnections().addAll(Arrays.asList(airportToDestinationList));
+							
+							headConnection.getSubConnections().add(originToAirportList[1]);
+							headConnection.getSubConnections().add(originToAirportList[2]);
+							headConnection.getSubConnections().add(originToAirportList[0]);
+							
 							headConnection.getSubConnections().add(originToAirportList[c]);
 							for(utilities.Connection con : result){
 								headConnection.getSubConnections().add(con);
@@ -103,7 +111,7 @@ public class SkyscannerCache {
 							headConnection.getSubConnections().add(airportToDestinationList[i2]);
 							
 							//some more information for head connection
-							headConnection.setSummary("Car, Plain, Car");
+							headConnection.setSummary("Car, Plane, Car");
 							
 							connection.add(headConnection);
 							return connection;
@@ -139,9 +147,6 @@ public class SkyscannerCache {
 				}
 			}
 			
-
-		} catch (SQLException e) {
-			logger.error("It was not possible to generate a connecthion with the Database \n" + e);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -40,6 +40,10 @@ public class ClosestAirports {
 		this.conn = conn;
 	}
 	
+	public ClosestAirports(){
+		this.conn = DatabaseConnection.getConnection();
+	}
+	
 	
 	/**
 	 * creates a list with the "limit"s closest airport around the given place

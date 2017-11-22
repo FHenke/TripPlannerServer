@@ -55,6 +55,16 @@ public class GoogleMapsDirection {
 			}
 		}
 		
-		return connectionList;
+		//includes the highest level
+		LinkedBlockingQueue<Connection> headConnectionList = new LinkedBlockingQueue<Connection>();
+		for(Connection connection : connectionList){
+			Connection headConnection = new Connection(connection.getType(), connection.getOrigin(), connection.getDestination(), connection.getPrice(), connection.getDuration(),
+					connection.getDepartureDate(), connection.getArrivalDate());
+			headConnection.setSummary(connection.getSummary());
+			headConnection.addSubconnection(connection);
+			headConnectionList.add(headConnection);
+		}
+		
+		return headConnectionList;
 	}
 }

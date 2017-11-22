@@ -90,7 +90,8 @@ public class GoogleMapsDirection implements API {
 		// status is OK if there is a result, if a place cant be found it is ZERO_RESULT
 		if(rootFromConnectionsXML.getChildText("status").equals("OK")){
 			for(Element routeOption : rootFromConnectionsXML.getDescendants(Filters.element("leg"))){
-				
+				Connection headHeadConnection = null;
+				Connection headConnection = null;
 				Connection connection = null;
 				
 				// tries to parse the coordinates of the returning xml file from start and endlocation into double
@@ -319,11 +320,11 @@ public class GoogleMapsDirection implements API {
 							
 						//polyline
 						//detailed polyline is not necessary but needs hige transmission rate, therefor deactivate it
-						/*try{
+						try{
 							subconnection.setPolyline(subconnectionXML.getChild("polyline").getChildText("points"));
 						}catch(NullPointerException e){
 							//do nothing, no polyline available (should be available usually)
-						}*/
+						}/**/
 						
 						//html instruction
 						try{
@@ -335,7 +336,18 @@ public class GoogleMapsDirection implements API {
 						//add the subconnection to the connection
 						connection.addSubconnection(subconnection);
 				}
-				connectionList.add(connection);
+				
+				
+				
+				headConnection = new Connection(connection.getType(), connection.getOrigin(), connection.getDestination(), connection.getPrice(), connection.getDuration(),
+						connection.getDepartureDate(), connection.getArrivalDate());
+				headConnection.setSummary(connection.getSummary());
+				headConnection.setDuration(connection.getDuration());
+				headConnection.setDistance(connection.getDistance());
+				headConnection.addSubconnection(connection);
+				
+				connectionList.add(headConnection);
+				
 			}
 		}
 		//To write the returned XML file into a file

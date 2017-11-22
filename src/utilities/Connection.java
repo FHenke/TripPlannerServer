@@ -129,6 +129,28 @@ public class Connection {
 	}
 	
 	/**
+	 * 
+	 * @param origin
+	 * @param destination
+	 * @param price
+	 * @param duration
+	 * @param arrivalDate
+	 * @param departureionDate
+	 */
+	public Connection(int type, Place origin, Place destination, double price,
+			GregorianCalendar departureDate, GregorianCalendar arrivalDate) {
+		super();
+		this.type = type;
+		this.origin = origin;
+		this.destination = destination;
+		this.price = price;
+		this.arrivalDate = arrivalDate;
+		this.departureDate = departureDate;
+		this.id = IdGenerator.getNewID();
+		this.action = ADD;
+	}
+	
+	/**
 	 * Constructor for passing an action to a ID
 	 * @param id ID of the Connection
 	 * @param action Action to perform (usually remove)

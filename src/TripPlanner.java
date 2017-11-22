@@ -102,8 +102,7 @@ public class TripPlanner {
 			System.out.println(e);
 		}
 		
-		// +++ Starting the Server +++
-		//openSocket();
+		
 		
 		
 		// eStream
@@ -117,11 +116,11 @@ public class TripPlanner {
 		
 		
 		//++Updates the entries of the database from skyscanner
-		try{
+		/*try{
 			UpdateDatabase.proceed(new  database.DatabaseConnection().getConnection());
 		}catch(IOException | SQLException e){
 			System.out.println(e);
-		}/**/
+		}*/
 		
 		
 		
@@ -135,6 +134,9 @@ public class TripPlanner {
 		}
 		*/
 		
+		// +++ Starting the Server +++
+		openSocket();
+		//
 		System.out.println("Done");
 	}
 

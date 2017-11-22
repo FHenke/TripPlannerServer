@@ -206,7 +206,7 @@ public class Segment {
 	
 	private GregorianCalendar StringToGregorian(String time){
 		
-		return new GregorianCalendar(Integer.parseInt(time.substring(0, 4)), Integer.parseInt(time.substring(4, 6)), Integer.parseInt(time.substring(6, 8)), Integer.parseInt(time.substring(8, 10)), Integer.parseInt(time.substring(10, 12)));
+		return new GregorianCalendar(Integer.parseInt(time.substring(0, 4)), Integer.parseInt(time.substring(4, 6)) - 1, Integer.parseInt(time.substring(6, 8)), Integer.parseInt(time.substring(8, 10)), Integer.parseInt(time.substring(10, 12)));
 		
 	}
 	

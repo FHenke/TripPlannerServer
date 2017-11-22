@@ -2,6 +2,7 @@ package database.updateTables;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.GregorianCalendar;
@@ -39,7 +40,7 @@ public class UpdateFlights extends UpdateTable {
 			try {
 				PreparedStatement selectIdenticalEntries = conn.prepareStatement("SELECT * FROM flight_connections WHERE origin = ? AND destination = ? AND departure_date = ? AND flightnumber = ? AND min_price = ? AND weekday = ? AND duration = ? AND currency = ? AND operating_airline = ? AND quote_date_time = ?;");
 				PreparedStatement selectId = conn.prepareStatement("SELECT * FROM flight_connections WHERE origin = ? AND destination = ? AND departure_date = ? AND operating_airline = ? AND duration = ?;");
-				PreparedStatement deleteEntry = conn.prepareStatement("DELETE FROM flight_connections WHERE WHERE origin = ? AND destination = ? AND departure_date = ? AND operating_airline = ? AND duration = ?;");
+				PreparedStatement deleteEntry = conn.prepareStatement("DELETE FROM flight_connections WHERE origin = ? AND destination = ? AND departure_date = ? AND operating_airline = ? AND duration = ?;");
 				PreparedStatement insertEntry = conn.prepareStatement("INSERT INTO flight_connections VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 				PreparedStatement updateStatus = conn.prepareStatement("UPDATE states SET status = ? WHERE process = 'update_flights';");
 		
@@ -56,10 +57,10 @@ public class UpdateFlights extends UpdateTable {
 					}
 					
 					System.out.println("Step: " + counter.get());
-					if(counter.get() == 2600)
+					if(counter.get() == 9000)
 						return;
 					
-					LinkedBlockingQueue<Connection> flightList = eStream.getAllDirectFlights(connection[0], connection[1], new GregorianCalendar(2018, 03, 05, 0, 0, 0));
+					LinkedBlockingQueue<Connection> flightList = eStream.getAllDirectFlights(connection[0], connection[1], new GregorianCalendar(2018, 04 - 1, 05, 0, 0, 0));
 					
 					if(flightList == null)
 						return;
@@ -90,7 +91,14 @@ public class UpdateFlights extends UpdateTable {
 								selectId.setTimestamp(3, new java.sql.Timestamp(flight.getDepartureDate().getTimeInMillis()));
 								selectId.setString(4, flight.getCarrier().getCarrierName());
 								selectId.setInt(5, (int) flight.getDuration().getMillis());
-								if(super.hasQuerryResults(selectId) && flight.hasPrice()){
+								ResultSet sameIDResult;
+								boolean replace = false;
+								// in this first step the result will be deletet to write a new one to the database in the next step
+								// a result should only be overwritten if:
+								// -> the new result has a price but the old one not
+								// -> the price of the new result is cheaper than the price of the old result
+								// -> the new result has a price and the old result is older than one day (also if the price is even higher)
+								if((sameIDResult = selectId.executeQuery()).next() && flight.hasPrice() && (sameIDResult.getDouble("min_price") > flight.getPrice() || sameIDResult.getDate("quote_date_time").getTime() < flight.getQuoteDateTime().getTime() - 86400000)){
 									//if yes drop the old entry for adding the new one later
 									deleteEntry.setString(1, flight.getOrigin().getIata());
 									deleteEntry.setString(2, flight.getDestination().getIata());
@@ -98,9 +106,12 @@ public class UpdateFlights extends UpdateTable {
 									deleteEntry.setString(4, flight.getCarrier().getCarrierName());
 									deleteEntry.setInt(5, (int) flight.getDuration().getMillis());
 									deleteEntry.executeUpdate();
+									replace = true;
 								}
-								//if not add the new dataset
-								if(!super.hasQuerryResults(selectId) || flight.hasPrice()){
+								//an new result should be written to the database if:
+								// -> replace is true
+								// -> this flight is not in the database
+								if(!super.hasQuerryResults(selectId) || replace == true){
 									insertEntry.setString(1, flight.getOrigin().getIata());
 									insertEntry.setString(2, flight.getDestination().getIata());
 									insertEntry.setTimestamp(3, new java.sql.Timestamp(flight.getDepartureDate().getTimeInMillis()));
@@ -117,7 +128,7 @@ public class UpdateFlights extends UpdateTable {
 								}
 							}
 						}catch(SQLException e){
-							logger.warn("Problem by writing following Airport to Database:" + flight.getOrigin().getId() + " : " + flight.getDestination().getId() + "   - " + e.toString());
+							logger.warn("Problem by writing following Airport to Database: " + flight.getOrigin().getId() + " : " + flight.getDestination().getId() + "   - " + e.toString());
 						}
 					}
 					//sets the state for this progress in the database

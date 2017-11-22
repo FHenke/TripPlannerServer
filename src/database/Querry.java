@@ -17,10 +17,14 @@ public class Querry {
 	
 	protected static final Logger logger = LogManager.getLogger(Querry.class);
 	
-	protected java.sql.Connection conn = null;
+	protected static java.sql.Connection conn = null;
 	
 	public Querry(java.sql.Connection conn){
 		this.conn = conn;
+	}
+	
+	public Querry(){
+		this.conn = DatabaseConnection.getConnection();
 	}
 	
 	public double getLatitudeFromPlace(Place place) throws PSQLException, SQLException{
@@ -51,7 +55,11 @@ public class Querry {
 	 * @return Place object where latitude, longitude and airport name was added
 	 * @throws SQLException Thrown if no entry for this IATA code was found
 	 */
-	public Place setAirportinformationFromDatabase(Place airport) throws SQLException{
+	public static Place setAirportinformationFromDatabase(Place airport) throws SQLException{
+		
+		if(conn == null){
+			conn = DatabaseConnection.getConnection();
+		}
 
 		ResultSet querryResult = conn.createStatement().executeQuery("SELECT ST_Y(location) As latitude, ST_X(location) As longitude, name FROM airports WHERE iata_code = '" + airport.getIata().toUpperCase() + "';");
 		querryResult.next();
@@ -92,7 +100,12 @@ public class Querry {
 		
 	}
 	
-	
+	/**
+	 * Gets the Status counter of update flights from the state table
+	 * to save the actual position
+	 * @return status of update Flights
+	 * @throws SQLException
+	 */
 	public int getStatusOfUpdateFlights() throws SQLException{
 		ResultSet querryResult = conn.createStatement().executeQuery("SELECT status FROM states WHERE process = 'update_flights';");
 		querryResult.next();

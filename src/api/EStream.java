@@ -210,7 +210,7 @@ private int successConnections = 0;
 		//Request parameters to URL
 		String requestString = "https://api.travelcloudpro.eu/v1/cache/shopping?searchPhrase=" + getDateStringFromCalendar(outboundDate) + origin + destination;
 		if(inboundDate != null){
-			requestString = "https://api.travelcloudpro.eu/v1/cache/shopping?searchPhrase=" + getDateStringFromCalendar(inboundDate) + destination + origin;
+			requestString += getDateStringFromCalendar(inboundDate) + destination + origin;
 		}
 		requestString += "&pointOfSale=DE";
 		

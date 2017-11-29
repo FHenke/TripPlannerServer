@@ -184,6 +184,7 @@ public class Connection {
 		this.quoteDateTime = new Date();
 		this.type = Connection.PLANE;
 		this.action = ADD;
+		this.id = IdGenerator.getNewID();
 	}
 	
 

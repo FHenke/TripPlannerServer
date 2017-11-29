@@ -84,7 +84,7 @@ public class ClosestAirports {
 				utilities.Connection airportElement;
 				Place airport = new Place(querryResult.getDouble("lng"), querryResult.getDouble("lat"));
 				airport.setIata(querryResult.getString("iata"));
-				airport.setName(querryResult.getString("name"));
+				airport.setName(querryResult.getString("name") + " Airport");
 				airport.setType(Place.AIRPORT);
 				if(direction < 0)
 					airportElement = new utilities.Connection(place, airport);

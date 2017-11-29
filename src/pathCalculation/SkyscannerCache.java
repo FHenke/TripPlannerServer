@@ -1,7 +1,6 @@
 package pathCalculation;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -14,7 +13,6 @@ import org.jdom2.JDOMException;
 
 import api.utilities.GoogleMaps;
 import database.ClosestAirports;
-import database.DatabaseConnection;
 import database.utilities.ClosestAirportListElement;
 import utilities.Connection;
 import utilities.Request;
@@ -51,7 +49,7 @@ public class SkyscannerCache {
 			
 			
 			for(Connection a : originToAirportList){
-				System.out.println(a.getOrigin().getName() + " - " + a.getDestination().getName() + " : " + a.getDistance());
+				System.out.println(a.getOrigin().getName() + " - " + a.getDestination().getName() + " : " + a.getDistance() / 1000);
 			}
 			
 			
@@ -76,11 +74,27 @@ public class SkyscannerCache {
 						if(!result.isEmpty()){
 							headConnection = new Connection(originToAirportList[i1].getOrigin(), airportToDestinationList[c].getDestination());
 							
+							headConnection.getSubConnections().addAll(Arrays.asList(originToAirportList));
+							headConnection.getSubConnections().addAll(Arrays.asList(airportToDestinationList));
+							
 							headConnection.getSubConnections().add(originToAirportList[i1]);
 							for(utilities.Connection con : result){
 								headConnection.getSubConnections().add(con);
 							}
 							headConnection.getSubConnections().add(airportToDestinationList[c]);
+							
+							//remove all connections to and from airports that are not used
+							for(Connection con : originToAirportList){
+								if(con.getId() != originToAirportList[i1].getId()){
+									headConnection.getSubConnections().add(new Connection(con.getId(), Connection.REMOVE));
+								}
+							}
+							for(Connection con : airportToDestinationList){
+								if(con.getId() != airportToDestinationList[c].getId()){
+									headConnection.getSubConnections().add(new Connection(con.getId(), Connection.REMOVE));
+								}
+							}
+							
 							
 							//some more information for head connection
 							headConnection.setSummary("Car, Plain, Car");
@@ -97,18 +111,26 @@ public class SkyscannerCache {
 						if(!result.isEmpty()){
 							headConnection = new Connection(originToAirportList[c].getOrigin(), airportToDestinationList[i2].getDestination());
 							
-							//headConnection.getSubConnections().addAll(Arrays.asList(originToAirportList));
-							//headConnection.getSubConnections().addAll(Arrays.asList(airportToDestinationList));
-							
-							headConnection.getSubConnections().add(originToAirportList[1]);
-							headConnection.getSubConnections().add(originToAirportList[2]);
-							headConnection.getSubConnections().add(originToAirportList[0]);
+							headConnection.getSubConnections().addAll(Arrays.asList(originToAirportList));
+							headConnection.getSubConnections().addAll(Arrays.asList(airportToDestinationList));
 							
 							headConnection.getSubConnections().add(originToAirportList[c]);
 							for(utilities.Connection con : result){
 								headConnection.getSubConnections().add(con);
 							}
 							headConnection.getSubConnections().add(airportToDestinationList[i2]);
+
+							//remove all connections to and from airports that are not used
+							for(Connection con : originToAirportList){
+								if(con.getId() != originToAirportList[c].getId()){
+									headConnection.getSubConnections().add(new Connection(con.getId(), Connection.REMOVE));
+								}
+							}
+							for(Connection con : airportToDestinationList){
+								if(con.getId() != airportToDestinationList[i2].getId()){
+									headConnection.getSubConnections().add(new Connection(con.getId(), Connection.REMOVE));
+								}
+							}
 							
 							//some more information for head connection
 							headConnection.setSummary("Car, Plane, Car");

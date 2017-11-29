@@ -65,7 +65,7 @@ public class Querry {
 		querryResult.next();
 		airport.setLatitude(querryResult.getDouble("latitude"));
 		airport.setLongitude(querryResult.getDouble("longitude"));
-		airport.setName(querryResult.getString("name"));
+		airport.setName(querryResult.getString("name") + " Airport");
 		
 		return airport;
 	}

@@ -57,7 +57,7 @@ public class UpdateFlights extends UpdateTable {
 					}
 					
 					System.out.println("Step: " + counter.get());
-					if(counter.get() == 9000)
+					if(counter.get() == 11000)
 						return;
 					
 					LinkedBlockingQueue<Connection> flightList = eStream.getAllDirectFlights(connection[0], connection[1], new GregorianCalendar(2018, 04 - 1, 05, 0, 0, 0));

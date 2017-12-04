@@ -33,6 +33,17 @@ import utilities.XMLUtilities;
 public class GoogleMapsGeocoding {
 	
 	
+	/**
+	 * adds longitude and latitude to any arbitray place object by using the Google Maps Geocoding API
+	 * @param place a Place object without a longitude and latitude 
+	 * @return the passed Place object including values for longitude and latitude
+	 * @throws NullPointerException
+	 * @throws NumberFormatException
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 * @throws IllegalStateException
+	 * @throws JDOMException
+	 */
 	public static Place addCoordinatesToPlace(Place place) throws NullPointerException, NumberFormatException, ClientProtocolException, IOException, IllegalStateException, JDOMException{
 		//ToDo:insert body
 		String address = api.utilities.GoogleMaps.PlaceToGoogleMapsString(place);

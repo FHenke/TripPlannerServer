@@ -92,6 +92,32 @@ private int successConnections = 0;
 		}else{
 			return new LinkedBlockingQueue<Connection>();
 		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param origin IATA code of origin airport
+	 * @param destination IATA code of destination airport
+	 * @param outboundDate outbound date
+	 * @return
+	 * @throws JsonSyntaxException
+	 * @throws IOException
+	 */
+	public LinkedBlockingQueue<Connection> getCheapestDirectConnection(String origin, String destination, GregorianCalendar outboundDate) throws JsonSyntaxException, IOException{
+		String requestString = getRequestURL(origin, destination, outboundDate, null);
+		ResultSet resultSet = getResultSet(requestString, 10);
+				
+		if(resultSet != null){
+			if(resultSet.getMessage().equals("success")){
+				return  getDirectConnection(resultSet);
+			} else{
+				System.out.println(resultSet.getMessage());
+				return null;
+			}	
+		}else{
+			return new LinkedBlockingQueue<Connection>();
+		}
 		
 	}
 	

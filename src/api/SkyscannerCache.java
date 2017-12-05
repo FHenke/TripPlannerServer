@@ -96,7 +96,6 @@ public class SkyscannerCache implements API {
 				returnConnection.add((this.createConnectionListFromXML(rootFromConnectionXML, con, INBOUND)));
 				connectionObject.setReturnConnection(returnConnection);
 			}
-
 			
 			connectionList.add(connectionObject);
 		}

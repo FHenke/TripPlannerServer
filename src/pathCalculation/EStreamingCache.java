@@ -2,36 +2,31 @@ package pathCalculation;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
-
-import javax.naming.spi.DirStateFactory.Result;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jdom2.JDOMException;
 
 import api.utilities.GoogleMaps;
 import database.ClosestAirports;
-import database.utilities.ClosestAirportListElement;
 import utilities.Connection;
 import utilities.Place;
 import utilities.Request;
 
-public class SkyscannerCache {
+public class EStreamingCache {
 	
 	protected static final Logger logger = LogManager.getLogger(ClosestAirports.class);
 	public static final int DISTANCE = 1;
 	public static final int DURATION = 2;
 	private int valueOfInterest = DISTANCE;
 
-	public SkyscannerCache(){
+	public EStreamingCache(){
 		
 	}
 	
 	public LinkedBlockingQueue<Connection> getConnectionList(Request request, LinkedBlockingQueue<Connection> connection){
 		try {
-			api.SkyscannerCache skyCache = new api.SkyscannerCache();
+			api.EStream eStream = new api.EStream();
 			Connection headConnection;
 			
 			//get closest airport from origin
@@ -42,7 +37,7 @@ public class SkyscannerCache {
 			ClosestAirports closeDestinationAirports = new ClosestAirports();
 			Place destinationAirport = closeDestinationAirports.getClosestBeelineAirport(request.getDestination());
 			
-			LinkedBlockingQueue<Connection> result = skyCache.getAllConnections(originAirport.getIata(), destinationAirport.getIata(), request.getDepartureDateString(), null);
+			LinkedBlockingQueue<Connection> result = eStream.getAllConnections(originAirport.getIata(), destinationAirport.getIata(), request.getDepartureDateString(), null);
 			// if a flight connection was found take this connection
 			if(!result.isEmpty()){
 				headConnection = new Connection(originAirport, destinationAirport);

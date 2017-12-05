@@ -37,7 +37,7 @@ import utilities.XMLUtilities;
 public class EStream implements API {
 
 protected static final Logger logger = LogManager.getLogger(EStream.class);
-private static final String[] KEYS = {"2e4c18c566ec29f80f5b62156edebefc707ba1e0", "9759124eb23195416e37f9afb3760989282ce190"};
+private static final String[] KEYS = {"2e4c18c566ec29f80f5b62156edebefc707ba1e0", "9759124eb23195416e37f9afb3760989282ce190", "251df1c73ac1f99010c0182ae2c5acaaa8c67363"};
 private static final AtomicInteger KeyToken = new AtomicInteger(0);
 private int successConnections = 0;
 	
@@ -56,7 +56,7 @@ private int successConnections = 0;
 		
 		if(resultSet != null){
 			if(resultSet.getMessage().equals("success")){
-				return getOnlyCheepestConnection(resultSet);
+				return getOnlyCheepestConnectionFromResult(resultSet);
 			} else{
 				System.out.println(resultSet.getMessage());
 				return new LinkedBlockingQueue<Connection>();
@@ -104,8 +104,8 @@ private int successConnections = 0;
 	 * @throws JsonSyntaxException
 	 * @throws IOException
 	 */
-	public LinkedBlockingQueue<Connection> getCheapestDirectConnection(String origin, String destination, GregorianCalendar outboundDate) throws JsonSyntaxException, IOException{
-		String requestString = getRequestURL(origin, destination, outboundDate, null);
+	public LinkedBlockingQueue<Connection> getCheapestDirectConnection(String origin, String destination, GregorianCalendar outboundDate, GregorianCalendar inboundDate) throws JsonSyntaxException, IOException{
+		String requestString = getRequestURL(origin, destination, outboundDate, inboundDate);
 		ResultSet resultSet = getResultSet(requestString, 10);
 				
 		if(resultSet != null){
@@ -138,7 +138,6 @@ private int successConnections = 0;
 		return connectionList;
 	}
 	
-	//####################################
 	
 	private LinkedBlockingQueue<Connection> getAllDirectConnections(ResultSet results){
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
@@ -163,9 +162,8 @@ private int successConnections = 0;
 		return connectionList;
 	}
 	
-	//###################################
 	
-	private LinkedBlockingQueue<Connection> getOnlyCheepestConnection(ResultSet results){
+	private LinkedBlockingQueue<Connection> getOnlyCheepestConnectionFromResult(ResultSet results){
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		Connection headConnection;
 		Duration duration = new Duration(0);
@@ -190,7 +188,13 @@ private int successConnections = 0;
 		
 		for(Segment segment : segments){
 			try{
-				Connection connection = new Connection(results.getProposals()[0], segment);
+				Connection connection;
+				if(segments.length == 1){
+					connection = new Connection(results.getProposals()[0], segment);
+				}
+				else{
+					connection = new Connection(null, segment);
+				}
 				headConnection.getSubConnections().add(connection);
 				
 				//summary += segment.getFullFlightNumber() + " ";

@@ -49,10 +49,36 @@ public class RequestHandler {
 			}
 		}*/
 		
-		if(request.getMethode().equalsIgnoreCase("All")){
+		if(request.getMethode().equalsIgnoreCase("SkyscannerCacheOnly")){
 			try {
 				SkyscannerCache skyCache = new SkyscannerCache();
 				return skyCache.getConnectionList(request, connectionList);
+			} catch (IllegalStateException e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			}
+		}
+		
+		if(request.getMethode().equalsIgnoreCase("eStreamingCacheOnly")){
+			try {
+				EStreamingCache eStreaming = new EStreamingCache();
+				return eStreaming.getConnectionList(request, connectionList);
+			} catch (IllegalStateException e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			}
+		}
+		
+		if(request.getMethode().equalsIgnoreCase("FFC")){
+			try {
+				FindFirstConnection ffc = new FindFirstConnection();
+				return ffc.getConnectionList(request, connectionList);
 			} catch (IllegalStateException e) {
 				System.out.println("FAIL");
 				e.printStackTrace();

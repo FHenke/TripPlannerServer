@@ -62,6 +62,8 @@ public class UpdateFlightConnections extends UpdateTable {
 						System.out.println("save: " + process + "%");
 					}
 					try{
+			//  WICHTIG!!!!
+			// vor dem benutzen muss 100% sicher gestellt werden, dass nicht eine verbindung die in estreaming gefunden wurde durch diese funktion überschrieben wird
 						//check if the exact entry exists in the database already
 						selectIdenticalEntries.setString(1, connection.getOrigin().getId());
 						selectIdenticalEntries.setString(2, connection.getDestination().getId());

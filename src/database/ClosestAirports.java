@@ -44,6 +44,45 @@ public class ClosestAirports {
 		this.conn = DatabaseConnection.getConnection();
 	}
 	
+	/**
+	 * Returns the closest airport to a given place using beeline distance
+	 * @param place the place to which the closest airport should be find
+	 * @return closest airport to the given place
+	 */
+	public Place getClosestBeelineAirport(Place place){
+		Place airport;
+		
+		if(place.getLatitude() == Double.MAX_VALUE || place.getLongitude() == Double.MAX_VALUE){
+			try {
+				place = api.GoogleMapsGeocoding.addCoordinatesToPlace(place);
+			} catch (NumberFormatException | NullPointerException | IllegalStateException | IOException | JDOMException e) {
+				logger.error("Problem by adding coordinates to a place: " + place.getName() + "\n " + e);
+			}
+		}		
+		
+		String querryString = "SELECT ST_Distance_sphere(airports.location, ST_GeomFromText('POINT("
+				+ place.getLongitude()
+				+ " "
+				+ place.getLatitude()
+				+ ")',-1)) AS distance, airports.iata_code as iata, airports.name AS name, ST_X(airports.location) AS lng, ST_Y(airports.location) AS lat FROM airports ORDER BY distance LIMIT 1;";
+		
+		System.out.println(querryString);
+		
+		try {
+			ResultSet querryResult = conn.createStatement().executeQuery(querryString);
+			querryResult.next();
+			airport = new Place(querryResult.getDouble("lng"), querryResult.getDouble("lat"));
+			airport.setIata(querryResult.getString("iata"));
+			airport.setName(querryResult.getString("name") + " Airport");
+			airport.setType(Place.AIRPORT);
+		} catch (SQLException e) {
+			logger.error("Problem by getting data from querry result: " + place.getName() + "\n " + e);
+			return null;
+		}
+		
+		return airport;
+	}
+	
 	
 	/**
 	 * creates a list with the "limit"s closest airport around the given place
@@ -104,66 +143,6 @@ public class ClosestAirports {
 		return airportList;
 	}
 	
-	
-	/**
-	 * 
-	 * @param direction	1 for the direction to th Airport | -1 for the direction from the Airport
-	 * @return 1 for success | -1 unsuccessful (maybe list is empty, call createAirportsBeeline() before this function, maybe for one airport cant be find a distance or duration and it was not possible to remove it from the list)
-	// duration and distance is not matched to the right airports 
-	public int setAirportDrivingDistance(int direction, String transportation){
-		if(airportList.isEmpty()){
-			return -1;
-		}
-		GoogleMapsDistance distance = new GoogleMapsDistance();
-		LinkedList<ClosestAirportListElement> removeFromList = new LinkedList<ClosestAirportListElement>();
-		LinkedList<Place> placeList = new LinkedList<Place>();
-		
-		LinkedList<Place> airportPlaceList = new LinkedList<Place>();
-		for(ClosestAirportListElement airport : airportList){
-			airportPlaceList.add(airport.getAirport());
-		}
-		
-		placeList.add(airportList.get(0).getPlace());
-		
-		LinkedBlockingQueue<utilities.Connection> connection = null;
-		try {
-			if(direction > 0){
-				connection = distance.getConnection(placeList, airportPlaceList, null, true, transportation, "", "de");
-			}
-			if(direction < 0){
-				connection = distance.getConnection(airportPlaceList, placeList, null, true, transportation, "", "de");
-			}
-		} catch (IllegalStateException | IOException | JDOMException e) {
-			logger.error("Cant calculate the distance and duration \n" + e);
-				return -1;
-		}
-		
-		for(int i = 0; i < airportList.size(); i++){
-			try {
-				utilities.Connection connectionElement = connection.poll();
-				airportList.get(i).setDistance(connectionElement.getDistance());
-				airportList.get(i).setDuration(new Duration(connectionElement.getDuration()));
-			} catch (IllegalStateException e) {
-				logger.error("Problem by calculating the distance or duration of one Element: " + airportList.get(i).getAirport().getName() + "\n" + e);
-				removeFromList.add(airportList.get(i));					
-			} catch (NoSuchElementException | NullPointerException e){
-				removeFromList.add(airportList.get(i));
-			}
-		}
-		
-		for(ClosestAirportListElement airportToRemove : removeFromList){
-			if(airportList.remove(airportToRemove) == false){
-				logger.error("It was not be possible to remove the element for which it was noch be possible to calculate the distance or duration. Element: " + airportToRemove.getAirport().getName() + "\n");
-				return -1;
-			}
-		}
-		
-		ordered = ORDERED_BY_DISTANCE;
-		
-		return 1;
-	}*/
-	
-	
 	/**
 	 * 
 	 * @param transportation	means of transportation according to GoogleMaps class
@@ -192,14 +171,21 @@ public class ClosestAirports {
 		return 1;
 	}
 	
-	
-	public utilities.Connection[] orderListByDistance(){
+	/**
+	 * 
+	 * @return
+	 */
+	public utilities.Connection[] getListOrderedByDistance(){
 		utilities.Connection[] connectionArray = airportList.toArray(new utilities.Connection[airportList.size()]);
 		Arrays.sort(connectionArray, new CompareClosestAirportsForDistance());
 		return connectionArray;
 	}
 	
-	public utilities.Connection[] orderListByDuration(){
+	/**
+	 * 
+	 * @return
+	 */
+	public utilities.Connection[] getListOrderedByDuration(){
 		utilities.Connection[] connectionArray = airportList.toArray(new utilities.Connection[airportList.size()]);
 		Arrays.sort(connectionArray, new CompareClosestAirportsForDuration());
 		return connectionArray;

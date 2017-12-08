@@ -2,6 +2,7 @@ package database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.GregorianCalendar;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.logging.log4j.LogManager;
@@ -79,25 +80,77 @@ public class Querry {
 	 */
 	public String[][] getAllAvailableConnections() throws SQLException{
 		ResultSet querryResult;
-		int counter = 0;
+		int size = 0;
+		String query = "SELECT DISTINCT origin, destination FROM flight_connections;";
 		
 		//get the number of connections and create an array with this size
-		querryResult = conn.createStatement().executeQuery("SELECT count(*) AS size FROM (SELECT distinct origin, destination FROM flight_connections) AS distinctConnections;");
-		querryResult.next();
-		String[][] result = new String[querryResult.getInt("size")][2];
+		size = getSizeOfResult(query);
 		
 		//get All distinct connections from the Database
-		querryResult = conn.createStatement().executeQuery("SELECT DISTINCT origin, destination FROM flight_connections;");
+		querryResult = conn.createStatement().executeQuery(query);
 		
+		return getConnectionStringArray(querryResult, size);
+	}
+	
+	/**
+	 * Generates an array with all connections available in the Database (kind of a Flightmap)
+	 * each connection represents a pair of origin and destination in the form ORIGIN_IATADESTINATIONIATA
+	 * (for example: FRAHAM for the connectiion Frankfurt to Hamburg)
+	 * @return Array of unique connections.
+	 * @throws SQLException
+	 */
+	public String[][] getAllConnectionsWhithouDuration(GregorianCalendar date) throws SQLException{
+		ResultSet querryResult;
+		int size = 0;
+		String query = "SELECT distinct origin, destination FROM ( SELECT origin, destination, min_price, duration, CAST(CAST(departure_date AS date) AS timestamp) AS departure_date FROM flight_connections ) AS x WHERE departure_date = '" + date.get(1) + "-" + (date.get(2) + 1) + "-" + date.get(5) + " 00:00:00' AND duration is null;";
+		
+		System.out.println(query);
+		
+		//get the number of connections and create an array with this size
+		size = getSizeOfResult(query);
+		
+		//get All distinct connections from the Database
+		querryResult = conn.createStatement().executeQuery(query);
+		
+		return getConnectionStringArray(querryResult, size);
+	}
+	
+	
+	/**
+	 * gets a Result set and generates an Array with the origin and destination from it
+	 * @param resultSet result set must have one column for origin and one for destination
+	 * @param size amount of entries of the result set
+	 * @return Array with origin and destination pair in each line
+	 * @throws SQLException
+	 */
+	private String[][] getConnectionStringArray(ResultSet resultSet, int size) throws SQLException{
+		String[][] result = new String[size][2];
+		int counter = 0;
 		//Write the Iata code from each received connection to the StringArray
-		while(querryResult.next()){
-			result[counter][0] = querryResult.getString("origin");
-			result[counter][1] = querryResult.getString("destination");
+		while(resultSet.next()){
+			result[counter][0] = resultSet.getString("origin");
+			result[counter][1] = resultSet.getString("destination");
 			counter++;
 		}
-			
 		return result;
+	}
+	
+	/**
+	 * 
+	 * @param query
+	 * @return
+	 * @throws SQLException
+	 */
+	private int getSizeOfResult(String query) throws SQLException{
+		int size = 0;
+		ResultSet querryResult;
+
+		querryResult = conn.createStatement().executeQuery("SELECT count(*) AS size FROM (" + query.substring(0, query.length()-1) + ") AS query;");
+		querryResult.next();
+		size = querryResult.getInt("size");
+		System.out.println(size + "/ SELECT count(*) AS size FROM (" + query.substring(0, query.length()-1) + ") AS query;");
 		
+		return size;
 	}
 	
 	/**

@@ -4,15 +4,12 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.jdom2.JDOMException;
 
 import api.EStream;
-import api.SkyscannerCache;
 import database.DatabaseConnection;
 import database.Querry;
 import utilities.Connection;
@@ -30,16 +27,18 @@ public class UpdateFlights extends UpdateTable {
 		try {
 			//Get list of all connections that are cached by Skyscanner
 			EStream eStream = new EStream();
-			Querry querry = new Querry(new DatabaseConnection().getConnection());
-			String[][] connectionList = querry.getAllAvailableConnections();
+			Querry querry = new Querry(DatabaseConnection.getConnection());
+			String[][] connectionList = querry.getAllConnectionsWhithouDuration(UpdateDatabase.getUpdateDate());
 			
-			counter.set(querry.getStatusOfUpdateFlights());
-	
+			//counter.set(querry.getStatusOfUpdateFlights());
+			counter.set(0);
+
 			
 			//PreparedStatements precompile the Statement and executes it then with different values, therefor runtime improvement
 			try {
 				PreparedStatement selectIdenticalEntries = conn.prepareStatement("SELECT * FROM flight_connections WHERE origin = ? AND destination = ? AND departure_date = ? AND flightnumber = ? AND min_price = ? AND weekday = ? AND duration = ? AND currency = ? AND operating_airline = ? AND quote_date_time = ?;");
 				PreparedStatement selectId = conn.prepareStatement("SELECT * FROM flight_connections WHERE origin = ? AND destination = ? AND departure_date = ? AND operating_airline = ? AND duration = ?;");
+				PreparedStatement deleteSkyscannerEntries = conn.prepareStatement("DELETE FROM flight_connections WHERE origin = ? AND destination = ? AND departure_date = ? AND duration is null;");
 				PreparedStatement deleteEntry = conn.prepareStatement("DELETE FROM flight_connections WHERE origin = ? AND destination = ? AND departure_date = ? AND operating_airline = ? AND duration = ?;");
 				PreparedStatement insertEntry = conn.prepareStatement("INSERT INTO flight_connections VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 				PreparedStatement updateStatus = conn.prepareStatement("UPDATE states SET status = ? WHERE process = 'update_flights';");
@@ -57,10 +56,10 @@ public class UpdateFlights extends UpdateTable {
 					}
 					
 					System.out.println("Step: " + counter.get());
-					if(counter.get() == 20000)
+					if(counter.get() == 26000)
 						return;
 					
-					LinkedBlockingQueue<Connection> flightList = eStream.getAllDirectFlights(connection[0], connection[1], new GregorianCalendar(2018, 04 - 1, 05, 0, 0, 0));
+					LinkedBlockingQueue<Connection> flightList = eStream.getAllDirectFlights(connection[0], connection[1], UpdateDatabase.getUpdateDate());
 					
 					if(flightList == null)
 						return;
@@ -127,6 +126,13 @@ public class UpdateFlights extends UpdateTable {
 									//System.out.println("Inserted entry for: (" + flight.getOrigin().getName() + "-" + flight.getDestination().getName() + ")");
 								}
 							}
+							
+							GregorianCalendar gregTmp = new GregorianCalendar(flight.getDepartureDate().get(1), flight.getDepartureDate().get(2), flight.getDepartureDate().get(5), 0, 0, 0);
+							//Delete The entry without a departure and arrival time
+							deleteSkyscannerEntries.setString(1, flight.getOrigin().getIata());
+							deleteSkyscannerEntries.setString(2, flight.getDestination().getIata());
+							deleteSkyscannerEntries.setTimestamp(3, new java.sql.Timestamp(gregTmp.getTimeInMillis()));
+							deleteSkyscannerEntries.executeUpdate();
 						}catch(SQLException e){
 							logger.warn("Problem by writing following Airport to Database: " + flight.getOrigin().getId() + " : " + flight.getDestination().getId() + "   - " + e.toString());
 						}

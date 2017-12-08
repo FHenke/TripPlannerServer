@@ -37,7 +37,7 @@ import utilities.XMLUtilities;
 public class EStream implements API {
 
 protected static final Logger logger = LogManager.getLogger(EStream.class);
-private static final String[] KEYS = {"2e4c18c566ec29f80f5b62156edebefc707ba1e0", "9759124eb23195416e37f9afb3760989282ce190", "251df1c73ac1f99010c0182ae2c5acaaa8c67363"};
+private static final String[] KEYS = {"2e4c18c566ec29f80f5b62156edebefc707ba1e0", "9759124eb23195416e37f9afb3760989282ce190", "251df1c73ac1f99010c0182ae2c5acaaa8c67363", "933b6f0f1f363f84bbb8a882fa9f20be21deb096"};
 private static final AtomicInteger KeyToken = new AtomicInteger(0);
 private int successConnections = 0;
 	
@@ -130,7 +130,7 @@ private int successConnections = 0;
 					Connection connection = new Connection(results.getProposals()[0], proposal.getLegs()[0].getSegments()[0]);
 					connectionList.add(connection);
 				}catch(SQLException e){
-					logger.error("Connection can't be added to Connection list because of SQL Exception: " + e.toString());
+					logger.error("Connection (" + proposal.getLegs()[0].getSegments()[0].getOrigin() + " -" + proposal.getLegs()[0].getSegments()[0].getDestination() + ") can't be added to Connection list because of SQL Exception: " + e.toString());
 				}
 			}
 		}
@@ -285,6 +285,15 @@ private int successConnections = 0;
 			}
 			else{
 				return new ResultSet(cacheResponse.getErrorMessage());
+			}
+		}
+		if(cacheResponse.getErrorMessage().equals("Unable to get data from warehouse")){
+			if(timeout > 0){
+				System.out.println("Unable to get data from warehouse: " + timeout);
+				return getResultSet(requestString, timeout - 1);
+			}
+			else{
+				return null;
 			}
 		}
 		else{

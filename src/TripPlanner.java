@@ -116,11 +116,11 @@ public class TripPlanner {
 		
 		
 		//++Updates the entries of the database from skyscanner
-		/*try{
-			UpdateDatabase.proceed(new  database.DatabaseConnection().getConnection());
+		try{
+			UpdateDatabase.proceed(new GregorianCalendar(2018, 04 - 1, 6, 0, 0, 0));
 		}catch(IOException | SQLException e){
 			System.out.println(e);
-		}*/
+		}/**/
 		
 		
 		

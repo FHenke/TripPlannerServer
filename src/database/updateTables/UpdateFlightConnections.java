@@ -38,7 +38,67 @@ public class UpdateFlightConnections extends UpdateTable {
 		try {
 			//Get list of all connections that are cached by Skyscanner
 			SkyscannerCache skyCache = new SkyscannerCache();
-			Collection<utilities.Connection> connectionList = skyCache.getFlightMap();
+			Collection<utilities.Connection> connectionList = skyCache.getFlightMap(UpdateDatabase.getUpdateDate());
+			
+	
+	
+			
+			//PreparedStatements precompile the Statement and executes it then with different values, therefor runtime improvement
+			try {
+				PreparedStatement selectIdenticalEntries = conn.prepareStatement("SELECT * FROM (SELECT origin, destination, CAST(CAST(departure_date AS date) AS timestamp) AS date FROM flight_connections ) AS x WHERE origin = ? AND destination = ? AND date = ?;");
+				PreparedStatement insertEntry = conn.prepareStatement("INSERT INTO flight_connections VALUES (?, ?, ?, ?, ?, ?);");
+		
+			
+			
+				//iterates over all places in placelist to add them to the database if not already existing
+				for(utilities.Connection connection : connectionList){
+					//ToDo: remove
+					if((int) (counter.getAndIncrement() * 100 / connectionList.size()) > process){
+						process = counter.incrementAndGet() * 100 / connectionList.size();
+						System.out.println("save: " + process + "%");
+					}
+					try{
+						//check if the exact entry exists in the database already
+						selectIdenticalEntries.setString(1, connection.getOrigin().getId());
+						selectIdenticalEntries.setString(2, connection.getDestination().getId());
+						selectIdenticalEntries.setTimestamp(3, new java.sql.Timestamp(connection.getDepartureDate().getTimeInMillis()));
+						System.out.println(selectIdenticalEntries.toString());
+						if(!super.isQuerryEmpty(selectIdenticalEntries)){
+							//if not add the new data set
+							insertEntry.setString(1, connection.getOrigin().getId());
+							insertEntry.setString(2, connection.getDestination().getId());
+							insertEntry.setTimestamp(3, new java.sql.Timestamp(connection.getDepartureDate().getTimeInMillis()));
+							insertEntry.setDouble(4, connection.getPrice());
+							insertEntry.setTimestamp(5, new java.sql.Timestamp(connection.getQuoteDateTime().getTime()));
+							insertEntry.setInt(6, connection.getWeekday());
+							System.out.println("insert");
+							insertEntry.executeUpdate();
+						}
+					}catch(SQLException e){
+						logger.warn("Problem by writing following Airport to Database:" + connection.getOrigin().getId() + " : " + connection.getDestination().getId() + "   - " + e.toString());
+					}
+				}
+			} catch (SQLException e) {
+				logger.warn("Problem by writing updated Airport to Database - " + e.toString());
+			}
+		} catch (JDOMException | IOException e) {
+			logger.warn("Problem by reading or loading the XML file from the Skyscanner API - " + e.toString());
+		}
+
+	}
+
+	/**
+	 * Old version of the method
+	 * This version updates not a single date but updates 
+	 * @throws IOException
+	 */
+	public void proceedOld() throws IOException {
+		AtomicInteger counter = new AtomicInteger();
+		int process = 0;
+		try {
+			//Get list of all connections that are cached by Skyscanner
+			SkyscannerCache skyCache = new SkyscannerCache();
+			Collection<utilities.Connection> connectionList = skyCache.getFlightMap(UpdateDatabase.getUpdateDate());
 			
 	
 	

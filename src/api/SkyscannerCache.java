@@ -143,7 +143,7 @@ public class SkyscannerCache implements API {
 	 * @throws ClientProtocolException 
 	 * @throws ParseException 
 	 */
-	public LinkedBlockingQueue<Connection> getFlightMap() throws IOException, JDOMException{
+	public LinkedBlockingQueue<Connection> getFlightMap(GregorianCalendar date) throws IOException, JDOMException{
 		
 		LinkedBlockingQueue<Connection> flightMap = new LinkedBlockingQueue<Connection>();
 		
@@ -175,8 +175,12 @@ public class SkyscannerCache implements API {
 			try{
 					Connection connection = null;
 
-					// get XML document for all flights available from the origin airport to any place and at any time
-					parallelUrl.setRoute(originID, "anywhere", "anytime", null);
+					// get XML document for all flights available from the origin airport to any place and at the specified time or at any time if date is null
+					if(date != null){
+						parallelUrl.setRoute(originID, "anywhere", DATE_FORMAT.format(date.getTimeInMillis()), null);
+					} else{
+						parallelUrl.setRoute(originID, "anywhere", "anytime", null);
+					}
 					SAXBuilder parallelBuilder = new SAXBuilder();
 					Document connectionlist = parallelBuilder.build(getInput(parallelUrl.getQuotesURL()));
 					Element rootFromConnectionlist = connectionlist.getRootElement();

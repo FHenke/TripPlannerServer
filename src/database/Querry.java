@@ -61,13 +61,16 @@ public class Querry {
 		if(conn == null){
 			conn = DatabaseConnection.getConnection();
 		}
-
-		ResultSet querryResult = conn.createStatement().executeQuery("SELECT ST_Y(location) As latitude, ST_X(location) As longitude, name FROM airports WHERE iata_code = '" + airport.getIata().toUpperCase() + "';");
-		querryResult.next();
-		airport.setLatitude(querryResult.getDouble("latitude"));
-		airport.setLongitude(querryResult.getDouble("longitude"));
-		airport.setName(querryResult.getString("name") + " Airport");
-		
+		try{
+			ResultSet querryResult = conn.createStatement().executeQuery("SELECT ST_Y(location) As latitude, ST_X(location) As longitude, name FROM airports WHERE iata_code = '" + airport.getIata().toUpperCase() + "';");
+			querryResult.next();
+			airport.setLatitude(querryResult.getDouble("latitude"));
+			airport.setLongitude(querryResult.getDouble("longitude"));
+			airport.setName(querryResult.getString("name") + " Airport");
+		}catch(SQLException e){
+			//logger.warn("Error 234: Unable to get Information of Airport (" + airport.getId() + ") because of SQL Exception: " + e.toString());
+			throw new SQLException("Airport not in Databse");
+		}
 		return airport;
 	}
 	
@@ -148,7 +151,6 @@ public class Querry {
 		querryResult = conn.createStatement().executeQuery("SELECT count(*) AS size FROM (" + query.substring(0, query.length()-1) + ") AS query;");
 		querryResult.next();
 		size = querryResult.getInt("size");
-		System.out.println(size + "/ SELECT count(*) AS size FROM (" + query.substring(0, query.length()-1) + ") AS query;");
 		
 		return size;
 	}
@@ -164,4 +166,17 @@ public class Querry {
 		querryResult.next();
 		return querryResult.getInt("status");
 	}
+	
+	/**
+	 * returns the next unused number that can be used as connection number (for number the connected flights consecutively)
+	 * searches the max number and increase it by one
+	 * @return next valid number for connected flights
+	 * @throws SQLException
+	 */
+	public static int getNextConnectionNumber() throws SQLException{
+		ResultSet querryResult = conn.createStatement().executeQuery("select max(connection_number) from connected_flight_numbers;");
+		querryResult.next();
+		return querryResult.getInt("max") + 1;
+	}
+	
 }

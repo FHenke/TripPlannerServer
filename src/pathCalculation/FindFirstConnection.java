@@ -64,7 +64,7 @@ public class FindFirstConnection {
 				for(int c = 0; c <= counter; c++){
 					if(lastChanged == 1){
 						//LinkedBlockingQueue<Connection> result = skyCache.getAllConnections(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), request.getDepartureDateString(), null);
-						LinkedBlockingQueue<Connection> result = eStream.getAllConnections(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), request.getDepartureDateString(), null);
+						LinkedBlockingQueue<Connection> result = eStream.getCheapestConnection(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), request.getDepartureDateString(), null);
 						// if a flight connection was found take this connection
 						if(!result.isEmpty()){
 							headConnection = new Connection(originToAirportList[i1].getOrigin(), airportToDestinationList[c].getDestination());

@@ -62,7 +62,6 @@ public class UpdateFlightConnections extends UpdateTable {
 						selectIdenticalEntries.setString(1, connection.getOrigin().getId());
 						selectIdenticalEntries.setString(2, connection.getDestination().getId());
 						selectIdenticalEntries.setTimestamp(3, new java.sql.Timestamp(connection.getDepartureDate().getTimeInMillis()));
-						System.out.println(selectIdenticalEntries.toString());
 						if(!super.isQuerryEmpty(selectIdenticalEntries)){
 							//if not add the new data set
 							insertEntry.setString(1, connection.getOrigin().getId());
@@ -71,7 +70,6 @@ public class UpdateFlightConnections extends UpdateTable {
 							insertEntry.setDouble(4, connection.getPrice());
 							insertEntry.setTimestamp(5, new java.sql.Timestamp(connection.getQuoteDateTime().getTime()));
 							insertEntry.setInt(6, connection.getWeekday());
-							System.out.println("insert");
 							insertEntry.executeUpdate();
 						}
 					}catch(SQLException e){
@@ -92,7 +90,7 @@ public class UpdateFlightConnections extends UpdateTable {
 	 * This version updates not a single date but updates 
 	 * @throws IOException
 	 */
-	public void proceedOld() throws IOException {
+	/*public void proceedOld() throws IOException {
 		AtomicInteger counter = new AtomicInteger();
 		int process = 0;
 		try {
@@ -165,6 +163,6 @@ public class UpdateFlightConnections extends UpdateTable {
 			logger.warn("Problem by reading or loading the XML file from the Skyscanner API - " + e.toString());
 		}
 
-	}
+	}*/
 
 }

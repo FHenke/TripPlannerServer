@@ -11,7 +11,7 @@ import utilities.Place;
 
 public class Segment {
 
-	private int Duration;
+	private int Duration; //Duration in minutes
 	private String Origin;
 	private String Destination;
 	private String DepartureTime;
@@ -55,10 +55,16 @@ public class Segment {
 
 
 	/**
-	 * @return the duration
+	 * @return the duration in Milliseconds
 	 */
 	public int getDuration() {
-		return Duration * 60 * 1000;
+		//duration has the format Dhhmm
+		int minutes = Duration % 100;
+		int houres = (Duration % 10000) / 100;
+		int days = Duration / 10000;
+		int totalMin = minutes + (houres * 60) + (days * 24 * 60);
+
+		return totalMin * 60 * 1000;
 	}
 
 

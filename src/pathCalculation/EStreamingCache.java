@@ -37,7 +37,7 @@ public class EStreamingCache {
 			ClosestAirports closeDestinationAirports = new ClosestAirports();
 			Place destinationAirport = closeDestinationAirports.getClosestBeelineAirport(request.getDestination());
 			
-			LinkedBlockingQueue<Connection> result = eStream.getAllConnections(originAirport.getIata(), destinationAirport.getIata(), request.getDepartureDateString(), null);
+			LinkedBlockingQueue<Connection> result = eStream.getCheapestConnection(originAirport.getIata(), destinationAirport.getIata(), request.getDepartureDateString(), null);
 			// if a flight connection was found take this connection
 			if(!result.isEmpty()){
 				headConnection = new Connection(originAirport, destinationAirport);

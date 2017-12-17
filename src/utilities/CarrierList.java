@@ -3,6 +3,8 @@
  */
 package utilities;
 
+import api.utilities.eStream.Leg;
+
 /**
  * @author Florian
  *
@@ -11,13 +13,6 @@ public class CarrierList {
 	private CarrierList nextCarrier = null; 
 	private String carrierName = null;
 	private String url = null;
-	
-	/**
-	 * Empty constructor
-	 */
-	public CarrierList(){
-		
-	}
 	
 	/**
 	 * Constractor with carrier name

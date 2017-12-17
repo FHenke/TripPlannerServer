@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -30,6 +31,7 @@ import api.utilities.eStream.Proposal;
 import api.utilities.eStream.ResultSet;
 import api.utilities.eStream.Segment;
 import database.Querry;
+import utilities.CarrierList;
 import utilities.Connection;
 import utilities.Place;
 import utilities.XMLUtilities;
@@ -48,7 +50,39 @@ private int successConnections = 0;
 		
 	}
 	
+	/**
+	 * Returns all connections (all direct, all connected and all direct parts from connected connections as direct connection of the subconnections from a connected connection as well)
+	 */
 	public LinkedBlockingQueue<Connection> getAllConnections(String origin, String destination, GregorianCalendar outboundDate, GregorianCalendar inboundDate) throws JsonSyntaxException, IOException{
+		String requestString = getRequestURL(origin, destination, outboundDate, inboundDate);
+		ResultSet resultSet = getResultSet(requestString, 10);
+		
+		//System.out.println(resultSet.getProposals()[0].getLegs()[0].getSegments()[0].getFlightNumber());
+		
+		if(resultSet != null){
+			if(resultSet.getMessage().equals("success")){
+				return getAllConnectionsFromResult(resultSet);
+			} else{
+				System.out.println(resultSet.getMessage());
+				return new LinkedBlockingQueue<Connection>();
+			}	
+		}else{
+			return new LinkedBlockingQueue<Connection>();
+		}
+		
+	}
+	
+	/**
+	 * Returns the cheapest available connection, doesn't matter if it is direct or not
+	 * @param origin
+	 * @param destination
+	 * @param outboundDate
+	 * @param inboundDate
+	 * @return
+	 * @throws JsonSyntaxException
+	 * @throws IOException
+	 */
+	public LinkedBlockingQueue<Connection> getCheapestConnection(String origin, String destination, GregorianCalendar outboundDate, GregorianCalendar inboundDate) throws JsonSyntaxException, IOException{
 		String requestString = getRequestURL(origin, destination, outboundDate, inboundDate);
 		ResultSet resultSet = getResultSet(requestString, 10);
 		
@@ -121,6 +155,62 @@ private int successConnections = 0;
 		
 	}
 	
+	// #####################################################################
+
+	/**
+	 * Returns all connections (all direct, all connected and all direct parts from connected connections as direct connection as well)	
+	 * @param results 
+	 * @return 
+	 */
+	private LinkedBlockingQueue<Connection> getAllConnectionsFromResult(ResultSet results){
+		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
+		
+		for(Proposal proposal : results.getProposals()){
+			try{
+					//if the connection is direct it exists exact one segment otherwise it is a connected flight
+					if(proposal.getLegs()[0].getSegments().length == 1){
+						Connection connection = new Connection(proposal, proposal.getLegs()[0].getSegments()[0]);
+						connectionList.add(connection);
+					}else{
+						//generate connection object from proposal for connected flight included all subconnections as direct flights
+						Connection connection = getConnectedFlightFromProposal(proposal);
+						connectionList.add(connection);
+					}
+				}catch(SQLException e){
+					//If an Airport is not in the Database, this is usually a bus or train station, this connections shouldn't be added to the database
+					//therefor it is ok when this error occurs and it is not necessary to write an error log for it.
+					//Errorlog can be activated to see which IATA codes can't be written to the database
+					//logger.error("Error 282: Connection can't be added to Connection list because of SQL Exception: " + e.toString());
+				}
+		}
+		return connectionList;
+	}
+	
+	private Connection getConnectedFlightFromProposal(Proposal proposal) throws SQLException{
+		Segment[] segments = proposal.getLegs()[0].getSegments();
+		Connection connection;
+		
+		Place origin = new Place(segments[0].getOrigin(), segments[0].getOrigin(), Place.AIRPORT);
+		Place destination = new Place(segments[segments.length - 1].getDestination(), segments[segments.length - 1].getDestination(), Place.AIRPORT);
+		connection = new Connection(origin, destination);
+		connection.setDepartureDate(segments[0].getGregorianDepartureTime());
+		connection.setArrivalDate(segments[segments.length - 1].getGregorianArrivalTime());
+		connection.setPrice(proposal.getTotalFareAmount());
+		connection.setCurrency(proposal.getCurrency());
+		connection.setDuration(connectedFlightDuration(segments));
+		connection.setQuoteDateTime(new Date());
+		connection.setDirect(false);
+		connection.setWeekday((segments[0].getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1 == 0) ? 7 : segments[0].getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1);
+		connection.setCarrier(new CarrierList(proposal.getValidatingCarrier()));
+		
+		for(Segment segment : segments){
+			connection.addSubconnection(new Connection(null, segment));
+		}
+		
+		return connection;
+	}
+	// #####################################################################
+	
 	private LinkedBlockingQueue<Connection> getDirectConnection(ResultSet results){
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		
@@ -166,8 +256,6 @@ private int successConnections = 0;
 	private LinkedBlockingQueue<Connection> getOnlyCheepestConnectionFromResult(ResultSet results){
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		Connection headConnection;
-		Duration duration = new Duration(0);
-		GregorianCalendar lastArrivalDate = null;
 		String summary = "";
 		
 		//Generate head connection
@@ -188,6 +276,7 @@ private int successConnections = 0;
 		
 		for(Segment segment : segments){
 			try{
+
 				Connection connection;
 				if(segments.length == 1){
 					connection = new Connection(results.getProposals()[0], segment);
@@ -195,20 +284,15 @@ private int successConnections = 0;
 				else{
 					connection = new Connection(null, segment);
 				}
-				headConnection.getSubConnections().add(connection);
 				
-				//summary += segment.getFullFlightNumber() + " ";
-				
-				
-				//calculates the duration by adding the flight time and the stop time by subtracting the arrival time from the last flight from the departure time from the current flight
-				duration.plus(segment.getDuration());
-				if(lastArrivalDate != null){
-					duration.plus(segment.getGregorianDepartureTime().getTimeInMillis() - lastArrivalDate.getTimeInMillis());
+				if(!headConnection.getSubConnections().isEmpty()){
 					//runs only in this loop if it is the second segment which means that the flight is not direct
 					headConnection.setDirect(false);
 					summary += connection.getOrigin().getName() + " ";
 				}
-				lastArrivalDate = segment.getGregorianArrivalTime();
+				
+				headConnection.getSubConnections().add(connection);
+
 				
 			}catch(SQLException e){
 				logger.error("Connection (" + segment.getOrigin() + "-" + segment.getDestination() + ") can't be added to Connection list because of SQL Exception: " + e.toString());
@@ -220,11 +304,33 @@ private int successConnections = 0;
 			summary = "direct";
 		
 		headConnection.setSummary(summary);
+		
+		//set total duration
+		headConnection.setDuration(connectedFlightDuration(segments));
+		
 		connectionList.add(headConnection);
 		
-		
-		
 		return connectionList;
+	}
+	
+	/**
+	 * calculates the duration by adding the flight time and the stop time by subtracting the arrival time from the last flight from the departure time from the current flight
+	 * @param segments
+	 * @return
+	 */
+	private Duration connectedFlightDuration(Segment[] segments){
+		Duration duration = new Duration(0);
+		GregorianCalendar lastArrivalDate = null;
+		
+		for(Segment segment : segments){
+			duration = duration.plus(segment.getDuration());
+			if(lastArrivalDate != null){
+				duration = duration.plus(segment.getGregorianDepartureTime().getTimeInMillis() - lastArrivalDate.getTimeInMillis());
+			}
+			lastArrivalDate = segment.getGregorianArrivalTime();
+		}
+		
+		return duration;
 	}
 	
 	

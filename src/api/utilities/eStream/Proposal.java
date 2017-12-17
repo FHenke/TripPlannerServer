@@ -5,6 +5,7 @@ public class Proposal {
 	private String Currency;
 	private double TotalFareAmount;
 	private Leg[] Legs;
+	private String ValidatingCarrier;
 	/**
 	 * 
 	 */
@@ -43,6 +44,20 @@ public class Proposal {
 		return Legs;
 	}
 
+	/**
+	 * @return the legs
+	 */
+	public String getValidatingCarrier() {
+		return ValidatingCarrier;
+	}
+
+	/**
+	 * @param currency the currency to set
+	 */
+	public void setValidatingCarrier(String validatingCarrier) {
+		ValidatingCarrier = validatingCarrier;
+	}
+	
 	/**
 	 * @param currency the currency to set
 	 */

@@ -181,6 +181,7 @@ public class Connection {
 			this.code = flight.getFullFlightNumber();
 		}
 		
+		this.direct = true;
 		this.quoteDateTime = new Date();
 		this.type = Connection.PLANE;
 		this.action = ADD;

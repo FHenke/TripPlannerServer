@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import database.DatabaseConnection;
+
 /**
  * @author Florian
  * Class with functions that all update classes will need, so thet they can extend from this class
@@ -19,11 +21,15 @@ public abstract class UpdateTable implements UpdateableTable{
 	
 	protected static final Logger logger = LogManager.getLogger(UpdateTable.class);
 	
-	protected Connection conn = null;
+	protected Connection conn = DatabaseConnection.getConnection();
 	
 	
 	public UpdateTable(Connection conn){
 		this.conn = conn;
+	}
+	
+	public UpdateTable(){
+		
 	}
 	
 	/**

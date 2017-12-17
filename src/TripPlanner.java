@@ -116,11 +116,11 @@ public class TripPlanner {
 		
 		
 		//++Updates the entries of the database from skyscanner
-		try{
-			UpdateDatabase.proceed(new GregorianCalendar(2018, 04 - 1, 6, 0, 0, 0));
+		/*try{
+			UpdateDatabase.proceed(new GregorianCalendar(2018, 04 - 1, 10, 0, 0, 0));
 		}catch(IOException | SQLException e){
 			System.out.println(e);
-		}/**/
+		}*/
 		
 		
 		
@@ -135,8 +135,12 @@ public class TripPlanner {
 		*/
 		
 		// +++ Starting the Server +++
-		openSocket();
+		//openSocket();
 		//
+		
+		ServerUI serverUI = new ServerUI();
+		serverUI.getFrame().setVisible(true);
+		
 		System.out.println("Done");
 	}
 

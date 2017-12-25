@@ -28,17 +28,28 @@ public class FindFirstConnection {
 			api.SkyscannerCache skyCache = new api.SkyscannerCache();
 			api.EStream eStream = new api.EStream();
 			Connection headConnection;
+			String transportation = GoogleMaps.DRIVING;
+		
+			if(request.getTransportation()[3])
+				transportation = GoogleMaps.WALKING;
+			if(request.getTransportation()[2])
+				transportation = GoogleMaps.BICYCLING;
+			if(request.getTransportation()[1])
+				transportation = GoogleMaps.TRANSIT;
+			if(request.getTransportation()[0])
+				transportation = GoogleMaps.DRIVING;
+			
 			
 			//get closest airport from origin
 			ClosestAirports closeOriginAirports = new ClosestAirports();
 			LinkedBlockingQueue<Connection> originAirportBeeline = closeOriginAirports.createAirportsBeeline(request.getOrigin(), 3, -1);
-			closeOriginAirports.setAirportOtherDistance(GoogleMaps.DRIVING);
+			closeOriginAirports.setAirportOtherDistance(transportation);
 			Connection[] originToAirportList = closeOriginAirports.getListOrderedByDistance();
 			
 			//get closest airport from destination
 			ClosestAirports closeDestinationAirports = new ClosestAirports();
 			LinkedBlockingQueue<Connection> destinationAirportBeeline = closeDestinationAirports.createAirportsBeeline(request.getDestination(), 3, 1);
-			closeDestinationAirports.setAirportOtherDistance(GoogleMaps.DRIVING);
+			closeDestinationAirports.setAirportOtherDistance(transportation);
 			Connection[] airportToDestinationList = closeDestinationAirports.getListOrderedByDistance();
 
 			

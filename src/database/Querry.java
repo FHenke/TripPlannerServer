@@ -3,6 +3,7 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.logging.log4j.LogManager;
@@ -178,5 +179,6 @@ public class Querry {
 		querryResult.next();
 		return querryResult.getInt("max") + 1;
 	}
+	
 	
 }

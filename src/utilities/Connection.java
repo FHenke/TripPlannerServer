@@ -27,6 +27,7 @@ public class Connection {
 	public final static int SHIP = 7;
 	public final static int WALK = 8;
 	public final static int BICYCLE = 9;
+	public final static int BEELINE = 10;
 	public final static int OTHER = 99;
 	
 	public final static int MONDAY = 1;

@@ -25,6 +25,7 @@ public class GoogleMaps {
 	public static final String WALKING = "walking";
 	public static final String BICYCLING = "bicycling";
 	public static final String TRANSIT = "transit";
+	public static final String AIRPLANE = "airplane";
 	
 	public static final String TOLLS = "tolls";
 	public static final String HIGHWAYS = "highways";

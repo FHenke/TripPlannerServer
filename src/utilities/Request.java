@@ -3,6 +3,9 @@ package utilities;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
+import api.GoogleMapsDistance;
+import api.utilities.GoogleMaps;
+
 public class Request extends Connection {
 
 	private String methode = "";
@@ -10,6 +13,7 @@ public class Request extends Connection {
 	private long returnDateEpochTime = 0;
 	private boolean[] transportation;
 	private boolean showAlternatives = false;
+	private boolean isDepartureTime = true;
 	
 	
 	
@@ -79,6 +83,26 @@ public class Request extends Connection {
 	 */
 	public boolean isShowAlternatives() {
 		return showAlternatives;
+	}
+
+
+
+
+	/**
+	 * @return the isDepartureTime
+	 */
+	public boolean isDepartureTime() {
+		return isDepartureTime;
+	}
+
+
+
+
+	/**
+	 * @param isDepartureTime the isDepartureTime to set
+	 */
+	public void setDepartureTime(boolean isDepartureTime) {
+		this.isDepartureTime = isDepartureTime;
 	}
 
 
@@ -168,6 +192,25 @@ public class Request extends Connection {
 		return transportation[4];
 	}
 
-	
+	/**
+	 * Returns the "best" way to move from the given possiblilities. The order is
+	 * 1. Driving
+	 * 2. Public Transport
+	 * 3. Bicycle
+	 * 4. Walking
+	 * 5. Airplane
+	 * @return Best way to move according to the above list
+	 */
+	public String getBestTransportation(){
+		if(transportation[0])
+			return GoogleMaps.DRIVING;
+		if(transportation[1])
+			return GoogleMaps.TRANSIT;
+		if(transportation[2])
+			return GoogleMaps.BICYCLING;
+		if(transportation[3])
+			return GoogleMaps.WALKING;
+		return null;
+	}
 	
 }

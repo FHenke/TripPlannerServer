@@ -45,8 +45,8 @@ public class ServerUI {
 		});
 	}*/
 	
-	public JFrame getFrame(){
-		return frame;
+	public void setVisible(boolean visibility){
+		frame.setVisible(visibility);
 	}
 
 	/**
@@ -105,14 +105,17 @@ public class ServerUI {
 		frame.getContentPane().add(lblUpdateComponents);
 		
 		chckbxLocations = new JCheckBox("Locations");
+		chckbxLocations.setSelected(true);
 		chckbxLocations.setBounds(12, 45, 113, 25);
 		frame.getContentPane().add(chckbxLocations);
 		
 		chckbxSkyscanner = new JCheckBox("Skyscanner");
+		chckbxSkyscanner.setSelected(true);
 		chckbxSkyscanner.setBounds(12, 75, 113, 25);
 		frame.getContentPane().add(chckbxSkyscanner);
 		
 		chckbxEstreaming = new JCheckBox("eStreaming");
+		chckbxEstreaming.setSelected(true);
 		chckbxEstreaming.setBounds(12, 105, 113, 25);
 		frame.getContentPane().add(chckbxEstreaming);
 		
@@ -121,6 +124,7 @@ public class ServerUI {
 		frame.getContentPane().add(lblUpdateDate);
 		
 		textField = new JTextField();
+		textField.setText("2018");
 		textField.setBounds(80, 184, 72, 22);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
@@ -134,6 +138,7 @@ public class ServerUI {
 		frame.getContentPane().add(lblMonth);
 		
 		textField_1 = new JTextField();
+		textField_1.setText("4");
 		textField_1.setColumns(10);
 		textField_1.setBounds(80, 219, 72, 22);
 		frame.getContentPane().add(textField_1);
@@ -143,6 +148,7 @@ public class ServerUI {
 		frame.getContentPane().add(lblDay);
 		
 		textField_2 = new JTextField();
+		textField_2.setText("10");
 		textField_2.setColumns(10);
 		textField_2.setBounds(80, 251, 72, 22);
 		frame.getContentPane().add(textField_2);

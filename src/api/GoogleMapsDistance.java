@@ -36,6 +36,7 @@ public class GoogleMapsDistance implements API {
 	public static final String WALKING = api.utilities.GoogleMaps.WALKING;
 	public static final String BICYCLING = api.utilities.GoogleMaps.BICYCLING;
 	public static final String TRANSIT = api.utilities.GoogleMaps.TRANSIT;
+	public static final String AIRPLANE = api.utilities.GoogleMaps.AIRPLANE;
 	
 	/**
 	 * Empty Constructor
@@ -76,6 +77,7 @@ public class GoogleMapsDistance implements API {
 		
 		return getConnection(originlist, destinationlist, date, isDepartureDate, transportation, avoid, language);
 	}
+	
 	
 	/**
 	 * 

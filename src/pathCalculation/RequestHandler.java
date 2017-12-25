@@ -88,6 +88,20 @@ public class RequestHandler {
 			}
 		}
 
+		if(request.getMethode().equalsIgnoreCase("OutboundConnections")){
+			try {
+				OutboundConnections outboundConnections = new OutboundConnections();
+				return outboundConnections.getConnectionList(request, connectionList);
+			} catch (IllegalStateException e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			}
+		}
+		
+		
 		return connectionList;
 	}
 }

@@ -1,7 +1,6 @@
 package database;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -9,19 +8,18 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.apache.http.client.ClientProtocolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jdom2.JDOMException;
-import org.joda.time.Duration;
 
 import api.GoogleMapsDirection;
 import api.GoogleMapsDistance;
-import api.utilities.GoogleMaps;
-import database.updateTables.UpdateContinents;
-import database.utilities.ClosestAirportListElement;
 import database.utilities.CompareClosestAirportsForDistance;
 import database.utilities.CompareClosestAirportsForDuration;
+import utilities.Connection;
 import utilities.Place;
+import utilities.Request;
 
 public class ClosestAirports {
 	
@@ -32,11 +30,11 @@ public class ClosestAirports {
 	public static final int ORDERED_BY_DISTANCE = 2;
 	public static final int ORDERED_BY_DURATION = 3;
 
-	private Connection conn = null;
-	private LinkedBlockingQueue<utilities.Connection> airportList = new LinkedBlockingQueue<utilities.Connection>();
+	private java.sql.Connection conn = null;
+	private LinkedBlockingQueue<Connection> airportList = new LinkedBlockingQueue<Connection>();
 	private int ordered = 0;
 	
-	public ClosestAirports(Connection conn){
+	public ClosestAirports(java.sql.Connection conn){
 		this.conn = conn;
 	}
 	
@@ -45,43 +43,104 @@ public class ClosestAirports {
 	}
 	
 	/**
-	 * Returns the closest airport to a given place using beeline distance
-	 * @param place the place to which the closest airport should be find
-	 * @return closest airport to the given place
+	 * 
+	 * @param request
+	 * @param place
+	 * @param placeIsOrigin
+	 * @param amountOfAirportsToReturn int value between 1 and 25, if the value is < 1 it will be changed to 1 if it is > 25 it will be changed to 25
+	 * @return
+	 * @throws SQLException 
+	 * @throws JDOMException 
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 * @throws ClientProtocolException 
 	 */
-	public Place getClosestBeelineAirport(Place place){
-		Place airport;
-		
+	public Connection[] getFastestAirports(Request request, Place place, boolean placeIsOrigin, int amountOfAirportsToReturn) throws SQLException, ClientProtocolException, IllegalStateException, IOException, JDOMException{
+		//Because Google Maps distance can not handle more than 25 places
+		amountOfAirportsToReturn = correctAirportAmountValue(amountOfAirportsToReturn);
+		place = addCoordinatesToPlace(place);
+		LinkedList<Place> closestBeelineAirports = QueryClosestAirports.getClosestAirports(place, amountOfAirportsToReturn);
+		LinkedBlockingQueue<Connection> connections = getConnectionsBetweenPlaces(closestBeelineAirports, place, placeIsOrigin, request);
+
+		return OrderListByDistance(connections);
+	}
+	
+	
+	private int correctAirportAmountValue(int amountOfAirportsToReturn){
+		if(amountOfAirportsToReturn < 1)
+			return 1;
+		if(amountOfAirportsToReturn > 25)
+			return 25;
+		return amountOfAirportsToReturn;
+	}
+	
+	private Place addCoordinatesToPlace(Place place){
 		if(place.getLatitude() == Double.MAX_VALUE || place.getLongitude() == Double.MAX_VALUE){
 			try {
 				place = api.GoogleMapsGeocoding.addCoordinatesToPlace(place);
 			} catch (NumberFormatException | NullPointerException | IllegalStateException | IOException | JDOMException e) {
 				logger.error("Problem by adding coordinates to a place: " + place.getName() + "\n " + e);
 			}
-		}		
-		
-		String querryString = "SELECT ST_Distance_sphere(airports.location, ST_GeomFromText('POINT("
-				+ place.getLongitude()
-				+ " "
-				+ place.getLatitude()
-				+ ")',-1)) AS distance, airports.iata_code as iata, airports.name AS name, ST_X(airports.location) AS lng, ST_Y(airports.location) AS lat FROM airports ORDER BY distance LIMIT 1;";
-		
-		System.out.println(querryString);
-		
+		}
+		return place;
+	}
+	
+	private LinkedBlockingQueue<Connection> getConnectionsBetweenPlaces(LinkedList<Place> closestBeelineAirports, Place place, boolean placeIsOrigin, Request request) throws ClientProtocolException, IllegalStateException, IOException, JDOMException{
+		GoogleMapsDistance googleDistance = new GoogleMapsDistance();
+		LinkedList<Place> originPlaces = null;
+		LinkedList<Place> destinationPlaces = null;
+		if(placeIsOrigin){
+			originPlaces.add(place);
+			destinationPlaces = closestBeelineAirports;
+		}else{
+			originPlaces = closestBeelineAirports;
+			destinationPlaces.add(place);
+		}
+		LinkedBlockingQueue<Connection> connections = googleDistance.getConnection(originPlaces, destinationPlaces, request.getDepartureDateString(), request.isDepartureTime(), request.getBestTransportation(), null, "en");
+		return connections;
+	}
+	
+	/**
+	 * Orders the connection list by the distance to the airport
+	 * @return
+	 */
+	private Connection[] OrderListByDistance(LinkedBlockingQueue<Connection> connections){
+		Connection[] connectionArray = connections.toArray(new Connection[connections.size()]);
+		Arrays.sort(connectionArray, new CompareClosestAirportsForDistance());
+		return connectionArray;
+	}
+	
+	/**
+	 * orders the connection list by the duration to the airport
+	 * @return
+	 */
+	private Connection[] OrderListByDuration(LinkedBlockingQueue<Connection> connections){
+		Connection[] connectionArray = connections.toArray(new Connection[connections.size()]);
+		Arrays.sort(connectionArray, new CompareClosestAirportsForDuration());
+		return connectionArray;
+	}
+	
+	
+	/**
+	 * Returns the closest airport to a given place using beeline distance
+	 * @param place the place to which the closest airport should be find
+	 * @return closest airport to the given place
+	 */
+	public Place getClosestBeelineAirport(Place place){
+		Place airport = null;
 		try {
-			ResultSet querryResult = conn.createStatement().executeQuery(querryString);
-			querryResult.next();
-			airport = new Place(querryResult.getDouble("lng"), querryResult.getDouble("lat"));
-			airport.setIata(querryResult.getString("iata"));
-			airport.setName(querryResult.getString("name") + " Airport");
-			airport.setType(Place.AIRPORT);
+			airport = QueryClosestAirports.getClosestAirports(place, 1).peekFirst();
 		} catch (SQLException e) {
-			logger.error("Problem by getting data from querry result: " + place.getName() + "\n " + e);
-			return null;
+			logger.error("Cannt find closest airport to this place: " + place.getName() + "\n " + e);
 		}
 		
 		return airport;
 	}
+	
+	
+	// ##########################################################################################
+	// #################################### DEPRECIATED #########################################
+	// ##########################################################################################
 	
 	
 	/**
@@ -94,14 +153,7 @@ public class ClosestAirports {
 	 */
 	public LinkedBlockingQueue<utilities.Connection> createAirportsBeeline(Place place, int limit, int direction){
 		
-		if(place.getLatitude() == Double.MAX_VALUE || place.getLongitude() == Double.MAX_VALUE){
-			try {
-				place = api.GoogleMapsGeocoding.addCoordinatesToPlace(place);
-			} catch (NumberFormatException | NullPointerException | IllegalStateException | IOException | JDOMException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}		
+		place = addCoordinatesToPlace(place);		
 		
 		String querryString = "SELECT ST_Distance_sphere(airports.location, ST_GeomFromText('POINT("
 				+ place.getLongitude()
@@ -175,8 +227,8 @@ public class ClosestAirports {
 	 * 
 	 * @return
 	 */
-	public utilities.Connection[] getListOrderedByDistance(){
-		utilities.Connection[] connectionArray = airportList.toArray(new utilities.Connection[airportList.size()]);
+	public Connection[] getListOrderedByDistance(){
+		Connection[] connectionArray = airportList.toArray(new Connection[airportList.size()]);
 		Arrays.sort(connectionArray, new CompareClosestAirportsForDistance());
 		return connectionArray;
 	}
@@ -185,8 +237,8 @@ public class ClosestAirports {
 	 * 
 	 * @return
 	 */
-	public utilities.Connection[] getListOrderedByDuration(){
-		utilities.Connection[] connectionArray = airportList.toArray(new utilities.Connection[airportList.size()]);
+	public Connection[] getListOrderedByDuration(){
+		Connection[] connectionArray = airportList.toArray(new Connection[airportList.size()]);
 		Arrays.sort(connectionArray, new CompareClosestAirportsForDuration());
 		return connectionArray;
 	}

@@ -17,7 +17,7 @@ import org.joda.time.format.PeriodFormatterBuilder;
 import api.utilities.eStream.Proposal;
 import api.utilities.eStream.Segment;
 
-public class Connection {
+public class Connection implements Cloneable{
 	public final static int PLANE = 1;
 	public final static int BUS = 2;
 	public final static int TRAIN = 3;
@@ -40,20 +40,21 @@ public class Connection {
 	
 	public final static String ADD = "add";
 	public final static String REMOVE = "remove";
+	public final static String UNUSED = "un";
 	
 	
 	private Place origin;
 	private Place destination;
 	private double price = 0;
-	private Duration duration;
+	private Duration duration = new Duration(0);
 	private GregorianCalendar arrivalDate = null;
 	private GregorianCalendar departureDate = null;
 	private int type;
-	private CarrierList carrier;
+	private CarrierList carrier = null;
 	private boolean direct;
 	private Date quoteDateTime;
 	private int weekday;
-	private int distance; //distance in meter
+	private int distance = Integer.MAX_VALUE; //distance in meter
 	private String polyline = null;
 	private String htmlInstructions = null;
 	private String summary = null;
@@ -74,7 +75,7 @@ public class Connection {
 		this.origin = origin;
 		this.destination = destination;
 		this.id = IdGenerator.getNewID();
-		this.action = ADD;
+		this.action = UNUSED;
 	}
 	
 	
@@ -102,7 +103,7 @@ public class Connection {
 		this.quoteDateTime = quoteDateTime;
 		this.weekday = weekday;
 		this.id = IdGenerator.getNewID();
-		this.action = ADD;
+		this.action = UNUSED;
 	}
 	
 	
@@ -126,7 +127,7 @@ public class Connection {
 		this.arrivalDate = arrivalDate;
 		this.departureDate = departureDate;
 		this.id = IdGenerator.getNewID();
-		this.action = ADD;
+		this.action = UNUSED;
 	}
 	
 	/**
@@ -148,7 +149,7 @@ public class Connection {
 		this.arrivalDate = arrivalDate;
 		this.departureDate = departureDate;
 		this.id = IdGenerator.getNewID();
-		this.action = ADD;
+		this.action = UNUSED;
 	}
 	
 	/**
@@ -185,12 +186,30 @@ public class Connection {
 		this.direct = true;
 		this.quoteDateTime = new Date();
 		this.type = Connection.PLANE;
-		this.action = ADD;
+		this.action = UNUSED;
 		this.id = IdGenerator.getNewID();
 	}
 	
-
-	
+	@Override
+	public Connection clone(){
+		Connection newConnection = new Connection(origin, destination, price, departureDate, type, direct, quoteDateTime, weekday);
+		newConnection.setDuration(duration);
+		newConnection.setArrivalDate(arrivalDate);
+		newConnection.setCarrier(carrier);
+		newConnection.setDistance(distance);
+		newConnection.setPolyline(polyline);
+		newConnection.setHtmlInstructions(htmlInstructions);
+		newConnection.setSummary(summary);
+		LinkedBlockingQueue<Connection> newSubConnections = new LinkedBlockingQueue<Connection>();
+		newSubConnections.addAll(subConnections);
+		newConnection.setSubConnections(newSubConnections);
+		newConnection.setReturnConnection(returnConnection);
+		newConnection.setAction(action);
+		newConnection.setBeeline(beeline);
+		newConnection.setCurrency(currency);
+		newConnection.setCode(code);
+		return newConnection;
+	}	
 	/**
 	 * @return the ID
 	 */
@@ -591,13 +610,20 @@ public class Connection {
 	
 	
 	/**
-	 * adds a subconnection to the subconnectionlist
+	 * adds a sub connection to the subconnectionlist and changes all parameters necessary in the head connection
+	 * changed 28.12.2017
 	 * @param subconnection
 	 */
-	public void addSubconnection(Connection subconnection){
-		this.subConnections.add(subconnection);
+	public void addSubconnection(Connection subConnection){
+		//this.subConnections.add(subconnection);
+		UpdateConnectionAfterAddingSubConnection updateConnection = new UpdateConnectionAfterAddingSubConnection();
+		updateConnection.updateConnection(this, subConnection);
 	}
 	
+	public void simpleAddSubconnection(Connection subConnection){
+		this.subConnections.add(subConnection);
+	}
+		
 	/**
 	 * Returns the duration as a nice human readable String
 	 * @return nice human readable String representation of the duration (HH:mm)
@@ -631,5 +657,14 @@ public class Connection {
 	 */
 	public void addPrice(double price){
 		this.price += price;
+	}
+	
+	public void setRecursiveAction(String action){
+		this.setAction(action);
+		System.out.println(":: change action");
+		subConnections.parallelStream().forEach(conn -> {
+			conn.setRecursiveAction(action);
+			System.out.println("change action");
+		});
 	}
 }

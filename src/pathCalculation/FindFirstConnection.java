@@ -58,6 +58,10 @@ public class FindFirstConnection {
 				System.out.println(a.getOrigin().getName() + " - " + a.getDestination().getName() + " : " + a.getDistance() / 1000);
 			}
 			
+			for(Connection a : airportToDestinationList){
+				System.out.println(a.getOrigin().getName() + " - " + a.getDestination().getName() + " : " + a.getDistance() / 1000);
+			}
+			
 			
 			//get flight between both airports
 			int i1 = 0;
@@ -83,14 +87,18 @@ public class FindFirstConnection {
 							headConnection.getSubConnections().addAll(Arrays.asList(originToAirportList));
 							headConnection.getSubConnections().addAll(Arrays.asList(airportToDestinationList));
 							
-							headConnection.getSubConnections().add(originToAirportList[i1]);
+							//headConnection.getSubConnections().add(originToAirportList[i1]);
+							originToAirportList[i1].setRecursiveAction(Connection.ADD);
 							for(utilities.Connection con : result){
+								con.setRecursiveAction(Connection.ADD);
 								headConnection.getSubConnections().add(con);
 							}
 							headConnection.getSubConnections().add(airportToDestinationList[c]);
+							airportToDestinationList[c].setRecursiveAction(Connection.ADD);
+							headConnection.setAction(Connection.ADD);
 							
 							//remove all connections to and from airports that are not used
-							for(Connection con : originToAirportList){
+							/*for(Connection con : originToAirportList){
 								if(con.getId() != originToAirportList[i1].getId()){
 									headConnection.getSubConnections().add(new Connection(con.getId(), Connection.REMOVE));
 								}
@@ -99,7 +107,7 @@ public class FindFirstConnection {
 								if(con.getId() != airportToDestinationList[c].getId()){
 									headConnection.getSubConnections().add(new Connection(con.getId(), Connection.REMOVE));
 								}
-							}
+							}*/
 							
 							
 							//some more information for head connection
@@ -120,14 +128,18 @@ public class FindFirstConnection {
 							headConnection.getSubConnections().addAll(Arrays.asList(originToAirportList));
 							headConnection.getSubConnections().addAll(Arrays.asList(airportToDestinationList));
 							
-							headConnection.getSubConnections().add(originToAirportList[c]);
+							//headConnection.getSubConnections().add(originToAirportList[c]);
+							originToAirportList[c].setRecursiveAction(Connection.ADD);
 							for(utilities.Connection con : result){
+								con.setRecursiveAction(Connection.ADD);
 								headConnection.getSubConnections().add(con);
 							}
-							headConnection.getSubConnections().add(airportToDestinationList[i2]);
-
+							//headConnection.getSubConnections().add(airportToDestinationList[i2]);
+							airportToDestinationList[i2].setRecursiveAction(Connection.ADD);
+							headConnection.setAction(Connection.ADD);
+							
 							//remove all connections to and from airports that are not used
-							for(Connection con : originToAirportList){
+							/*for(Connection con : originToAirportList){
 								if(con.getId() != originToAirportList[c].getId()){
 									headConnection.getSubConnections().add(new Connection(con.getId(), Connection.REMOVE));
 								}
@@ -136,7 +148,7 @@ public class FindFirstConnection {
 								if(con.getId() != airportToDestinationList[i2].getId()){
 									headConnection.getSubConnections().add(new Connection(con.getId(), Connection.REMOVE));
 								}
-							}
+							}*/
 							
 							//some more information for head connection
 							headConnection.setSummary("Car, Plane, Car");

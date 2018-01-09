@@ -95,7 +95,6 @@ public class GoogleMapsDistance implements API {
 	 * @throws JDOMException
 	 */
 	public LinkedBlockingQueue<Connection> getConnection(LinkedList<Place> originList, LinkedList<Place> destinationList, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language) throws ClientProtocolException, IOException, IllegalStateException, JDOMException{
-		//ToDo:insert body
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		int originIndex = 0;
 		int destinationIndex = 0;

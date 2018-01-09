@@ -59,6 +59,10 @@ public class GoogleMapsDistance {
 			}
 		}
 		
+		for(Connection con : connectionList){
+			con.setRecursiveAction(Connection.ADD);
+		}
+		
 		return connectionList;
 	}
 }

@@ -10,13 +10,12 @@ import utilities.Request;
 import java.io.*;
 
 public class LineCoordinatesOnly {
-	
+	static ServerSocket socket;
+
+    static Socket connection;
 	
 	//----------------------------------------------------------------
 	public static void version1(){
-	    ServerSocket socket;
-
-	    Socket connection;
 	    String jsonRequest = new String();
 	    OutputStreamWriter osw;
 
@@ -57,13 +56,23 @@ public class LineCoordinatesOnly {
             
              
         } catch (IOException e)  {
-            System.out.println("Fail!: " + e.toString());
+            System.out.println("Socket connection fail!ed: " + e.toString());
+            return;
         }
 
         
         
         version1();
         
+	}
+	
+	public static void closeSocket(){
+		try {
+			connection.close();
+			socket.close();
+		} catch (IOException e) {
+		
+		}
 	}
 	
 	public static void version2(){

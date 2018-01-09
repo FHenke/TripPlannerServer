@@ -52,9 +52,9 @@ public class QueryClosestAirports {
 				+ place.getLongitude()
 				+ " "
 				+ place.getLatitude()
-				+ ")',-1)) AS distance, airports.iata_code AS iata_code, airports.name AS name, ST_X(airports.location) AS longitude, ST_Y(airports.location) AS latitude FROM airports ORDER BY distance"
+				+ ")',-1)) AS distance, airports.iata_code AS iata_code, airports.name AS name, ST_X(airports.location) AS longitude, ST_Y(airports.location) AS latitude "
+				+ "FROM airports, (select distinct origin from flight_connections) As flights WHERE airports.iata_code = flights.origin ORDER BY distance"
 				+ " LIMIT " + amountOfAirportsToReturn + ";";
-		
 		try {
 			queryResult = conn.createStatement().executeQuery(querryString);
 		} catch (SQLException e) {

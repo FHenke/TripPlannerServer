@@ -52,7 +52,7 @@ public class Querry {
 	}
 	
 	/**
-	 * Sets atitude, longitude and airport name to a pPlace object
+	 * Sets latitude, longitude and airport name to a pPlace object
 	 * @param airport Place objects which containes a IATA code
 	 * @return Place object where latitude, longitude and airport name was added
 	 * @throws SQLException Thrown if no entry for this IATA code was found

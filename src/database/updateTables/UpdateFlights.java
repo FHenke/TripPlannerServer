@@ -54,13 +54,14 @@ public class UpdateFlights extends UpdateTable {
 	public void proceed() throws IOException {
 		AtomicInteger counter = new AtomicInteger();
 		int process = 0;
+		int addedConnections = 0;
+		int addedSubconnections = 0;
 		try {
 			//Get list of all connections that are cached by Skyscanner
 			EStream eStream = new EStream();
 			Querry querry = new Querry(DatabaseConnection.getConnection());
 			String[][] connectionList = querry.getAllConnectionsWhithouDuration(UpdateDatabase.getUpdateDate());
 			
-			//counter.set(querry.getStatusOfUpdateFlights());
 			counter.set(0);
 
 			
@@ -74,10 +75,10 @@ public class UpdateFlights extends UpdateTable {
 					//Status output
 					if((int) (counter.get() * 100 / connectionList.length) > process){
 						process = counter.get() * 100 / connectionList.length;
-						System.out.println("save: " + process + "%");
+						System.out.println("save: " + process + "% (" + addedConnections + " [" + addedSubconnections + "] new connections / " + counter.get() + " requests)");
 					}
 					
-					System.out.println("Step: " + counter.get());
+					//System.out.println("Step: " + counter.get());
 					if(counter.get() == 26000)
 						return;
 					
@@ -85,15 +86,14 @@ public class UpdateFlights extends UpdateTable {
 					LinkedBlockingQueue<Connection> flightList = eStream.getAllConnections(connection[0], connection[1], UpdateDatabase.getUpdateDate(), null);
 					
 					if(flightList == null)
-						return;
+						return;	
 					
-					if(flightList.isEmpty())
-						System.out.println("No connection found");
-					else
-						System.out.println("--> connection found");
+					if(!flightList.isEmpty())
+						addedConnections++;
 					
 					//Iterates over all flights found for this connection
 					for(Connection flight : flightList){
+						addedSubconnections++;
 						addConnectionToDatabase(flight);
 					}
 					//sets the state for this progress in the database

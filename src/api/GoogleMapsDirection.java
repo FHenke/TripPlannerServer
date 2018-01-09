@@ -90,7 +90,6 @@ public class GoogleMapsDirection implements API {
 		// status is OK if there is a result, if a place cant be found it is ZERO_RESULT
 		if(rootFromConnectionsXML.getChildText("status").equals("OK")){
 			for(Element routeOption : rootFromConnectionsXML.getDescendants(Filters.element("leg"))){
-				Connection headHeadConnection = null;
 				Connection headConnection = null;
 				Connection connection = null;
 				
@@ -334,7 +333,8 @@ public class GoogleMapsDirection implements API {
 						}
 
 						//add the subconnection to the connection
-						connection.addSubconnection(subconnection);
+						connection.getSubConnections().add(subconnection);
+						//connection.addSubconnection(subconnection);
 				}
 				
 				
@@ -344,7 +344,7 @@ public class GoogleMapsDirection implements API {
 				headConnection.setSummary(connection.getSummary());
 				headConnection.setDuration(connection.getDuration());
 				headConnection.setDistance(connection.getDistance());
-				headConnection.addSubconnection(connection);
+				headConnection.simpleAddSubconnection(connection);
 				
 				connectionList.add(headConnection);
 				

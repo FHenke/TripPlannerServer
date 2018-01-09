@@ -61,7 +61,8 @@ public class GoogleMapsDirection {
 			Connection headConnection = new Connection(connection.getType(), connection.getOrigin(), connection.getDestination(), connection.getPrice(), connection.getDuration(),
 					connection.getDepartureDate(), connection.getArrivalDate());
 			headConnection.setSummary(connection.getSummary());
-			headConnection.addSubconnection(connection);
+			headConnection.simpleAddSubconnection(connection);
+			headConnection.setRecursiveAction(Connection.ADD);
 			headConnectionList.add(headConnection);
 		}
 		

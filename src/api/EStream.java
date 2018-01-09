@@ -64,7 +64,7 @@ private int successConnections = 0;
 				return getAllConnectionsFromResult(resultSet);
 			} else{
 				System.out.println(resultSet.getMessage());
-				return new LinkedBlockingQueue<Connection>();
+				return null;
 			}	
 		}else{
 			return new LinkedBlockingQueue<Connection>();
@@ -155,7 +155,6 @@ private int successConnections = 0;
 		
 	}
 	
-	// #####################################################################
 
 	/**
 	 * Returns all connections (all direct, all connected and all direct parts from connected connections as direct connection as well)	
@@ -350,7 +349,7 @@ private int successConnections = 0;
 		}
 		requestString += "&pointOfSale=DE";
 		
-		System.out.println("Connection: " + origin + " - " + destination + " (" + successConnections + "/" + KeyToken + ")");
+		//System.out.println("Connection: " + origin + " - " + destination + " (" + successConnections + "/" + KeyToken + ")");
 		
 		return requestString;
 	}
@@ -394,13 +393,8 @@ private int successConnections = 0;
 			}
 		}
 		if(cacheResponse.getErrorMessage().equals("Unable to get data from warehouse")){
-			if(timeout > 0){
-				System.out.println("Unable to get data from warehouse: " + timeout);
-				return getResultSet(requestString, timeout - 1);
-			}
-			else{
-				return null;
-			}
+			logger.warn("Unable to get data (" + requestString + ") from warehouse!");
+			return null;
 		}
 		else{
 			return new ResultSet(cacheResponse.getErrorMessage());
@@ -500,6 +494,10 @@ private int successConnections = 0;
 	private static String getKey(){
 		int counter = KeyToken.getAndIncrement() % KEYS.length;
 		return KEYS[counter];
+	}
+	
+	public static int getKeyToken(){
+		return KeyToken.get();
 	}
 	
 }

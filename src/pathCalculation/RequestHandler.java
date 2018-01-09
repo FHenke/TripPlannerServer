@@ -1,6 +1,7 @@
 package pathCalculation;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -34,20 +35,6 @@ public class RequestHandler {
 			connectionList.addAll(direction.getConnectionList(request));
 		}
 		
-		
-		//If Method is SkyscannerCacheOnly uses Skyscanner Cache Service only
-		/*if(request.getMethode().equalsIgnoreCase("SkyscannerCacheOnly")){
-			try {
-				api.SkyscannerCache direction = new api.SkyscannerCache();
-				connectionList = direction.getAllConnections(request.getOrigin().getIata(), request.getDestination().getIata(), request.getDepartureDateString(), null);
-			} catch (IllegalStateException | IOException | JDOMException e) {
-				System.out.println("FAIL");
-				e.printStackTrace();
-			} catch (Exception e) {
-				System.out.println("FAIL");
-				e.printStackTrace();
-			}
-		}*/
 		
 		if(request.getMethode().equalsIgnoreCase("SkyscannerCacheOnly")){
 			try {
@@ -97,6 +84,19 @@ public class RequestHandler {
 				e.printStackTrace();
 			} catch (Exception e) {
 				System.out.println("FAIL");
+				e.printStackTrace();
+			}
+		}
+		
+		if(request.getMethode().equalsIgnoreCase("BFS")){
+			try {
+				BreadthFirstSearch breadthFirstSearch = new BreadthFirstSearch();
+				return breadthFirstSearch.getConnectionList(request);
+			} catch (IllegalStateException e) {
+				System.out.println("BFS failed: " + e.toString());
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("BFS failed: " + e.toString());
 				e.printStackTrace();
 			}
 		}

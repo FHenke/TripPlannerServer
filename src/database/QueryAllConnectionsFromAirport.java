@@ -44,7 +44,6 @@ public class QueryAllConnectionsFromAirport {
 			queryString += "and duration is not null ";
 		queryString += "and connections.departure_date between '" + departureTime + "' and '" + new java.sql.Timestamp(departureTime.getTime() + timeperiode) + "' "
 				+ "and airports.iata_code = connections.destination;";
-		System.out.println(queryString.toString());
 		try {
 			queryResult = conn.createStatement().executeQuery(queryString);
 		} catch (SQLException e) {

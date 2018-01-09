@@ -53,6 +53,7 @@ public class SkyscannerCache {
 				
 				//some more information for head connection
 				headConnection.setSummary("Plain");
+				headConnection.setRecursiveAction(Connection.ADD);
 				
 				connection.add(headConnection);
 				return connection;

@@ -16,6 +16,8 @@ import sockets.LineCoordinatesOnly;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.GregorianCalendar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ServerUI {
 
@@ -74,7 +76,7 @@ public class ServerUI {
 				
 			}
 		});
-		btnStartServer.setBounds(433, 422, 269, 25);
+		btnStartServer.setBounds(433, 376, 269, 25);
 		frame.getContentPane().add(btnStartServer);
 		
 		JButton btnNewButton = new JButton("Start Update");
@@ -152,8 +154,19 @@ public class ServerUI {
 		textField_2.setColumns(10);
 		textField_2.setBounds(80, 251, 72, 22);
 		frame.getContentPane().add(textField_2);
+		
+		JButton btnCloseServer = new JButton("Close Server");
+		btnCloseServer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				LineCoordinatesOnly.closeSocket();
+			}
+		});
+		btnCloseServer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnCloseServer.setBounds(433, 422, 269, 25);
+		frame.getContentPane().add(btnCloseServer);
 	}
-	
-	
-	
 }

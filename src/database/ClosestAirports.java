@@ -62,6 +62,29 @@ public class ClosestAirports {
 		LinkedList<Place> closestBeelineAirports = QueryClosestAirports.getClosestAirports(place, amountOfAirportsToReturn);
 		LinkedBlockingQueue<Connection> connections = getConnectionsBetweenPlaces(closestBeelineAirports, place, placeIsOrigin, request);
 
+		return OrderListByDuration(connections);
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @param place
+	 * @param placeIsOrigin
+	 * @param amountOfAirportsToReturn int value between 1 and 25, if the value is < 1 it will be changed to 1 if it is > 25 it will be changed to 25
+	 * @return
+	 * @throws SQLException
+	 * @throws ClientProtocolException
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 * @throws JDOMException
+	 */
+	public Connection[] getClosestAirports(Request request, Place place, boolean placeIsOrigin, int amountOfAirportsToReturn) throws SQLException, ClientProtocolException, IllegalStateException, IOException, JDOMException{
+		//Because Google Maps distance can not handle more than 25 places
+		amountOfAirportsToReturn = correctAirportAmountValue(amountOfAirportsToReturn);
+		place = addCoordinatesToPlace(place);
+		LinkedList<Place> closestBeelineAirports = QueryClosestAirports.getClosestAirports(place, amountOfAirportsToReturn);
+		LinkedBlockingQueue<Connection> connections = getConnectionsBetweenPlaces(closestBeelineAirports, place, placeIsOrigin, request);
+
 		return OrderListByDistance(connections);
 	}
 	
@@ -87,8 +110,8 @@ public class ClosestAirports {
 	
 	private LinkedBlockingQueue<Connection> getConnectionsBetweenPlaces(LinkedList<Place> closestBeelineAirports, Place place, boolean placeIsOrigin, Request request) throws ClientProtocolException, IllegalStateException, IOException, JDOMException{
 		GoogleMapsDistance googleDistance = new GoogleMapsDistance();
-		LinkedList<Place> originPlaces = null;
-		LinkedList<Place> destinationPlaces = null;
+		LinkedList<Place> originPlaces = new LinkedList<Place>();
+		LinkedList<Place> destinationPlaces = new LinkedList<Place>();
 		if(placeIsOrigin){
 			originPlaces.add(place);
 			destinationPlaces = closestBeelineAirports;
@@ -204,18 +227,18 @@ public class ClosestAirports {
 		if(airportList.isEmpty()){
 			return -1;
 		}
-		GoogleMapsDirection distance = new GoogleMapsDirection();
+		GoogleMapsDirection direction = new GoogleMapsDirection();
 		LinkedBlockingQueue<utilities.Connection> newConnectionList = new LinkedBlockingQueue<utilities.Connection>();
 		for(utilities.Connection airport : airportList){
 			try {
 				utilities.Connection connection = null;
-				connection = distance.getConnection(airport.getOrigin(), airport.getDestination(), null, true, transportation, "", "de", false).element();
+				connection = direction.getConnection(airport.getOrigin(), airport.getDestination(), null, true, transportation, "", "de", false).element();
 				connection.setBeeline(airport.getBeeline());
 				newConnectionList.add(connection);
 			} catch (IllegalStateException | IOException | JDOMException e) {
 				logger.error("Problem by calculating the distance or duration of one Element: " + airport.getOrigin().getName() + " / " + airport.getDestination().getName() + "\n" + e);
 			} catch (NoSuchElementException e){
-				logger.error("It was not be possible to remove the element for which it was noch be possible to calculate the distance or duration. Element: " + airport.getOrigin().getName() + " / " + airport.getDestination().getName() + "\n");
+				logger.error("It was not be possible to remove the element for which it was not be possible to calculate the distance or duration. Element: " + airport.getOrigin().getName() + " / " + airport.getDestination().getName() + "\n");
 			}
 		}
 		

@@ -2,6 +2,7 @@ package pathCalculation;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.GregorianCalendar;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.logging.log4j.LogManager;
@@ -40,27 +41,17 @@ public class FindFirstConnection {
 				transportation = GoogleMaps.DRIVING;
 			
 			
-			//get closest airport from origin
+			//get closest airports from origin
 			ClosestAirports closeOriginAirports = new ClosestAirports();
 			LinkedBlockingQueue<Connection> originAirportBeeline = closeOriginAirports.createAirportsBeeline(request.getOrigin(), 3, -1);
 			closeOriginAirports.setAirportOtherDistance(transportation);
 			Connection[] originToAirportList = closeOriginAirports.getListOrderedByDistance();
 			
-			//get closest airport from destination
+			//get closest airports from destination
 			ClosestAirports closeDestinationAirports = new ClosestAirports();
 			LinkedBlockingQueue<Connection> destinationAirportBeeline = closeDestinationAirports.createAirportsBeeline(request.getDestination(), 3, 1);
 			closeDestinationAirports.setAirportOtherDistance(transportation);
 			Connection[] airportToDestinationList = closeDestinationAirports.getListOrderedByDistance();
-
-			
-			
-			for(Connection a : originToAirportList){
-				System.out.println(a.getOrigin().getName() + " - " + a.getDestination().getName() + " : " + a.getDistance() / 1000);
-			}
-			
-			for(Connection a : airportToDestinationList){
-				System.out.println(a.getOrigin().getName() + " - " + a.getDestination().getName() + " : " + a.getDistance() / 1000);
-			}
 			
 			
 			//get flight between both airports
@@ -78,8 +69,9 @@ public class FindFirstConnection {
 			
 				for(int c = 0; c <= counter; c++){
 					if(lastChanged == 1){
-						//LinkedBlockingQueue<Connection> result = skyCache.getAllConnections(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), request.getDepartureDateString(), null);
-						LinkedBlockingQueue<Connection> result = eStream.getCheapestConnection(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), request.getDepartureDateString(), null);
+						GregorianCalendar newDepartureTime = (GregorianCalendar) originToAirportList[i1].getArrivalDate().clone();
+						newDepartureTime.add(GregorianCalendar.HOUR_OF_DAY, 1);
+						LinkedBlockingQueue<Connection> result = eStream.getCheapestConnection(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), newDepartureTime, null);
 						// if a flight connection was found take this connection
 						if(!result.isEmpty()){
 							headConnection = new Connection(originToAirportList[i1].getOrigin(), airportToDestinationList[c].getDestination());
@@ -97,19 +89,7 @@ public class FindFirstConnection {
 							airportToDestinationList[c].setRecursiveAction(Connection.ADD);
 							headConnection.setAction(Connection.ADD);
 							
-							//remove all connections to and from airports that are not used
-							/*for(Connection con : originToAirportList){
-								if(con.getId() != originToAirportList[i1].getId()){
-									headConnection.getSubConnections().add(new Connection(con.getId(), Connection.REMOVE));
-								}
-							}
-							for(Connection con : airportToDestinationList){
-								if(con.getId() != airportToDestinationList[c].getId()){
-									headConnection.getSubConnections().add(new Connection(con.getId(), Connection.REMOVE));
-								}
-							}*/
-							
-							
+				
 							//some more information for head connection
 							headConnection.setSummary("Car, Plain, Car");
 							
@@ -137,18 +117,6 @@ public class FindFirstConnection {
 							//headConnection.getSubConnections().add(airportToDestinationList[i2]);
 							airportToDestinationList[i2].setRecursiveAction(Connection.ADD);
 							headConnection.setAction(Connection.ADD);
-							
-							//remove all connections to and from airports that are not used
-							/*for(Connection con : originToAirportList){
-								if(con.getId() != originToAirportList[c].getId()){
-									headConnection.getSubConnections().add(new Connection(con.getId(), Connection.REMOVE));
-								}
-							}
-							for(Connection con : airportToDestinationList){
-								if(con.getId() != airportToDestinationList[i2].getId()){
-									headConnection.getSubConnections().add(new Connection(con.getId(), Connection.REMOVE));
-								}
-							}*/
 							
 							//some more information for head connection
 							headConnection.setSummary("Car, Plane, Car");

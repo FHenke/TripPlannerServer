@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import api.utilities.TimeZoneInfo;
 import utilities.Connection;
 import utilities.Request;
 
@@ -22,9 +23,16 @@ public class JsonConverter {
 		return json;
 	}
 	
-	public static Request jasonToRequest(String jsonRequest){
+	public static Request jsonToRequest(String jsonRequest){
 		Gson gson = new Gson();
 		Request request = gson.fromJson(jsonRequest, Request.class);
 		return request;
+	}
+	
+	public static TimeZoneInfo jsonToTimeZoneInfo(String jsonTimeZoneInfo){
+		Gson gson = new Gson();
+		System.out.println(jsonTimeZoneInfo);
+		TimeZoneInfo timeZoneInfo = gson.fromJson(jsonTimeZoneInfo, TimeZoneInfo.class);
+		return timeZoneInfo;
 	}
 }

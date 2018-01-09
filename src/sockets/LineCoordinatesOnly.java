@@ -36,7 +36,7 @@ public class LineCoordinatesOnly {
         	System.out.println("The input is: " + jsonRequest);
 
         	//Calculate path
-        	Request request = JsonConverter.jasonToRequest(jsonRequest);
+        	Request request = JsonConverter.jsonToRequest(jsonRequest);
         	System.out.println(Connection.dateToString(request.getDepartureDateString()));
         	pathCalculation.RequestHandler requestHandler = new pathCalculation.RequestHandler();
         	LinkedBlockingQueue<Connection> connectionList = requestHandler.solveRequest(request);
@@ -101,7 +101,7 @@ public class LineCoordinatesOnly {
         	if(jsonRequest.startsWith("{")){
         		System.out.println("1. Ausgabe");
 	        	//Calculate path
-	        	Request request = JsonConverter.jasonToRequest(jsonRequest);
+	        	Request request = JsonConverter.jsonToRequest(jsonRequest);
 	        	System.out.println(Connection.dateToString(request.getDepartureDateString()));
 	        	pathCalculation.RequestHandler requestHandler = new pathCalculation.RequestHandler();
 	        	LinkedBlockingQueue<Connection> connectionList = requestHandler.solveRequest(request);

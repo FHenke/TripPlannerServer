@@ -99,6 +99,13 @@ public class GoogleMapsDistance implements API {
 		int originIndex = 0;
 		int destinationIndex = 0;
 		
+		if(avoid == null)
+			avoid = "";
+		if(language == null)
+			language = "";
+		if(transportation == null)
+			transportation = "";
+		
 		Element rootFromConnectionsXML = getInput(api.utilities.GoogleMaps.createDistanceURL(GoogleMaps.PlaceToGoogleMapsString(originList), GoogleMaps.PlaceToGoogleMapsString(destinationList), date, isDepartureDate, transportation, avoid, language));
 		
 		

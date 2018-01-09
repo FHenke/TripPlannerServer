@@ -67,9 +67,9 @@ public class ClosestAirports {
 	
 	/**
 	 * 
-	 * @param request
-	 * @param place
-	 * @param placeIsOrigin
+	 * @param request the whole request object
+	 * @param place a Place object that should be close to the airports
+	 * @param placeIsOrigin is the place object the origin ore destination Place
 	 * @param amountOfAirportsToReturn int value between 1 and 25, if the value is < 1 it will be changed to 1 if it is > 25 it will be changed to 25
 	 * @return
 	 * @throws SQLException

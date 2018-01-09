@@ -5,12 +5,14 @@ import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.apache.http.client.ClientProtocolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jdom2.JDOMException;
 
-import api.utilities.GoogleMaps;
 import database.ClosestAirports;
 import utilities.Connection;
+import utilities.Place;
 import utilities.Request;
 
 public class FindFirstConnection {
@@ -26,32 +28,16 @@ public class FindFirstConnection {
 	
 	public LinkedBlockingQueue<Connection> getConnectionList(Request request, LinkedBlockingQueue<Connection> connection){
 		try {
-			api.SkyscannerCache skyCache = new api.SkyscannerCache();
 			api.EStream eStream = new api.EStream();
-			Connection headConnection;
-			String transportation = GoogleMaps.DRIVING;
-		
-			if(request.getTransportation()[3])
-				transportation = GoogleMaps.WALKING;
-			if(request.getTransportation()[2])
-				transportation = GoogleMaps.BICYCLING;
-			if(request.getTransportation()[1])
-				transportation = GoogleMaps.TRANSIT;
-			if(request.getTransportation()[0])
-				transportation = GoogleMaps.DRIVING;
-			
+			Connection headConnection;			
 			
 			//get closest airports from origin
 			ClosestAirports closeOriginAirports = new ClosestAirports();
-			LinkedBlockingQueue<Connection> originAirportBeeline = closeOriginAirports.createAirportsBeeline(request.getOrigin(), 3, -1);
-			closeOriginAirports.setAirportOtherDistance(transportation);
-			Connection[] originToAirportList = closeOriginAirports.getListOrderedByDistance();
+			Connection[] originToAirportList = closeOriginAirports.getClosestAirports(request, request.getOrigin(), true, 3);
 			
 			//get closest airports from destination
 			ClosestAirports closeDestinationAirports = new ClosestAirports();
-			LinkedBlockingQueue<Connection> destinationAirportBeeline = closeDestinationAirports.createAirportsBeeline(request.getDestination(), 3, 1);
-			closeDestinationAirports.setAirportOtherDistance(transportation);
-			Connection[] airportToDestinationList = closeDestinationAirports.getListOrderedByDistance();
+			Connection[] airportToDestinationList = closeDestinationAirports.getClosestAirports(request, request.getDestination(), false, 3);
 			
 			
 			//get flight between both airports
@@ -69,26 +55,30 @@ public class FindFirstConnection {
 			
 				for(int c = 0; c <= counter; c++){
 					if(lastChanged == 1){
-						GregorianCalendar newDepartureTime = (GregorianCalendar) originToAirportList[i1].getArrivalDate().clone();
-						newDepartureTime.add(GregorianCalendar.HOUR_OF_DAY, 1);
-						LinkedBlockingQueue<Connection> result = eStream.getCheapestConnection(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), newDepartureTime, null);
+						LinkedBlockingQueue<Connection> result = eStream.getCheapestConnection(originToAirportList[i1].getDestination().getIata(), airportToDestinationList[c].getOrigin().getIata(), request.getDepartureDateString(), null);
 						// if a flight connection was found take this connection
 						if(!result.isEmpty()){
+							//create new head connection
 							headConnection = new Connection(originToAirportList[i1].getOrigin(), airportToDestinationList[c].getDestination());
+							headConnection.setAction(Connection.ADD);
 							
+							//add all unused connections (the distance calculated to the different airports)
 							headConnection.getSubConnections().addAll(Arrays.asList(originToAirportList));
 							headConnection.getSubConnections().addAll(Arrays.asList(airportToDestinationList));
 							
-							//headConnection.getSubConnections().add(originToAirportList[i1]);
-							originToAirportList[i1].setRecursiveAction(Connection.ADD);
+							//add the connection to the first airport
+							Connection connectionToAirport = connectAirportWithPlace(request, originToAirportList[i1].getDestination(), result.peek().getDepartureDate(), true);
+							headConnection.addSubconnection(connectionToAirport);
+							
+							//add the flights to the connection
 							for(utilities.Connection con : result){
 								con.setRecursiveAction(Connection.ADD);
 								headConnection.getSubConnections().add(con);
 							}
-							headConnection.getSubConnections().add(airportToDestinationList[c]);
-							airportToDestinationList[c].setRecursiveAction(Connection.ADD);
-							headConnection.setAction(Connection.ADD);
 							
+							//add the connection from the destination airport to the destination
+							Connection connectionFromAirport = connectAirportWithPlace(request, airportToDestinationList[c].getOrigin(), result.peek().getArrivalDate(), false);
+							headConnection.addSubconnection(connectionFromAirport);
 				
 							//some more information for head connection
 							headConnection.setSummary("Car, Plain, Car");
@@ -174,6 +164,41 @@ public class FindFirstConnection {
 			return (int) connection.getDuration().getMillis();
 		}
 		return -1;
+	}
+	
+	/**
+	 * returns the way how to come to the origin arport and how to come from the destination airport to the destination
+	 * @param request
+	 * @param otherPlace
+	 * @param date
+	 * @param isWayToOriginAirport distinguishs if the way from the origin to the origin airport or the way from the destination airport to the destination shpuld be returned
+	 * @return
+	 * @throws ClientProtocolException
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 * @throws JDOMException
+	 */
+	private Connection connectAirportWithPlace(Request request, Place otherPlace, GregorianCalendar date, boolean isWayToOriginAirport) throws ClientProtocolException, IllegalStateException, IOException, JDOMException{
+		GregorianCalendar newTime = (GregorianCalendar) date.clone();
+		api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();
+		Place originPlace;
+		Place destinationPlace;
+		
+		if(isWayToOriginAirport){
+			//the minimum transfer time on the origin airport
+			newTime.add(GregorianCalendar.HOUR_OF_DAY, -1);
+			originPlace = request.getOrigin();
+			destinationPlace = otherPlace;
+		}else{
+			//the minimum transfer time on the destination airport 
+			newTime.add(GregorianCalendar.HOUR_OF_DAY, 1);
+			originPlace = otherPlace;
+			destinationPlace = request.getDestination();
+		}
+		
+		Connection connection = googleDirection.getConnection(originPlace, destinationPlace, newTime, !isWayToOriginAirport, request.getBestTransportation(), "", "en", false).peek();
+		connection.setRecursiveAction(Connection.ADD);
+		return connection;
 	}
 }
 

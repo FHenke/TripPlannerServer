@@ -41,7 +41,7 @@ public class BreadthFirstSearch {
 			connectionList.add(connectionToAirport.peek());
 			
 			int level = 0;
-			while(!controlObject.isConnectionFound()){
+			while(!controlObject.isConnectionFound() && level < 10){
 				LinkedBlockingQueue<Connection> tmpConnectionList = new LinkedBlockingQueue<Connection>();
 				System.out.println(level++);
 				connectionList.parallelStream().forEach(connection -> {
@@ -52,7 +52,11 @@ public class BreadthFirstSearch {
 					}
 				});
 				connectionList = tmpConnectionList;
+				level++;
 			}
+			
+			if(!controlObject.isConnectionFound())
+				return null;
 			
 			LinkedBlockingQueue<Connection> connectionFromAirport = googleDirection.getConnection(destination, request.getDestination(), controlObject.getConnectionList().peek().getArrivalDate(), true, request.getBestTransportation(), "", "", false);
 			controlObject.getConnectionList().peek().addSubconnection(connectionFromAirport.peek());

@@ -615,13 +615,21 @@ public class Connection implements Cloneable{
 	 * @param subconnection
 	 */
 	public void addSubconnection(Connection subConnection){
-		//this.subConnections.add(subconnection);
 		UpdateConnectionAfterAddingSubConnection updateConnection = new UpdateConnectionAfterAddingSubConnection();
 		updateConnection.updateConnection(this, subConnection);
 	}
 	
 	public void simpleAddSubconnection(Connection subConnection){
 		this.subConnections.add(subConnection);
+	}
+	
+	/**
+	 * adds a sub connection to the head of the subconnectionlist and changes all parameters necessary in the head connection
+	 * @param subconnection
+	 */
+	public void addHeadOnSubconnection(Connection subConnection){
+		UpdateConnectionAfterAddingSubConnection updateConnection = new UpdateConnectionAfterAddingSubConnection();
+		updateConnection.updateConnectionsAddingHead(this, subConnection);
 	}
 		
 	/**
@@ -661,10 +669,8 @@ public class Connection implements Cloneable{
 	
 	public void setRecursiveAction(String action){
 		this.setAction(action);
-		System.out.println(":: change action");
 		subConnections.parallelStream().forEach(conn -> {
 			conn.setRecursiveAction(action);
-			System.out.println("change action");
 		});
 	}
 }

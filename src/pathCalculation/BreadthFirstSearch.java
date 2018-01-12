@@ -27,18 +27,26 @@ public class BreadthFirstSearch {
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		ControlObject controlObject = new ControlObject();
 		ClosestAirports closestAirports = new ClosestAirports();
-		Place origin = closestAirports.getClosestBeelineAirport(request.getOrigin());
-		Place destination = closestAirports.getClosestBeelineAirport(request.getDestination());
+		Place originAirport = closestAirports.getClosestBeelineAirport(request.getOrigin());
+		Place destinationAirport = closestAirports.getClosestBeelineAirport(request.getDestination());
 		long startTime = System.nanoTime();
-
 		
-		api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();
+		controlObject.setDepartureAirport(destinationAirport);
+		controlObject.setRequest(request);
+		Connection headConnection = new Connection(request.getOrigin(), originAirport);
+		headConnection.setArrivalDate(request.getDepartureDateString());
+		// set a temporal connection to the startairport. This connection is needed by the SearchNode class to calculate the following flights.  Only the destination and arrivalDate parameters are required.
+		Connection tmpStartConnection = new Connection(request.getOrigin(), originAirport);
+		tmpStartConnection.setArrivalDate(request.getDepartureDateString());
+		headConnection.getSubConnections().add(tmpStartConnection);
+		
+		//api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();
 		try {
 			//Connection startConnection = new Connection(request.getOrigin(), origin);
-			LinkedBlockingQueue<Connection> connectionToAirport = googleDirection.getConnection(request.getOrigin(), origin, request.getDepartureDate(), request.isDepartureTime(), request.getBestTransportation(), "", "", false);
+			//LinkedBlockingQueue<Connection> connectionToAirport = googleDirection.getConnection(request.getOrigin(), originAirport, request.getDepartureDateString(), true, request.getBestTransportation(), "", "", false);
 			//startConnection.addSubconnection(connectionToAirport.peek());
 			//connectionList.add(startConnection);
-			connectionList.add(connectionToAirport.peek());
+			connectionList.add(headConnection);
 			
 			int level = 0;
 			while(!controlObject.isConnectionFound() && level < 10){
@@ -46,23 +54,22 @@ public class BreadthFirstSearch {
 				System.out.println(level++);
 				connectionList.parallelStream().forEach(connection -> {
 					if(connection.getAction().equals(Connection.ADD) || connection.getAction().equals(Connection.UNUSED)){
-						System.out.println(connection.getOrigin().getName() + " - " + connection.getDestination().getName());
 						SearchNode searchNode = new SearchNode();
-						tmpConnectionList.addAll(searchNode.getNextConnections(controlObject, connection.clone(), destination));
+						tmpConnectionList.addAll(searchNode.getNextConnections(controlObject, connection.clone(), destinationAirport));
 					}
 				});
 				connectionList = tmpConnectionList;
-				level++;
 			}
 			
+			// in the case that no connection was found
 			if(!controlObject.isConnectionFound())
 				return null;
 			
-			LinkedBlockingQueue<Connection> connectionFromAirport = googleDirection.getConnection(destination, request.getDestination(), controlObject.getConnectionList().peek().getArrivalDate(), true, request.getBestTransportation(), "", "", false);
-			controlObject.getConnectionList().peek().addSubconnection(connectionFromAirport.peek());
+			//LinkedBlockingQueue<Connection> connectionFromAirport = googleDirection.getConnection(destinationAirport, request.getDestination(), controlObject.getConnectionList().peek().getArrivalDate(), true, request.getBestTransportation(), "", "", false);
+			//controlObject.getConnectionList().peek().addSubconnection(connectionFromAirport.peek());
 			
 		
-		} catch (IllegalStateException | IOException | JDOMException e) {
+		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

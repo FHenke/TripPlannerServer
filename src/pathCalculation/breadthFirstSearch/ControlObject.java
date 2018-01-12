@@ -5,15 +5,17 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import utilities.Connection;
+import utilities.Place;
+import utilities.Request;
 
 public class ControlObject {
 
 	private ConcurrentHashMap<String, Boolean> airportsInTree = new ConcurrentHashMap<String, Boolean>();
 	private LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
-	private AtomicInteger threads = new AtomicInteger(0);
 	private AtomicInteger threadsRunning = new AtomicInteger(0);
-	private AtomicInteger level = new AtomicInteger(0);
 	private boolean connectionFound = false;
+	private Place departureAirport = null;
+	private Request request = null;
 	
 	public ControlObject(){
 		
@@ -36,6 +38,14 @@ public class ControlObject {
 			return false;
 		else
 			return true;
+	}
+	
+	public boolean isDepartureAirportIATA(String iata){
+		if(departureAirport.getIata().equals(iata)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public void incrementRunningThreads(){
@@ -74,6 +84,36 @@ public class ControlObject {
 	public void addConnection(Connection con){
 		connectionList.add(con);
 	}
+
+	/**
+	 * @return the departureAirport
+	 */
+	public Place getDepartureAirport() {
+		return departureAirport;
+	}
+
+	/**
+	 * @param departureAirport the departureAirport to set
+	 */
+	public void setDepartureAirport(Place departureAirport) {
+		this.departureAirport = departureAirport;
+	}
+
+	/**
+	 * @return the request
+	 */
+	public Request getRequest() {
+		return request;
+	}
+
+	/**
+	 * @param request the request to set
+	 */
+	public void setRequest(Request request) {
+		this.request = request;
+	}
+	
+	
 	
 
 	

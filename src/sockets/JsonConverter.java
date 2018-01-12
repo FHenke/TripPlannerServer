@@ -31,7 +31,6 @@ public class JsonConverter {
 	
 	public static TimeZoneInfo jsonToTimeZoneInfo(String jsonTimeZoneInfo){
 		Gson gson = new Gson();
-		System.out.println(jsonTimeZoneInfo);
 		TimeZoneInfo timeZoneInfo = gson.fromJson(jsonTimeZoneInfo, TimeZoneInfo.class);
 		return timeZoneInfo;
 	}

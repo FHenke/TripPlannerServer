@@ -43,7 +43,6 @@ public class GoogleMapsTimeZone {
 	        return utcTime;
 		} catch (IllegalStateException | IOException | JDOMException e) {
 			logger.error("UTC Time can't be calculated. " + e.toString());
-			System.out.println(e.toString());
 			throw new IllegalStateException("UTC Time can't be calculated. " + e.toString());
 		}
     }
@@ -60,24 +59,9 @@ public class GoogleMapsTimeZone {
 	        return localTime;
 		} catch (IllegalStateException | IOException | JDOMException e) {
 			logger.error("Local Time can't be calculated. " + e.toString());
-			System.out.println(e.toString());
 			throw new IllegalStateException("Local Time can't be calculated. " + e.toString());
 		}
     }
-
-    //DateString is the date from the input field
-    /*getUTCTimeFromText: function(dateString, location) {
-        var localTime = new Date(0);
-        //document.getElementById("demo1").innerHTML = "." + dateString + ".";
-        if (dateString != "") {
-            //document.getElementById("demo2").innerHTML = "." + "test" + ".";
-            var splitString = dateString.split(/\/|:| /);
-            localTime.setUTCFullYear(splitString[0], (splitString[1] - 1), splitString[2]);
-            localTime.setUTCHours(splitString[3], splitString[4], 0, 0);
-            var utcTime = this.getUTC(localTime, location);
-        }
-        return utcTime.getTime();
-    },*/
 
     //Gets information about the TimeZone of the given location at the given date
     public static TimeZoneInfo getTimeZoneInfo(GregorianCalendar date, Place place) throws ClientProtocolException, IllegalStateException, IOException, JDOMException{

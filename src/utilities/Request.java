@@ -39,9 +39,8 @@ public class Request extends Connection {
 	 * @return the departureDate
 	 */
 	public GregorianCalendar getDepartureDateString() {
-		//String[] dateArray = departureDateString.split(" |/|\\:");
 		GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-		//greg.set(Integer.parseInt(dateArray[0]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[3]), Integer.parseInt(dateArray[4]));
+		//GregorianCalendar greg = new GregorianCalendar();
 		greg.setTimeInMillis(departureDateEpochTime);
 		return greg;
 	}
@@ -54,9 +53,8 @@ public class Request extends Connection {
 	 */
 	public GregorianCalendar getReturnDateString() {
 		try{
-			//String[] dateArray = returnDateString.split(" |\\|\\:");
 			GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-			//greg.set(Integer.parseInt(dateArray[0]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[3]), Integer.parseInt(dateArray[4]));
+			//GregorianCalendar greg = new GregorianCalendar();
 			greg.setTimeInMillis(returnDateEpochTime);
 			return greg;
 		}catch(Exception e){

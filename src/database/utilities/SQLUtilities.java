@@ -1,14 +1,18 @@
 package database.utilities;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jdom2.JDOMException;
 import org.joda.time.Duration;
 
+import api.GoogleMapsTimeZone;
 import database.QueryClosestAirports;
 import utilities.CarrierList;
 import utilities.Connection;
@@ -25,6 +29,23 @@ public class SQLUtilities {
 		return calendar;
 	}
 	
+	public static GregorianCalendar toGregorianCalendar(java.sql.Timestamp time, Place place){
+		GregorianCalendar gregTime = new GregorianCalendar();
+		gregTime.setTimeInMillis(time.getTime());
+		GregorianCalendar calendar;
+		try {
+			//calendar = new GregorianCalendar(TimeZone.getTimeZone(GoogleMapsTimeZone.getTimeZoneInfo(gregTime, place).getTimeZoneId()));
+			calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+			calendar.setTimeInMillis(time.getTime());
+		return calendar;
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("FAIL time zone");
+		}
+		return null;
+	}
+	
 	public static LinkedBlockingQueue<Connection> getConnectionListFromResultSet(Place origin, ResultSet result) throws SQLException{
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		
@@ -39,8 +60,8 @@ public class SQLUtilities {
 		Place destination = generatePlaceFromResultSet(result);
 		Connection connection = new Connection(origin, destination);
 		
-		connection.setDepartureDate(toGregorianCalendar(result.getTimestamp("departure_date")));
-		connection.setArrivalDate(toGregorianCalendar(result.getTimestamp("arrival_time")));
+		connection.setDepartureDate(toGregorianCalendar(result.getTimestamp("departure_date"), origin));
+		connection.setArrivalDate(toGregorianCalendar(result.getTimestamp("arrival_time"), destination));
 		connection.setPrice(result.getDouble("min_price"));
 		connection.setWeekday(result.getInt("weekday"));
 		connection.setCode(result.getString("flightnumber"));

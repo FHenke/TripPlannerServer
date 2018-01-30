@@ -40,7 +40,6 @@ public class Request extends Connection {
 	 */
 	public GregorianCalendar getDepartureDateString() {
 		GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-		//GregorianCalendar greg = new GregorianCalendar();
 		greg.setTimeInMillis(departureDateEpochTime);
 		return greg;
 	}
@@ -54,7 +53,6 @@ public class Request extends Connection {
 	public GregorianCalendar getReturnDateString() {
 		try{
 			GregorianCalendar greg = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-			//GregorianCalendar greg = new GregorianCalendar();
 			greg.setTimeInMillis(returnDateEpochTime);
 			return greg;
 		}catch(Exception e){

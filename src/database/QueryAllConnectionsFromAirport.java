@@ -34,7 +34,8 @@ public class QueryAllConnectionsFromAirport {
 	
 	public static LinkedBlockingQueue<Connection> getAllOutboundConnectionsWithinOneDay(Place airport, GregorianCalendar date) throws SQLException{
 		java.sql.Timestamp time = new java.sql.Timestamp(date.getTimeInMillis());
-		ResultSet outboundConnections = getAllOutboundConnections(airport.getIata(), time, millisecondsOfDay, true, false, false);
+		//ResultSet outboundConnections = getAllOutboundConnections(airport.getIata(), time, millisecondsOfDay, true, false, false);
+		ResultSet outboundConnections = getAllOutboundConnectionsAprxPrice(airport.getIata(), time, millisecondsOfDay, true, false, false);
 		LinkedBlockingQueue<Connection> connectionList = SQLUtilities.getConnectionListFromResultSet(airport, outboundConnections);
 		return connectionList;
 	}
@@ -53,6 +54,29 @@ public class QueryAllConnectionsFromAirport {
 			queryString += "and flightnumber is not null ";
 		queryString += "and connections.departure_date between '" + departureTime + "' and '" + new java.sql.Timestamp(departureTime.getTime() + timeperiode) + "' "
 				+ "and airports.iata_code = connections.destination;";
+		try {
+			queryResult = conn.createStatement().executeQuery(queryString);
+		} catch (SQLException e) {
+			logger.error("Cant Query closest airports for: " + iata + "\n " + e);
+			throw new SQLException("Cant Query closest airports for: " + iata);
+		}	
+		return queryResult;
+	}
+	
+	
+	private static ResultSet getAllOutboundConnectionsAprxPrice(String iata, java.sql.Timestamp departureTime, long timeperiode, boolean allowZeroPrice, boolean allowIncompleteData, boolean allowConnectedFlights) throws SQLException{
+		ResultSet queryResult;
+		String queryString = "SELECT * "
+				+ "FROM connections_with_aprx_price "
+				+ "WHERE origin = '" + iata + "' ";
+		if(!allowZeroPrice)
+			queryString += "and min_price != 0.0 ";
+		if(!allowIncompleteData)
+			queryString += "and duration is not null ";
+		if(!allowConnectedFlights)
+			queryString += "and flightnumber is not null ";
+		queryString += "and departure_date between '" + departureTime + "' and '" + new java.sql.Timestamp(departureTime.getTime() + timeperiode) + "';";
+		System.out.println(queryString);
 		try {
 			queryResult = conn.createStatement().executeQuery(queryString);
 		} catch (SQLException e) {

@@ -39,7 +39,7 @@ import utilities.XMLUtilities;
 public class EStream implements API {
 
 protected static final Logger logger = LogManager.getLogger(EStream.class);
-private static final String[] KEYS = {"2e4c18c566ec29f80f5b62156edebefc707ba1e0", "9759124eb23195416e37f9afb3760989282ce190", "251df1c73ac1f99010c0182ae2c5acaaa8c67363", "933b6f0f1f363f84bbb8a882fa9f20be21deb096"};
+private static final String[] KEYS = {"2e4c18c566ec29f80f5b62156edebefc707ba1e0", "9759124eb23195416e37f9afb3760989282ce190", "251df1c73ac1f99010c0182ae2c5acaaa8c67363", "933b6f0f1f363f84bbb8a882fa9f20be21deb096", "d7b607c691c4eb127355015c707de055fcb6cfce"};
 private static final AtomicInteger KeyToken = new AtomicInteger(0);
 private int successConnections = 0;
 	
@@ -368,36 +368,40 @@ private int successConnections = 0;
 		//Converts the received JSON file into an Object
 	    Gson gson = new Gson();
 		CacheResponse cacheResponse = gson.fromJson(urlResponse, CacheResponse.class);
-	    
-		if(cacheResponse.getStatus().equals("success")){
-			successConnections++;
-			//Converts the JSON file into an ResultSet object and returns it
-			try{
-				// first decodes the Base 64 String and then decompress it
-				String decompressedData = decompress(cacheResponse.getData().getBase64GzippedResponse());
-				ResultSet resultSet = gson.fromJson(decompressedData, ResultSet.class);
-				resultSet.setMessage("success");
-				return resultSet;
-			}catch(NullPointerException e){
-				//if no result was found return null
-				return null;
+	    try{
+			if(cacheResponse.getStatus().equals("success")){
+				successConnections++;
+				//Converts the JSON file into an ResultSet object and returns it
+				try{
+					// first decodes the Base 64 String and then decompress it
+					String decompressedData = decompress(cacheResponse.getData().getBase64GzippedResponse());
+					ResultSet resultSet = gson.fromJson(decompressedData, ResultSet.class);
+					resultSet.setMessage("success");
+					return resultSet;
+				}catch(NullPointerException e){
+					//if no result was found return null
+					return null;
+				}
 			}
-		}
-		if(cacheResponse.getErrorMessage().equals("RPS capacity limit exceeded")){
-			if(timeout > 0){
-				System.out.println("Timeout: " + timeout);
-				return getResultSet(requestString, timeout - 1);
+			if(cacheResponse.getErrorMessage().equals("RPS capacity limit exceeded")){
+				if(timeout > 0){
+					System.out.println("Timeout: " + timeout);
+					return getResultSet(requestString, timeout - 1);
+				}
+				else{
+					return new ResultSet(cacheResponse.getErrorMessage());
+				}
+			}
+			if(cacheResponse.getErrorMessage().equals("Unable to get data from warehouse")){
+				logger.warn("Unable to get data (" + requestString + ") from warehouse!");
+				return null;
 			}
 			else{
 				return new ResultSet(cacheResponse.getErrorMessage());
 			}
-		}
-		if(cacheResponse.getErrorMessage().equals("Unable to get data from warehouse")){
-			logger.warn("Unable to get data (" + requestString + ") from warehouse!");
+		}catch(NullPointerException ex){
+			System.out.println("NullPointerException: " + urlResponse);
 			return null;
-		}
-		else{
-			return new ResultSet(cacheResponse.getErrorMessage());
 		}
 	}
 	

@@ -5,9 +5,12 @@ import java.util.GregorianCalendar;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Consumer;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jdom2.JDOMException;
 
 import database.ClosestAirports;
+import database.QueryAllConnectionsFromAirport;
 import pathCalculation.breadthFirstSearch.ControlObject;
 import pathCalculation.breadthFirstSearch.SearchNode;
 import utilities.Connection;
@@ -16,13 +19,14 @@ import utilities.Request;
 
 public class BreadthFirstSearch {
 
+	protected static final Logger logger = LogManager.getLogger(BreadthFirstSearch.class);
 	
 	public BreadthFirstSearch(){
 		
 	}
 	
 	
-	public LinkedBlockingQueue<Connection> getConnectionList(Request request){
+	public LinkedBlockingQueue<Connection> getConnectionList(Request request) throws IllegalStateException{
 		
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		ControlObject controlObject = new ControlObject();
@@ -33,6 +37,7 @@ public class BreadthFirstSearch {
 		
 		controlObject.setDepartureAirport(destinationAirport);
 		controlObject.setRequest(request);
+		
 		Connection headConnection = new Connection(request.getOrigin(), originAirport);
 		headConnection.setArrivalDate(request.getDepartureDateString());
 		// set a temporal connection to the startairport. This connection is needed by the SearchNode class to calculate the following flights.  Only the destination and arrivalDate parameters are required.
@@ -40,12 +45,7 @@ public class BreadthFirstSearch {
 		tmpStartConnection.setArrivalDate(request.getDepartureDateString());
 		headConnection.getSubConnections().add(tmpStartConnection);
 		
-		//api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();
 		try {
-			//Connection startConnection = new Connection(request.getOrigin(), origin);
-			//LinkedBlockingQueue<Connection> connectionToAirport = googleDirection.getConnection(request.getOrigin(), originAirport, request.getDepartureDateString(), true, request.getBestTransportation(), "", "", false);
-			//startConnection.addSubconnection(connectionToAirport.peek());
-			//connectionList.add(startConnection);
 			connectionList.add(headConnection);
 			
 			int level = 0;
@@ -64,20 +64,16 @@ public class BreadthFirstSearch {
 			// in the case that no connection was found
 			if(!controlObject.isConnectionFound())
 				return null;
-			
-			//LinkedBlockingQueue<Connection> connectionFromAirport = googleDirection.getConnection(destinationAirport, request.getDestination(), controlObject.getConnectionList().peek().getArrivalDate(), true, request.getBestTransportation(), "", "", false);
-			//controlObject.getConnectionList().peek().addSubconnection(connectionFromAirport.peek());
-			
+						
 		
 		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.warn("Connectionf for Breadth first Search can't be calculated." + e);
+			throw new IllegalStateException("Connectionf for Breadth first Search can't be calculated." + e);
 		}
 		
 		
 		long elapsedTime = System.nanoTime() - startTime;
 		System.out.println((double) elapsedTime / 1000000000.0);
 		return connectionList;
-		//return controlObject.getConnectionList();
 	}
 }

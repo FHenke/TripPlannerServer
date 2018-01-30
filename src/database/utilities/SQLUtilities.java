@@ -30,20 +30,9 @@ public class SQLUtilities {
 	}
 	
 	public static GregorianCalendar toGregorianCalendar(java.sql.Timestamp time, Place place){
-		GregorianCalendar gregTime = new GregorianCalendar();
-		gregTime.setTimeInMillis(time.getTime());
-		GregorianCalendar calendar;
-		try {
-			//calendar = new GregorianCalendar(TimeZone.getTimeZone(GoogleMapsTimeZone.getTimeZoneInfo(gregTime, place).getTimeZoneId()));
-			calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-			calendar.setTimeInMillis(time.getTime());
+		GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+		calendar.setTimeInMillis(time.getTime());
 		return calendar;
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("FAIL time zone");
-		}
-		return null;
 	}
 	
 	public static LinkedBlockingQueue<Connection> getConnectionListFromResultSet(Place origin, ResultSet result) throws SQLException{
@@ -70,6 +59,9 @@ public class SQLUtilities {
 		connection.setCarrier(new CarrierList(result.getString("operating_airline")));
 		connection.setType(Connection.PLANE);
 		connection.setSummary(destination.getName());
+		if(connection.getCode() != null){
+			connection.setDirect(true);
+		}
 	
 		return connection;
 	}

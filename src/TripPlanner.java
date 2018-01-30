@@ -1,3 +1,4 @@
+import java.util.GregorianCalendar;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import sockets.LineCoordinatesOnly;
@@ -17,8 +18,17 @@ public class TripPlanner {
 		}
 		*/
 		
-		ServerUI serverUI = new ServerUI();
-		serverUI.setVisible(true);
+		if(args.length > 0){
+			if(args[0].equals("server"))
+				(new Thread(new ServerStart())).start();
+			if(args[0].equals("update"))
+				(new Thread(new database.updateTables.UpdateDatabase(new GregorianCalendar(2018, 4 - 1, Integer.parseInt(args[1]), 0, 0, 0), true, true, true))).start();
+		}else{
+			ServerUI serverUI = new ServerUI();
+			serverUI.setVisible(true);
+		}
+		
+		
 	}
 
 	

@@ -155,14 +155,11 @@ public class GoogleMapsDirection implements API {
 					logger.warn("The departure and arrival time of one connection can't be set." + e);
 				}catch(NullPointerException e){
 					try{
-						//TODO remove
-						System.out.println("input millis to direction: " + date.getTimeInMillis());
 						GregorianCalendar departureTime = new GregorianCalendar();
 						if(isDepartureDate)
 							departureTime.setTimeInMillis(date.getTimeInMillis());
 						else
 							departureTime.setTimeInMillis(date.getTimeInMillis() - connection.getDuration().getMillis());
-						//departureTime.setTimeZone(TimeZone.getTimeZone("UTC"));
 						departureTime.setTimeZone(TimeZone.getTimeZone(GoogleMapsTimeZone.getTimeZoneInfo(departureTime, connection.getOrigin()).getTimeZoneId()));
 						connection.setDepartureDate(departureTime);
 						
@@ -171,7 +168,6 @@ public class GoogleMapsDirection implements API {
 							arrivalTime.setTimeInMillis(date.getTimeInMillis() + connection.getDuration().getMillis());
 						else
 							arrivalTime.setTimeInMillis(date.getTimeInMillis());
-						//arrivalTime.setTimeZone(TimeZone.getTimeZone("UTC"));
 						arrivalTime.setTimeZone(TimeZone.getTimeZone(GoogleMapsTimeZone.getTimeZoneInfo(arrivalTime, connection.getDestination()).getTimeZoneId()));
 						connection.setArrivalDate(arrivalTime);
 					}catch(NullPointerException ex){

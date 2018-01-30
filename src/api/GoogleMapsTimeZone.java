@@ -37,7 +37,7 @@ public class GoogleMapsTimeZone {
         try {
 			timeZoneInfo = getTimeZoneInfo(localTime, place);
 			//rawOffset = time difference to utc, dstOffset = day light saving time difference
-	        //calculates the current utc time by subtract the time difference to utc and to day light saving time
+	        //calculates the utc time by subtract the time difference to utc and to day light saving time
 	        GregorianCalendar utcTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 	        utcTime.setTimeInMillis(((localTime.getTimeInMillis() / 1000) - timeZoneInfo.getDstOffset() - timeZoneInfo.getRawOffset()) * 1000);
 	        return utcTime;
@@ -53,7 +53,7 @@ public class GoogleMapsTimeZone {
 		try {
 			timeZoneInfo = getTimeZoneInfo(utcTime, place);
 			//rawOffset = time difference to utc, dstOffset = day light saving time difference
-	        //calculates the current utc time by add the time difference to utc and to day light saving time
+	        //calculates the local time by adding the time difference to utc and to day light saving time
 	        GregorianCalendar localTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 	        localTime.setTimeInMillis(((utcTime.getTimeInMillis() / 1000) + timeZoneInfo.getDstOffset() + timeZoneInfo.getRawOffset()) * 1000);
 	        return localTime;
@@ -66,7 +66,6 @@ public class GoogleMapsTimeZone {
     //Gets information about the TimeZone of the given location at the given date
     public static TimeZoneInfo getTimeZoneInfo(GregorianCalendar date, Place place) throws ClientProtocolException, IllegalStateException, IOException, JDOMException{
     	String url = "https://maps.googleapis.com/maps/api/timezone/json?location=" + place.getLatitude() + "," + place.getLongitude() +"&timestamp=" + (date.getTimeInMillis() / 1000) + "&key=AIzaSyCfBLegejThMTrjkQn3b3R9IErezqTx9UI";
-
     	return sockets.JsonConverter.jsonToTimeZoneInfo(getInput(url));
     }
 	

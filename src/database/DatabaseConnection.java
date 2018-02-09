@@ -16,8 +16,10 @@ public class DatabaseConnection {
 	
 	private static final String DATABASE_NAME = "TripPlanner";
 	private static final String DATABASE_HOST = "localhost";
-	private static final String DATABASE_USER = "postgres";
-	private static final String DATABASE_KEY = "TripPlanner";
+	private static final String DATABASE_USER = "henke";
+	//private static final String DATABASE_USER = "postgres";
+	//private static final String DATABASE_KEY = "TripPlanner";
+	private static final String DATABASE_KEY = "trip";
 	private static final String DATABASE_PORT = "5432";
 	
 	private static Connection conn = ConnectToDatabase();
@@ -45,6 +47,7 @@ public class DatabaseConnection {
 	private static Connection ConnectToDatabase(){
 		try {
 			return DriverManager.getConnection(BuildJdbcUrl(), DATABASE_USER, DATABASE_KEY);
+			//return DriverManager.getConnection(BuildJdbcUrl(), DATABASE_USER, null);
 		} catch (SQLException e) {
 			logger.error("Database connection can't be established: " + e.toString());
 		}

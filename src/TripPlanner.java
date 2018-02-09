@@ -1,7 +1,9 @@
 import java.util.GregorianCalendar;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import sockets.CloseApplicationListener;
 import sockets.LineCoordinatesOnly;
+import sockets.SendCommand;
 import utilities.Connection;
 
 public class TripPlanner {
@@ -19,21 +21,24 @@ public class TripPlanner {
 		*/
 		
 		if(args.length > 0){
-			if(args[0].equals("server"))
+			if(args[0].equals("server")){
 				(new Thread(new ServerStart())).start();
-			if(args[0].equals("update"))
+				(new Thread(new CloseApplicationListener())).start();
+			}
+			if(args[0].equals("update")){
 				(new Thread(new database.updateTables.UpdateDatabase(new GregorianCalendar(2018, 4 - 1, Integer.parseInt(args[1]), 0, 0, 0), true, true, true))).start();
+				//(new Thread(new CloseApplicationListener())).start();
+			}
+			if(args[0].equals("stop")){
+				(new Thread(new SendCommand("stop"))).start();
+			}
+				
 		}else{
 			ServerUI serverUI = new ServerUI();
 			serverUI.setVisible(true);
 		}
 		
 		
-	}
-
-	
-	private static void openSocket(){
-		LineCoordinatesOnly.version1();
 	}
 	
 	//for getConnection

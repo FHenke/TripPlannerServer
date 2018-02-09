@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
@@ -34,7 +33,6 @@ import org.jdom2.input.SAXBuilder;
 import api.utilities.SkyscannerURL;
 import database.DatabaseConnection;
 import database.Querry;
-import database.updateTables.UpdateContinents;
 import utilities.*;
 
 /**

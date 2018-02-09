@@ -188,7 +188,7 @@ public class UpdateFlights extends UpdateTable {
 				deleteSkyscannerEntries.executeUpdate();
 			}
 		}catch(SQLException e){
-			logger.warn("Problem by writing following Airport to Database: " + flight.getOrigin().getId() + " : " + flight.getDestination().getId() + "   - " + e.toString());
+			logger.warn("Problem by writing following Airport to Database: " + flight.getOrigin().getId() + " : " + flight.getDestination().getId() + " ([" + connectionNumber + "]" +  flight.getSummary() + ")   - " + e.toString());
 		}
 	}
 	

@@ -13,6 +13,7 @@ public class LineCoordinatesOnly {
 	static ServerSocket socket;
 
     static Socket connection;
+    static boolean closeApplication = false;
 	
 	//----------------------------------------------------------------
 	public static void version1(){
@@ -21,7 +22,7 @@ public class LineCoordinatesOnly {
 
 	    int port = 4308;
 	    
-		System.out.println("Signal Server 2 is running.");
+		System.out.println("Server is running.");
 
         try  {
         	String solutionJson="";
@@ -56,7 +57,8 @@ public class LineCoordinatesOnly {
             
              
         } catch (IOException e)  {
-            System.out.println("Socket connection fail!ed: " + e.toString());
+        	if(!closeApplication)
+        		System.out.println("Socket connection fail!ed: " + e.toString());
             return;
         }
 
@@ -68,10 +70,10 @@ public class LineCoordinatesOnly {
 	
 	public static void closeSocket(){
 		try {
-			connection.close();
-			socket.close();
+			if(socket != null)
+				socket.close();
 		} catch (IOException e) {
-		
+				System.out.println("Cant't close the socket connection");
 		}
 	}
 		

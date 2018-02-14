@@ -189,6 +189,7 @@ private int successConnections = 0;
 		Segment[] segments = proposal.getLegs()[0].getSegments();
 		Connection connection;
 		
+		
 		Place origin = new Place(segments[0].getOrigin(), segments[0].getOrigin(), Place.AIRPORT);
 		Place destination = new Place(segments[segments.length - 1].getDestination(), segments[segments.length - 1].getDestination(), Place.AIRPORT);
 		connection = new Connection(origin, destination);
@@ -201,9 +202,21 @@ private int successConnections = 0;
 		connection.setDirect(false);
 		connection.setWeekday((segments[0].getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1 == 0) ? 7 : segments[0].getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1);
 		connection.setCarrier(new CarrierList(proposal.getValidatingCarrier()));
+		//TODO: Remove
+		String test = connection.getFlightString();
+		
+		
 		
 		for(Segment segment : segments){
-			connection.addSubconnection(new Connection(null, segment));
+			Connection tmp = new Connection(null, segment);
+			//TODO: Remove
+			//logger.error("FLIGHT NUMBER: " + tmp.getSummary());
+			connection.simpleAddSubconnection(tmp);
+		}
+		
+		if(!test.equals(connection.getFlightString())){
+			logger.warn(test);
+			logger.warn("Check: " + connection.getFlightString());
 		}
 		
 		return connection;

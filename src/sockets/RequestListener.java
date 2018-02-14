@@ -1,30 +1,40 @@
 package sockets;
 
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import database.updateTables.UpdateDatabase;
 import utilities.Connection;
 import utilities.Request;
 
-import java.io.*;
-
-public class LineCoordinatesOnly {
+public class RequestListener implements Runnable{
+	
 	static ServerSocket socket;
 
     static Socket connection;
     static boolean closeApplication = false;
+    
+    public RequestListener(){
+    	
+    }
 	
 	//----------------------------------------------------------------
-	public static void version1(){
-	    String jsonRequest = new String();
+    @Override
+	public void run(){
+	    String command = new String();
 	    OutputStreamWriter osw;
 
-	    int port = 4308;
+	    int port = 4310;
 	    
-		System.out.println("Server is running.");
+		System.out.println("Server Listens for commands.");
 
         try  {
-        	String solutionJson="";
+        	String response="";
         	socket = new ServerSocket(port);
         	connection = socket.accept();
 
@@ -32,27 +42,22 @@ public class LineCoordinatesOnly {
         	osw = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
         	BufferedReader input = new BufferedReader(inputStream);
 
-        	jsonRequest = input.readLine();
-        	System.out.println("The input is: " + jsonRequest);
+        	command = input.readLine();
+        	System.out.println("The input is: " + command);
 
-        	//Calculate path
-        	Request request = JsonConverter.jsonToRequest(jsonRequest);
-        	System.out.println(Connection.dateToString(request.getDepartureDateString()));
-        	pathCalculation.RequestHandler requestHandler = new pathCalculation.RequestHandler();
-        	LinkedBlockingQueue<Connection> connectionList = requestHandler.solveRequest(request);
-        	solutionJson = JsonConverter.getJson(connectionList);
-        	//System.out.println("Solution: " + solutionJson);
+        	//Process command
+        	if(command.equals("status")){
+        		response = UpdateDatabase.getStatus();
+        	}
 
         	//output
-        	String str = solutionJson;
-        	osw.write(str, 0, str.length());
+        	osw.write(response, 0, response.length());
         	osw.flush();
 
         	
 
         	connection.close();
         	socket.close();
-        	System.out.println("Closing...");
             
              
         } catch (IOException e)  {
@@ -63,7 +68,7 @@ public class LineCoordinatesOnly {
 
         
         
-        version1();
+        run();
         
 	}
 	
@@ -75,5 +80,4 @@ public class LineCoordinatesOnly {
 				System.out.println("Cant't close the socket connection");
 		}
 	}
-		
 }

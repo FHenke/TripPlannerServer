@@ -44,6 +44,7 @@ public class CloseApplicationListener implements Runnable {
         	//Close System
         	if(inputString.equals("stop")){
         		LineCoordinatesOnly.closeSocket();
+        		RequestListener.closeSocket();
         		System.out.println("Close application...");
         		System.exit(0);
         	}

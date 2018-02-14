@@ -16,10 +16,10 @@ public class DatabaseConnection {
 	
 	private static final String DATABASE_NAME = "TripPlanner";
 	private static final String DATABASE_HOST = "localhost";
-	private static final String DATABASE_USER = "henke";
-	//private static final String DATABASE_USER = "postgres";
-	//private static final String DATABASE_KEY = "TripPlanner";
-	private static final String DATABASE_KEY = "trip";
+	//private static final String DATABASE_USER = "henke";
+	private static final String DATABASE_USER = "postgres";
+	private static final String DATABASE_KEY = "TripPlanner";
+	//private static final String DATABASE_KEY = "trip";
 	private static final String DATABASE_PORT = "5432";
 	
 	private static Connection conn = ConnectToDatabase();

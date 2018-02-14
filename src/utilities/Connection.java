@@ -51,7 +51,7 @@ public class Connection implements Cloneable{
 	private GregorianCalendar departureDate = null;
 	private int type;
 	private CarrierList carrier = null;
-	private boolean direct;
+	private boolean direct = false;
 	private Date quoteDateTime;
 	private int weekday;
 	private int distance = Integer.MAX_VALUE; //distance in meter
@@ -672,5 +672,12 @@ public class Connection implements Cloneable{
 		subConnections.parallelStream().forEach(conn -> {
 			conn.setRecursiveAction(action);
 		});
+	}
+	
+	public String getFlightString(){
+		return "Flight: " + summary + " [" + direct + "]"
+				+ " (" + origin.getName() + " (" + origin.getIata() + ") - " + destination.getName() + " (" + destination.getIata() + ") "
+				+ " duration: " + durationToString().toString() + " price: " + price 
+				+ " departure: " + departureDate.get(Calendar.HOUR_OF_DAY) + ":" + departureDate.get(Calendar.MINUTE) + " arrival: " + arrivalDate.get(Calendar.HOUR_OF_DAY) + ":" + arrivalDate.get(Calendar.MINUTE);
 	}
 }

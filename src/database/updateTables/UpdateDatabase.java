@@ -18,6 +18,7 @@ import database.DatabaseConnection;
  */
 public class UpdateDatabase implements Runnable{
 	
+	private static String status = "NO STATUS";
 	private static GregorianCalendar updateDate = null;
 	boolean updatePlaces = true;
 	boolean useSkyscanner = true;
@@ -36,21 +37,27 @@ public class UpdateDatabase implements Runnable{
 		try {
 			if(updatePlaces){
 				new UpdateContinents(dbConnection).proceed();
-				System.out.println("Continents updated!");
+				status = "Continents updated!";
+				System.out.println(status);
 				new UpdateCountries(dbConnection).proceed();
-				System.out.println("Countries updated!");
+				status = "Countries updated!";
+				System.out.println(status);
 				new UpdateCities(dbConnection).proceed();
-				System.out.println("Cities updated!");
+				status = "Cities updated!";
+				System.out.println(status);
 				new UpdateAirports(dbConnection).proceed();
-				System.out.println("Airports updated!");
+				status = "Airports updated!";
+				System.out.println(status);
 			}
 			if(useSkyscanner){
 				new UpdateFlightConnections(dbConnection).proceed();
-				System.out.println("Flight Connections updated!");
+				status = "Flight Connections updated!";
+				System.out.println(status);
 			}
 			if(useEStreaming){
 				new UpdateFlights(dbConnection).proceed();
-				System.out.println("Flight Connections updated!");
+				status = "Flight Connections updated!";
+				System.out.println(status);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -67,4 +74,11 @@ public class UpdateDatabase implements Runnable{
 		proceed();
 	}
 	
+	public static void setStatus(String newStatus){
+		status = newStatus;
+	}
+	
+	public static String getStatus(){
+		return status;
+	}
 }

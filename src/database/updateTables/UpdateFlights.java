@@ -17,6 +17,7 @@ import utilities.Connection;
 public class UpdateFlights extends UpdateTable {
 	
 	
+	//PreparedStatements precompile the Statement and executes it then with different values, therefor runtime improvement
 	PreparedStatement selectIdenticalDirectEntries = null;
 	PreparedStatement selectConnectedEntries = null;
 	PreparedStatement selectId = null;
@@ -64,8 +65,6 @@ public class UpdateFlights extends UpdateTable {
 			
 			counter.set(0);
 
-			
-			//PreparedStatements precompile the Statement and executes it then with different values, therefor runtime improvement
 			try {			
 			
 				//iterates over all places in placelist to add them to the database if not already existing
@@ -75,6 +74,7 @@ public class UpdateFlights extends UpdateTable {
 					//Status output
 					if((int) (counter.get() * 100 / connectionList.length) > process){
 						process = counter.get() * 100 / connectionList.length;
+						UpdateDatabase.setStatus("save: " + process + "% (" + addedConnections + " [" + addedSubconnections + "] new connections / " + counter.get() + " requests)");
 						System.out.println("save: " + process + "% (" + addedConnections + " [" + addedSubconnections + "] new connections / " + counter.get() + " requests)");
 					}
 					
@@ -141,7 +141,7 @@ public class UpdateFlights extends UpdateTable {
 				deletOldEntriesFromDatabase(flight, connectionNumber);
 				replace = true;
 			}
-			//an new result should be written to the database if:
+			//a new result should be written to the database if:
 			// -> replace is true
 			// -> this flight is not in the database
 			if(!isFlightInDatabase(flight, connectionNumber) || replace == true){

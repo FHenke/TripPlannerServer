@@ -1,18 +1,18 @@
 package sockets;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-
-public class SendCommand implements Runnable {
+public class RequestSocket implements Runnable {
 	String command = "";
 	static Socket socket;
 
-    static Socket connection;
     
-    public SendCommand(String command){
+    public RequestSocket(String command){
     	this.command = command;
     }
 	
@@ -20,9 +20,9 @@ public class SendCommand implements Runnable {
 	@Override
 	public void run(){
 
-	    int port = 4309;
+	    int port = 4310;
 	    
-		System.out.println("Command Server is running.");
+		System.out.println("2Command Server is running.");
 
         try  {
         	socket = new Socket("localhost", port);
@@ -32,7 +32,15 @@ public class SendCommand implements Runnable {
         	//output
         	osw.write(command, 0, command.length());
         	osw.flush();
+        	
+        	System.out.println("2Command sended. " + command );
+        	
+        	//Response
+        	InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
+        	BufferedReader input = new BufferedReader(inputStream);
 
+        	String inputString = input.readLine();
+        	System.out.println("The response is: " + inputString);
         	
 
         	socket.close();
@@ -46,4 +54,3 @@ public class SendCommand implements Runnable {
         
 	}
 }
-

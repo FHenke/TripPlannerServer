@@ -33,6 +33,7 @@ import org.jdom2.input.SAXBuilder;
 import api.utilities.SkyscannerURL;
 import database.DatabaseConnection;
 import database.Querry;
+import database.updateTables.UpdateDatabase;
 import utilities.*;
 
 /**
@@ -163,6 +164,7 @@ public class SkyscannerCache implements API {
 			
 			if((int) (counter.getAndIncrement() * 100 / streamSize) > process.get()){
 				process.set((int) (counter.get() * 100 / streamSize));
+				UpdateDatabase.setStatus("collecting: " + process.get() + "%");
 				System.out.println("collecting: " + process.get() + "%");
 			}
 

@@ -55,6 +55,7 @@ public class UpdateFlightConnections extends UpdateTable {
 					//ToDo: remove
 					if((int) (counter.getAndIncrement() * 100 / connectionList.size()) > process){
 						process = counter.incrementAndGet() * 100 / connectionList.size();
+						UpdateDatabase.setStatus("save: " + process + "%");
 						System.out.println("save: " + process + "%");
 					}
 					try{

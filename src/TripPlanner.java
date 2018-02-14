@@ -3,6 +3,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import sockets.CloseApplicationListener;
 import sockets.LineCoordinatesOnly;
+import sockets.RequestSocket;
+import sockets.RequestListener;
 import sockets.SendCommand;
 import utilities.Connection;
 
@@ -24,13 +26,18 @@ public class TripPlanner {
 			if(args[0].equals("server")){
 				(new Thread(new ServerStart())).start();
 				(new Thread(new CloseApplicationListener())).start();
+				(new Thread(new RequestListener())).start();
 			}
 			if(args[0].equals("update")){
 				(new Thread(new database.updateTables.UpdateDatabase(new GregorianCalendar(2018, 4 - 1, Integer.parseInt(args[1]), 0, 0, 0), true, true, true))).start();
-				//(new Thread(new CloseApplicationListener())).start();
+				(new Thread(new CloseApplicationListener())).start();
+				(new Thread(new RequestListener())).start();
 			}
 			if(args[0].equals("stop")){
 				(new Thread(new SendCommand("stop"))).start();
+			}
+			if(args[0].equals("status")){
+				(new Thread(new RequestSocket("status"))).start();
 			}
 				
 		}else{

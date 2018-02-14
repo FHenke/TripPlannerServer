@@ -1,11 +1,9 @@
 package utilities;
 
-import java.util.GregorianCalendar;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.joda.time.Duration;
 
-import api.utilities.eStream.Segment;
 
 public class UpdateConnectionAfterAddingSubConnection {
 

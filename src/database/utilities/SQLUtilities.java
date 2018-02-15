@@ -1,19 +1,14 @@
 package database.utilities;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
-import java.util.TimeZone;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jdom2.JDOMException;
 import org.joda.time.Duration;
 
-import api.GoogleMapsTimeZone;
-import database.QueryClosestAirports;
 import utilities.CarrierList;
 import utilities.Connection;
 import utilities.Place;
@@ -21,36 +16,47 @@ import utilities.Place;
 public class SQLUtilities {
 
 	protected static final Logger logger = LogManager.getLogger(SQLUtilities.class);
-
 	
-	public static GregorianCalendar toGregorianCalendar(java.sql.Timestamp time){
-		GregorianCalendar calendar = new GregorianCalendar();
-		calendar.setTimeInMillis(time.getTime());
-		return calendar;
-	}
-	
-	public static GregorianCalendar toGregorianCalendar(java.sql.Timestamp time, Place place){
-		GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-		calendar.setTimeInMillis(time.getTime());
-		return calendar;
-	}
-	
-	public static LinkedBlockingQueue<Connection> getConnectionListFromResultSet(Place origin, ResultSet result) throws SQLException{
+	/**
+	 * Converts a result set that includes all outbound connections for a given origin into a list of connections
+	 * @param origin Origin Place (Airport)
+	 * @param result Result set whith place information about the destination airport for all connections to the given destination
+	 * @return List of all connections from the result set
+	 * @throws SQLException
+	 */
+	public static LinkedBlockingQueue<Connection> getConnectionListFromResultSetWhithDestinations(Place origin, ResultSet result) throws SQLException{
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		
 		while(result.next()){
-			connectionList.add(getConnectionFromResultSet(origin, result));
+			Place destination = generatePlaceFromResultSet(result);
+			Connection connection = new Connection(origin, destination);
+			connectionList.add(getConnectionFromResultSet(connection, result));
 		}
-		
 		return connectionList;
 	}
 	
-	public static Connection getConnectionFromResultSet(Place origin, ResultSet result) throws SQLException{
-		Place destination = generatePlaceFromResultSet(result);
-		Connection connection = new Connection(origin, destination);
+	/**
+	 * Converts a result set that includes all inbound connections for a given destination into a list of connections
+	 * @param origin Destination Place (Airport)
+	 * @param result Result set whith place information about the origin airport for all connections to the given destination
+	 * @return List of all connections from the result set
+	 * @throws SQLException
+	 */
+	public static LinkedBlockingQueue<Connection> getConnectionListFromResultSetWhithOrigins(Place destination, ResultSet result) throws SQLException{
+		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		
-		connection.setDepartureDate(toGregorianCalendar(result.getTimestamp("departure_date"), origin));
-		connection.setArrivalDate(toGregorianCalendar(result.getTimestamp("arrival_time"), destination));
+		while(result.next()){
+			Place origin = generatePlaceFromResultSet(result);
+			Connection connection = new Connection(origin, destination);
+			connectionList.add(getConnectionFromResultSet(connection, result));
+		}
+		return connectionList;
+	}
+	
+	public static Connection getConnectionFromResultSet(Connection connection, ResultSet result) throws SQLException{
+		
+		connection.setDepartureDate(toGregorianCalendar(result.getTimestamp("departure_date")));
+		connection.setArrivalDate(toGregorianCalendar(result.getTimestamp("arrival_time")));
 		connection.setPrice(result.getDouble("min_price"));
 		connection.setWeekday(result.getInt("weekday"));
 		connection.setCode(result.getString("flightnumber"));
@@ -58,7 +64,7 @@ public class SQLUtilities {
 		connection.setCurrency(result.getString("currency"));
 		connection.setCarrier(new CarrierList(result.getString("operating_airline")));
 		connection.setType(Connection.PLANE);
-		connection.setSummary(destination.getName());
+		connection.setSummary(connection.getDestination().getName());
 		if(connection.getCode() != null){
 			connection.setDirect(true);
 		}
@@ -74,9 +80,15 @@ public class SQLUtilities {
 			place.setId(result.getString("iata_code"));
 			place.setType(Place.AIRPORT);
 		}catch(Exception e){
-			logger.error("Cant read this place from ResultSet: " + place.getName() + "\n " + e);
+			logger.error("Can't read this place from ResultSet: " + place.getName() + "\n " + e);
 			throw new SQLException("Cant read this place from ResultSet: " + place.getName() + "\n ");
 		}
 		return place;
+	}
+	
+	public static GregorianCalendar toGregorianCalendar(java.sql.Timestamp time){
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTimeInMillis(time.getTime());
+		return calendar;
 	}
 }

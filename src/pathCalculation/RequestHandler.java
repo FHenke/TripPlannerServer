@@ -8,6 +8,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.jdom2.JDOMException;
 
 import api.utilities.GoogleMaps;
+import database.ConnectedHotspots;
 import utilities.Connection;
 import utilities.Place;
 import utilities.Request;
@@ -92,6 +93,19 @@ public class RequestHandler {
 			try {
 				BreadthFirstSearch breadthFirstSearch = new BreadthFirstSearch();
 				return breadthFirstSearch.getConnectionList(request);
+			} catch (IllegalStateException e) {
+				System.out.println("BFS failed: " + e.toString());
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("BFS failed: " + e.toString());
+				e.printStackTrace();
+			}
+		}
+		
+		if(request.getMethode().equalsIgnoreCase("Hotspots")){
+			try {
+				Hotspot hotspot = new Hotspot();
+				return hotspot.getConnectionList(request);
 			} catch (IllegalStateException e) {
 				System.out.println("BFS failed: " + e.toString());
 				e.printStackTrace();

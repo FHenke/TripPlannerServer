@@ -28,7 +28,7 @@ public class QueryAllConnectionsFromAirport {
 	public static LinkedBlockingQueue<Connection> getAllOutboundConnections(Place airport) throws SQLException{
 		java.sql.Timestamp time = new java.sql.Timestamp((long) 1523105259 * 1000);
 		ResultSet outboundConnections = getAllOutboundConnections(airport.getIata(), time, millisecondsOfDay, true, false, false);
-		LinkedBlockingQueue<Connection> connectionList = SQLUtilities.getConnectionListFromResultSet(airport, outboundConnections);
+		LinkedBlockingQueue<Connection> connectionList = SQLUtilities.getConnectionListFromResultSetWhithDestinations(airport, outboundConnections);
 		return connectionList;
 	}
 	
@@ -36,7 +36,7 @@ public class QueryAllConnectionsFromAirport {
 		java.sql.Timestamp time = new java.sql.Timestamp(date.getTimeInMillis());
 		//ResultSet outboundConnections = getAllOutboundConnections(airport.getIata(), time, millisecondsOfDay, true, false, false);
 		ResultSet outboundConnections = getAllOutboundConnectionsAprxPrice(airport.getIata(), time, millisecondsOfDay, true, false, false);
-		LinkedBlockingQueue<Connection> connectionList = SQLUtilities.getConnectionListFromResultSet(airport, outboundConnections);
+		LinkedBlockingQueue<Connection> connectionList = SQLUtilities.getConnectionListFromResultSetWhithDestinations(airport, outboundConnections);
 		return connectionList;
 	}
 	

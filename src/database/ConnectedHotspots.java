@@ -38,7 +38,7 @@ public class ConnectedHotspots {
 		if(!allowIncompleteData)
 			queryString += "and duration is not null ";
 		if(!allowConnectedFlights)
-			queryString += "and flightnumber is not null ";
+			queryString += "and flightnumber is not null and connection_number is null ";
 		queryString += "and connections.departure_date between '" + departureTime + "' and '" + new java.sql.Timestamp(departureTime.getTime() + timeperiode) + "' "
 				+ "and airports.iata_code = connections.destination;";
 		
@@ -52,7 +52,7 @@ public class ConnectedHotspots {
 	}
 	
 	
-	public static LinkedBlockingQueue<Connection> getAllInboundConnectionsWithinFiveDay(Place originAirport, Place destinationAirport, GregorianCalendar date) throws SQLException{
+	public static LinkedBlockingQueue<Connection> getAllInboundConnectionsWithinFiveDays(Place originAirport, Place destinationAirport, GregorianCalendar date) throws SQLException{
 		java.sql.Timestamp time = new java.sql.Timestamp(date.getTimeInMillis());
 		//ResultSet outboundConnections = getAllOutboundConnections(airport.getIata(), time, millisecondsOfDay, true, false, false);
 		ResultSet outboundConnections = getAllInboundConnections(originAirport.getIata(), destinationAirport.getIata(), time, millisecondsOfDay * 5, true, false, false);

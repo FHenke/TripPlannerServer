@@ -28,12 +28,12 @@ public class BreadthFirstSearch {
 	
 	public LinkedBlockingQueue<Connection> getConnectionList(Request request) throws IllegalStateException{
 		
+		long startTime = System.nanoTime();
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		ControlObject controlObject = new ControlObject();
 		ClosestAirports closestAirports = new ClosestAirports();
 		Place originAirport = closestAirports.getClosestBeelineAirport(request.getOrigin());
 		Place destinationAirport = closestAirports.getClosestBeelineAirport(request.getDestination());
-		long startTime = System.nanoTime();
 		
 		controlObject.setDepartureAirport(destinationAirport);
 		controlObject.setRequest(request);

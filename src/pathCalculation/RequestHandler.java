@@ -9,6 +9,7 @@ import org.jdom2.JDOMException;
 
 import api.utilities.GoogleMaps;
 import database.ConnectedHotspots;
+import pathCalculation.bestPath.hotspotPath.HotspotSearch;
 import utilities.Connection;
 import utilities.Place;
 import utilities.Request;
@@ -107,10 +108,23 @@ public class RequestHandler {
 				Hotspot hotspot = new Hotspot();
 				return hotspot.getConnectionList(request);
 			} catch (IllegalStateException e) {
-				System.out.println("BFS failed: " + e.toString());
+				System.out.println("Hotspot failed: " + e.toString());
 				e.printStackTrace();
 			} catch (Exception e) {
-				System.out.println("BFS failed: " + e.toString());
+				System.out.println("Hotspot failed: " + e.toString());
+				e.printStackTrace();
+			}
+		}
+		
+		if(request.getMethode().equalsIgnoreCase("HotspotPath")){
+			try {
+				HotspotSearch hotspot = new HotspotSearch();
+				return hotspot.gethotspotPath(request);
+			} catch (IllegalStateException e) {
+				System.out.println("Hotspot Search failed: " + e.toString());
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("Hotspot Search failed: " + e.toString());
 				e.printStackTrace();
 			}
 		}

@@ -35,7 +35,7 @@ public class SearchNode{
 			timeIncludingMinimumTransit.add(GregorianCalendar.HOUR_OF_DAY, 1);
 			LinkedBlockingQueue<Connection> connectedAirports = QueryAllConnectionsFromAirport.getAllOutboundConnectionsWithinOneDay(node, timeIncludingMinimumTransit);
 			//TODO: parallelisieren
-			for(Connection nextSubConnection : connectedAirports){
+			connectedAirports.parallelStream().forEach(nextSubConnection -> {
 				String departureAirportIATA = nextSubConnection.getDestination().getIata();
 
 				//if next destination is not on list already
@@ -79,7 +79,7 @@ public class SearchNode{
 					connectionList.add(newConnection);
 					
 				}
-			}
+			});
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -202,26 +202,18 @@ private int successConnections = 0;
 		connection.setDirect(false);
 		connection.setWeekday((segments[0].getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1 == 0) ? 7 : segments[0].getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1);
 		connection.setCarrier(new CarrierList(proposal.getValidatingCarrier()));
-		//TODO: Remove
-		String test = connection.getFlightString();
+
 		
 		
 		
 		for(Segment segment : segments){
 			Connection tmp = new Connection(null, segment);
-			//TODO: Remove
-			//logger.error("FLIGHT NUMBER: " + tmp.getSummary());
 			connection.simpleAddSubconnection(tmp);
-		}
-		
-		if(!test.equals(connection.getFlightString())){
-			logger.warn(test);
-			logger.warn("Check: " + connection.getFlightString());
 		}
 		
 		return connection;
 	}
-	// #####################################################################
+
 	
 	private LinkedBlockingQueue<Connection> getDirectConnection(ResultSet results){
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();

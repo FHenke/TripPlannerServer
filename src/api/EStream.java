@@ -31,6 +31,7 @@ import api.utilities.eStream.Proposal;
 import api.utilities.eStream.ResultSet;
 import api.utilities.eStream.Segment;
 import database.Querry;
+import utilities.Carrier;
 import utilities.CarrierList;
 import utilities.Connection;
 import utilities.Place;
@@ -201,7 +202,7 @@ private int successConnections = 0;
 		connection.setQuoteDateTime(new Date());
 		connection.setDirect(false);
 		connection.setWeekday((segments[0].getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1 == 0) ? 7 : segments[0].getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1);
-		connection.setCarrier(new CarrierList(proposal.getValidatingCarrier()));
+		connection.addCarrier(new Carrier(proposal.getValidatingCarrier()));
 
 		
 		

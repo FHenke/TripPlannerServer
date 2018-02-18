@@ -312,17 +312,13 @@ public class SkyscannerCache implements API {
 	 * @param carrierNames XML Element with the same numbers as in carrierNumbers and the depending names of the carriers
 	 * @return A list of all carriers that are reffert to in the carrierNumbers file
 	 */
-	private static CarrierList getCarrierListFromXML(Element carrierNumbers, Element carrierNames){
-		CarrierList carrierList = null;
+	private static LinkedBlockingQueue<Carrier> getCarrierListFromXML(Element carrierNumbers, Element carrierNames){
+		LinkedBlockingQueue<Carrier> carrierList = new LinkedBlockingQueue<Carrier>();
 		
 		for(Element num:carrierNumbers.getDescendants(Filters.element("int"))){
 			for(Element name:carrierNames.getDescendants(Filters.element("CarriersDto"))){
 				if(num.getText().equals(name.getChildText("CarrierId"))){
-					// if list is empty set element as list, else add element to the list
-					if(carrierList == null)
-						carrierList = new CarrierList(name.getChildText("Name"));
-					else
-						carrierList.addCarrier(new CarrierList(name.getChildText("Name")));
+					carrierList.add(new Carrier(name.getChildText("Name")));
 				}
 			}
 		}	

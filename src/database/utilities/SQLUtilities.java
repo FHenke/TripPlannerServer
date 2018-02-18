@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joda.time.Duration;
 
+import utilities.Carrier;
 import utilities.CarrierList;
 import utilities.Connection;
 import utilities.Place;
@@ -62,7 +63,7 @@ public class SQLUtilities {
 		connection.setCode(result.getString("flightnumber"));
 		connection.setDuration(new Duration(result.getInt("duration")));
 		connection.setCurrency(result.getString("currency"));
-		connection.setCarrier(new CarrierList(result.getString("operating_airline")));
+		connection.addCarrier(new Carrier(result.getString("operating_airline")));
 		connection.setType(Connection.PLANE);
 		connection.setSummary(connection.getDestination().getName());
 		if(connection.getCode() != null){

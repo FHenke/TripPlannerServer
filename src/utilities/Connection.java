@@ -50,7 +50,7 @@ public class Connection implements Cloneable{
 	private GregorianCalendar arrivalDate = null;
 	private GregorianCalendar departureDate = null;
 	private int type;
-	private CarrierList carrier = null;
+	private LinkedBlockingQueue<Carrier> carrier = new LinkedBlockingQueue<Carrier>();
 	private boolean direct = false;
 	private Date quoteDateTime;
 	private int weekday;
@@ -178,7 +178,7 @@ public class Connection implements Cloneable{
 		this.summary = flight.getFullFlightNumber();
 		//GregorianCalendar returns 1 for Sunday, 2 for Monday and so on
 		this.weekday = (flight.getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1 == 0) ? 7 : flight.getGregorianDepartureTime().get(Calendar.DAY_OF_WEEK) - 1;
-		this.carrier = new CarrierList(flight.getOperatingCarrier());
+		this.carrier.add(new Carrier(flight.getOperatingCarrier()));
 		if(flight.getMarketingCarrier().equals(flight.getOperatingCarrier())){
 			this.code = flight.getFullFlightNumber();
 		}
@@ -276,8 +276,15 @@ public class Connection implements Cloneable{
 	/**
 	 * @return the carrier
 	 */
-	public CarrierList getCarrier() {
+	public LinkedBlockingQueue<Carrier> getCarriers() {
 		return carrier;
+	}
+	
+	/**
+	 * @return the first carrier from the list
+	 */
+	public Carrier getFirstCarrier() {
+		return carrier.peek();
 	}
 
 
@@ -529,7 +536,7 @@ public class Connection implements Cloneable{
 	/**
 	 * @param carrier the carrier to set
 	 */
-	public void setCarrier(CarrierList carrier) {
+	public void setCarrier(LinkedBlockingQueue<Carrier> carrier) {
 		this.carrier = carrier;
 	}
 
@@ -607,6 +614,9 @@ public class Connection implements Cloneable{
 	}
 	
 	
+	public void addCarrier(Carrier carrier){
+		this.carrier.add(carrier);
+	}
 	
 	
 	/**

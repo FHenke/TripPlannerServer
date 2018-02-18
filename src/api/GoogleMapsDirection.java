@@ -26,6 +26,7 @@ import org.joda.time.Duration;
 
 import api.utilities.GoogleMaps;
 import database.updateTables.UpdateContinents;
+import utilities.Carrier;
 import utilities.CarrierList;
 import utilities.Connection;
 import utilities.Place;
@@ -311,7 +312,7 @@ public class GoogleMapsDirection implements API {
 						
 						//agency
 						try{
-							subconnection.setCarrier(new CarrierList(subconnectionXML.getChild("transit_details").getChild("line").getChild("agency").getChildText("name"), subconnectionXML.getChild("transit_details").getChild("line").getChild("agency").getChildText("url")));
+							subconnection.addCarrier(new Carrier(subconnectionXML.getChild("transit_details").getChild("line").getChild("agency").getChildText("name"), subconnectionXML.getChild("transit_details").getChild("line").getChild("agency").getChildText("url")));
 						}catch(NullPointerException e){
 							//do nothing, no agency avaiable (agency is available only for transit)
 						}

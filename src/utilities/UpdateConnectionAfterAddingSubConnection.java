@@ -96,11 +96,8 @@ public class UpdateConnectionAfterAddingSubConnection {
 	}
 	
 	public void updateCarrier(Connection connection, Connection subConnection){
-		if(subConnection.getCarrier() != null){
-			if(connection.getCarrier() == null)
-				connection.setCarrier(subConnection.getCarrier());
-			else
-				connection.getCarrier().addCarrier(subConnection.getCarrier());
+		if(subConnection.getFirstCarrier() != null){
+			connection.getCarriers().addAll(subConnection.getCarriers());
 		}
 	}
 	

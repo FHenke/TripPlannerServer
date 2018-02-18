@@ -158,7 +158,7 @@ public class UpdateFlights extends UpdateTable {
 					insertDirectEntry.setTimestamp(8, new java.sql.Timestamp(flight.getArrivalDate().getTimeInMillis()));
 					insertDirectEntry.setInt(9, (int) flight.getDuration().getMillis());
 					insertDirectEntry.setString(10, flight.getCurrency());
-					insertDirectEntry.setString(11, flight.getCarrier().getCarrierName());
+					insertDirectEntry.setString(11, flight.getFirstCarrier().getCarrierName());
 					insertDirectEntry.executeUpdate();
 				}
 				else{
@@ -172,7 +172,7 @@ public class UpdateFlights extends UpdateTable {
 					insertConnectedEntry.setTimestamp(8, new java.sql.Timestamp(flight.getArrivalDate().getTimeInMillis()));
 					insertConnectedEntry.setInt(9, (int) flight.getDuration().getMillis());
 					insertConnectedEntry.setString(10, flight.getCurrency());
-					insertConnectedEntry.setString(11, flight.getCarrier().getCarrierName());
+					insertConnectedEntry.setString(11, flight.getFirstCarrier().getCarrierName());
 					insertConnectedEntry.setInt(12, connectionNumber);
 					insertConnectedEntry.executeUpdate();
 				}	
@@ -211,7 +211,7 @@ public class UpdateFlights extends UpdateTable {
 		selectIdenticalDirectEntries.setInt(6, flight.getWeekday());
 		selectIdenticalDirectEntries.setInt(7, (int) flight.getDuration().getMillis());
 		selectIdenticalDirectEntries.setString(8, flight.getCurrency());
-		selectIdenticalDirectEntries.setString(9, flight.getCarrier().getCarrierName());
+		selectIdenticalDirectEntries.setString(9, flight.getFirstCarrier().getCarrierName());
 		selectIdenticalDirectEntries.setTimestamp(10, new java.sql.Timestamp(flight.getQuoteDateTime().getTime()));
 		return selectIdenticalDirectEntries;
 	}
@@ -223,7 +223,7 @@ public class UpdateFlights extends UpdateTable {
 					selectId.setString(1, flight.getOrigin().getIata());
 					selectId.setString(2, flight.getDestination().getIata());
 					selectId.setTimestamp(3, new java.sql.Timestamp(flight.getDepartureDate().getTimeInMillis()));
-					selectId.setString(4, flight.getCarrier().getCarrierName());
+					selectId.setString(4, flight.getFirstCarrier().getCarrierName());
 					selectId.setTimestamp(5, new java.sql.Timestamp(flight.getArrivalDate().getTimeInMillis()));
 					// in this first step the result will be deletet to write a new one to the database in the next step
 					// a result should only be overwritten if:
@@ -262,7 +262,7 @@ public class UpdateFlights extends UpdateTable {
 			selectId.setString(1, flight.getOrigin().getIata());
 			selectId.setString(2, flight.getDestination().getIata());
 			selectId.setTimestamp(3, new java.sql.Timestamp(flight.getDepartureDate().getTimeInMillis()));
-			selectId.setString(4, flight.getCarrier().getCarrierName());
+			selectId.setString(4, flight.getFirstCarrier().getCarrierName());
 			selectId.setTimestamp(5, new java.sql.Timestamp(flight.getArrivalDate().getTimeInMillis()));
 			// in this first step the result will be deletet to write a new one to the database in the next step
 			// a result should only be overwritten if:
@@ -299,7 +299,7 @@ public class UpdateFlights extends UpdateTable {
 			deleteDirectEntry.setString(1, flight.getOrigin().getIata());
 			deleteDirectEntry.setString(2, flight.getDestination().getIata());
 			deleteDirectEntry.setTimestamp(3, new java.sql.Timestamp(flight.getDepartureDate().getTimeInMillis()));
-			deleteDirectEntry.setString(4, flight.getCarrier().getCarrierName());
+			deleteDirectEntry.setString(4, flight.getFirstCarrier().getCarrierName());
 			deleteDirectEntry.setTimestamp(5, new java.sql.Timestamp(flight.getArrivalDate().getTimeInMillis()));
 			deleteDirectEntry.executeUpdate();
 		}else{

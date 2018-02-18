@@ -12,6 +12,7 @@ public class ControlObject {
 
 	private ConcurrentHashMap<String, Boolean> airportsInTree = new ConcurrentHashMap<String, Boolean>();
 	private LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
+	private ConcurrentHashMap<String, LinkedBlockingQueue<Connection>> destinationAirportsMap = new ConcurrentHashMap<String, LinkedBlockingQueue<Connection>>();
 	private AtomicInteger threadsRunning = new AtomicInteger(0);
 	private boolean connectionFound = false;
 	private Place departureAirport = null;
@@ -113,6 +114,21 @@ public class ControlObject {
 		this.request = request;
 	}
 	
+	public void setDestinationAirportsMap(ConcurrentHashMap<String, LinkedBlockingQueue<Connection>> destinationAirportsMap){
+		this.destinationAirportsMap = destinationAirportsMap;
+	}
+	
+	public ConcurrentHashMap<String, LinkedBlockingQueue<Connection>> getDestinationAirportsMap(){
+		return destinationAirportsMap;
+	}
+	
+	public boolean isDestinationAirport(String iata){
+		
+		if(destinationAirportsMap.containsKey(iata))
+			return true;
+		else
+			return false;
+	}
 	
 	
 

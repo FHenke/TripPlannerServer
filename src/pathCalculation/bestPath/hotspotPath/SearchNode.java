@@ -52,7 +52,7 @@ public class SearchNode {
 				String departureAirportIATA = nextSubConnection.getDestination().getIata();
 				
 				//true if no flight to the departure airport is already in the list from this airport
-				// or if the departure date is earlier than the current one but still after the minimum trabsit time
+				// or if the departure date is earlier than the current one but still after the minimum transit time
 				if(shouldConnectionAdded(connectedAirportsMap, departureAirportIATA, nextSubConnection, timeIncludingMinimumTransit, usedAirportsMap)){
 					connectedAirportsMap.put(departureAirportIATA, nextSubConnection);
 				}
@@ -67,8 +67,9 @@ public class SearchNode {
 				newConnection.addSubconnection(newNextSubConnection);
 				
 				//if departure place is found
-				if(newNextSubConnection.getDestination().getIata().equals(destination.getIata())){
-					addToFromAirport(newConnection, controlObject, newNextSubConnection);
+				if(controlObject.isDestinationAirport(newNextSubConnection.getDestination().getIata())){
+					if(addFinalConnectionToDestinationAirport(newConnection, controlObject))
+						addToFromAirport(newConnection, controlObject, newNextSubConnection);
 				}
 				
 				connectionList.add(newConnection);
@@ -85,6 +86,25 @@ public class SearchNode {
 	}
 	
 	
+	private boolean addFinalConnectionToDestinationAirport(Connection newConnection, ControlObject controlObject){
+		LinkedBlockingQueue<Connection> ConnectionsToDestinationAirport = controlObject.getDestinationAirportsMap().get(newConnection.getDestination().getIata());
+		Connection bestConnectionToDestination = null;
+		if(!ConnectionsToDestinationAirport.isEmpty()){
+			for(Connection connection : ConnectionsToDestinationAirport){
+				//test if the new connection is better than the previoust choosen one
+				if(connection.getDepartureDate().after(TimeFunctions.cloneAndAddHoures(newConnection.getArrivalDate(), 1)) && connection.getDepartureDate().before(TimeFunctions.cloneAndAddHoures(newConnection.getArrivalDate(), 25))){
+					if(bestConnectionToDestination == null || connection.getDepartureDate().before(bestConnectionToDestination.getDepartureDate()))
+						bestConnectionToDestination = connection;
+				}
+			}
+			if(bestConnectionToDestination != null){
+				newConnection.addSubconnection(bestConnectionToDestination.clone());
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	private void addToFromAirport(Connection newConnection, ControlObject controlObject, Connection newNextSubConnection){
 		api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();
 		newConnection.getSubConnections().poll();
@@ -100,11 +120,12 @@ public class SearchNode {
 		
 		//Add connection from destination airport to destination
 		try {
-			GregorianCalendar departureTimeFromAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(newNextSubConnection.getArrivalDate(), 1), newNextSubConnection.getDestination());
-			LinkedBlockingQueue<Connection> connectionFromAirport = googleDirection.getConnection(newNextSubConnection.getDestination(), controlObject.getRequest().getDestination(), departureTimeFromAirport, true, controlObject.getRequest().getBestTransportation(), "", "", false);
+			GregorianCalendar departureTimeFromAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(newConnection.getArrivalDate(), 1), newConnection.getDestination());
+			LinkedBlockingQueue<Connection> connectionFromAirport = googleDirection.getConnection(newConnection.getDestination(), controlObject.getRequest().getDestination(), departureTimeFromAirport, true, controlObject.getRequest().getBestTransportation(), "", "", false);
 			newConnection.addSubconnection(connectionFromAirport.peek());
 		} catch (IllegalStateException | IOException | JDOMException e) {
 			// TODO Auto-generated catch block
+			System.out.println(e);
 			e.printStackTrace();
 		}
 		
@@ -115,10 +136,13 @@ public class SearchNode {
 	}
 	
 	private boolean shouldConnectionAdded(ConcurrentHashMap<String, Connection> connectedAirportsMap, String departureAirportIATA, Connection nextSubConnection, GregorianCalendar earliestDepartureTime, ConcurrentHashMap<String, Boolean> usedAirportsMap){
-		if(usedAirportsMap.contains(departureAirportIATA))
+		//Airport was visited to a previous point in time (cycle prevention)
+		if(usedAirportsMap.containsKey(departureAirportIATA))
 			return false;
+		//airport is not connected at this time
 		if(!connectedAirportsMap.containsKey(departureAirportIATA))
 			return true;
+		//test if the new connection is better than the previoust choosen one
 		if(nextSubConnection.getDepartureDate().before(connectedAirportsMap.get(departureAirportIATA).getDepartureDate()) && nextSubConnection.getDepartureDate().after(earliestDepartureTime))
 			return true;
 		return false;

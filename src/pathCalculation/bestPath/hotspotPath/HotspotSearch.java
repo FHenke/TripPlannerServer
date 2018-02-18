@@ -48,16 +48,19 @@ public class HotspotSearch {
 		try {
 			connectionList.add(headConnection);
 			
+			
+			//TODO: in own Method
 			//find all inboundconnections to destination to exploid the destination airports to find
-			ConcurrentHashMap<String, LinkedBlockingQueue<Connection>> destinationAirportMap = new ConcurrentHashMap<String, LinkedBlockingQueue<Connection>>();
+			ConcurrentHashMap<String, LinkedBlockingQueue<Connection>> destinationAirportsMap = new ConcurrentHashMap<String, LinkedBlockingQueue<Connection>>();
 			LinkedBlockingQueue<Connection> finalConnectionList = ConnectedHotspots.getAllInboundConnectionsWithinFiveDays(originAirport, destinationAirport, request.getDepartureDateString());
-			destinationAirportMap.put(destinationAirport.getIata(), new LinkedBlockingQueue<Connection>());
+			destinationAirportsMap.put(destinationAirport.getIata(), new LinkedBlockingQueue<Connection>());
 			finalConnectionList.parallelStream().forEach(finalConnection -> {
 				// because of parallel purpose it has to try to insert an empty list before adding a connection afterwards
-				destinationAirportMap.putIfAbsent(finalConnection.getOrigin().getIata(), new LinkedBlockingQueue<Connection>());
-				destinationAirportMap.get(finalConnection.getOrigin().getIata()).add(finalConnection);
+				
+				destinationAirportsMap.putIfAbsent(finalConnection.getOrigin().getIata(), new LinkedBlockingQueue<Connection>());
+				destinationAirportsMap.get(finalConnection.getOrigin().getIata()).add(finalConnection);
 			});
-			
+			controlObject.setDestinationAirportsMap(destinationAirportsMap);
 			
 			
 			

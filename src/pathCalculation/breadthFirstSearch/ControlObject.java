@@ -15,11 +15,18 @@ public class ControlObject {
 	private ConcurrentHashMap<String, LinkedBlockingQueue<Connection>> destinationAirportsMap = new ConcurrentHashMap<String, LinkedBlockingQueue<Connection>>();
 	private AtomicInteger threadsRunning = new AtomicInteger(0);
 	private boolean connectionFound = false;
-	private Place departureAirport = null;
 	private Request request = null;
+	private Place originAirport = null;
+	private Place destinationAirport = null;
 	
 	public ControlObject(){
 		
+	}
+	
+	public ControlObject(Request request, Place originAirport, Place destinationAirport){
+		this.request = request;
+		this.originAirport = originAirport;
+		this.destinationAirport = destinationAirport;
 	}
 	
 	/**
@@ -27,6 +34,9 @@ public class ControlObject {
 	 * @param iata iata code of the airport that should be added
 	 * @return true if the airport was not in the hash map before | false if the airport was in the hash map already.
 	 */
+	
+	
+	
 	public boolean addAirportToTree(String iata){
 		if(airportsInTree.put(iata, true) == null)
 			return true;
@@ -34,6 +44,34 @@ public class ControlObject {
 			return false;
 	}
 	
+	/**
+	 * @return the originAirport
+	 */
+	public Place getOriginAirport() {
+		return originAirport;
+	}
+
+	/**
+	 * @return the destinationAirport
+	 */
+	public Place getDestinationAirport() {
+		return destinationAirport;
+	}
+
+	/**
+	 * @param originAirport the originAirport to set
+	 */
+	public void setOriginAirport(Place originAirport) {
+		this.originAirport = originAirport;
+	}
+
+	/**
+	 * @param destinationAirport the destinationAirport to set
+	 */
+	public void setDestinationAirport(Place destinationAirport) {
+		this.destinationAirport = destinationAirport;
+	}
+
 	public boolean isAirportInTree(String iata){
 		if(airportsInTree.get(iata) == null)
 			return false;
@@ -41,8 +79,8 @@ public class ControlObject {
 			return true;
 	}
 	
-	public boolean isDepartureAirportIATA(String iata){
-		if(departureAirport.getIata().equals(iata)){
+	public boolean isDestinationAirport(String iata){
+		if(destinationAirport.getIata().equals(iata)){
 			return true;
 		}else{
 			return false;
@@ -84,20 +122,7 @@ public class ControlObject {
 	
 	public void addConnection(Connection con){
 		connectionList.add(con);
-	}
-
-	/**
-	 * @return the departureAirport
-	 */
-	public Place getDepartureAirport() {
-		return departureAirport;
-	}
-
-	/**
-	 * @param departureAirport the departureAirport to set
-	 */
-	public void setDepartureAirport(Place departureAirport) {
-		this.departureAirport = departureAirport;
+		this.setConnectionIsFound();
 	}
 
 	/**
@@ -122,15 +147,16 @@ public class ControlObject {
 		return destinationAirportsMap;
 	}
 	
-	public boolean isDestinationAirport(String iata){
-		
-		if(destinationAirportsMap.containsKey(iata))
+	public boolean isPathToDestinationAirportKnown(String iata){
+		if(destinationAirportsMap.containsKey(iata) || destinationAirport.getIata().equals(iata))
 			return true;
 		else
 			return false;
 	}
 	
-	
+	public LinkedBlockingQueue<Connection> getFlightsFromOneDestinationAirport(String iata){
+		return destinationAirportsMap.get(iata);
+	}
 
 	
 }

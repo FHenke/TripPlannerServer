@@ -24,7 +24,7 @@ public class Hotspot {
 		
 		
 		connectionList = ConnectedHotspots.getAllOutboundConnectionsWithinOneDay(originAirport, destinationAirport, request.getDepartureDateString());
-		connectionList.addAll(ConnectedHotspots.getAllInboundConnectionsWithinFiveDays(originAirport, destinationAirport, request.getDepartureDateString()));
+		connectionList.addAll(ConnectedHotspots.getAllInboundConnectionsWithinFiveDays(destinationAirport, request.getDepartureDateString()));
 		return connectionList;
 	}
 }

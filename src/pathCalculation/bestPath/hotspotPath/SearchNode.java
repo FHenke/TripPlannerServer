@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.jdom2.JDOMException;
 
 import api.GoogleMapsTimeZone;
+import database.ConnectedAirports;
 import database.ConnectedHotspots;
 import pathCalculation.breadthFirstSearch.ControlObject;
 import utilities.Connection;
@@ -26,20 +27,37 @@ public class SearchNode {
 		
 	}
 	
-	public LinkedBlockingQueue<Connection> getNextConnections(ControlObject controlObject, Connection connection, Place destination){
+	/**
+	 * 
+	 * @param controlObject
+	 * @param connection
+	 * @param destination
+	 * @param method 1: all outbound connections, 2: hotspots only, 3: destination hash data only
+	 * @return
+	 */
+	public LinkedBlockingQueue<Connection> getNextConnections(ControlObject controlObject, Connection connection, int method){
 		
 		ConcurrentHashMap<String, Connection> connectedAirportsMap = new ConcurrentHashMap<String, Connection>();
 		ConcurrentHashMap<String, Boolean> usedAirportsMap = new ConcurrentHashMap<String, Boolean>();
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
+		LinkedBlockingQueue<Connection> outboundConnections = new LinkedBlockingQueue<Connection>();
 		Place node = connection.getDestination();
 		try {
 			
 			//Add one houre (transit time) to arrival time (for the next departure time)
 			GregorianCalendar timeIncludingMinimumTransit = TimeFunctions.cloneAndAddHoures(connection.getArrivalDate(), 1);
 			
-			LinkedBlockingQueue<Connection> outboundConnections = ConnectedHotspots.getAllOutboundConnectionsWithinOneDay(node, destination, timeIncludingMinimumTransit);
+			//TODO: own method
+			if(method == 1)
+				outboundConnections = ConnectedAirports.getAllOutboundConnectionsWithinOneDay(node, timeIncludingMinimumTransit);
+			if(method == 2)
+				outboundConnections = ConnectedHotspots.getAllOutboundConnectionsWithinOneDay(node, controlObject.getDestinationAirport(), timeIncludingMinimumTransit);
+			if(method == 3)
+				outboundConnections = controlObject.getFlightsFromOneDestinationAirport(connection.getDestination().getIata());
+			
 			
 			//TODO: own method
+			//put all already visited airports for this connection in a hash map
 			for(Connection subConnection : connection.getSubConnections()){
 				if(subConnection.getOrigin().getType() == Place.AIRPORT)
 					usedAirportsMap.put(subConnection.getOrigin().getIata(), true);
@@ -47,6 +65,7 @@ public class SearchNode {
 					usedAirportsMap.put(subConnection.getDestination().getIata(), true);
 			}
 			
+			//TODO: own method
 			//choose for each connection the best flight
 			for(Connection nextSubConnection : outboundConnections){
 				String departureAirportIATA = nextSubConnection.getDestination().getIata();
@@ -58,23 +77,28 @@ public class SearchNode {
 				}
 			}
 			
+			//TODO: own method at least inner part
 			//add for each connection the best flight to the previous connection and add the full connection to the result set
+			
 			connectedAirportsMap.entrySet().parallelStream().forEach(nextSubConnection -> {
 				
-				//add subconnection to old connection
+				//add sub connection to old connection
 				Connection newConnection = connection.clone();
 				Connection newNextSubConnection = nextSubConnection.getValue().clone();
 				newConnection.addSubconnection(newNextSubConnection);
 				
 				//if departure place is found
-				if(controlObject.isDestinationAirport(newNextSubConnection.getDestination().getIata())){
-					if(addFinalConnectionToDestinationAirport(newConnection, controlObject))
-						addToFromAirport(newConnection, controlObject, newNextSubConnection);
+				if(controlObject.isPathToDestinationAirportKnown(newNextSubConnection.getDestination().getIata()) && method != 3){
+					connectionList.addAll(addFinalConnectionToDestinationAirport(newConnection, controlObject));
+				}else{
+					connectionList.add(newConnection);
+					if(method == 3 && controlObject.isDestinationAirport(newConnection.getDestination().getIata())){
+						addToFromAirport(newConnection, controlObject);
+					}
 				}
 				
-				connectionList.add(newConnection);
-
 			});
+			
 			
 		} catch (SQLException e) {
 			logger.warn("Next nodes for hotspot search can't be calculated." + e);
@@ -86,26 +110,27 @@ public class SearchNode {
 	}
 	
 	
-	private boolean addFinalConnectionToDestinationAirport(Connection newConnection, ControlObject controlObject){
-		LinkedBlockingQueue<Connection> ConnectionsToDestinationAirport = controlObject.getDestinationAirportsMap().get(newConnection.getDestination().getIata());
-		Connection bestConnectionToDestination = null;
-		if(!ConnectionsToDestinationAirport.isEmpty()){
-			for(Connection connection : ConnectionsToDestinationAirport){
-				//test if the new connection is better than the previoust choosen one
-				if(connection.getDepartureDate().after(TimeFunctions.cloneAndAddHoures(newConnection.getArrivalDate(), 1)) && connection.getDepartureDate().before(TimeFunctions.cloneAndAddHoures(newConnection.getArrivalDate(), 25))){
-					if(bestConnectionToDestination == null || connection.getDepartureDate().before(bestConnectionToDestination.getDepartureDate()))
-						bestConnectionToDestination = connection;
-				}
-			}
-			if(bestConnectionToDestination != null){
-				newConnection.addSubconnection(bestConnectionToDestination.clone());
-				return true;
-			}
+	private LinkedBlockingQueue<Connection> addFinalConnectionToDestinationAirport(Connection newConnection, ControlObject controlObject){
+		LinkedBlockingQueue<Connection> connectionsToDestinationAirport = new LinkedBlockingQueue<Connection>();
+		connectionsToDestinationAirport.add(newConnection);
+		
+		//if destination of connection is already the destination airport
+		if(controlObject.isDestinationAirport(newConnection.getDestination().getIata())){
+			addToFromAirport(newConnection, controlObject);		
+			return connectionsToDestinationAirport;
 		}
-		return false;
+		
+		for(int level = 0; !controlObject.isConnectionFound() && level < 5; level++){
+			LinkedBlockingQueue<Connection> tmpConnectionsToDestinationAirport = new LinkedBlockingQueue<Connection>();
+			connectionsToDestinationAirport.parallelStream().forEach(connection -> {
+				tmpConnectionsToDestinationAirport.addAll(getNextConnections(controlObject, connection, 3));
+			});
+			connectionsToDestinationAirport = tmpConnectionsToDestinationAirport;
+		}
+		return connectionsToDestinationAirport;
 	}
 	
-	private void addToFromAirport(Connection newConnection, ControlObject controlObject, Connection newNextSubConnection){
+	private void addToFromAirport(Connection newConnection, ControlObject controlObject){
 		api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();
 		newConnection.getSubConnections().poll();
 		//Add connection from origin to origin airport
@@ -130,10 +155,10 @@ public class SearchNode {
 		}
 		
 		newConnection.setRecursiveAction(Connection.ADD);
-		controlObject.setConnectionIsFound();
 		controlObject.addConnection(newConnection);
 		System.out.println("-> Connection Found");
 	}
+	
 	
 	private boolean shouldConnectionAdded(ConcurrentHashMap<String, Connection> connectedAirportsMap, String departureAirportIATA, Connection nextSubConnection, GregorianCalendar earliestDepartureTime, ConcurrentHashMap<String, Boolean> usedAirportsMap){
 		//Airport was visited to a previous point in time (cycle prevention)
@@ -146,6 +171,16 @@ public class SearchNode {
 		if(nextSubConnection.getDepartureDate().before(connectedAirportsMap.get(departureAirportIATA).getDepartureDate()) && nextSubConnection.getDepartureDate().after(earliestDepartureTime))
 			return true;
 		return false;
+	}
+	
+	private LinkedBlockingQueue<Connection> getAllOutboundConnections(int method, Place origin, ControlObject controlObject, GregorianCalendar departureTime) throws SQLException{
+		if(method == 1)
+			return ConnectedAirports.getAllOutboundConnectionsWithinOneDay(origin, departureTime);
+		if(method == 2)
+			return ConnectedHotspots.getAllOutboundConnectionsWithinOneDay(origin, controlObject.getDestinationAirport(), departureTime);
+		if(method == 3)
+			return controlObject.getFlightsFromOneDestinationAirport(origin.getIata());
+		return null;
 	}
 	
 }

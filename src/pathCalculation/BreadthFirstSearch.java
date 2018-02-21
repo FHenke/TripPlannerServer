@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.jdom2.JDOMException;
 
 import database.ClosestAirports;
-import database.QueryAllConnectionsFromAirport;
+import database.ConnectedAirports;
 import pathCalculation.breadthFirstSearch.ControlObject;
 import pathCalculation.breadthFirstSearch.SearchNode;
 import utilities.Connection;
@@ -30,13 +30,10 @@ public class BreadthFirstSearch {
 		
 		long startTime = System.nanoTime();
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
-		ControlObject controlObject = new ControlObject();
 		ClosestAirports closestAirports = new ClosestAirports();
 		Place originAirport = closestAirports.getClosestBeelineAirport(request.getOrigin());
 		Place destinationAirport = closestAirports.getClosestBeelineAirport(request.getDestination());
-		
-		controlObject.setDepartureAirport(destinationAirport);
-		controlObject.setRequest(request);
+		ControlObject controlObject = new ControlObject(request, originAirport, destinationAirport);
 		
 		Connection headConnection = new Connection(request.getOrigin(), originAirport);
 		headConnection.setArrivalDate(request.getDepartureDateString());

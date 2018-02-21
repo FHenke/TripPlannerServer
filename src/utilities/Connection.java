@@ -77,8 +77,7 @@ public class Connection implements Cloneable{
 		this.id = IdGenerator.getNewID();
 		this.action = UNUSED;
 	}
-	
-	
+
 	
 	/**
 	 * @param origin

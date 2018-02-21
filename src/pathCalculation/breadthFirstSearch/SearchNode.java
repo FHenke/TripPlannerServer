@@ -10,8 +10,8 @@ import org.apache.logging.log4j.Logger;
 import org.jdom2.JDOMException;
 
 import api.GoogleMapsTimeZone;
-import database.Querry;
-import database.QueryAllConnectionsFromAirport;
+import database.Query;
+import database.ConnectedAirports;
 import sockets.LineCoordinatesOnly;
 import utilities.Connection;
 import utilities.Place;
@@ -33,13 +33,13 @@ public class SearchNode{
 		try {
 			GregorianCalendar timeIncludingMinimumTransit = (GregorianCalendar) connection.getArrivalDate().clone();
 			timeIncludingMinimumTransit.add(GregorianCalendar.HOUR_OF_DAY, 1);
-			LinkedBlockingQueue<Connection> connectedAirports = QueryAllConnectionsFromAirport.getAllOutboundConnectionsWithinOneDay(node, timeIncludingMinimumTransit);
+			LinkedBlockingQueue<Connection> connectedAirports = ConnectedAirports.getAllOutboundConnectionsWithinOneDay(node, timeIncludingMinimumTransit);
 			//TODO: parallelisieren
 			connectedAirports.parallelStream().forEach(nextSubConnection -> {
 				String departureAirportIATA = nextSubConnection.getDestination().getIata();
 
 				//if next destination is not on list already
-				if(controlObject.isDepartureAirportIATA(departureAirportIATA) || controlObject.addAirportToTree(departureAirportIATA)){
+				if(controlObject.isDestinationAirport(departureAirportIATA) || controlObject.addAirportToTree(departureAirportIATA)){
 					Connection newConnection = connection.clone();
 					
 					Connection newNextSubConnection = nextSubConnection.clone();

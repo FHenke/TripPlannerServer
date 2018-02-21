@@ -32,7 +32,7 @@ import org.jdom2.input.SAXBuilder;
 
 import api.utilities.SkyscannerURL;
 import database.DatabaseConnection;
-import database.Querry;
+import database.Query;
 import database.updateTables.UpdateDatabase;
 import utilities.*;
 
@@ -280,9 +280,9 @@ public class SkyscannerCache implements API {
 		}
 		if(place.getChildText("IataCode") != null){
 			placeObject.setIata(place.getChildText("IataCode"));
-			Querry querry;
+			Query querry;
 			try {
-				querry = new Querry((new DatabaseConnection()).getConnection());
+				querry = new Query((new DatabaseConnection()).getConnection());
 				placeObject.setLatitude(querry.getLatitudeFromPlace(placeObject));
 				placeObject.setLongitude((querry.getLongitudeFromPlace(placeObject)));
 			} catch (SQLException e) {

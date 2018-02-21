@@ -14,18 +14,18 @@ import database.updateTables.UpdateContinents;
 import utilities.Connection;
 import utilities.Place;
 
-public class Querry {
+public class Query {
 
 	
-	protected static final Logger logger = LogManager.getLogger(Querry.class);
+	protected static final Logger logger = LogManager.getLogger(Query.class);
 	
 	protected static java.sql.Connection conn = null;
 	
-	public Querry(java.sql.Connection conn){
+	public Query(java.sql.Connection conn){
 		this.conn = conn;
 	}
 	
-	public Querry(){
+	public Query(){
 		this.conn = DatabaseConnection.getConnection();
 	}
 	
@@ -180,5 +180,21 @@ public class Querry {
 		return querryResult.getInt("max") + 1;
 	}
 	
+	public static boolean isAirportHotspot(String iata) throws SQLException{
+		try{
+			System.out.println("get hotspot info: " + iata);
+			ResultSet querryResult;
+			querryResult = DatabaseConnection.getConnection().createStatement().executeQuery("SELECT count(*) AS isHotspot FROM hotspots where iata_code = '" + iata + "';");
+			//querryResult = DatabaseConnection.getConnection().createStatement().executeQuery("SELECT count(*) AS a FROM hotspots;");
+			querryResult.next();
+			if(querryResult.getInt("isHotspot") == 0)
+				return false;
+			else
+				return true;
+		}catch(SQLException e){
+			logger.error("Unable to get the information if airport is hotspot of airport (" + iata + ") because of SQL Exception: " + e.toString());
+			throw new SQLException("It is not possible to check if Airport is a hotspot");
+		}
+	}
 	
 }

@@ -225,7 +225,7 @@ public class GoogleMapsDirection implements API {
 				
 				
 				//subconnection
-				for(Element subconnectionXML : routeOption.getDescendants(Filters.element("step"))){
+				/*for(Element subconnectionXML : routeOption.getDescendants(Filters.element("step"))){
 					
 						Connection subconnection = null;
 						Place startLocation = null;
@@ -324,7 +324,7 @@ public class GoogleMapsDirection implements API {
 							subconnection.setPolyline(subconnectionXML.getChild("polyline").getChildText("points"));
 						}catch(NullPointerException e){
 							//do nothing, no polyline available (should be available usually)
-						}/**/
+						}
 						
 						//html instruction
 						try{
@@ -336,7 +336,7 @@ public class GoogleMapsDirection implements API {
 						//add the subconnection to the connection
 						connection.getSubConnections().add(subconnection);
 						//connection.addSubconnection(subconnection);
-				}
+				}*/
 				
 				
 				
@@ -352,7 +352,7 @@ public class GoogleMapsDirection implements API {
 			}
 		}
 		//To write the returned XML file into a file
-		XMLUtilities.writeXmlToFile(rootFromConnectionsXML, "testGoogle.xml");
+		//XMLUtilities.writeXmlToFile(rootFromConnectionsXML, "testGoogle.xml");
 		
 		return connectionList;
 	}

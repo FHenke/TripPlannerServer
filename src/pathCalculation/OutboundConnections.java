@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import database.ClosestAirports;
-import database.QueryAllConnectionsFromAirport;
+import database.ConnectedAirports;
 import utilities.Connection;
 import utilities.Place;
 import utilities.Request;
@@ -21,7 +21,7 @@ public class OutboundConnections {
 		ClosestAirports closeOriginAirports = new ClosestAirports();
 		Place originAirport = closeOriginAirports.getClosestBeelineAirport(request.getOrigin());
 		
-		connection = QueryAllConnectionsFromAirport.getAllOutboundConnections(originAirport);
+		connection = ConnectedAirports.getAllOutboundConnections(originAirport);
 		return connection;
 	}
 	

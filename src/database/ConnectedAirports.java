@@ -14,14 +14,14 @@ import utilities.CarrierList;
 import utilities.Connection;
 import utilities.Place;
 
-public class QueryAllConnectionsFromAirport {
+public class ConnectedAirports {
 
 	
-	protected static final Logger logger = LogManager.getLogger(QueryAllConnectionsFromAirport.class);
+	protected static final Logger logger = LogManager.getLogger(ConnectedAirports.class);
 	protected static java.sql.Connection conn = DatabaseConnection.getConnection();
 	private static long millisecondsOfDay = 1000 * 60 * 60 * 24;
 	
-	public QueryAllConnectionsFromAirport(){
+	public ConnectedAirports(){
 		
 	}
 	
@@ -32,6 +32,13 @@ public class QueryAllConnectionsFromAirport {
 		return connectionList;
 	}
 	
+	/**
+	 * Returns all airports than can be reached from the given airport within one daay
+	 * @param airport origin airport
+	 * @param date departure date
+	 * @return List of connections to the airports
+	 * @throws SQLException
+	 */
 	public static LinkedBlockingQueue<Connection> getAllOutboundConnectionsWithinOneDay(Place airport, GregorianCalendar date) throws SQLException{
 		java.sql.Timestamp time = new java.sql.Timestamp(date.getTimeInMillis());
 		//ResultSet outboundConnections = getAllOutboundConnections(airport.getIata(), time, millisecondsOfDay, true, false, false);
@@ -77,6 +84,37 @@ public class QueryAllConnectionsFromAirport {
 			queryString += "and flightnumber is not null ";
 		queryString += "and departure_date between '" + departureTime + "' and '" + new java.sql.Timestamp(departureTime.getTime() + timeperiode) + "';";
 		System.out.println(queryString);
+		try {
+			queryResult = conn.createStatement().executeQuery(queryString);
+		} catch (SQLException e) {
+			logger.error("Cant Query closest airports for: " + iata + "\n " + e);
+			throw new SQLException("Cant Query closest airports for: " + iata);
+		}	
+		return queryResult;
+	}
+	
+	
+	public static LinkedBlockingQueue<Connection> getAllInboundConnectionsWithinFiveDays(Place airport, GregorianCalendar date) throws SQLException{
+		java.sql.Timestamp time = new java.sql.Timestamp(date.getTimeInMillis());
+		ResultSet inboundConnections = getAllInboundConnections(airport.getIata(), time, millisecondsOfDay * 5, true, false, false);
+		LinkedBlockingQueue<Connection> connectionList = SQLUtilities.getConnectionListFromResultSetWhithOrigins(airport, inboundConnections);
+		return connectionList;
+	}
+	
+	private static ResultSet getAllInboundConnections(String iata, java.sql.Timestamp departureTime, long timeperiode, boolean allowZeroPrice, boolean allowIncompleteData, boolean allowConnectedFlights) throws SQLException{
+		ResultSet queryResult;
+		String queryString = "SELECT airports.iata_code, airports.name, ST_Y(airports.location) As latitude, ST_X(airports.location) As longitude, connections.departure_date, connections.arrival_time, connections.min_price, connections.weekday, connections.flightnumber, connections.duration, connections.currency, connections.operating_airline "
+				+ "FROM airports, flight_connections as connections "
+				+ "WHERE connections.destination = '" + iata + "' "
+				+ "and connections.connection_number is null ";
+		if(!allowZeroPrice)
+			queryString += "and min_price != 0.0 ";
+		if(!allowIncompleteData)
+			queryString += "and duration is not null ";
+		if(!allowConnectedFlights)
+			queryString += "and flightnumber is not null ";
+		queryString += "and connections.departure_date between '" + departureTime + "' and '" + new java.sql.Timestamp(departureTime.getTime() + timeperiode) + "' "
+				+ "and airports.iata_code = connections.origin;";
 		try {
 			queryResult = conn.createStatement().executeQuery(queryString);
 		} catch (SQLException e) {

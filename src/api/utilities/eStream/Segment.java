@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 import org.postgresql.util.PSQLException;
 
 import database.DatabaseConnection;
-import database.Querry;
+import database.Query;
 import utilities.Place;
 
 public class Segment {
@@ -235,7 +235,7 @@ public class Segment {
 	
 	private Place getPlace(String iata) throws SQLException, PSQLException{
 		Place place = new Place(iata, iata, Place.AIRPORT);
-		Querry querry = new Querry((new DatabaseConnection()).getConnection());
+		Query querry = new Query((new DatabaseConnection()).getConnection());
 		place = querry.setAirportinformationFromDatabase(place);
 		
 		return place;	

@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import api.EStream;
 import database.DatabaseConnection;
-import database.Querry;
+import database.Query;
 import utilities.Connection;
 
 public class UpdateFlights extends UpdateTable {
@@ -60,7 +60,7 @@ public class UpdateFlights extends UpdateTable {
 		try {
 			//Get list of all connections that are cached by Skyscanner
 			EStream eStream = new EStream();
-			Querry querry = new Querry(DatabaseConnection.getConnection());
+			Query querry = new Query(DatabaseConnection.getConnection());
 			String[][] connectionList = querry.getAllConnectionsWhithouDuration(UpdateDatabase.getUpdateDate());
 			
 			counter.set(0);
@@ -112,7 +112,7 @@ public class UpdateFlights extends UpdateTable {
 	private void addConnectionToDatabase(Connection flight) throws SQLException{
 		
 		if(!flight.isDirect()){
-			int connectionNumber = Querry.getNextConnectionNumber();
+			int connectionNumber = Query.getNextConnectionNumber();
 			int partPosition = 1; // describes on which position this part of the connection has to be
 			for(Connection subConnection : flight.getSubConnections()){
 				addConnectionToDatabase(subConnection);

@@ -77,7 +77,7 @@ public class Query {
 	
 	/**
 	 * Generates an array with all connections available in the Database (kind of a Flightmap)
-	 * each connection represents a pair of origin and destination in the form ORIGIN_IATADESTINATIONIATA
+	 * each connection represents a pair of origin and destination in the form ORIGIN_IATADESTINATION_IATA
 	 * (for example: FRAHAM for the connectiion Frankfurt to Hamburg)
 	 * @return Array of unique connections.
 	 * @throws SQLException
@@ -182,7 +182,6 @@ public class Query {
 	
 	public static boolean isAirportHotspot(String iata) throws SQLException{
 		try{
-			System.out.println("get hotspot info: " + iata);
 			ResultSet querryResult;
 			querryResult = DatabaseConnection.getConnection().createStatement().executeQuery("SELECT count(*) AS isHotspot FROM hotspots where iata_code = '" + iata + "';");
 			//querryResult = DatabaseConnection.getConnection().createStatement().executeQuery("SELECT count(*) AS a FROM hotspots;");

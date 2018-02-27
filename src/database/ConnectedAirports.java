@@ -7,10 +7,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.joda.time.Duration;
 
 import database.utilities.SQLUtilities;
-import utilities.CarrierList;
 import utilities.Connection;
 import utilities.Place;
 
@@ -73,16 +71,18 @@ public class ConnectedAirports {
 	
 	private static ResultSet getAllOutboundConnectionsAprxPrice(String iata, java.sql.Timestamp departureTime, long timeperiode, boolean allowZeroPrice, boolean allowIncompleteData, boolean allowConnectedFlights) throws SQLException{
 		ResultSet queryResult;
-		String queryString = "SELECT * "
-				+ "FROM connections_with_aprx_price "
-				+ "WHERE origin = '" + iata + "' ";
+		String queryString = "SELECT airports.iata_code, airports.name, ST_Y(airports.location) As latitude, ST_X(airports.location) As longitude, connections.departure_date, connections.arrival_time, connections.min_price, connections.weekday, connections.flightnumber, connections.duration, connections.currency, connections.operating_airline "
+				+ "FROM airports, connections_with_aprx_price as connections "
+				+ "WHERE connections.origin = '" + iata + "' "
+				+ "and connections.connection_number is null ";
 		if(!allowZeroPrice)
-			queryString += "and min_price != 0.0 ";
+			queryString += "and min_price is not ";
 		if(!allowIncompleteData)
 			queryString += "and duration is not null ";
 		if(!allowConnectedFlights)
 			queryString += "and flightnumber is not null ";
-		queryString += "and departure_date between '" + departureTime + "' and '" + new java.sql.Timestamp(departureTime.getTime() + timeperiode) + "';";
+		queryString += "and connections.departure_date between '" + departureTime + "' and '" + new java.sql.Timestamp(departureTime.getTime() + timeperiode) + "' "
+				+ "and airports.iata_code = connections.destination;";
 		System.out.println(queryString);
 		try {
 			queryResult = conn.createStatement().executeQuery(queryString);
@@ -96,7 +96,8 @@ public class ConnectedAirports {
 	
 	public static LinkedBlockingQueue<Connection> getAllInboundConnectionsWithinFiveDays(Place airport, GregorianCalendar date) throws SQLException{
 		java.sql.Timestamp time = new java.sql.Timestamp(date.getTimeInMillis());
-		ResultSet inboundConnections = getAllInboundConnections(airport.getIata(), time, millisecondsOfDay * 5, true, false, false);
+		//ResultSet inboundConnections = getAllInboundConnections(airport.getIata(), time, millisecondsOfDay * 5, true, false, false);
+		ResultSet inboundConnections = getAllInboundConnectionsAprxPrice(airport.getIata(), time, millisecondsOfDay * 5, true, false, false);
 		LinkedBlockingQueue<Connection> connectionList = SQLUtilities.getConnectionListFromResultSetWhithOrigins(airport, inboundConnections);
 		return connectionList;
 	}
@@ -109,6 +110,30 @@ public class ConnectedAirports {
 				+ "and connections.connection_number is null ";
 		if(!allowZeroPrice)
 			queryString += "and min_price != 0.0 ";
+		if(!allowIncompleteData)
+			queryString += "and duration is not null ";
+		if(!allowConnectedFlights)
+			queryString += "and flightnumber is not null ";
+		queryString += "and connections.departure_date between '" + departureTime + "' and '" + new java.sql.Timestamp(departureTime.getTime() + timeperiode) + "' "
+				+ "and airports.iata_code = connections.origin;";
+		try {
+			queryResult = conn.createStatement().executeQuery(queryString);
+		} catch (SQLException e) {
+			logger.error("Cant Query closest airports for: " + iata + "\n " + e);
+			throw new SQLException("Cant Query closest airports for: " + iata);
+		}	
+		return queryResult;
+	}
+	
+	
+	private static ResultSet getAllInboundConnectionsAprxPrice(String iata, java.sql.Timestamp departureTime, long timeperiode, boolean allowZeroPrice, boolean allowIncompleteData, boolean allowConnectedFlights) throws SQLException{
+		ResultSet queryResult;
+		String queryString = "SELECT airports.iata_code, airports.name, ST_Y(airports.location) As latitude, ST_X(airports.location) As longitude, connections.departure_date, connections.arrival_time, connections.min_price, connections.weekday, connections.flightnumber, connections.duration, connections.currency, connections.operating_airline "
+				+ "FROM airports, connections_with_aprx_price as connections "
+				+ "WHERE connections.destination = '" + iata + "' "
+				+ "and connections.connection_number is null ";
+		if(!allowZeroPrice)
+			queryString += "and min_price is not null ";
 		if(!allowIncompleteData)
 			queryString += "and duration is not null ";
 		if(!allowConnectedFlights)

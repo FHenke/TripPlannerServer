@@ -1,8 +1,6 @@
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
@@ -10,7 +8,6 @@ import javax.swing.JTextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import api.EStream;
 import sockets.LineCoordinatesOnly;
 
 import java.awt.event.MouseAdapter;
@@ -168,5 +165,15 @@ public class ServerUI {
 		});
 		btnCloseServer.setBounds(433, 422, 269, 25);
 		frame.getContentPane().add(btnCloseServer);
+		
+		JButton btnAddTimeZonen = new JButton("Add Time Zonen Info To Database");
+		btnAddTimeZonen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println(database.updates.correctDuration.addTimezoneToAirports() + " Airports updated!");
+			}
+		});
+		btnAddTimeZonen.setBounds(302, 45, 400, 98);
+		frame.getContentPane().add(btnAddTimeZonen);
 	}
 }

@@ -50,7 +50,7 @@ public class HotspotSearch {
 		
 		
 		long elapsedTime = System.nanoTime() - startTime;
-		System.out.println((double) elapsedTime / 1000000000.0);
+		System.out.println((double) elapsedTime / 1000000000.0 + " time needed for hotspot search");
 		System.out.println(controlObject.getConnectionList().size() + " connections found.");
 		return connectionList;
 		//return controlObject.getConnectionList();

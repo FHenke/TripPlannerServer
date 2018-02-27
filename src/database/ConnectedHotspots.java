@@ -29,7 +29,7 @@ public class ConnectedHotspots {
 	private static ResultSet getAllOutboundConnections(String originIata, String destinationIata, java.sql.Timestamp departureTime, long timeperiode, boolean allowZeroPrice, boolean allowIncompleteData, boolean allowConnectedFlights) throws SQLException{
 		ResultSet queryResult;
 		String queryString = "SELECT airports.iata_code, airports.name, ST_Y(airports.location) As latitude, ST_X(airports.location) As longitude, connections.departure_date, connections.arrival_time, connections.min_price, connections.weekday, connections.flightnumber, connections.duration, connections.currency, connections.operating_airline "
-				+ "FROM airports, flight_connections as connections "
+				+ "FROM airports, connections_with_aprx_price as connections "
 				+ "WHERE connections.origin = '" + originIata + "' "
 				+ "AND connections.connection_number IS NULL "
 				+ "AND (connections.destination IN (SELECT iata_code FROM hotspots) OR connections.destination = '" + destinationIata + "')";
@@ -63,7 +63,7 @@ public class ConnectedHotspots {
 	private static ResultSet getAllInboundConnections(String destinationIata, java.sql.Timestamp departureTime, long timeperiode, boolean allowZeroPrice, boolean allowIncompleteData, boolean allowConnectedFlights) throws SQLException{
 		ResultSet queryResult;
 		String queryString = "SELECT airports.iata_code, airports.name, ST_Y(airports.location) As latitude, ST_X(airports.location) As longitude, connections.departure_date, connections.arrival_time, connections.min_price, connections.weekday, connections.flightnumber, connections.duration, connections.currency, connections.operating_airline "
-				+ "FROM airports, flight_connections as connections "
+				+ "FROM airports, connections_with_aprx_price as connections "
 				+ "WHERE connections.destination = '" + destinationIata + "' "
 				+ "AND connections.connection_number IS NULL "
 				+ "AND (connections.origin IN (SELECT iata_code FROM hotspots))";

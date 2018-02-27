@@ -1,12 +1,9 @@
 import java.util.GregorianCalendar;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import sockets.CloseApplicationListener;
-import sockets.LineCoordinatesOnly;
 import sockets.RequestSocket;
 import sockets.RequestListener;
 import sockets.SendCommand;
-import utilities.Connection;
 
 public class TripPlanner {
 
@@ -39,6 +36,9 @@ public class TripPlanner {
 			if(args[0].equals("status")){
 				(new Thread(new RequestSocket("status"))).start();
 			}
+			if(args[0].equals("updateTimeZone")){
+				System.out.println(database.updates.correctDuration.addTimezoneToAirports() + " Airports updated!");
+			}
 				
 		}else{
 			ServerUI serverUI = new ServerUI();
@@ -47,7 +47,7 @@ public class TripPlanner {
 		
 		
 	}
-	
+	/*
 	//for getConnection
 	private static void printConnectionList(LinkedBlockingQueue<Connection> connectionList){
 		for(Connection connection : connectionList){
@@ -86,6 +86,6 @@ public class TripPlanner {
 		}
 		
 	}
-
+*/
 
 }

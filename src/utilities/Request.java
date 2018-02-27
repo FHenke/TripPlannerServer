@@ -14,6 +14,7 @@ public class Request extends Connection {
 	private boolean[] transportation;
 	private boolean showAlternatives = false;
 	private boolean isDepartureTime = true;
+	private int priceForHoure = 1000;
 	
 	
 	
@@ -69,6 +70,27 @@ public class Request extends Connection {
 	 */
 	public boolean[] getTransportation() {
 		return transportation;
+	}
+
+
+	
+
+
+	/**
+	 * @return the priceForHoure
+	 */
+	public int getPriceForHoure() {
+		return priceForHoure;
+	}
+
+
+
+
+	/**
+	 * @param priceForHoure the priceForHoure to set
+	 */
+	public void setPriceForHoure(int priceForHoure) {
+		this.priceForHoure = priceForHoure;
 	}
 
 

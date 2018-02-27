@@ -1,0 +1,31 @@
+2018-02-22 00:35:37.298 [Thread-3] ERROR database.ConnectedAirports - Cant Query closest airports for: ARK
+ org.postgresql.util.PSQLException: FEHLER: Relation »connections_with_aprx_price« existiert nicht
+  Position: 15
+2018-02-22 00:35:37.306 [Thread-3] WARN  pathCalculation.bestPath.hotspotPath.SearchNode - Next nodes for hotspot search can't be calculated.java.sql.SQLException: Cant Query closest airports for: ARK
+2018-02-22 00:35:37.306 [Thread-3] WARN  pathCalculation.bestPath.hotspotPath.HotspotSearch - Connectionf for hotspot search can't be calculated.java.lang.IllegalStateException: Next nodes for hotspot search can't be calculated.java.sql.SQLException: Cant Query closest airports for: ARK
+2018-02-23 00:10:16.376 [AWT-EventQueue-0] ERROR database.updates.correctDuration - AirportList cant be generated. java.sql.SQLException: AirportList cant be created
+2018-02-23 00:12:25.741 [AWT-EventQueue-0] ERROR database.updates.correctDuration - AirportList cant be generated. java.sql.SQLException: AirportList cant be created. org.postgresql.util.PSQLException: FEHLER: Operator existiert nicht: character varying == unknown
+  Hinweis: Kein Operator stimmt mit dem angegebenen Namen und den Argumenttypen überein. Sie müssen möglicherweise ausdrückliche Typumwandlungen hinzufügen.
+  Position: 104
+2018-02-27 01:50:12.968 [Thread-3] ERROR database.ConnectedAirports - Cant Query closest airports for: ARK
+ org.postgresql.util.PSQLException: FEHLER: Spalte connections.connection_number existiert nicht
+  Position: 416
+2018-02-27 01:50:12.972 [Thread-3] WARN  pathCalculation.bestPath.hotspotPath.FindHotspotsToDestination - Inbound hotspot connections for connections to destination cant be determined.java.sql.SQLException: Cant Query closest airports for: ARK
+2018-02-27 01:52:57.750 [Thread-3] ERROR database.ConnectedAirports - Cant Query closest airports for: ARK
+ org.postgresql.util.PSQLException: FEHLER: Spalte connections.connection_number existiert nicht
+  Position: 416
+2018-02-27 01:52:57.751 [Thread-3] WARN  pathCalculation.bestPath.hotspotPath.FindHotspotsToDestination - Inbound hotspot connections for connections to destination cant be determined.java.sql.SQLException: Cant Query closest airports for: ARK
+2018-02-27 01:53:06.873 [Thread-3] ERROR database.ConnectedAirports - Cant Query closest airports for: ARK
+ org.postgresql.util.PSQLException: FEHLER: Spalte connections.connection_number existiert nicht
+  Position: 416
+2018-02-27 01:53:06.873 [Thread-3] WARN  pathCalculation.bestPath.hotspotPath.FindHotspotsToDestination - Inbound hotspot connections for connections to destination cant be determined.java.sql.SQLException: Cant Query closest airports for: ARK
+2018-02-27 01:54:40.722 [Thread-3] ERROR database.ConnectedAirports - Cant Query closest airports for: ARK
+ org.postgresql.util.PSQLException: FEHLER: Spalte connections.connection_number existiert nicht
+  Position: 411
+2018-02-27 01:54:40.723 [Thread-3] WARN  pathCalculation.bestPath.hotspotPath.SearchNode - Next nodes for hotspot search can't be calculated.java.sql.SQLException: Cant Query closest airports for: ARK
+2018-02-27 01:54:40.723 [Thread-3] WARN  pathCalculation.bestPath.hotspotPath.HotspotSearch - Connectionf for hotspot search can't be calculated.java.lang.IllegalStateException: Next nodes for hotspot search can't be calculated.java.sql.SQLException: Cant Query closest airports for: ARK
+2018-02-27 01:55:02.341 [Thread-3] ERROR database.ConnectedAirports - Cant Query closest airports for: ARK
+ org.postgresql.util.PSQLException: FEHLER: Spalte connections.connection_number existiert nicht
+  Position: 411
+2018-02-27 01:55:02.341 [Thread-3] WARN  pathCalculation.bestPath.hotspotPath.SearchNode - Next nodes for hotspot search can't be calculated.java.sql.SQLException: Cant Query closest airports for: ARK
+2018-02-27 01:55:02.341 [Thread-3] WARN  pathCalculation.bestPath.hotspotPath.HotspotSearch - Connectionf for hotspot search can't be calculated.java.lang.IllegalStateException: Next nodes for hotspot search can't be calculated.java.sql.SQLException: Cant Query closest airports for: ARK

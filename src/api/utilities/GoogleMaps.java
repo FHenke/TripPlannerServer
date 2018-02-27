@@ -5,7 +5,6 @@ package api.utilities;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 

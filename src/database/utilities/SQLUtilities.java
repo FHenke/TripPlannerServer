@@ -92,4 +92,47 @@ public class SQLUtilities {
 		calendar.setTimeInMillis(time.getTime());
 		return calendar;
 	}
+	
+	
+	public static LinkedBlockingQueue<Connection> getConnectionListFromResultSet(ResultSet result) throws SQLException{
+		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
+		
+		while(result.next()){
+			Place origin = generateOriginPlaceFromResultSet(result);
+			Place destination = generateDestinationPlaceFromResultSet(result);
+			Connection connection = new Connection(origin, destination);
+			connectionList.add(getConnectionFromResultSet(connection, result));
+		}
+		return connectionList;
+	}
+	
+	public static Place generateOriginPlaceFromResultSet(ResultSet result) throws SQLException{
+		Place place = null;
+		try{
+			place = new Place(result.getString("org_name") + " Airport", result.getDouble("org_longitude"), result.getDouble("org_latitude"));
+			place.setIata(result.getString("org_iata"));
+			place.setId(result.getString("org_iata"));
+			place.setType(Place.AIRPORT);
+		}catch(Exception e){
+			logger.error("Can't read this place from ResultSet: " + place.getName() + "\n " + e);
+			throw new SQLException("Cant read this place from ResultSet: " + place.getName() + "\n ");
+		}
+		return place;
+	}
+	
+	public static Place generateDestinationPlaceFromResultSet(ResultSet result) throws SQLException{
+		Place place = null;
+		try{
+			place = new Place(result.getString("dst_name") + " Airport", result.getDouble("dst_longitude"), result.getDouble("dst_latitude"));
+			place.setIata(result.getString("dst_iata"));
+			place.setId(result.getString("dst_iata"));
+			place.setType(Place.AIRPORT);
+		}catch(Exception e){
+			logger.error("Can't read this place from ResultSet: " + place.getName() + "\n " + e);
+			throw new SQLException("Cant read this place from ResultSet: " + place.getName() + "\n ");
+		}
+		return place;
+	}
+	
+	
 }

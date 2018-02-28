@@ -68,6 +68,32 @@ public class SearchNode {
 	}
 	
 	
+	/**
+	 * adds the sub connection to the Connection if there was no better flight to the smae destination airport earlier and add the full connection to the result set
+	 * @param connection
+	 * @param nextSubConnection
+	 * @param controlObject
+	 * @param method
+	 * @param connectionList
+	 */
+	private void addSubconnectionToConnection(Connection connection, Connection nextSubConnection, ControlObject controlObject, int method, LinkedBlockingQueue<Connection> connectionList){
+		//add sub connection to old connection
+		Connection newConnection = connection.clone();
+		Connection newNextSubConnection = nextSubConnection.clone();
+		newConnection.addSubconnection(newNextSubConnection);
+		
+		//if departure place is found
+		if(controlObject.isPathToDestinationAirportKnown(newNextSubConnection.getDestination().getIata()) && method != 3){
+			connectionList.addAll(addFinalConnectionToDestinationAirport(newConnection, controlObject));
+		}else{
+			connectionList.add(newConnection);
+			if(method == 3 && controlObject.isDestinationAirport(newConnection.getDestination().getIata())){
+				addToFromAirport(newConnection, controlObject);
+			}
+		}
+	}
+	
+	
 	private LinkedBlockingQueue<Connection> addFinalConnectionToDestinationAirport(Connection newConnection, ControlObject controlObject){
 		LinkedBlockingQueue<Connection> connectionsToDestinationAirport = new LinkedBlockingQueue<Connection>();
 		connectionsToDestinationAirport.add(newConnection);
@@ -183,28 +209,4 @@ public class SearchNode {
 		return connectedAirportsMap;
 	}
 	
-	/**
-	 * adds the sub connection to the Connection if there was no better flight to the smae destination airport earlier and add the full connection to the result set
-	 * @param connection
-	 * @param nextSubConnection
-	 * @param controlObject
-	 * @param method
-	 * @param connectionList
-	 */
-	private void addSubconnectionToConnection(Connection connection, Connection nextSubConnection, ControlObject controlObject, int method, LinkedBlockingQueue<Connection> connectionList){
-		//add sub connection to old connection
-		Connection newConnection = connection.clone();
-		Connection newNextSubConnection = nextSubConnection.clone();
-		newConnection.addSubconnection(newNextSubConnection);
-		
-		//if departure place is found
-		if(controlObject.isPathToDestinationAirportKnown(newNextSubConnection.getDestination().getIata()) && method != 3){
-			connectionList.addAll(addFinalConnectionToDestinationAirport(newConnection, controlObject));
-		}else{
-			connectionList.add(newConnection);
-			if(method == 3 && controlObject.isDestinationAirport(newConnection.getDestination().getIata())){
-				addToFromAirport(newConnection, controlObject);
-			}
-		}
-	}
 }

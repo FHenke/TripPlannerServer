@@ -29,3 +29,8 @@
   Position: 411
 2018-02-27 01:55:02.341 [Thread-3] WARN  pathCalculation.bestPath.hotspotPath.SearchNode - Next nodes for hotspot search can't be calculated.java.sql.SQLException: Cant Query closest airports for: ARK
 2018-02-27 01:55:02.341 [Thread-3] WARN  pathCalculation.bestPath.hotspotPath.HotspotSearch - Connectionf for hotspot search can't be calculated.java.lang.IllegalStateException: Next nodes for hotspot search can't be calculated.java.sql.SQLException: Cant Query closest airports for: ARK
+2018-02-28 20:31:30.496 [Thread-3] ERROR database.QueryConnection - Cant Query connection for: FRA to JFK
+ org.postgresql.util.PSQLException: FEHLER: Syntaxfehler bei »origin«
+  Position: 798
+2018-02-28 20:32:50.047 [Thread-3] ERROR database.utilities.SQLUtilities - Can't read this place from ResultSet: Frankfurt am Main Airport
+ org.postgresql.util.PSQLException: Der Spaltenname org_iata_code wurde in diesem ResultSet nicht gefunden.

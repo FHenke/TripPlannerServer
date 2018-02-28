@@ -21,7 +21,7 @@ public class HotspotSearch {
 	}
 	
 	
-	public LinkedBlockingQueue<Connection> gethotspotPath(Request request) throws IllegalStateException{
+	public LinkedBlockingQueue<Connection> getHotspotPath(Request request) throws IllegalStateException{
 		
 		long startTime = System.nanoTime();
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();

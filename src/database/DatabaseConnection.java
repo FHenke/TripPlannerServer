@@ -14,7 +14,7 @@ import api.EStream;
 public class DatabaseConnection {
 	protected static final Logger logger = LogManager.getLogger(DatabaseConnection.class);
 	
-	private static final String DATABASE_NAME = "TripPlanner2";
+	private static final String DATABASE_NAME = "TripPlanner";
 	private static final String DATABASE_HOST = "localhost";
 	private static final String DATABASE_USER = "henke";
 	private static final String DATABASE_KEY = "trip";

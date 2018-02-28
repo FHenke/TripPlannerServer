@@ -64,6 +64,7 @@ public class RequestHandler {
 			}
 		}
 		
+		//uses eStreaming
 		if(request.getMethode().equalsIgnoreCase("FFC")){
 			try {
 				FindFirstConnection ffc = new FindFirstConnection();
@@ -90,6 +91,21 @@ public class RequestHandler {
 			}
 		}
 		
+		//searches all direct connections in database
+		if(request.getMethode().equalsIgnoreCase("Database")){
+			try {
+				RequestDatabase requestDatabase = new RequestDatabase();
+				return requestDatabase.getConnectionList(request);
+			} catch (IllegalStateException e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			}
+		}
+		
+		//Breadth search
 		if(request.getMethode().equalsIgnoreCase("BFS")){
 			try {
 				BreadthFirstSearch breadthFirstSearch = new BreadthFirstSearch();
@@ -119,7 +135,7 @@ public class RequestHandler {
 		if(request.getMethode().equalsIgnoreCase("HotspotPath")){
 			try {
 				HotspotSearch hotspot = new HotspotSearch();
-				return hotspot.gethotspotPath(request);
+				return hotspot.getHotspotPath(request);
 			} catch (IllegalStateException e) {
 				System.out.println("Hotspot Search failed: " + e.toString());
 				e.printStackTrace();

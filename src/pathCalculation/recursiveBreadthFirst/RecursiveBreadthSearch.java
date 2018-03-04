@@ -29,7 +29,6 @@ public class RecursiveBreadthSearch {
 		
 	}
 	
-	@SuppressWarnings("null")
 	public LinkedBlockingQueue<Connection> getHotspotPath(Request request) throws Exception{
 		
 		long startTime = System.nanoTime();
@@ -64,18 +63,31 @@ public class RecursiveBreadthSearch {
 		//return controlObject.getUnusedConnectionList();
 	}
 	
+	/**
+	 * Wait until all Threads are finished
+	 * @param threadList
+	 */
 	private void waitForJoin(LinkedBlockingQueue<Thread> threadList){
 		Thread thread;
 		while((thread = threadList.poll()) != null){
 			try {
 				thread.join();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.warn("It as not possible to join all threads. Maybe the algorithm was not doen before terminating.\n" + e);
 			}
 		}
 	}
 	
+	/**
+	 * Calculates wich are the closest airports to the origin and destination point (using fastest route)
+	 * and returns an array of the connections to this airports
+	 * @param request
+	 * @return an array with connection arrays:
+	 * 	airports[0] includes an array of connections to the origin airports and
+	 * 	airports[1] includes an array of connections from the destination airports
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
 	private Connection[][] calculateClosestAirportConnections(Request request) throws InterruptedException, ExecutionException{
 		ExecutorService executor = Executors.newFixedThreadPool(2);
 		ClosestAirports closestAirports = new ClosestAirports();
@@ -101,6 +113,13 @@ public class RecursiveBreadthSearch {
 		return airports;
 	}
 	
+	/**
+	 * Generates HashMaps for the origin and destination airports and generates the ControlObject.
+	 * @param request
+	 * @param originAirports Array with the connections to the origin airports.
+	 * @param destinationAirports Array with the connections from the destination airports.
+	 * @return
+	 */
 	private ControlObject generateControlObject(Request request, Connection[] originAirports, Connection destinationAirports[]){
 		ConcurrentHashMap<String, Place> originAirportsMap = new ConcurrentHashMap<String, Place>();
 		ConcurrentHashMap<String, Place> destinationAirportsMap = new ConcurrentHashMap<String, Place>();
@@ -114,77 +133,5 @@ public class RecursiveBreadthSearch {
 		}
 		
 		return new ControlObject(request, originAirportsMap, destinationAirportsMap);
-	}
-	
-	/**
-	 * 
-	 * @param connectionList
-	 * @param controlObject
-	 * @param maxLevel
-	 * @return 1 if a connection was found, 0 if no connection was found
-	 */
-	
-	/*
-	private LinkedBlockingQueue<Connection> searchNextConnection(LinkedBlockingQueue<Connection> connectionList, ControlObject controlObject, int maxLevel){
-		//Iterative search of next hotspot or destination
-		for(int level = 0; !controlObject.isConnectionFound() && level < maxLevel; level++){
-			System.out.println(level);
-			LinkedBlockingQueue<Connection> newConnectionList = new LinkedBlockingQueue<Connection>();
-			
-			//add next sub connections to connection
-			generateNextSubConnection(connectionList, newConnectionList, controlObject, 2);
-			//if no connection to hotspots was found search for connection to any airport
-			if(newConnectionList.isEmpty()){
-				generateNextSubConnection(connectionList, newConnectionList, controlObject, 1);
-			}
-			//if still no connection was found return null
-			if(newConnectionList.isEmpty()){
-				return null;
-			}
-			connectionList = newConnectionList;
-		}
-		
-		// in the case that no connection was found
-		if(!controlObject.isConnectionFound())
-			return null;
-						
-		return connectionList;
-	}
-	*/
-	/**
-	 * for each connection add next sub connections to connection
-	 * @param oldConnectionList
-	 * @param newConnectionList
-	 * @param controlObject
-	 * @param method 1: all outbound connections, 2: hotspots only, 3: destination hash data only
-	 */
-	/*
-	private void generateNextSubConnection(LinkedBlockingQueue<Connection> oldConnectionList, LinkedBlockingQueue<Connection> newConnectionList, ControlObject controlObject, int method){
-		oldConnectionList.parallelStream().forEach(connection -> {
-			//??????? wofür ist dieses if ????????
-			if(connection.getAction().equals(Connection.ADD) || connection.getAction().equals(Connection.UNUSED)){
-				SearchNode searchNode = new SearchNode();
-				newConnectionList.addAll(searchNode.getNextConnections(controlObject, connection.clone(), method));	
-			}
-		});
-	}
-	*/
-	
-	/**
-	 * Generates the headConnection and
-	 * set a temporal connection to the start airport.
-	 * This tmp connection is needed by the SearchNode class to calculate the following flights.
-	 * Only the destination and arrivalDate parameters are required.
-	 * @param request
-	 * @param headConnection
-	 * @param originAirport
-	 */
-	private Connection generateHeadConnection(Request request, Place originAirport){
-		Connection headConnection = new Connection(request.getOrigin(), originAirport);
-		headConnection.setArrivalDate(request.getDepartureDateString());
-		Connection tmpStartConnection = new Connection(request.getOrigin(), originAirport);
-		tmpStartConnection.setArrivalDate(request.getDepartureDateString());
-		headConnection.getSubConnections().add(tmpStartConnection);
-		return headConnection;
 	}	
 }

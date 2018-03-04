@@ -1,4 +1,4 @@
-package pathCalculation.bestPath.hotspotPath;
+package pathCalculation.hotspotPath;
 
 import java.sql.SQLException;
 import java.util.concurrent.LinkedBlockingQueue;

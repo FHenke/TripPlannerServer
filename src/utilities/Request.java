@@ -16,6 +16,11 @@ public class Request extends Connection {
 	private boolean isDepartureTime = true;
 	private int priceForHoure = 1000;
 	
+	//final static values that can only be changed in code
+	private static final int amountOfOriginAirports = 10;
+	private static final int amountOfDestinationAirports = 10;
+	private static final int AmountOfConnectionsToShow = 5;
+	
 	
 	
 	
@@ -84,6 +89,35 @@ public class Request extends Connection {
 	}
 
 
+
+
+	/**
+	 * @return the originAirport
+	 */
+	public int getAmountOfOriginAirports() {
+		return amountOfOriginAirports;
+	}
+
+
+
+
+	/**
+	 * @return the destinationAirports
+	 */
+	public int getAmountOfDestinationAirports() {
+		return amountOfDestinationAirports;
+	}
+
+
+	
+//#######
+
+	/**
+	 * @return the amountOfConnectionstoShow
+	 */
+	public int getAmountOfConnectionsToShow() {
+		return AmountOfConnectionsToShow;
+	}
 
 
 	/**

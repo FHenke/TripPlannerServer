@@ -9,7 +9,8 @@ import org.jdom2.JDOMException;
 
 import api.utilities.GoogleMaps;
 import database.ConnectedHotspots;
-import pathCalculation.bestPath.hotspotPath.HotspotSearch;
+import pathCalculation.hotspotPath.HotspotSearch;
+import pathCalculation.recursiveBreadthFirst.RecursiveBreadthSearch;
 import utilities.Connection;
 import utilities.Place;
 import utilities.Request;
@@ -141,6 +142,20 @@ public class RequestHandler {
 				e.printStackTrace();
 			} catch (Exception e) {
 				System.out.println("Hotspot Search failed: " + e.toString());
+				e.printStackTrace();
+			}
+		}
+		
+		
+		if(request.getMethode().equalsIgnoreCase("RecursiveBFS")){
+			try {
+				RecursiveBreadthSearch breadthSearch = new RecursiveBreadthSearch();
+				return breadthSearch.getHotspotPath(request);
+			} catch (IllegalStateException e) {
+				System.out.println("Best Search failed: " + e.toString());
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("Best Search failed: " + e.toString());
 				e.printStackTrace();
 			}
 		}

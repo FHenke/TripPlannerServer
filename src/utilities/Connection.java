@@ -689,4 +689,22 @@ public class Connection implements Cloneable{
 				+ " duration: " + durationToString().toString() + " price: " + price 
 				+ " departure: " + departureDate.get(Calendar.HOUR_OF_DAY) + ":" + departureDate.get(Calendar.MINUTE) + " arrival: " + arrivalDate.get(Calendar.HOUR_OF_DAY) + ":" + arrivalDate.get(Calendar.MINUTE);
 	}
+	
+	/**
+	 * Generates a virtual price with the price, the duration and the price that an hour delay costs
+	 * @param connection
+	 * @return
+	 */
+	public double getVirtualPrice(double priceForHour){
+		return (getDuration().getMillis() * getPriceForMilli(priceForHour)) + getPrice();
+	}
+	
+	/**
+	 * converts the price for hour in price for milliseconds
+	 * @return
+	 */
+	private double getPriceForMilli(double priceForHour){
+		double millisecondsOfhour = 1000 * 60 * 60;
+		return priceForHour / (millisecondsOfhour);
+	}
 }

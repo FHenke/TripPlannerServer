@@ -1,4 +1,4 @@
-package pathCalculation.bestPath.hotspotPath;
+package pathCalculation.hotspotPath;
 
 import java.io.IOException;
 import java.sql.SQLException;

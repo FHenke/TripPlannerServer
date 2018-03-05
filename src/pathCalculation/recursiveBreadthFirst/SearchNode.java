@@ -2,6 +2,7 @@ package pathCalculation.recursiveBreadthFirst;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -15,6 +16,7 @@ import database.ConnectedAirports;
 import database.ConnectedHotspots;
 import utilities.Connection;
 import utilities.Place;
+import utilities.Request;
 import utilities.TimeFunctions;
 
 public class SearchNode implements Runnable{
@@ -35,12 +37,13 @@ public class SearchNode implements Runnable{
 	
 	@Override
 	public void run() {
+		// TODO: verbindung zum flughafen muss irgendwann hinzugefügt werden
 		
 		if(shouldExploit(connection)){
 			System.out.println(connection.getDestination().getIata()  + ": " + connection.getVirtualPrice(controlObject.getRequest().getPriceForHoure()));
 			controlObject.addUsedConnection(connection.clone());
 			try {
-				LinkedBlockingQueue<Connection> outboundConnectionList = getOutboundAllConnections(connection);
+				LinkedBlockingQueue<Connection> outboundConnectionList = getAllOutboundConnections(connection, controlObject.getRequest());
 				
 				//get connections to add
 				
@@ -52,24 +55,86 @@ public class SearchNode implements Runnable{
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e);
 			}
 		}
 	}
 	
 	private boolean shouldExploit(Connection connection){
+		// TODO: has to be extended
 		if(connection.getSubConnections().size() < 5)
-			return false;
-		return true;
+			return true;
+		return false;
 	}
 	
-	private LinkedBlockingQueue<Connection> getOutboundAllConnections(Connection connection) throws SQLException{
+	private LinkedBlockingQueue<Connection> getAllOutboundConnections(Connection connection, Request request) throws SQLException{
 		//Add one houre (transit time) to arrival time (for the next departure time)
-		GregorianCalendar timeIncludingMinimumTransit = TimeFunctions.cloneAndAddHoures(connection.getArrivalDate(), 1);
-		
+		GregorianCalendar timeIncludingMinimumTransit;
+		if(connection.getArrivalDate() == null)
+			timeIncludingMinimumTransit = request.getDepartureDateString();
+		else
+			timeIncludingMinimumTransit = TimeFunctions.cloneAndAddHoures(connection.getArrivalDate(), 1);
 		return ConnectedAirports.getAllOutboundConnectionsWithinOneDay(connection.getDestination(), timeIncludingMinimumTransit);			
-		
 	}
+	
+	private LinkedBlockingQueue<Connection> getConnectionsToAdd(int method, LinkedBlockingQueue<Connection> outboundConnectionList){
+		LinkedBlockingQueue<Connection> connectionsToAdd = new LinkedBlockingQueue<Connection>();
+		//put all already visited airports for this connection in a hash map
+		ConcurrentHashMap<String, Boolean> visitedAirportsMap = hashmapOfVisitedAirports(connection);
+		
+		if(method == ALL_CONNECTIONS){
+			connectionsToAdd = removeCircles(outboundConnectionList, visitedAirportsMap);
+		}
+		
+		if(method == CHEAPEST_CONNECTION){
+			ConcurrentHashMap<String, Connection> connectionsToAddMap = findCheapestConnections(outboundConnectionList, visitedAirportsMap);
+			connectionsToAdd.addAll(new ArrayList<Connection>(connectionsToAddMap.values()));			
+		}
+		
+		return connectionsToAdd;
+	}
+	
+	private LinkedBlockingQueue<Connection> removeCircles(LinkedBlockingQueue<Connection> connectionList, ConcurrentHashMap<String, Boolean> visitedAirports){
+		LinkedBlockingQueue<Connection> newConnectionList = new LinkedBlockingQueue<Connection>();
+		connectionList.parallelStream().forEach(connection -> {
+			if(visitedAirports.containsKey(connection.getDestination().getIata()))
+				newConnectionList.add(connection);
+		});
+		return newConnectionList;
+	}
+	
+	/**
+	 * choose for each connection the best flight
+	 * @param outboundConnections
+	 * @param departureTime
+	 * @param visitedAirportsMap
+	 * @return
+	 */
+	private ConcurrentHashMap<String, Connection> findCheapestConnections(LinkedBlockingQueue<Connection> outboundConnections, ConcurrentHashMap<String, Boolean> visitedAirportsMap){
+		ConcurrentHashMap<String, Connection> connectedAirportsMap = new ConcurrentHashMap<String, Connection>();
+		for(Connection nextSubConnection : outboundConnections){
+			//true if no flight to the departure airport is already in the list from this airport
+			// or if the flight is ceaper than the current one
+			if(isCheapestConnection(connectedAirportsMap, nextSubConnection, visitedAirportsMap)){
+				connectedAirportsMap.put(nextSubConnection.getDestination().getIata(), nextSubConnection);
+			}
+		}
+		return connectedAirportsMap;
+	}
+	
+	private boolean isCheapestConnection(ConcurrentHashMap<String, Connection> connectedAirportsMap, Connection connection, ConcurrentHashMap<String, Boolean> usedAirportsMap){
+		//Airport was visited to a previous point in time (cycle prevention)
+		if(usedAirportsMap.containsKey(connection.getDestination().getIata()))
+			return false;
+		//airport is not connected at this time
+		if(!connectedAirportsMap.containsKey(connection.getDestination().getIata()))
+			return true;
+		//test if the new connection is better than the previoust choosen one
+		if(connection.getPrice() < connectedAirportsMap.get(connection.getDestination().getIata()).getPrice())
+			return true;
+		return false;
+	}
+	
 	
 	/**
 	 * 
@@ -90,8 +155,7 @@ public class SearchNode implements Runnable{
 		try {
 			
 
-			//put all already visited airports for this connection in a hash map
-			usedAirportsMap = hashmapOfVisitedAirports(connection);
+
 			
 			//choose for each connection the best flight
 			ConcurrentHashMap<String, Connection> connectedAirportsMap = findBestConnection(outboundConnections, timeIncludingMinimumTransit, usedAirportsMap);
@@ -182,40 +246,6 @@ public class SearchNode implements Runnable{
 		System.out.println("-> Connection Found");
 	}
 	
-	
-	private boolean shouldConnectionAdded(ConcurrentHashMap<String, Connection> connectedAirportsMap, String departureAirportIATA, Connection nextSubConnection, GregorianCalendar earliestDepartureTime, ConcurrentHashMap<String, Boolean> usedAirportsMap){
-		//Airport was visited to a previous point in time (cycle prevention)
-		if(usedAirportsMap.containsKey(departureAirportIATA))
-			return false;
-		//airport is not connected at this time
-		if(!connectedAirportsMap.containsKey(departureAirportIATA))
-			return true;
-		//test if the new connection is better than the previoust choosen one
-		if(nextSubConnection.getDepartureDate().before(connectedAirportsMap.get(departureAirportIATA).getDepartureDate()) && nextSubConnection.getDepartureDate().after(earliestDepartureTime))
-			return true;
-		return false;
-	}
-	
-	/**
-	 * 
-	 * @param method 1: all outbound connections, 2: hotspots only, 3: destination hash data only
-	 * @param origin
-	 * @param controlObject
-	 * @param departureTime
-	 * @return
-	 * @throws SQLException
-	 */
-	/*
-	private LinkedBlockingQueue<Connection> getAllOutboundConnections(int method, Place origin, ControlObject controlObject, GregorianCalendar departureTime) throws SQLException{
-		if(method == 1)
-			return ConnectedAirports.getAllOutboundConnectionsWithinOneDay(origin, departureTime);
-		if(method == 2)
-			return ConnectedHotspots.getAllOutboundConnectionsWithinOneDay(origin, controlObject.getDestinationAirport(), departureTime);
-		if(method == 3)
-			return controlObject.getFlightsFromOneDestinationAirport(origin.getIata());
-		return null;
-	}
-	
 	/**
 	 * put all already visited airports for this connection in a hash map
 	 * @connection
@@ -229,28 +259,7 @@ public class SearchNode implements Runnable{
 		}
 		return visitedAirportsMap;
 	}
-	
-	/**
-	 * choose for each connection the best flight
-	 * @param outboundConnections
-	 * @param departureTime
-	 * @param visitedAirportsMap
-	 * @return
-	 */
-	/*
-	private ConcurrentHashMap<String, Connection> findBestConnection(LinkedBlockingQueue<Connection> outboundConnections, GregorianCalendar departureTime, ConcurrentHashMap<String, Boolean> visitedAirportsMap){
-		ConcurrentHashMap<String, Connection> connectedAirportsMap = new ConcurrentHashMap<String, Connection>();
-		for(Connection nextSubConnection : outboundConnections){
-			String departureAirportIATA = nextSubConnection.getDestination().getIata();
-			//true if no flight to the departure airport is already in the list from this airport
-			// or if the departure date is earlier than the current one but still after the minimum transit time
-			if(shouldConnectionAdded(connectedAirportsMap, departureAirportIATA, nextSubConnection, departureTime, visitedAirportsMap)){
-				connectedAirportsMap.put(departureAirportIATA, nextSubConnection);
-			}
-		}
-		return connectedAirportsMap;
-	}
 
-*/
+
 	
 }

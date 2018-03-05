@@ -20,6 +20,7 @@ public class Request extends Connection {
 	private static final int amountOfOriginAirports = 10;
 	private static final int amountOfDestinationAirports = 10;
 	private static final int AmountOfConnectionsToShow = 5;
+	private static final int exploitMethod = pathCalculation.recursiveBreadthFirst.SearchNode.Best_CONNECTIONS;
 	
 	
 	
@@ -108,6 +109,13 @@ public class Request extends Connection {
 		return amountOfDestinationAirports;
 	}
 
+	
+	/**
+	 * @return the destinationAirports
+	 */
+	public int getExploitMethod() {
+		return exploitMethod;
+	}
 
 	
 //#######

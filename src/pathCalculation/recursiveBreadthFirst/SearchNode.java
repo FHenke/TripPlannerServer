@@ -21,6 +21,10 @@ public class SearchNode implements Runnable{
 
 	protected static final Logger logger = LogManager.getLogger(SearchNode.class);
 	
+	public static final int CHEAPEST_CONNECTION = 1;
+	public static final int Best_CONNECTIONS = 2;
+	public static final int ALL_CONNECTIONS = 3;
+	
 	ControlObject controlObject;
 	Connection connection;
 	
@@ -31,8 +35,40 @@ public class SearchNode implements Runnable{
 	
 	@Override
 	public void run() {
-		System.out.println(connection.getDestination().getIata()  + ": " + connection.getVirtualPrice(controlObject.getRequest().getPriceForHoure()));
-		controlObject.addUsedConnection(connection.clone());
+		
+		if(shouldExploit(connection)){
+			System.out.println(connection.getDestination().getIata()  + ": " + connection.getVirtualPrice(controlObject.getRequest().getPriceForHoure()));
+			controlObject.addUsedConnection(connection.clone());
+			try {
+				LinkedBlockingQueue<Connection> outboundConnectionList = getOutboundAllConnections(connection);
+				
+				//get connections to add
+				
+				//add connections to previous connection
+				
+				//call this method for each new connection
+				
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private boolean shouldExploit(Connection connection){
+		if(connection.getSubConnections().size() < 5)
+			return false;
+		return true;
+	}
+	
+	private LinkedBlockingQueue<Connection> getOutboundAllConnections(Connection connection) throws SQLException{
+		//Add one houre (transit time) to arrival time (for the next departure time)
+		GregorianCalendar timeIncludingMinimumTransit = TimeFunctions.cloneAndAddHoures(connection.getArrivalDate(), 1);
+		
+		return ConnectedAirports.getAllOutboundConnectionsWithinOneDay(connection.getDestination(), timeIncludingMinimumTransit);			
+		
 	}
 	
 	/**
@@ -53,11 +89,7 @@ public class SearchNode implements Runnable{
 		
 		try {
 			
-			//Add one houre (transit time) to arrival time (for the next departure time)
-			GregorianCalendar timeIncludingMinimumTransit = TimeFunctions.cloneAndAddHoures(connection.getArrivalDate(), 1);
-			
-			outboundConnections = getAllOutboundConnections(method, node, controlObject, timeIncludingMinimumTransit);			
-			
+
 			//put all already visited airports for this connection in a hash map
 			usedAirportsMap = hashmapOfVisitedAirports(connection);
 			
@@ -192,8 +224,6 @@ public class SearchNode implements Runnable{
 	private ConcurrentHashMap<String, Boolean> hashmapOfVisitedAirports(Connection connection){
 		ConcurrentHashMap<String, Boolean> visitedAirportsMap = new ConcurrentHashMap<String, Boolean>();
 		for(Connection subConnection : connection.getSubConnections()){
-			if(subConnection.getOrigin().getType() == Place.AIRPORT)
-				visitedAirportsMap.put(subConnection.getOrigin().getIata(), true);
 			if(subConnection.getDestination().getType() == Place.AIRPORT)
 				visitedAirportsMap.put(subConnection.getDestination().getIata(), true);
 		}

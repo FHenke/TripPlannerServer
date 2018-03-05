@@ -41,17 +41,23 @@ public class SearchNode implements Runnable{
 		
 		if(shouldExploit(connection)){
 			System.out.println(connection.getDestination().getIata()  + ": " + connection.getVirtualPrice(controlObject.getRequest().getPriceForHoure()));
-			controlObject.addUsedConnection(connection.clone());
+			
 			try {
+				//get all outbound connections for this airport
 				LinkedBlockingQueue<Connection> outboundConnectionList = getAllOutboundConnections(connection, controlObject.getRequest());
 				
 				//get connections to add
+				outboundConnectionList = getConnectionsToAdd(controlObject.getRequest().getExploitMethod() ,outboundConnectionList);
 				
 				//add connections to previous connection
+				outboundConnectionList = addOldConnection(connection, outboundConnectionList);
 				
 				//call this method for each new connection
 				
 				
+				
+				for(Connection con : outboundConnectionList)
+					controlObject.addUsedConnection(con.clone());
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -89,6 +95,10 @@ public class SearchNode implements Runnable{
 		if(method == CHEAPEST_CONNECTION){
 			ConcurrentHashMap<String, Connection> connectionsToAddMap = findCheapestConnections(outboundConnectionList, visitedAirportsMap);
 			connectionsToAdd.addAll(new ArrayList<Connection>(connectionsToAddMap.values()));			
+		}
+		
+		if(method == Best_CONNECTIONS){
+			
 		}
 		
 		return connectionsToAdd;
@@ -135,6 +145,19 @@ public class SearchNode implements Runnable{
 		return false;
 	}
 	
+	private LinkedBlockingQueue<Connection> addOldConnection(Connection connection, LinkedBlockingQueue<Connection> connectionList){
+		LinkedBlockingQueue<Connection> newConnectionList = new LinkedBlockingQueue<Connection>();
+		
+		//add for each connection the best flight to the previous connection and add the full connection to the result set
+		connectionList.parallelStream().forEach(nextSubConnection -> {
+			Connection newConnection = connection.clone();
+			newConnection.addSubconnection(nextSubConnection);
+			newConnectionList.add(newConnection);
+		});
+		
+		return newConnectionList;
+	}
+	
 	
 	/**
 	 * 
@@ -160,10 +183,7 @@ public class SearchNode implements Runnable{
 			//choose for each connection the best flight
 			ConcurrentHashMap<String, Connection> connectedAirportsMap = findBestConnection(outboundConnections, timeIncludingMinimumTransit, usedAirportsMap);
 
-			//add for each connection the best flight to the previous connection and add the full connection to the result set
-			connectedAirportsMap.entrySet().parallelStream().forEach(nextSubConnection -> {
-				addSubconnectionToConnection(connection, nextSubConnection.getValue(), controlObject, method, connectionList);	
-			});
+			
 				
 		} catch (SQLException e) {
 			logger.warn("Next nodes for hotspot search can't be calculated." + e);
@@ -171,32 +191,6 @@ public class SearchNode implements Runnable{
 		}
 		
 		return connectionList;
-	}
-	
-	*/
-	/**
-	 * adds the sub connection to the Connection if there was no better flight to the smae destination airport earlier and add the full connection to the result set
-	 * @param connection
-	 * @param nextSubConnection
-	 * @param controlObject
-	 * @param method
-	 * @param connectionList
-	 */
-	/*private void addSubconnectionToConnection(Connection connection, Connection nextSubConnection, ControlObject controlObject, int method, LinkedBlockingQueue<Connection> connectionList){
-		//add sub connection to old connection
-		Connection newConnection = connection.clone();
-		Connection newNextSubConnection = nextSubConnection.clone();
-		newConnection.addSubconnection(newNextSubConnection);
-		
-		//if departure place is found
-		if(controlObject.isPathToDestinationAirportKnown(newNextSubConnection.getDestination().getIata()) && method != 3){
-			connectionList.addAll(addFinalConnectionToDestinationAirport(newConnection, controlObject));
-		}else{
-			connectionList.add(newConnection);
-			if(method == 3 && controlObject.isDestinationAirport(newConnection.getDestination().getIata())){
-				addToFromAirport(newConnection, controlObject);
-			}
-		}
 	}
 	
 	

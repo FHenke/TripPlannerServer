@@ -3,6 +3,7 @@ package database.utilities;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.logging.log4j.LogManager;
@@ -88,6 +89,7 @@ public class SQLUtilities {
 	}
 	
 	public static GregorianCalendar toGregorianCalendar(java.sql.Timestamp time){
+		//GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 		GregorianCalendar calendar = new GregorianCalendar();
 		calendar.setTimeInMillis(time.getTime());
 		return calendar;

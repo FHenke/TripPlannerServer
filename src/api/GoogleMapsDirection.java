@@ -4,9 +4,7 @@
 package api;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
 import java.util.TimeZone;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -25,9 +23,6 @@ import org.jdom2.input.SAXBuilder;
 import org.joda.time.Duration;
 
 import api.utilities.GoogleMaps;
-import database.updateTables.UpdateContinents;
-import utilities.Carrier;
-import utilities.CarrierList;
 import utilities.Connection;
 import utilities.Place;
 import utilities.XMLUtilities;
@@ -156,7 +151,7 @@ public class GoogleMapsDirection implements API {
 					logger.warn("The departure and arrival time of one connection can't be set." + e);
 				}catch(NullPointerException e){
 					try{
-						GregorianCalendar departureTime = new GregorianCalendar();
+						GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone("CET"));
 						if(isDepartureDate)
 							departureTime.setTimeInMillis(date.getTimeInMillis());
 						else
@@ -164,7 +159,7 @@ public class GoogleMapsDirection implements API {
 						departureTime.setTimeZone(TimeZone.getTimeZone(GoogleMapsTimeZone.getTimeZoneInfo(departureTime, connection.getOrigin()).getTimeZoneId()));
 						connection.setDepartureDate(departureTime);
 						
-						GregorianCalendar arrivalTime = new GregorianCalendar();
+						GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone("CET"));
 						if(isDepartureDate)
 							arrivalTime.setTimeInMillis(date.getTimeInMillis() + connection.getDuration().getMillis());
 						else

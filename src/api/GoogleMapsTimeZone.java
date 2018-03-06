@@ -39,6 +39,7 @@ public class GoogleMapsTimeZone {
 			//rawOffset = time difference to utc, dstOffset = day light saving time difference
 	        //calculates the utc time by subtract the time difference to utc and to day light saving time
 	        GregorianCalendar utcTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+	        //GregorianCalendar utcTime = new GregorianCalendar(TimeZone.getTimeZone(timeZoneInfo.getTimeZoneId()));
 	        utcTime.setTimeInMillis(((localTime.getTimeInMillis() / 1000) - timeZoneInfo.getDstOffset() - timeZoneInfo.getRawOffset()) * 1000);
 	        return utcTime;
 		} catch (IllegalStateException | IOException | JDOMException e) {
@@ -55,6 +56,7 @@ public class GoogleMapsTimeZone {
 			//rawOffset = time difference to utc, dstOffset = day light saving time difference
 	        //calculates the local time by adding the time difference to utc and to day light saving time
 	        GregorianCalendar localTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+	        //GregorianCalendar localTime = new GregorianCalendar(TimeZone.getTimeZone(timeZoneInfo.getTimeZoneId()));
 	        localTime.setTimeInMillis(((utcTime.getTimeInMillis() / 1000) + timeZoneInfo.getDstOffset() + timeZoneInfo.getRawOffset()) * 1000);
 	        return localTime;
 		} catch (IllegalStateException | IOException | JDOMException e) {

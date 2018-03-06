@@ -150,7 +150,7 @@ public class RequestHandler {
 		if(request.getMethode().equalsIgnoreCase("RecursiveBFS")){
 			try {
 				RecursiveBreadthSearch breadthSearch = new RecursiveBreadthSearch();
-				return breadthSearch.getHotspotPath(request);
+				return breadthSearch.getReqursivePath(request);
 			} catch (IllegalStateException e) {
 				System.out.println("Best Search failed: " + e.toString());
 				e.printStackTrace();

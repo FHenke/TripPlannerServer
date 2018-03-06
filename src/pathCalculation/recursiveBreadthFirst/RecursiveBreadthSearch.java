@@ -29,7 +29,7 @@ public class RecursiveBreadthSearch {
 		
 	}
 	
-	public LinkedBlockingQueue<Connection> getHotspotPath(Request request) throws Exception{
+	public LinkedBlockingQueue<Connection> getReqursivePath(Request request) throws Exception{
 		
 		long startTime = System.nanoTime();
 		Connection[] originAirports = null;
@@ -49,7 +49,9 @@ public class RecursiveBreadthSearch {
 		
 		//für jede connection rufe die rekursion auf
 		Arrays.stream(originAirports).parallel().forEach(connection -> {
-			Thread thread = new Thread(new SearchNode(controlObject, connection));
+			Connection headConnection = new Connection(connection.getOrigin(), connection.getDestination());
+			headConnection.addSubconnection(connection);
+			Thread thread = new Thread(new SearchNode(controlObject, headConnection));
 			thread.start();
 			controlObject.getThreadList().add(thread);
 		});
@@ -58,7 +60,8 @@ public class RecursiveBreadthSearch {
 		
 		long elapsedTime = System.nanoTime() - startTime;
 		System.out.println((double) elapsedTime / 1000000000.0 + " time needed for Recursive search");
-		System.out.println(controlObject.getUsedConnectionSet().size() + " connections found.");
+		//System.out.println(controlObject.getUsedConnectionSet().size() + " connections found.");
+		System.out.println(controlObject.getUnusedConnectionList().size() + " connections found.");
 		return controlObject.getUsedConnectionQueue();
 		//return controlObject.getUnusedConnectionList();
 	}

@@ -152,12 +152,32 @@ public class SearchNode implements Runnable{
 		connectionList.parallelStream().forEach(nextSubConnection -> {
 			Connection newConnection = connection.clone();
 			newConnection.addSubconnection(nextSubConnection);
+			if(newConnection.getSubConnections().size() == 2)
+				newConnection = addConnectionToAirport(newConnection);
 			newConnectionList.add(newConnection);
 		});
 		
 		return newConnectionList;
 	}
 	
+	private Connection addConnectionToAirport(Connection connection){
+		api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();
+		connection.getSubConnections().poll();
+		//Add connection from origin to origin airport
+		try {
+			
+			//System.out.println(connection.getSubConnections().peek().getDepartureDate().toString());
+			//GregorianCalendar arrivalTimeToAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(connection.getSubConnections().peek().getDepartureDate(), -1), connection.getSubConnections().peek().getOrigin());
+			GregorianCalendar arrivalTimeToAirport = TimeFunctions.cloneAndAddHoures(connection.getSubConnections().peek().getDepartureDate(), -1);
+			if(connection.getSubConnections().peek().getDestination().getIata().equals("FRA"))
+				System.out.println(connection.getSubConnections().peek().getDepartureDate().toString() + "\n --> " + arrivalTimeToAirport.toString());
+			LinkedBlockingQueue<Connection> connectionToAirport = googleDirection.getConnection(controlObject.getRequest().getOrigin(), connection.getSubConnections().peek().getOrigin(), arrivalTimeToAirport, false, controlObject.getRequest().getBestTransportation(), "", "", false);
+			connection.addHeadOnSubconnection(connectionToAirport.peek());
+		} catch (IllegalStateException | IOException | JDOMException e) {
+			logger.warn("Connection from origin to origin airport cant be added. (origin: " + connection.getOrigin().getIata() + ")" + e);
+		}		
+		return connection;
+	}
 	
 	/**
 	 * 
@@ -168,51 +188,6 @@ public class SearchNode implements Runnable{
 	 * @return
 	 */
 	/*
-	public LinkedBlockingQueue<Connection> getNextConnections(ControlObject controlObject, Connection connection, int method){
-		
-		ConcurrentHashMap<String, Boolean> usedAirportsMap = new ConcurrentHashMap<String, Boolean>();
-		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
-		LinkedBlockingQueue<Connection> outboundConnections = new LinkedBlockingQueue<Connection>();
-		Place node = connection.getDestination();
-		
-		try {
-			
-
-
-			
-			//choose for each connection the best flight
-			ConcurrentHashMap<String, Connection> connectedAirportsMap = findBestConnection(outboundConnections, timeIncludingMinimumTransit, usedAirportsMap);
-
-			
-				
-		} catch (SQLException e) {
-			logger.warn("Next nodes for hotspot search can't be calculated." + e);
-			throw new IllegalStateException("Next nodes for hotspot search can't be calculated." + e);
-		}
-		
-		return connectionList;
-	}
-	
-	
-	private LinkedBlockingQueue<Connection> addFinalConnectionToDestinationAirport(Connection newConnection, ControlObject controlObject){
-		LinkedBlockingQueue<Connection> connectionsToDestinationAirport = new LinkedBlockingQueue<Connection>();
-		connectionsToDestinationAirport.add(newConnection);
-		
-		//if destination of connection is already the destination airport
-		if(controlObject.isDestinationAirport(newConnection.getDestination().getIata())){
-			addToFromAirport(newConnection, controlObject);		
-			return connectionsToDestinationAirport;
-		}
-		
-		for(int level = 0; !controlObject.isConnectionFound() && level < 5; level++){
-			LinkedBlockingQueue<Connection> tmpConnectionsToDestinationAirport = new LinkedBlockingQueue<Connection>();
-			connectionsToDestinationAirport.parallelStream().forEach(connection -> {
-				tmpConnectionsToDestinationAirport.addAll(getNextConnections(controlObject, connection, 3));
-			});
-			connectionsToDestinationAirport = tmpConnectionsToDestinationAirport;
-		}
-		return connectionsToDestinationAirport;
-	}
 	
 	private void addToFromAirport(Connection newConnection, ControlObject controlObject){
 		api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();

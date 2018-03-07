@@ -39,7 +39,6 @@ public class ConnectedAirports {
 	 */
 	public static LinkedBlockingQueue<Connection> getAllOutboundConnectionsWithinOneDay(Place airport, GregorianCalendar date) throws SQLException{
 		java.sql.Timestamp time = new java.sql.Timestamp(date.getTimeInMillis());
-		//ResultSet outboundConnections = getAllOutboundConnections(airport.getIata(), time, millisecondsOfDay, true, false, false);
 		ResultSet outboundConnections = getAllOutboundConnectionsAprxPrice(airport.getIata(), time, millisecondsOfDay, true, false, false);
 		LinkedBlockingQueue<Connection> connectionList = SQLUtilities.getConnectionListFromResultSetWhithDestinations(airport, outboundConnections);
 		return connectionList;

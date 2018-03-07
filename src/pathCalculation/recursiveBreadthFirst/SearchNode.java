@@ -161,17 +161,12 @@ public class SearchNode implements Runnable{
 	}
 	
 	private Connection addConnectionToAirport(Connection connection){
+		// first remove the rough connection from origin to origin airport and than add the new one (with origin and departure time and polyline)
 		api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();
 		connection.getSubConnections().poll();
 		//Add connection from origin to origin airport
 		try {
-			
-			//System.out.println(connection.getSubConnections().peek().getDepartureDate().toString());
 			GregorianCalendar arrivalTimeToAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(connection.getSubConnections().peek().getDepartureDate(), -1), connection.getSubConnections().peek().getOrigin());
-			//GregorianCalendar arrivalTimeToAirport = TimeFunctions.cloneAndAddHoures(connection.getSubConnections().peek().getDepartureDate(), -1);
-			if(connection.getSubConnections().peek().getDestination().getIata().equals("YYZ"))
-				System.out.println(connection.getSubConnections().peek().getDepartureDate().toString() 
-						+ "\n --> " + arrivalTimeToAirport.toString());
 			LinkedBlockingQueue<Connection> connectionToAirport = googleDirection.getConnection(controlObject.getRequest().getOrigin(), connection.getSubConnections().peek().getOrigin(), arrivalTimeToAirport, false, controlObject.getRequest().getBestTransportation(), "", "", false);
 			connection.addHeadOnSubconnection(connectionToAirport.peek());
 		} catch (IllegalStateException | IOException | JDOMException e) {

@@ -34,6 +34,8 @@ import utilities.XMLUtilities;
 public class GoogleMapsDirection implements API {
 	
 	protected static final Logger logger = LogManager.getLogger(GoogleMapsDirection.class);
+	// liters for 100 km * fuel price for 1 liter / 100 km
+	private static final double DRIVING_PRICE_FOR_KM = 7 * 1.45 / 100;
 	
 	/**
 	 * Empty Constructor
@@ -137,7 +139,6 @@ public class GoogleMapsDirection implements API {
 				try{
 					//departure time
 					//Sets the departure time in local time and not UTC
-					//GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("departure_time").getChildText("time_zone")));
 					GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 					departureTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("departure_time").getChildText("value")) * 1000L);
 					departureTime = GoogleMapsTimeZone.getLocalTime(departureTime, connection.getOrigin());
@@ -145,7 +146,6 @@ public class GoogleMapsDirection implements API {
 					
 					//arrival time
 					//Sets the arrival time in local time and not UTC
-					//GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("arrival_time").getChildText("time_zone")));
 					GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 					arrivalTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("arrival_time").getChildText("value")) * 1000L);
 					arrivalTime = GoogleMapsTimeZone.getLocalTime(arrivalTime, connection.getDestination());
@@ -202,7 +202,11 @@ public class GoogleMapsDirection implements API {
 				try{
 					connection.addPrice(Double.parseDouble(routeOption.getParentElement().getChild("fare").getChildText("value")));
 				}catch(NullPointerException | NumberFormatException e){
-					//usually fare is not available
+					if(transportation == GoogleMaps.DRIVING){
+						connection.addPrice(DRIVING_PRICE_FOR_KM * connection.getDistance() / 1000);
+						System.out.println(connection.getPrice());
+					}
+					System.out.println("enters pricing");
 				}
 				
 				//travel mode

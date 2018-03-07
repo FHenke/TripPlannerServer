@@ -1,5 +1,6 @@
 package utilities;
 
+import java.util.Calendar;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.joda.time.Duration;
@@ -50,12 +51,12 @@ public class UpdateConnectionAfterAddingSubConnection {
 				//time between connections
 				if(subConnection.getDepartureDate() != null && connection.getArrivalDate() != null && subConnection.getDepartureDate().after(connection.getArrivalDate()))
 					durationInMillis += subConnection.getDepartureDate().getTimeInMillis() - connection.getArrivalDate().getTimeInMillis();
-				if(subConnection.getArrivalDate() != null && connection.getDepartureDate() != null && subConnection.getArrivalDate().before(connection.getDepartureDate()))
+				if(subConnection.getArrivalDate() != null && connection.getDepartureDate() != null && subConnection.getArrivalDate().before(connection.getDepartureDate())){
+					System.out.println("Transit time: " + (connection.getDepartureDate().getTimeInMillis() - subConnection.getArrivalDate().getTimeInMillis()));
 					durationInMillis += connection.getDepartureDate().getTimeInMillis() - subConnection.getArrivalDate().getTimeInMillis();
-					
+				}
 				//duration of new part of connection
 				durationInMillis += subConnection.getDuration().getMillis();
-				
 				//duration between last arrival time and arrival time from new sub connection
 				duration = duration.plus(durationInMillis);
 			}

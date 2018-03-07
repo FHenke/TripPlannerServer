@@ -137,34 +137,38 @@ public class GoogleMapsDirection implements API {
 				try{
 					//departure time
 					//Sets the departure time in local time and not UTC
-					GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("departure_time").getChildText("time_zone")));
+					//GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("departure_time").getChildText("time_zone")));
+					GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 					departureTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("departure_time").getChildText("value")) * 1000L);
+					departureTime = GoogleMapsTimeZone.getLocalTime(departureTime, connection.getOrigin());
 					connection.setDepartureDate(departureTime);
 					
 					//arrival time
 					//Sets the arrival time in local time and not UTC
-					GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("arrival_time").getChildText("time_zone")));
+					//GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone(routeOption.getChild("arrival_time").getChildText("time_zone")));
+					GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 					arrivalTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("arrival_time").getChildText("value")) * 1000L);
+					arrivalTime = GoogleMapsTimeZone.getLocalTime(arrivalTime, connection.getDestination());
 					connection.setArrivalDate(arrivalTime);
 					
 				}catch(NumberFormatException e){
 					logger.warn("The departure and arrival time of one connection can't be set." + e);
 				}catch(NullPointerException e){
 					try{
-						GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone("CET"));
+						GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 						if(isDepartureDate)
 							departureTime.setTimeInMillis(date.getTimeInMillis());
 						else
 							departureTime.setTimeInMillis(date.getTimeInMillis() - connection.getDuration().getMillis());
-						departureTime.setTimeZone(TimeZone.getTimeZone(GoogleMapsTimeZone.getTimeZoneInfo(departureTime, connection.getOrigin()).getTimeZoneId()));
+						departureTime = GoogleMapsTimeZone.getLocalTime(departureTime, connection.getOrigin());
 						connection.setDepartureDate(departureTime);
 						
-						GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone("CET"));
+						GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 						if(isDepartureDate)
 							arrivalTime.setTimeInMillis(date.getTimeInMillis() + connection.getDuration().getMillis());
 						else
 							arrivalTime.setTimeInMillis(date.getTimeInMillis());
-						arrivalTime.setTimeZone(TimeZone.getTimeZone(GoogleMapsTimeZone.getTimeZoneInfo(arrivalTime, connection.getDestination()).getTimeZoneId()));
+						arrivalTime = GoogleMapsTimeZone.getLocalTime(arrivalTime, connection.getDestination());
 						connection.setArrivalDate(arrivalTime);
 					}catch(NullPointerException ex){
 						if(date != null)

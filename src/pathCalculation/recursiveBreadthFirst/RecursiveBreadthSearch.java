@@ -50,7 +50,7 @@ public class RecursiveBreadthSearch {
 		//für jede connection rufe die rekursion auf
 		Arrays.stream(originAirports).parallel().forEach(connection -> {
 			Connection headConnection = new Connection(connection.getOrigin(), connection.getDestination());
-			headConnection.addSubconnection(connection);
+			headConnection.simpleAddSubconnection(connection);
 			Thread thread = new Thread(new SearchNode(controlObject, headConnection));
 			thread.start();
 			controlObject.getThreadList().add(thread);

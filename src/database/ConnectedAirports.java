@@ -60,7 +60,6 @@ public class ConnectedAirports {
 		queryString += "and connections.departure_date between '" + departureTime + "' and '" + new java.sql.Timestamp(departureTime.getTime() + timeperiode) + "' "
 				+ "and airports.iata_code = connections.destination "
 				+ "ORDER BY departure_date;";
-		System.out.println(queryString);
 		try {
 			queryResult = conn.createStatement().executeQuery(queryString);
 		} catch (SQLException e) {

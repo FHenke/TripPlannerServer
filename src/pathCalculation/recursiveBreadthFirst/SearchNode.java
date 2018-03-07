@@ -167,10 +167,11 @@ public class SearchNode implements Runnable{
 		try {
 			
 			//System.out.println(connection.getSubConnections().peek().getDepartureDate().toString());
-			//GregorianCalendar arrivalTimeToAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(connection.getSubConnections().peek().getDepartureDate(), -1), connection.getSubConnections().peek().getOrigin());
-			GregorianCalendar arrivalTimeToAirport = TimeFunctions.cloneAndAddHoures(connection.getSubConnections().peek().getDepartureDate(), -1);
-			if(connection.getSubConnections().peek().getDestination().getIata().equals("FRA"))
-				System.out.println(connection.getSubConnections().peek().getDepartureDate().toString() + "\n --> " + arrivalTimeToAirport.toString());
+			GregorianCalendar arrivalTimeToAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(connection.getSubConnections().peek().getDepartureDate(), -1), connection.getSubConnections().peek().getOrigin());
+			//GregorianCalendar arrivalTimeToAirport = TimeFunctions.cloneAndAddHoures(connection.getSubConnections().peek().getDepartureDate(), -1);
+			if(connection.getSubConnections().peek().getDestination().getIata().equals("YYZ"))
+				System.out.println(connection.getSubConnections().peek().getDepartureDate().toString() 
+						+ "\n --> " + arrivalTimeToAirport.toString());
 			LinkedBlockingQueue<Connection> connectionToAirport = googleDirection.getConnection(controlObject.getRequest().getOrigin(), connection.getSubConnections().peek().getOrigin(), arrivalTimeToAirport, false, controlObject.getRequest().getBestTransportation(), "", "", false);
 			connection.addHeadOnSubconnection(connectionToAirport.peek());
 		} catch (IllegalStateException | IOException | JDOMException e) {

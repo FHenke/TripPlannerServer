@@ -2,6 +2,8 @@ package database.utilities;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -69,8 +71,7 @@ public class SQLUtilities {
 		connection.setSummary(connection.getDestination().getName());
 		if(connection.getCode() != null){
 			connection.setDirect(true);
-		}
-	
+		}	
 		return connection;
 	}
 	
@@ -89,9 +90,14 @@ public class SQLUtilities {
 	}
 	
 	public static GregorianCalendar toGregorianCalendar(java.sql.Timestamp time){
-		//GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-		GregorianCalendar calendar = new GregorianCalendar();
+		GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 		calendar.setTimeInMillis(time.getTime());
+		//System.out.println(time.);
+		//calendar.set(time.get, time.getMonth(), time.getDate(), time.getHours(), time.getMinutes(), 0);
+		calendar.set(Calendar.MONTH, time.getMonth());
+		calendar.set(Calendar.DAY_OF_MONTH, time.getDate());
+		calendar.set(Calendar.HOUR_OF_DAY, time.getHours());
+		calendar.set(Calendar.MINUTE, time.getMinutes());
 		return calendar;
 	}
 	

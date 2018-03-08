@@ -3,7 +3,9 @@ package pathCalculation.recursiveBreadthFirst;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -37,11 +39,7 @@ public class SearchNode implements Runnable{
 	
 	@Override
 	public void run() {
-		// TODO: verbindung zum flughafen muss irgendwann hinzugefügt werden
-		
-		if(shouldExploit(connection)){
-			System.out.println(connection.getDestination().getIata()  + ": " + connection.getVirtualPrice(controlObject.getRequest().getPriceForHoure()));
-			
+		if(TerminationCriteria.shouldExploit(connection, controlObject)){
 			try {
 				//get all outbound connections for this airport
 				LinkedBlockingQueue<Connection> outboundConnectionList = getAllOutboundConnections(connection, controlObject.getRequest());
@@ -52,25 +50,19 @@ public class SearchNode implements Runnable{
 				//add connections to previous connection
 				outboundConnectionList = addOldConnection(connection, outboundConnectionList);
 				
-				//call this method for each new connection
+				//recursive call of this method
+				exploitNewConnections(outboundConnectionList);
 				
 				
 				
-				for(Connection con : outboundConnectionList)
-					controlObject.addUsedConnection(con.clone());
+				/*for(Connection con : outboundConnectionList)
+					controlObject.addUsedConnection(con.clone());*/
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				System.out.println(e);
 			}
 		}
-	}
-	
-	private boolean shouldExploit(Connection connection){
-		// TODO: has to be extended
-		if(connection.getSubConnections().size() < 5)
-			return true;
-		return false;
 	}
 	
 	private LinkedBlockingQueue<Connection> getAllOutboundConnections(Connection connection, Request request) throws SQLException{
@@ -98,7 +90,7 @@ public class SearchNode implements Runnable{
 		}
 		
 		if(method == Best_CONNECTIONS){
-			
+			connectionsToAdd = findBestConnections(outboundConnectionList, visitedAirportsMap);
 		}
 		
 		return connectionsToAdd;
@@ -130,6 +122,29 @@ public class SearchNode implements Runnable{
 			}
 		}
 		return connectedAirportsMap;
+	}
+	
+	/**
+	 * 
+	 * @param outboundConnections needs to be ordered by date and time (earliest at first, latest at last)
+	 * @param visitedAirportsMap
+	 * @return
+	 */
+	private LinkedBlockingQueue<Connection> findBestConnections(LinkedBlockingQueue<Connection> outboundConnections, ConcurrentHashMap<String, Boolean> visitedAirportsMap){
+		LinkedBlockingQueue<Connection> bestConnectionList = new LinkedBlockingQueue<Connection>();
+		HashMap<String, Double> bestPriceToAirport = new HashMap<String, Double>();
+		for(Connection connection : outboundConnections){
+			String destinationIata = connection.getDestination().getIata();
+			//if the connections does not contain this airport already
+			if(!visitedAirportsMap.containsKey(destinationIata)){
+				//if no connection to this airport is added already or the earlier connections are more expensice add current connection
+				if(!bestPriceToAirport.containsKey(destinationIata) || bestPriceToAirport.get(destinationIata) > connection.getPrice()){
+					bestPriceToAirport.put(destinationIata, connection.getPrice());
+					bestConnectionList.add(connection);
+				}
+			}
+		}
+		return bestConnectionList;
 	}
 	
 	private boolean isCheapestConnection(ConcurrentHashMap<String, Connection> connectedAirportsMap, Connection connection, ConcurrentHashMap<String, Boolean> usedAirportsMap){
@@ -173,6 +188,15 @@ public class SearchNode implements Runnable{
 			logger.warn("Connection from origin to origin airport cant be added. (origin: " + connection.getOrigin().getIata() + ")" + e);
 		}		
 		return connection;
+	}
+	
+	private void exploitNewConnections(LinkedBlockingQueue<Connection> connectionList){
+		//recursion for each connection of the List
+		connectionList.parallelStream().forEach(connection -> {
+			Thread thread = new Thread(new SearchNode(controlObject, connection));
+			thread.start();
+			controlObject.getThreadList().add(thread);
+		});
 	}
 	
 	/**

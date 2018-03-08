@@ -25,6 +25,8 @@ public class GoogleMapsTimeZone {
 
 	protected static final Logger logger = LogManager.getLogger(GoogleMapsTimeZone.class);
 	
+	private static final String API_KEY = "AIzaSyDhieKypOeAVC9O1rD2y7SoSEgESt0S8ao";
+	
 	
 	public GoogleMapsTimeZone(){
 		
@@ -67,7 +69,7 @@ public class GoogleMapsTimeZone {
 
     //Gets information about the TimeZone of the given location at the given date
     public static TimeZoneInfo getTimeZoneInfo(GregorianCalendar date, Place place) throws ClientProtocolException, IllegalStateException, IOException, JDOMException{
-    	String url = "https://maps.googleapis.com/maps/api/timezone/json?location=" + place.getLatitude() + "," + place.getLongitude() +"&timestamp=" + (date.getTimeInMillis() / 1000) + "&key=AIzaSyCfBLegejThMTrjkQn3b3R9IErezqTx9UI";
+    	String url = "https://maps.googleapis.com/maps/api/timezone/json?location=" + place.getLatitude() + "," + place.getLongitude() +"&timestamp=" + (date.getTimeInMillis() / 1000) + "&key=" + API_KEY;
     	return sockets.JsonConverter.jsonToTimeZoneInfo(getInput(url));
     }
 	

@@ -202,11 +202,8 @@ public class GoogleMapsDirection implements API {
 				try{
 					connection.addPrice(Double.parseDouble(routeOption.getParentElement().getChild("fare").getChildText("value")));
 				}catch(NullPointerException | NumberFormatException e){
-					if(transportation == GoogleMaps.DRIVING){
+					if(transportation == GoogleMaps.DRIVING)
 						connection.addPrice(DRIVING_PRICE_FOR_KM * connection.getDistance() / 1000);
-						System.out.println(connection.getPrice());
-					}
-					System.out.println("enters pricing");
 				}
 				
 				//travel mode

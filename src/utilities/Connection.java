@@ -199,10 +199,18 @@ public class Connection implements Cloneable{
 		newConnection.setPolyline(polyline);
 		newConnection.setHtmlInstructions(htmlInstructions);
 		newConnection.setSummary(summary);
+		//subConnections
 		LinkedBlockingQueue<Connection> newSubConnections = new LinkedBlockingQueue<Connection>();
-		newSubConnections.addAll(subConnections);
+		for(Connection connection : subConnections){
+			newSubConnections.add(connection.clone());
+		}
 		newConnection.setSubConnections(newSubConnections);
-		newConnection.setReturnConnection(returnConnection);
+		//returnConnection
+		LinkedBlockingQueue<Connection> newReturnConnection = new LinkedBlockingQueue<Connection>();
+		for(Connection connection : returnConnection){
+			newReturnConnection.add(connection.clone());
+		}
+		newConnection.setReturnConnection(newReturnConnection);
 		newConnection.setAction(action);
 		newConnection.setBeeline(beeline);
 		newConnection.setCurrency(currency);

@@ -151,4 +151,25 @@ public class ControlObject {
 	public boolean isDestinationAirport(String iata){
 		return destinationAirports.containsKey(iata);
 	}
+	
+	/* ----------- get minimum values for used connections list ------------ */
+	
+	public boolean isVirtualPriceToHigth(Connection connection){
+		if(!isUsedConnectionSetFull()){
+			return false;
+		}
+		if(connection.getVirtualPrice(request.getPriceForHoure()) < getMinimumVirtualPrice()) 
+			return false;
+		return true;
+	}
+	
+	public double getMinimumVirtualPrice(){
+		return usedConnectionSet.last().getVirtualPrice(request.getPriceForHoure());
+	}
+	
+	public boolean isUsedConnectionSetFull(){
+		if(usedConnectionSet.size() >= request.getAmountOfConnectionsToShow())
+			return true;
+		return false;
+	}
 }

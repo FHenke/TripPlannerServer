@@ -65,6 +65,7 @@ public class Connection implements Cloneable{
 	private int beeline = Integer.MAX_VALUE;
 	private String currency = "";
 	private String code = null;
+	private int distanceToDestination = Integer.MAX_VALUE;
 	
 	/**
 	 * 
@@ -364,20 +365,9 @@ public class Connection implements Cloneable{
 		return summary;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	public int getDistanceToDestination(){
+		return distanceToDestination;
+	}
 
 	/**
 	 * @return the action
@@ -405,7 +395,17 @@ public class Connection implements Cloneable{
 	}
 
 
+	
+	
+	
+	
+	
+	
 
+	public void setDistanceToDestination(int distanceToDestination){
+		this.distanceToDestination = distanceToDestination;
+	}
+	
 	/**
 	 * @param code the code to set
 	 */

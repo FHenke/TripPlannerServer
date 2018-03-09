@@ -26,6 +26,10 @@ public class TerminationCriteria {
 	
 	public static boolean shouldExploit(Connection connection, ControlObject controlObject){
 		// TODO: has to be extended
+		if(controlObject.isVirtualPriceToHigth(connection)){
+			return false;
+		}
+		
 		if(controlObject.isDestinationAirport(connection.getDestination().getIata())){
 			connection = addConnectionFromAirport(connection, controlObject);
 			controlObject.addUsedConnection(connection.clone());
@@ -35,7 +39,6 @@ public class TerminationCriteria {
 		if(connection.getSubConnections().size() >= 4){
 			controlObject.addUnusedConnection(connection);
 			return false;
-			
 		}
 		return true;
 	}
@@ -75,5 +78,11 @@ public class TerminationCriteria {
 		}		
 		return connection;
 	}
+	
+/*	private boolean isConnectionVirtualPriceOk(Connection connection, ControlObject controlObject){
+		if(connection.getVirtualPrice(controlObject.get))
+		
+		return false;
+	}*/
 
 }

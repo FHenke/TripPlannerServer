@@ -39,6 +39,8 @@ public class SearchNode implements Runnable{
 	
 	@Override
 	public void run() {
+		//TODO: Add airport to airport hashmap with airport info
+		
 		if(TerminationCriteria.shouldExploit(connection, controlObject)){
 			try {
 				//get all outbound connections for this airport

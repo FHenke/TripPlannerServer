@@ -196,4 +196,27 @@ public class Query {
 		}
 	}
 	
+	public static int getDistanceBeetweenAirportAndPlace(String iata, Place destination){
+
+		String querryString = "SELECT ST_Distance_sphere(airports.location, ST_GeomFromText('POINT("
+				+ destination.getLongitude()
+				+ " "
+				+ destination.getLatitude()
+				+ ")',-1)) AS distance FROM airports " 
+				+ "where iata_code = '" + iata + "';";
+		
+		System.out.println(querryString);
+		
+		try {
+			ResultSet queryResult = conn.createStatement().executeQuery(querryString);
+			queryResult.next();
+			
+			return (int) queryResult.getDouble("distance");
+		} catch (SQLException e) {
+			System.out.println("It's not possible to measure rest distance to destination");
+			logger.error("For airport " + iata + " it's not possible to determine rest distance");
+		}
+		return Integer.MAX_VALUE;
+	}
+	
 }

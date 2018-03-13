@@ -26,20 +26,33 @@ public class TerminationCriteria {
 	
 	public static boolean shouldExploit(Connection connection, ControlObject controlObject){
 		// TODO: has to be extended
+		
+		//if this airport was already reached by a better (cheaper at a earlier point of time) connection terminate
+		//if()
+		
+		
+		
+		//If connection is already worse than the x best connections terminate this connection
 		if(controlObject.isVirtualPriceToHigth(connection)){
 			return false;
 		}
 		
+		// If the airport is one of the destination airports do following
 		if(controlObject.isDestinationAirport(connection.getDestination().getIata())){
 			connection = addConnectionFromAirport(connection, controlObject);
 			controlObject.addUsedConnection(connection.clone());
 			return false;
 		}
 		
+		//If connections has already x steps terminate
 		if(connection.getSubConnections().size() >= 4){
 			controlObject.addUnusedConnection(connection);
 			return false;
 		}
+		
+		
+		
+		
 		return true;
 	}
 	

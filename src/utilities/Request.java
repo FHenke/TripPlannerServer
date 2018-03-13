@@ -21,7 +21,7 @@ public class Request extends Connection {
 	private static final int amountOfDestinationAirports = 10;
 	private static final int AmountOfConnectionsToShow = 5;
 	//private static final int exploitMethod = pathCalculation.recursiveBreadthFirst.SearchNode.Best_CONNECTIONS;
-	private static final int exploitMethod = pathCalculation.recursiveBreadthFirst.SearchNode.CHEAPEST_CONNECTION;
+	private static final int exploitMethod = pathCalculation.recursiveBreadthFirst.SearchNode.Best_CONNECTIONS;
 	
 	
 	

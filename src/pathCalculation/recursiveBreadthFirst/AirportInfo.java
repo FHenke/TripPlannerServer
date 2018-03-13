@@ -5,7 +5,9 @@ import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.locks.ReentrantLock;
 
+import database.Query;
 import utilities.Connection;
+import utilities.Place;
 
 public class AirportInfo {
 
@@ -15,8 +17,9 @@ public class AirportInfo {
 	private ConcurrentSkipListMap<GregorianCalendar, Double> connectionToAirport = new ConcurrentSkipListMap<GregorianCalendar, Double>();
 	private ReentrantLock lock1 = new ReentrantLock();
 	
-	public AirportInfo(String iata){
+	public AirportInfo(String iata, Place destination){
 		this.iata = iata;
+		this.distanceToDestination = Query.getDistanceBeetweenAirportAndPlace(iata, destination);
 	}
 	
 	public void setDistanceToDestination(int distanceToDestination){

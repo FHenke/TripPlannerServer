@@ -37,25 +37,20 @@ public class AirportInfo {
 	/**
 	 * Cecks if there is no cheaper connection to this airport before the departure time of this connection.
 	 * In this case the flight price and departure date are added to the Map and true is returned otherwise false is returned.
-	 * @param departureTime departure time on airport
+	 * @param arrivalTime arrival time on airport
 	 * @param price price to this connection
 	 * @return true if there is no cheaper price arriving this airport earlyer than the departure time and false otherwise
 	 */
-	public boolean addIfNoBetterConnectionIsAvailable(GregorianCalendar departureTime, double price){
+	public boolean addIfNoBetterConnectionIsAvailable(GregorianCalendar arrivalTime, double price){
 		lock1.lock();
-		if(connectionToAirport.lowerEntry(departureTime).getValue() > price){
-			connectionToAirport.put(departureTime, price);
+		if(connectionToAirport.lowerEntry(arrivalTime) == null || connectionToAirport.lowerEntry(arrivalTime).getValue() > price){
+			connectionToAirport.put(arrivalTime, price);
 			lock1.unlock();
 			return true;
 		}
 		lock1.unlock();
 		return false;
 	}
-	
-
-	
-	
-	
 	
 	
 }

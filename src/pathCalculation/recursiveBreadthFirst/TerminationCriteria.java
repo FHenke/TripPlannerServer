@@ -24,14 +24,15 @@ public class TerminationCriteria {
 		
 	}
 	
+	
 	public static boolean shouldExploit(Connection connection, ControlObject controlObject){
 		// TODO: has to be extended
 		
 		//if this airport was already reached by a better (cheaper at a earlier point of time) connection terminate
-		//if()
-		
-		
-		
+		if(connection.getSubConnections().size() > 1 && !controlObject.addConnectionToAirportInfo(connection)){
+			return false;
+		}
+
 		//If connection is already worse than the x best connections terminate this connection
 		if(controlObject.isVirtualPriceToHigth(connection)){
 			return false;

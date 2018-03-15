@@ -15,10 +15,11 @@ public class ControlObject {
 	//caches all connection for an airport
 	private Request request = null;
 	LinkedBlockingQueue<Thread> threadList = new LinkedBlockingQueue<Thread>();
-	private ConcurrentHashMap<String, LinkedBlockingQueue<Connection>> airportsInTree = new ConcurrentHashMap<String, LinkedBlockingQueue<Connection>>();
+	private ConcurrentHashMap<String, AirportInfo> airportsMap = new ConcurrentHashMap<String, AirportInfo>();
 	private LinkedBlockingQueue<Connection> unusedConnectionList = new LinkedBlockingQueue<Connection>();
 	private ConcurrentSkipListSet<Connection> usedConnectionSet = null;
 	private boolean connectionFound = false;
+	private ReentrantLock lock1 = new ReentrantLock();
 	private ReentrantLock lock2 = new ReentrantLock();
 	private ReentrantLock lock3 = new ReentrantLock();
 	ConcurrentHashMap<String, Place> originAirports = null;
@@ -34,15 +35,28 @@ public class ControlObject {
 	}
 	
 	/**
-	 * 
+	 * Adds the airport to the airportMap if it is not in the map already
 	 * @param iata iata code of the airport that should be added
 	 * @return true if the airport was not in the hash map before | false if the airport was in the hash map already.
 	 */
-	public boolean addAirportToTree(String iata, LinkedBlockingQueue<Connection> connectionList){
-		if(airportsInTree.put(iata, connectionList) == null)
-			return true;
-		else
-			return false;
+	public void addAirportToMap(Connection connection){
+		String iataCode = "";
+		iataCode = connection.getDestination().getIata();
+		AirportInfo airportInfo = new AirportInfo(iataCode, request.getDestination());
+		airportsMap.putIfAbsent(iataCode, airportInfo);
+	}
+	
+	/**
+	 * 
+	 * @param connection Connection to the airport
+	 * @return
+	 */
+	public boolean addConnectionToAirportInfo(Connection connection){
+		boolean result = false;
+		addAirportToMap(connection);
+		AirportInfo airportInfo = airportsMap.get(connection.getDestination().getIata());
+		result = airportInfo.addIfNoBetterConnectionIsAvailable(connection.getArrivalDate(), connection.getPrice());
+		return result;
 	}
 	
 	public void setConnectionIsFound(){

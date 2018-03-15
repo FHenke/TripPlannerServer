@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +21,7 @@ public class Query {
 	protected static final Logger logger = LogManager.getLogger(Query.class);
 	
 	protected static java.sql.Connection conn = null;
+	private static ReentrantLock lock1 = new ReentrantLock();
 	
 	public Query(java.sql.Connection conn){
 		this.conn = conn;
@@ -197,7 +199,7 @@ public class Query {
 	}
 	
 	public static int getDistanceBeetweenAirportAndPlace(String iata, Place destination){
-
+		lock1.lock();
 		String querryString = "SELECT ST_Distance_sphere(airports.location, ST_GeomFromText('POINT("
 				+ destination.getLongitude()
 				+ " "
@@ -205,17 +207,34 @@ public class Query {
 				+ ")',-1)) AS distance FROM airports " 
 				+ "where iata_code = '" + iata + "';";
 		
-		System.out.println(querryString);
-		
+		//System.out.println(querryString);
+		double test = 0.0;
+		ResultSet queryResult = null;
+		int counter = 10;
 		try {
-			ResultSet queryResult = conn.createStatement().executeQuery(querryString);
+			try{
+				queryResult = DatabaseConnection.getConnection().createStatement().executeQuery(querryString);
+			}catch(NullPointerException e){
+				try{
+					queryResult = conn.createStatement().executeQuery(querryString);
+				}catch(NullPointerException b){
+					System.out.println("3.");
+					queryResult = conn.createStatement().executeQuery(querryString);
+				}
+				
+			}
 			queryResult.next();
-			
-			return (int) queryResult.getDouble("distance");
-		} catch (SQLException e) {
-			System.out.println("It's not possible to measure rest distance to destination");
+			test = queryResult.getDouble("distance");
+			lock1.unlock();
+			return (int) test;
+		} catch (SQLException | NullPointerException e) {
+			//System.out.println("It's not possible to measure rest distance to destination");
+			System.out.println(test + " - " + querryString);
+			//if(queryResult == null)
+				//System.out.println(counter + "query null");
 			logger.error("For airport " + iata + " it's not possible to determine rest distance");
 		}
+		lock1.unlock();
 		return Integer.MAX_VALUE;
 	}
 	

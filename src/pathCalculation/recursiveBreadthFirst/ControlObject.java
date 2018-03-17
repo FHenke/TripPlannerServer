@@ -40,10 +40,11 @@ public class ControlObject {
 	 * @return true if the airport was not in the hash map before | false if the airport was in the hash map already.
 	 */
 	public void addAirportToMap(Connection connection){
-		String iataCode = "";
-		iataCode = connection.getDestination().getIata();
-		AirportInfo airportInfo = new AirportInfo(iataCode, request.getDestination());
-		airportsMap.putIfAbsent(iataCode, airportInfo);
+		String iataCode = connection.getDestination().getIata();
+		if(!airportsMap.containsKey(iataCode)){
+			AirportInfo airportInfo = new AirportInfo(iataCode, request.getDestination());
+			airportsMap.putIfAbsent(iataCode, airportInfo);
+		}
 	}
 	
 	/**

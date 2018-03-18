@@ -66,7 +66,6 @@ public class HotspotSearch {
 	private LinkedBlockingQueue<Connection> searchNextConnection(LinkedBlockingQueue<Connection> connectionList, ControlObject controlObject, int maxLevel){
 		//Iterative search of next hotspot or destination
 		for(int level = 0; !controlObject.isConnectionFound() && level < maxLevel; level++){
-			System.out.println(level);
 			LinkedBlockingQueue<Connection> newConnectionList = new LinkedBlockingQueue<Connection>();
 			
 			//add next sub connections to connection

@@ -32,6 +32,11 @@ public class TerminationCriteria {
 		if(connection.getSubConnections().size() > 1 && !controlObject.addConnectionToAirportInfo(connection)){
 			return false;
 		}
+		
+		//if the distance to the destination is to high terminate
+		if(connection.getSubConnections().size() > 1 && isDistanceToDestinationToHigh2(controlObject, connection)){
+			return false;
+		}
 
 		//If connection is already worse than the x best connections terminate this connection
 		if(controlObject.isVirtualPriceToHigth(connection)){
@@ -91,6 +96,40 @@ public class TerminationCriteria {
 			logger.warn("Connection from destination Airport to destination can't be added. (destination airport: " + connection.getDestination().getIata() + ")\n" + e);
 		}		
 		return connection;
+	}
+	
+	private static boolean isDistanceToDestinationToHigh1(ControlObject controlObject, Connection connection){
+		try{
+			AirportInfo airportinfo = controlObject.getAirportinfo(connection.getDestination().getIata());		
+			int fullDistance = controlObject.getBeelineDistance();
+			int distanceToDestination = airportinfo.getDistanceToDestination();
+			int hops = connection.getSubConnections().size() - 1; // because first hop is driving
+			double percentage = (100 * (fullDistance - distanceToDestination)) / fullDistance;
+			
+			if(percentage < Math.pow(hops, 2) - 20)
+				return true;
+		
+			return false;
+		}catch(NullPointerException e){
+			return true;
+		}
+	}
+	
+	private static boolean isDistanceToDestinationToHigh2(ControlObject controlObject, Connection connection){
+		try{
+			AirportInfo airportinfo = controlObject.getAirportinfo(connection.getDestination().getIata());		
+			int fullDistance = controlObject.getBeelineDistance();
+			int distanceToOrigin = fullDistance - airportinfo.getDistanceToDestination();
+			int hops = connection.getSubConnections().size() - 1; // because first hop is driving
+			
+			if(distanceToOrigin < 100 * Math.pow(hops, 2) - 2000)
+				return true;
+		
+			return false;
+		}catch(NullPointerException e){
+			System.out.println("Error");
+			return true;
+		}
 	}
 	
 /*	private boolean isConnectionVirtualPriceOk(Connection connection, ControlObject controlObject){

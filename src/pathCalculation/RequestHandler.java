@@ -152,10 +152,25 @@ public class RequestHandler {
 				RecursiveBreadthSearch breadthSearch = new RecursiveBreadthSearch();
 				return breadthSearch.getReqursivePath(request);
 			} catch (IllegalStateException e) {
-				System.out.println("Best Search failed: " + e.toString());
+				System.out.println("RecursiveBFS failed: " + e.toString());
 				e.printStackTrace();
 			} catch (Exception e) {
-				System.out.println("Best Search failed: " + e.toString());
+				System.out.println("RecursiveBFS failed: " + e.toString());
+				e.printStackTrace();
+			}
+		}
+		
+		if(request.getMethode().equalsIgnoreCase("FullSearch")){
+			try {
+				HotspotSearch hotspot = new HotspotSearch();
+				RecursiveBreadthSearch breadthSearch = new RecursiveBreadthSearch();
+				LinkedBlockingQueue<Connection> preConnectionList = hotspot.getHotspotPath(request);
+				return breadthSearch.getReqursivePath(request, preConnectionList);
+			} catch (IllegalStateException e) {
+				System.out.println("Full Search failed: " + e.toString());
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("Full Search failed: " + e.toString());
 				e.printStackTrace();
 			}
 		}

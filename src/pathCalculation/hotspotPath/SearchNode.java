@@ -137,7 +137,6 @@ public class SearchNode {
 		
 		newConnection.setRecursiveAction(Connection.ADD);
 		controlObject.addConnection(newConnection);
-		System.out.println("-> Connection Found");
 	}
 	
 	

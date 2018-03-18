@@ -3,16 +3,11 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.postgresql.util.PSQLException;
 
-import database.updateTables.UpdateContinents;
-import utilities.Connection;
 import utilities.Place;
 
 public class Query {
@@ -20,14 +15,14 @@ public class Query {
 	
 	protected static final Logger logger = LogManager.getLogger(Query.class);
 	
-	protected static java.sql.Connection conn = null;
+	protected static java.sql.Connection conn = DatabaseConnection.getConnection();
 	
 	public Query(java.sql.Connection conn){
-		this.conn = conn;
+
 	}
 	
 	public Query(){
-		this.conn = DatabaseConnection.getConnection();
+		
 	}
 	
 	public double getLatitudeFromPlace(Place place) throws PSQLException, SQLException{
@@ -197,6 +192,12 @@ public class Query {
 		}
 	}
 	
+	/**
+	 * gets distance between an airport and a place
+	 * @param iata
+	 * @param destination
+	 * @return
+	 */
 	public static int getDistanceBeetweenAirportAndPlace(String iata, Place destination){
 		String querryString = "SELECT ST_Distance_sphere(airports.location, ST_GeomFromText('POINT("
 				+ destination.getLongitude()
@@ -211,6 +212,33 @@ public class Query {
 			return (int) queryResult.getDouble("distance");
 		} catch(SQLException e) {
 			logger.error("For airport " + iata + " it's not possible to determine rest distance");
+		}
+		return Integer.MAX_VALUE;
+	}
+	
+	/**
+	 * gets distance between two arbitrary places
+	 * @param origin
+	 * @param destination
+	 * @return
+	 */
+	public static int getDistanceBetweenPlaces(Place origin, Place destination){
+		String querryString = "SELECT ST_Distance_sphere(ST_GeomFromText('POINT("
+				+ origin.getLongitude()
+				+ " "
+				+ origin.getLatitude()
+				+ ")', -1), ST_GeomFromText('POINT("
+				+ destination.getLongitude()
+				+ " "
+				+ destination.getLatitude()
+				+ ")',-1)) AS distance;";
+		//System.out.println(querryString);
+		try{
+			ResultSet queryResult = DatabaseConnection.getConnection().createStatement().executeQuery(querryString);
+			queryResult.next();
+			return (int) queryResult.getDouble("distance");
+		} catch(SQLException e) {
+			logger.error("It's not possible to determine distance bewteen origin and destination.");
 		}
 		return Integer.MAX_VALUE;
 	}

@@ -2,11 +2,9 @@ package pathCalculation.recursiveBreadthFirst;
 
 import java.util.GregorianCalendar;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.locks.ReentrantLock;
 
 import database.Query;
-import utilities.Connection;
 import utilities.Place;
 
 public class AirportInfo {
@@ -32,6 +30,10 @@ public class AirportInfo {
 	
 	public void addConnectionToAirport(GregorianCalendar departureTime, double price){
 		connectionToAirport.put(departureTime, price);
+	}
+	
+	public String getIata(){
+		return iata;
 	}
 	
 	/**

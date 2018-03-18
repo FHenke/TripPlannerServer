@@ -401,3 +401,4 @@
 2018-03-15 23:56:56.083 [Thread-10] ERROR database.Query - For airport IST it's not possible to determine rest distance
 2018-03-15 23:56:56.085 [Thread-5] ERROR database.Query - For airport ZRH it's not possible to determine rest distance
 2018-03-15 23:56:56.087 [Thread-6] ERROR database.Query - For airport FRA it's not possible to determine rest distance
+2018-03-17 17:50:24.558 [Thread-3] ERROR database.Query - It's not possible to determine distance bewteen origin and destination.

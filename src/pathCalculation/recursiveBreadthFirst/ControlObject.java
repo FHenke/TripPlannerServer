@@ -3,9 +3,9 @@ package pathCalculation.recursiveBreadthFirst;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
+import database.Query;
 import utilities.Connection;
 import utilities.Place;
 import utilities.Request;
@@ -14,16 +14,17 @@ public class ControlObject {
 
 	//caches all connection for an airport
 	private Request request = null;
-	LinkedBlockingQueue<Thread> threadList = new LinkedBlockingQueue<Thread>();
+	private LinkedBlockingQueue<Thread> threadList = new LinkedBlockingQueue<Thread>();
 	private ConcurrentHashMap<String, AirportInfo> airportsMap = new ConcurrentHashMap<String, AirportInfo>();
 	private LinkedBlockingQueue<Connection> unusedConnectionList = new LinkedBlockingQueue<Connection>();
 	private ConcurrentSkipListSet<Connection> usedConnectionSet = null;
 	private boolean connectionFound = false;
-	private ReentrantLock lock1 = new ReentrantLock();
+	//private ReentrantLock lock1 = new ReentrantLock();
 	private ReentrantLock lock2 = new ReentrantLock();
 	private ReentrantLock lock3 = new ReentrantLock();
-	ConcurrentHashMap<String, Place> originAirports = null;
-	ConcurrentHashMap<String, Place> destinationAirports = null;
+	private ConcurrentHashMap<String, Place> originAirports = null;
+	private ConcurrentHashMap<String, Place> destinationAirports = null;
+	private int beelineDistance = Integer.MAX_VALUE;
 	
 	
 	public ControlObject(Request request, ConcurrentHashMap<String, Place> originAirports, ConcurrentHashMap<String, Place> destinationAirports){
@@ -32,32 +33,7 @@ public class ControlObject {
 		this.destinationAirports = destinationAirports;
 		// generates the list for the used connections and sets the price for an hour value to the Comparator object
 		usedConnectionSet = new ConcurrentSkipListSet<Connection>(new ConnectionComparator(request.getPriceForHoure()));
-	}
-	
-	/**
-	 * Adds the airport to the airportMap if it is not in the map already
-	 * @param iata iata code of the airport that should be added
-	 * @return true if the airport was not in the hash map before | false if the airport was in the hash map already.
-	 */
-	public void addAirportToMap(Connection connection){
-		String iataCode = connection.getDestination().getIata();
-		if(!airportsMap.containsKey(iataCode)){
-			AirportInfo airportInfo = new AirportInfo(iataCode, request.getDestination());
-			airportsMap.putIfAbsent(iataCode, airportInfo);
-		}
-	}
-	
-	/**
-	 * 
-	 * @param connection Connection to the airport
-	 * @return
-	 */
-	public boolean addConnectionToAirportInfo(Connection connection){
-		boolean result = false;
-		addAirportToMap(connection);
-		AirportInfo airportInfo = airportsMap.get(connection.getDestination().getIata());
-		result = airportInfo.addIfNoBetterConnectionIsAvailable(connection.getArrivalDate(), connection.getPrice());
-		return result;
+		this.beelineDistance = Query.getDistanceBetweenPlaces(request.getOrigin(), request.getDestination());
 	}
 	
 	public void setConnectionIsFound(){
@@ -80,6 +56,10 @@ public class ControlObject {
 	 */
 	public void setRequest(Request request) {
 		this.request = request;
+	}
+	
+	public int getBeelineDistance(){
+		return beelineDistance;
 	}
 	
 	/* -------------------- used and unused connection Lists -----------------------------*/
@@ -130,6 +110,12 @@ public class ControlObject {
 	public void addUnusedConnection(Connection con){
 		con.setRecursiveAction(Connection.UNUSED);
 		unusedConnectionList.add(con);
+	}
+	
+	public void setUsedConnectionList(LinkedBlockingQueue<Connection> connectionList){
+		connectionList.parallelStream().forEach(connection -> {
+			usedConnectionSet.add(connection);
+		});
 	}
 	
 	/* ---------------- Thread counter ------------------- */
@@ -187,4 +173,37 @@ public class ControlObject {
 			return true;
 		return false;
 	}
+	
+	/* ----------- airportMap methods ------------ */
+	
+	/**
+	 * Adds the airport to the airportMap if it is not in the map already
+	 * @param iata iata code of the airport that should be added
+	 * @return true if the airport was not in the hash map before | false if the airport was in the hash map already.
+	 */
+	public void addAirportToMap(Connection connection){
+		String iataCode = connection.getDestination().getIata();
+		if(!airportsMap.containsKey(iataCode)){
+			AirportInfo airportInfo = new AirportInfo(iataCode, request.getDestination());
+			airportsMap.putIfAbsent(iataCode, airportInfo);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param connection Connection to the airport
+	 * @return
+	 */
+	public boolean addConnectionToAirportInfo(Connection connection){
+		boolean result = false;
+		addAirportToMap(connection);
+		AirportInfo airportInfo = airportsMap.get(connection.getDestination().getIata());
+		result = airportInfo.addIfNoBetterConnectionIsAvailable(connection.getArrivalDate(), connection.getPrice());
+		return result;
+	}
+	
+	public AirportInfo getAirportinfo(String iata){
+		return airportsMap.get(iata);
+	}
+	
 }

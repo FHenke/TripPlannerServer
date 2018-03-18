@@ -1,7 +1,5 @@
 package pathCalculation.recursiveBreadthFirst;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,10 +9,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import org.apache.http.client.ClientProtocolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jdom2.JDOMException;
 
 import database.ClosestAirports;
 import utilities.Connection;
@@ -30,6 +26,11 @@ public class RecursiveBreadthSearch {
 	}
 	
 	public LinkedBlockingQueue<Connection> getReqursivePath(Request request) throws Exception{
+		return getReqursivePath(request, null);
+	}
+	
+	
+	public LinkedBlockingQueue<Connection> getReqursivePath(Request request, LinkedBlockingQueue<Connection> preConnectionList) throws Exception{
 		
 		long startTime = System.nanoTime();
 		Connection[] originAirports = null;
@@ -45,7 +46,7 @@ public class RecursiveBreadthSearch {
 			throw new Exception("Not possible to calculate path because of previous Exceptions");
 		}
 		
-		controlObject = generateControlObject(request, originAirports, destinationAirports);
+		controlObject = generateControlObject(request, originAirports, destinationAirports, preConnectionList);
 		
 		//für jede connection rufe die rekursion auf
 		Arrays.stream(originAirports).parallel().forEach(connection -> {
@@ -125,9 +126,10 @@ public class RecursiveBreadthSearch {
 	 * @param destinationAirports Array with the connections from the destination airports.
 	 * @return
 	 */
-	private ControlObject generateControlObject(Request request, Connection[] originAirports, Connection destinationAirports[]){
+	private ControlObject generateControlObject(Request request, Connection[] originAirports, Connection destinationAirports[], LinkedBlockingQueue<Connection> preConnectionList){
 		ConcurrentHashMap<String, Place> originAirportsMap = new ConcurrentHashMap<String, Place>();
 		ConcurrentHashMap<String, Place> destinationAirportsMap = new ConcurrentHashMap<String, Place>();
+		ControlObject controlObject;
 		
 		// generate Hashmaps for origin and destination airports needed for controlObject
 		for(Connection connection : originAirports){
@@ -137,6 +139,12 @@ public class RecursiveBreadthSearch {
 			destinationAirportsMap.put(connection.getOrigin().getIata(), connection.getOrigin());
 		}
 		
-		return new ControlObject(request, originAirportsMap, destinationAirportsMap);
+		controlObject = new ControlObject(request, originAirportsMap, destinationAirportsMap);
+		
+		if(preConnectionList != null){
+			controlObject.setUsedConnectionList(preConnectionList);
+		}
+		
+		return controlObject;
 	}	
 }

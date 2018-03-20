@@ -51,7 +51,12 @@ public class HotspotSearch {
 		
 		long elapsedTime = System.nanoTime() - startTime;
 		System.out.println((double) elapsedTime / 1000000000.0 + " time needed for hotspot search");
-		System.out.println(controlObject.getConnectionList().size() + " connections found.");
+		System.out.println(controlObject.getConnectionList().size() + " hotspot connections found.");
+		//return connectionList;
+		LinkedBlockingQueue<Connection> conList = controlObject.getConnectionList();
+		conList.parallelStream().forEach(con -> {
+				con.setSubConnections(database.utilities.SQLUtilities.addSubConnections(con.getSubConnections()));
+		});
 		return connectionList;
 		//return controlObject.getConnectionList();
 	}

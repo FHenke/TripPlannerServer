@@ -1,18 +1,10 @@
 package pathCalculation;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import org.jdom2.JDOMException;
-
-import api.utilities.GoogleMaps;
-import database.ConnectedHotspots;
 import pathCalculation.hotspotPath.HotspotSearch;
 import pathCalculation.recursiveBreadthFirst.RecursiveBreadthSearch;
 import utilities.Connection;
-import utilities.Place;
 import utilities.Request;
 
 public class RequestHandler {
@@ -22,7 +14,6 @@ public class RequestHandler {
 		
 	}
 	
-	@SuppressWarnings("null")
 	public LinkedBlockingQueue<Connection> solveRequest(Request request){
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		

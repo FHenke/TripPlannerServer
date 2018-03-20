@@ -10,7 +10,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import org.joda.time.Duration;
 import org.joda.time.Period;
-import org.joda.time.ReadablePeriod;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
@@ -66,6 +65,7 @@ public class Connection implements Cloneable{
 	private String currency = "";
 	private String code = null;
 	private int distanceToDestination = Integer.MAX_VALUE;
+	private int connectionNumber = Integer.MAX_VALUE;
 	
 	/**
 	 * 
@@ -216,6 +216,7 @@ public class Connection implements Cloneable{
 		newConnection.setBeeline(beeline);
 		newConnection.setCurrency(currency);
 		newConnection.setCode(code);
+		newConnection.setConnectionNumber(connectionNumber);
 		return newConnection;
 	}	
 	/**
@@ -400,7 +401,25 @@ public class Connection implements Cloneable{
 	
 	
 	
-	
+	/**
+	 * @return the connectionNumber
+	 */
+	public int getConnectionNumber() {
+		return connectionNumber;
+	}
+
+
+	/**
+	 * @param connectionNumber the connectionNumber to set
+	 */
+	public void setConnectionNumber(int connectionNumber) {
+		this.connectionNumber = connectionNumber;
+	}
+
+
+	public void setId(int id){
+		this.id = id;
+	}
 
 	public void setDistanceToDestination(int distanceToDestination){
 		this.distanceToDestination = distanceToDestination;

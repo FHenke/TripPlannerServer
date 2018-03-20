@@ -17,7 +17,7 @@ public class Request extends Connection {
 	private int priceForHoure = 1000;
 	
 	//final static values that can only be changed in code
-	private static final int amountOfOriginAirports = 1;
+	private static final int amountOfOriginAirports = 10;
 	private static final int amountOfDestinationAirports = 10;
 	private static final int AmountOfConnectionsToShow = 5;
 	//private static final int exploitMethod = pathCalculation.recursiveBreadthFirst.SearchNode.Best_CONNECTIONS;

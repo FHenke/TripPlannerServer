@@ -2,7 +2,6 @@ package database.utilities;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -12,8 +11,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joda.time.Duration;
 
+import database.ConnectedFlights;
 import utilities.Carrier;
-import utilities.CarrierList;
 import utilities.Connection;
 import utilities.Place;
 
@@ -30,13 +29,17 @@ public class SQLUtilities {
 	 */
 	public static LinkedBlockingQueue<Connection> getConnectionListFromResultSetWhithDestinations(Place origin, ResultSet result) throws SQLException{
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
-		
-		while(result.next()){
-			Place destination = generatePlaceFromResultSet(result);
-			Connection connection = new Connection(origin, destination);
-			connectionList.add(getConnectionFromResultSet(connection, result));
+		try{
+			while(result.next()){
+				Place destination = generatePlaceFromResultSet(result);
+				Connection connection = new Connection(origin, destination);
+				connectionList.add(getConnectionFromResultSet(connection, result));	
+			}
+			return connectionList;
+		}catch(SQLException e){
+			logger.error("It is not possible to generate ConnectionList for outbound connections: \n " + e);
+			throw new SQLException("It is not possible to generate ConnectionList for outbound connections.");
 		}
-		return connectionList;
 	}
 	
 	/**
@@ -48,31 +51,55 @@ public class SQLUtilities {
 	 */
 	public static LinkedBlockingQueue<Connection> getConnectionListFromResultSetWhithOrigins(Place destination, ResultSet result) throws SQLException{
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
-		
+		try{
 		while(result.next()){
 			Place origin = generatePlaceFromResultSet(result);
 			Connection connection = new Connection(origin, destination);
 			connectionList.add(getConnectionFromResultSet(connection, result));
 		}
 		return connectionList;
+		}catch(SQLException e){
+			logger.error("It is not possible to generate ConnectionList for inbound connections: \n " + e);
+			throw new SQLException("It is not possible to generate ConnectionList for inbound connections.");
+		}
 	}
 	
 	public static Connection getConnectionFromResultSet(Connection connection, ResultSet result) throws SQLException{
-		
-		connection.setDepartureDate(toGregorianCalendar(result.getTimestamp("departure_date")));
-		connection.setArrivalDate(toGregorianCalendar(result.getTimestamp("arrival_time")));
-		connection.setPrice(result.getDouble("min_price"));
-		connection.setWeekday(result.getInt("weekday"));
-		connection.setCode(result.getString("flightnumber"));
-		connection.setDuration(new Duration(result.getInt("duration")));
-		connection.setCurrency(result.getString("currency"));
-		connection.addCarrier(new Carrier(result.getString("operating_airline")));
-		connection.setType(Connection.PLANE);
-		connection.setSummary(connection.getDestination().getName());
-		if(connection.getCode() != null){
-			connection.setDirect(true);
-		}	
-		return connection;
+		try{
+			connection.setDepartureDate(toGregorianCalendar(result.getTimestamp("departure_date")));
+			connection.setArrivalDate(toGregorianCalendar(result.getTimestamp("arrival_time")));
+			connection.setPrice(result.getDouble("min_price"));
+			connection.setWeekday(result.getInt("weekday"));
+			connection.setCode(result.getString("flightnumber"));
+			connection.setDuration(new Duration(result.getInt("duration")));
+			connection.setCurrency(result.getString("currency"));
+			connection.addCarrier(new Carrier(result.getString("operating_airline")));
+			connection.setType(Connection.PLANE);
+			connection.setSummary(connection.getDestination().getName());
+			if(result.getInt("connection_number") == 0){
+				connection.setDirect(true);
+			}else{
+				connection.setConnectionNumber(result.getInt("connection_number"));
+			}
+			return connection;
+		}catch(SQLException e){
+			logger.error("Problem occurs by generating Connection object from SQL ResultSet: \n " + e);
+			throw new SQLException("Problem occurs by generating Connection object from SQL ResultSet.");
+		}
+	}
+	
+	public static LinkedBlockingQueue<Connection> addSubConnections(LinkedBlockingQueue<Connection> connectionList){
+		connectionList.parallelStream().forEach(connection -> {
+			if(!connection.isDirect() && connection.getType() == Connection.PLANE){
+				try {
+					connection.setSubConnections(ConnectedFlights.getSubConnectionsOfConnection(connection.getConnectionNumber()));
+					connection.setRecursiveAction(Connection.ADD);
+				} catch (SQLException e) {
+					logger.error("Its not possible to generate Subconnections: \n " + e);
+				}
+			}
+		});
+		return connectionList;
 	}
 	
 	public static Place generatePlaceFromResultSet(ResultSet result) throws SQLException{
@@ -92,8 +119,6 @@ public class SQLUtilities {
 	public static GregorianCalendar toGregorianCalendar(java.sql.Timestamp time){
 		GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 		calendar.setTimeInMillis(time.getTime());
-		//System.out.println(time.);
-		//calendar.set(time.get, time.getMonth(), time.getDate(), time.getHours(), time.getMinutes(), 0);
 		calendar.set(Calendar.MONTH, time.getMonth());
 		calendar.set(Calendar.DAY_OF_MONTH, time.getDate());
 		calendar.set(Calendar.HOUR_OF_DAY, time.getHours());
@@ -103,8 +128,7 @@ public class SQLUtilities {
 	
 	
 	public static LinkedBlockingQueue<Connection> getConnectionListFromResultSet(ResultSet result) throws SQLException{
-		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
-		
+		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();	
 		while(result.next()){
 			Place origin = generateOriginPlaceFromResultSet(result);
 			Place destination = generateDestinationPlaceFromResultSet(result);

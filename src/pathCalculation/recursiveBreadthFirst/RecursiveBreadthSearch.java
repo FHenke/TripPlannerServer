@@ -62,6 +62,7 @@ public class RecursiveBreadthSearch {
 		long elapsedTime = System.nanoTime() - startTime;
 		System.out.println((double) elapsedTime / 1000000000.0 + " seconds needed for Recursive search");
 		System.out.println(controlObject.getUnusedConnectionList().size() + " connections found. And " + TerminationCriteria.GoogleApiCallCounter + " Google API calls for destination were necessary.");
+		System.out.println(controlObject.terminationReasonsToString());
 		
 		LinkedBlockingQueue<Connection> connectionList = controlObject.getUsedConnectionQueue();
 		connectionList.parallelStream().forEach(con -> {

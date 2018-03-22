@@ -26,38 +26,67 @@ public class TerminationCriteria {
 	
 	
 	public static boolean shouldExploit(Connection connection, ControlObject controlObject){
-		// TODO: has to be extended
+		boolean reachedDestinationInThisStep = false;
 		
 		//if this airport was already reached by a better (cheaper at a earlier point of time) connection terminate
 		if(connection.getSubConnections().size() > 1 && !controlObject.addConnectionToAirportInfo(connection)){
-			return false;
-		}
-		
-		//if the distance to the destination is to high terminate
-		if(connection.getSubConnections().size() > 1 && isDistanceToDestinationToHigh2(controlObject, connection)){
-			return false;
-		}
-
-		//If connection is already worse than the x best connections terminate this connection
-		if(controlObject.isVirtualPriceToHigth(connection)){
-			return false;
-		}
-		
-		// If the airport is one of the destination airports do following
-		if(controlObject.isDestinationAirport(connection.getDestination().getIata())){
-			connection = addConnectionFromAirport(connection, controlObject);
-			controlObject.addUsedConnection(connection.clone());
+			controlObject.addUnusedConnection(connection);
+			controlObject.increaseCounter(ControlObject.BETTER_CONNECTION_TO_AIRPORT);
+			if(connection.isDestinationReached()){
+				controlObject.increaseCounter(ControlObject.LAST_CONNECTION_DESTINATION);
+			}
 			return false;
 		}
 		
 		//If connections has already x steps terminate
 		if(connection.getSubConnections().size() >= 4){
 			controlObject.addUnusedConnection(connection);
+			controlObject.increaseCounter(ControlObject.TO_MANY_STEPS);
+			if(connection.isDestinationReached()){
+				controlObject.increaseCounter(ControlObject.LAST_CONNECTION_DESTINATION);
+			}
 			return false;
 		}
 		
+		// If the airport is one of the destination airports do following
+		if(controlObject.isDestinationAirport(connection.getDestination().getIata())){
+			Connection newConnection = addConnectionFromAirport(connection.clone(), controlObject);
+			controlObject.addUsedConnection(newConnection.clone());
+			controlObject.increaseCounter(ControlObject.CONNECTION_FOUND);
+			reachedDestinationInThisStep = true;
+			//return false;
+		}
 		
+		//if last airport was destination terminate connection
+		//last and not current airport because if the current airport is one of the destinations the algorithm should have the possibility to go to a even better destination airport
+		if(connection.isDestinationReached()){
+			controlObject.addUnusedConnection(connection);
+			controlObject.increaseCounter(ControlObject.LAST_CONNECTION_DESTINATION);
+			return false;
+		}
 		
+		if(reachedDestinationInThisStep){
+			connection.setDestinationReached(true);
+		}/**/	
+		
+		//ensure that 5 connectios are in the used connection list
+		if(controlObject.getUsedConnectionSet().size() < 5){
+			return true;
+		}
+		
+		//if the distance to the destination is to high terminate
+		if(connection.getSubConnections().size() > 1 && isDistanceToDestinationToHigh2(controlObject, connection)){
+			controlObject.addUnusedConnection(connection);
+			controlObject.increaseCounter(ControlObject.TO_FAR_FROM_DESTINATION);
+			return false;
+		}
+
+		//If connection is already worse than the x best connections terminate this connection
+		if(controlObject.isVirtualPriceToHigth(connection)){
+			controlObject.addUnusedConnection(connection);
+			controlObject.increaseCounter(ControlObject.CONNECTION_IS_WORSE);
+			return false;
+		}
 		
 		return true;
 	}
@@ -131,11 +160,5 @@ public class TerminationCriteria {
 			return true;
 		}
 	}
-	
-/*	private boolean isConnectionVirtualPriceOk(Connection connection, ControlObject controlObject){
-		if(connection.getVirtualPrice(controlObject.get))
-		
-		return false;
-	}*/
 
 }

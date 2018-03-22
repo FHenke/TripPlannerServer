@@ -54,11 +54,6 @@ public class SearchNode implements Runnable{
 				//recursive call of this method
 				exploitNewConnections(outboundConnectionList);
 				
-				
-				
-				/*for(Connection con : outboundConnectionList)
-					controlObject.addUsedConnection(con.clone());*/
-				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				System.out.println(e);

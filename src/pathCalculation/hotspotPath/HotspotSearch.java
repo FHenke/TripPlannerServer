@@ -57,7 +57,8 @@ public class HotspotSearch {
 		conList.parallelStream().forEach(con -> {
 				con.setSubConnections(database.utilities.SQLUtilities.addSubConnections(con.getSubConnections()));
 		});
-		return connectionList;
+		//return connectionList;
+		return conList;
 		//return controlObject.getConnectionList();
 	}
 	

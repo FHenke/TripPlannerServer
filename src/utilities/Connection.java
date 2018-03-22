@@ -66,6 +66,7 @@ public class Connection implements Cloneable{
 	private String code = null;
 	private int distanceToDestination = Integer.MAX_VALUE;
 	private int connectionNumber = Integer.MAX_VALUE;
+	private boolean destinationReached = false; 
 	
 	/**
 	 * 
@@ -217,6 +218,7 @@ public class Connection implements Cloneable{
 		newConnection.setCurrency(currency);
 		newConnection.setCode(code);
 		newConnection.setConnectionNumber(connectionNumber);
+		newConnection.setDestinationReached(destinationReached);
 		return newConnection;
 	}	
 	/**
@@ -401,6 +403,22 @@ public class Connection implements Cloneable{
 	
 	
 	
+	/**
+	 * @return the destinationReached
+	 */
+	public boolean isDestinationReached() {
+		return destinationReached;
+	}
+
+
+	/**
+	 * @param destinationReached the destinationReached to set
+	 */
+	public void setDestinationReached(boolean destinationReached) {
+		this.destinationReached = destinationReached;
+	}
+
+
 	/**
 	 * @return the connectionNumber
 	 */

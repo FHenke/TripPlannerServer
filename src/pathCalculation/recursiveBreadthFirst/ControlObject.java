@@ -3,6 +3,7 @@ package pathCalculation.recursiveBreadthFirst;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 import database.Query;
@@ -11,6 +12,13 @@ import utilities.Place;
 import utilities.Request;
 
 public class ControlObject {
+	
+	public static final int TO_MANY_STEPS = 0;
+	public static final int LAST_CONNECTION_DESTINATION = 1;
+	public static final int TO_FAR_FROM_DESTINATION = 2;
+	public static final int CONNECTION_IS_WORSE = 3;
+	public static final int BETTER_CONNECTION_TO_AIRPORT = 4;
+	public static final int CONNECTION_FOUND = 5;
 
 	//caches all connection for an airport
 	private Request request = null;
@@ -25,6 +33,7 @@ public class ControlObject {
 	private ConcurrentHashMap<String, Place> originAirports = null;
 	private ConcurrentHashMap<String, Place> destinationAirports = null;
 	private int beelineDistance = Integer.MAX_VALUE;
+	private AtomicInteger[] terminationReasons = {new AtomicInteger(0), new AtomicInteger(0), new AtomicInteger(0), new AtomicInteger(0), new AtomicInteger(0), new AtomicInteger(0)};
 	
 	
 	public ControlObject(Request request, ConcurrentHashMap<String, Place> originAirports, ConcurrentHashMap<String, Place> destinationAirports){
@@ -206,4 +215,18 @@ public class ControlObject {
 		return airportsMap.get(iata);
 	}
 	
+	/* ----------- Termination Reasons Array ------------ */
+	
+	public void increaseCounter(int counterNumber){
+		terminationReasons[counterNumber].incrementAndGet();
+	}
+	
+	public String terminationReasonsToString(){
+		return "It exists a better connection to the same airport: " + terminationReasons[ControlObject.BETTER_CONNECTION_TO_AIRPORT].get() + "\n"
+				+ "To many steps: " + terminationReasons[ControlObject.TO_MANY_STEPS].get() + "\n"
+				+ "Last connection was destination: " + terminationReasons[ControlObject.LAST_CONNECTION_DESTINATION].get() + "\n"
+				+ "Airport is to far from Destination: " + terminationReasons[ControlObject.TO_FAR_FROM_DESTINATION].get() + "\n"
+				+ "Connection is worse than the x best: " + terminationReasons[ControlObject.CONNECTION_IS_WORSE].get() + "\n"
+				+ "Connections found: " + terminationReasons[ControlObject.CONNECTION_FOUND].get() + "\n";
+	}
 }

@@ -27,7 +27,7 @@ public class QueryConnection {
 		ResultSet queryResult;
 		String queryString = "SELECT origin.iata_code AS org_iata, origin.name AS org_name, ST_Y(origin.location) As org_latitude, ST_X(origin.location) As org_longitude, "
 				+ "destination.iata_code AS dst_iata, destination.name AS dst_name, ST_Y(destination.location) As dst_latitude, ST_X(destination.location) As dst_longitude, "
-				+ "connections.departure_date, connections.arrival_time, connections.min_price, connections.weekday, connections.flightnumber, connections.duration, connections.currency, connections.operating_airline "
+				+ "connections.departure_date, connections.arrival_time, connections.min_price, connections.weekday, connections.flightnumber, connections.duration, connections.currency, connections.operating_airline, connections.connection_number as connection_number "
 				+ "FROM airports origin, airports destination, connections_with_aprx_price as connections "
 				+ "WHERE connections.origin = '" + origin_iata + "' "
 				+ "and connections.destination = '" + destination_iata + "' ";

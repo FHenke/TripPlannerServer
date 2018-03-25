@@ -196,7 +196,12 @@ public class Connection implements Cloneable{
 		Connection newConnection = new Connection(origin, destination, price, departureDate, type, direct, quoteDateTime, weekday);
 		newConnection.setDuration(duration);
 		newConnection.setArrivalDate(arrivalDate);
-		newConnection.setCarrier(carrier);
+		//subConnections
+		LinkedBlockingQueue<Carrier> newCarriers = new LinkedBlockingQueue<Carrier>();
+		for(Carrier carri : carrier){
+			newCarriers.add(carri.clone());
+		}
+		newConnection.setCarrier(newCarriers);
 		newConnection.setDistance(distance);
 		newConnection.setPolyline(polyline);
 		newConnection.setHtmlInstructions(htmlInstructions);
@@ -219,6 +224,7 @@ public class Connection implements Cloneable{
 		newConnection.setCode(code);
 		newConnection.setConnectionNumber(connectionNumber);
 		newConnection.setDestinationReached(destinationReached);
+		newConnection.setType(type);
 		return newConnection;
 	}	
 	/**

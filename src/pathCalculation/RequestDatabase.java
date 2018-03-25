@@ -16,9 +16,9 @@ public class RequestDatabase {
 		
 	}
 	
-	public LinkedBlockingQueue<Connection> getConnectionList(Request request) throws SQLException{
+	public LinkedBlockingQueue<Connection> getConnectionListWithDate(Request request) throws SQLException{
 		
-		LinkedBlockingQueue<Connection> connection;
+		LinkedBlockingQueue<Connection> connectionList;
 		
 		//get closest airport from origin
 		ClosestAirports closeOriginAirports = new ClosestAirports();
@@ -30,10 +30,41 @@ public class RequestDatabase {
 		
 		
 		
-		connection = QueryConnection.getAllOutboundConnections(originAirport, destinationAirport);
-		connection.parallelStream().forEach(con -> {
-			con.setAction(Connection.ADD);
+		connectionList = QueryConnection.getAllConnections(originAirport, destinationAirport, request.getDepartureDateString());
+		connectionList = setAddAction(connectionList);
+		connectionList = addSubConnections(connectionList);
+		return connectionList;
+	}
+	
+	public LinkedBlockingQueue<Connection> getConnectionList(Request request) throws SQLException{
+		
+		LinkedBlockingQueue<Connection> connectionList;
+		
+		//get closest airport from origin
+		ClosestAirports closeOriginAirports = new ClosestAirports();
+		Place originAirport = closeOriginAirports.getClosestBeelineAirport(request.getOrigin());
+		
+		ClosestAirports closeDestinationAirports = new ClosestAirports();
+		Place destinationAirport = closeDestinationAirports.getClosestBeelineAirport(request.getDestination());
+		
+		
+		
+		
+		connectionList = QueryConnection.getAllConnections(originAirport, destinationAirport);
+		connectionList = setAddAction(connectionList);
+		connectionList = addSubConnections(connectionList);
+		return connectionList;
+	}
+	
+	private LinkedBlockingQueue<Connection> setAddAction(LinkedBlockingQueue<Connection> connectionList){
+		connectionList.parallelStream().forEach(connection -> {
+			connection.setRecursiveAction(Connection.ADD);
 		});
-		return connection;
+		return connectionList;
+	}
+	
+	private LinkedBlockingQueue<Connection> addSubConnections(LinkedBlockingQueue<Connection> connectionList){
+		database.utilities.SQLUtilities.addSubConnections(connectionList);
+		return connectionList;
 	}
 }

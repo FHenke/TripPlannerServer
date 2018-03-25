@@ -1,6 +1,6 @@
 package utilities;
 
-public class Carrier {
+public class Carrier implements Cloneable {
 	private String carrierName = null;
 	private String url = null;
 	
@@ -17,6 +17,11 @@ public class Carrier {
 		this.url = url;
 	}
 
+	@Override
+	public Carrier clone(){
+		return new Carrier(carrierName, url);
+	}
+	
 	/**
 	 * @return Name of the Carrier
 	 */

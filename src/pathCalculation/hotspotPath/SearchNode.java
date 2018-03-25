@@ -144,6 +144,8 @@ public class SearchNode {
 		//Airport was visited to a previous point in time (cycle prevention)
 		if(usedAirportsMap.containsKey(departureAirportIATA))
 			return false;
+		if(nextSubConnection.getDepartureDate().before(earliestDepartureTime))
+			return false;
 		//airport is not connected at this time
 		if(!connectedAirportsMap.containsKey(departureAirportIATA))
 			return true;

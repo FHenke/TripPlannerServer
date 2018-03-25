@@ -182,7 +182,8 @@ public class SearchNode implements Runnable{
 			connection.addHeadOnSubconnection(connectionToAirport.peek());
 		} catch (IllegalStateException | IOException | JDOMException e) {
 			logger.warn("Connection from origin to origin airport cant be added. (origin: " + connection.getOrigin().getIata() + ")" + e);
-		}		
+		}
+		TerminationCriteria.GoogleApiCallCounter.incrementAndGet();
 		return connection;
 	}
 	

@@ -70,7 +70,7 @@ public class RequestHandler {
 			}
 		}
 
-		if(request.getMethode().equalsIgnoreCase("OutboundConnections")){
+		if(request.getMethode().equalsIgnoreCase("ConnectedAirports")){
 			try {
 				OutboundConnections outboundConnections = new OutboundConnections();
 				return outboundConnections.getConnectionList(request, connectionList);
@@ -83,11 +83,38 @@ public class RequestHandler {
 			}
 		}
 		
-		//searches all direct connections in database
+		if(request.getMethode().equalsIgnoreCase("ConnectedAirports_Time")){
+			try {
+				OutboundConnections outboundConnections = new OutboundConnections();
+				return outboundConnections.getConnectionListWithDate(request, connectionList);
+			} catch (IllegalStateException e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			}
+		}
+		
+		//searches all connections in database
 		if(request.getMethode().equalsIgnoreCase("Database")){
 			try {
 				RequestDatabase requestDatabase = new RequestDatabase();
 				return requestDatabase.getConnectionList(request);
+			} catch (IllegalStateException e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("FAIL");
+				e.printStackTrace();
+			}
+		}
+		
+		//searches all connections in database
+		if(request.getMethode().equalsIgnoreCase("Database_Time")){
+			try {
+				RequestDatabase requestDatabase = new RequestDatabase();
+				return requestDatabase.getConnectionListWithDate(request);
 			} catch (IllegalStateException e) {
 				System.out.println("FAIL");
 				e.printStackTrace();

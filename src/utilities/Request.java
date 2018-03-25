@@ -15,14 +15,17 @@ public class Request extends Connection {
 	private boolean showAlternatives = false;
 	private boolean isDepartureTime = true;
 	private int priceForHoure = 1000;
+	private int amountOfOriginAirports = 10;
+	private int amountOfDestinationAirports = 10;
+	private int AmountOfConnectionsToShow = 5;
 	
 	//final static values that can only be changed in code
-	private static final int amountOfOriginAirports = 10;
-	private static final int amountOfDestinationAirports = 10;
-	private static final int AmountOfConnectionsToShow = 5;
+	//private static final int amountOfOriginAirports = 10;
+	//private static final int amountOfDestinationAirports = 10;
+	//private static final int AmountOfConnectionsToShow = 5;
 	//private static final int exploitMethod = pathCalculation.recursiveBreadthFirst.SearchNode.Best_CONNECTIONS;
 	private static final int exploitMethod = pathCalculation.recursiveBreadthFirst.SearchNode.Best_CONNECTIONS;
-	
+	private static final boolean allowZeroPrice = true;
 	
 	
 	
@@ -117,15 +120,47 @@ public class Request extends Connection {
 	public int getExploitMethod() {
 		return exploitMethod;
 	}
-
 	
-//#######
-
 	/**
 	 * @return the amountOfConnectionstoShow
 	 */
 	public int getAmountOfConnectionsToShow() {
 		return AmountOfConnectionsToShow;
+	}
+	
+	public static boolean isZeroPriceAllowed(){
+		return allowZeroPrice;
+	}
+
+	
+	
+//#######
+
+	/**
+	 * @param amountOfOriginAirports the amountOfOriginAirports to set
+	 */
+	public void setAmountOfOriginAirports(int amountOfOriginAirports) {
+		this.amountOfOriginAirports = amountOfOriginAirports;
+	}
+
+
+
+
+	/**
+	 * @param amountOfDestinationAirports the amountOfDestinationAirports to set
+	 */
+	public void setAmountOfDestinationAirports(int amountOfDestinationAirports) {
+		this.amountOfDestinationAirports = amountOfDestinationAirports;
+	}
+
+
+
+
+	/**
+	 * @param amountOfConnectionsToShow the amountOfConnectionsToShow to set
+	 */
+	public void setAmountOfConnectionsToShow(int amountOfConnectionsToShow) {
+		AmountOfConnectionsToShow = amountOfConnectionsToShow;
 	}
 
 

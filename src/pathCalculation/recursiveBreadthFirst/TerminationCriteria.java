@@ -32,19 +32,13 @@ public class TerminationCriteria {
 		if(connection.getSubConnections().size() > 1 && !controlObject.addConnectionToAirportInfo(connection)){
 			controlObject.addUnusedConnection(connection);
 			controlObject.increaseCounter(ControlObject.BETTER_CONNECTION_TO_AIRPORT);
-			if(connection.isDestinationReached()){
-				controlObject.increaseCounter(ControlObject.LAST_CONNECTION_DESTINATION);
-			}
 			return false;
 		}
 		
 		//If connections has already x steps terminate
-		if(connection.getSubConnections().size() >= 4){
+		if(amountOfSubConnections(connection) >= 6){
 			controlObject.addUnusedConnection(connection);
 			controlObject.increaseCounter(ControlObject.TO_MANY_STEPS);
-			if(connection.isDestinationReached()){
-				controlObject.increaseCounter(ControlObject.LAST_CONNECTION_DESTINATION);
-			}
 			return false;
 		}
 		
@@ -118,7 +112,8 @@ public class TerminationCriteria {
 		api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();
 		//Add connection from origin to origin airport
 		try {
-			GregorianCalendar departureTimeOnAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(connection.getSubConnections().peek().getDepartureDate(), 1), connection.getDestination());
+			//GregorianCalendar departureTimeOnAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(connection.getSubConnections().peek().getDepartureDate(), 1), connection.getDestination());
+			GregorianCalendar departureTimeOnAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(connection.getArrivalDate(), 1), connection.getDestination());
 			LinkedBlockingQueue<Connection> connectionFromAirport = googleDirection.getConnection(connection.getDestination(), controlObject.getRequest().getDestination(), departureTimeOnAirport, true, controlObject.getRequest().getBestTransportation(), "", "", false);
 			connection.addSubconnection(connectionFromAirport.peek());
 		} catch (IllegalStateException | IOException | JDOMException e) {
@@ -132,7 +127,7 @@ public class TerminationCriteria {
 			AirportInfo airportinfo = controlObject.getAirportinfo(connection.getDestination().getIata());		
 			int fullDistance = controlObject.getBeelineDistance();
 			int distanceToDestination = airportinfo.getDistanceToDestination();
-			int hops = connection.getSubConnections().size() - 1; // because first hop is driving
+			int hops = amountOfSubConnections(connection);
 			double percentage = (100 * (fullDistance - distanceToDestination)) / fullDistance;
 			
 			if(percentage < Math.pow(hops, 2) - 20)
@@ -149,7 +144,7 @@ public class TerminationCriteria {
 			AirportInfo airportinfo = controlObject.getAirportinfo(connection.getDestination().getIata());		
 			int fullDistance = controlObject.getBeelineDistance();
 			int distanceToOrigin = fullDistance - airportinfo.getDistanceToDestination();
-			int hops = connection.getSubConnections().size() - 1; // because first hop is driving
+			int hops = amountOfSubConnections(connection);
 			
 			if(distanceToOrigin < 100 * Math.pow(hops, 2) - 2000)
 				return true;
@@ -160,5 +155,28 @@ public class TerminationCriteria {
 			return true;
 		}
 	}
+	
+	/**
+	 * counts the amount of plane hops (including subconnections of flights)
+	 * @param connection
+	 * @return
+	 */
+	/*private static int amountOfSubConnections(Connection connection){
+		AtomicInteger counter = new AtomicInteger(0);	
+		connection.getSubConnections().parallelStream().forEach(subConnection -> {
+			if(subConnection.getType() == Connection.PLANE){
+				if(subConnection.getSubConnections().size() != 0){
+					counter.addAndGet(subConnection.getSubConnections().size());
+				}else{
+					counter.incrementAndGet();
+				}
+			}
+		});
+		return counter.get();
+	}*/
+	private static int amountOfSubConnections(Connection connection){
+		return connection.getSubConnections().size();
+	}
+	
 
 }

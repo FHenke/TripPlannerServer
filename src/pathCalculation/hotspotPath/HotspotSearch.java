@@ -56,6 +56,7 @@ public class HotspotSearch {
 		LinkedBlockingQueue<Connection> conList = controlObject.getConnectionList();
 		conList.parallelStream().forEach(con -> {
 				con.setSubConnections(database.utilities.SQLUtilities.addSubConnections(con.getSubConnections()));
+				con.setSummary("(Hotspot Search resulat) " + con.getSummary());
 		});
 		//return connectionList;
 		return conList;

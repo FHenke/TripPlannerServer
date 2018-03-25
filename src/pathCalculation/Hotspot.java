@@ -25,6 +25,14 @@ public class Hotspot {
 		
 		connectionList = ConnectedHotspots.getAllOutboundConnectionsWithinOneDay(originAirport, destinationAirport, request.getDepartureDateString());
 		connectionList.addAll(ConnectedHotspots.getAllInboundConnectionsWithinFiveDays(destinationAirport, request.getDepartureDateString()));
+		connectionList = setAddAction(connectionList);
+		return connectionList;
+	}
+	
+	public LinkedBlockingQueue<Connection> setAddAction(LinkedBlockingQueue<Connection> connectionList){
+		connectionList.parallelStream().forEach(connection -> {
+			connection.setRecursiveAction(Connection.ADD);
+		});
 		return connectionList;
 	}
 }

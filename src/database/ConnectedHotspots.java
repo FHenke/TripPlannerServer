@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import database.utilities.SQLUtilities;
 import utilities.Connection;
 import utilities.Place;
+import utilities.Request;
 
 public class ConnectedHotspots {
 
@@ -21,7 +22,7 @@ public class ConnectedHotspots {
 	public static LinkedBlockingQueue<Connection> getAllOutboundConnectionsWithinOneDay(Place originAirport, Place destinationAirport, GregorianCalendar date) throws SQLException{
 		java.sql.Timestamp time = new java.sql.Timestamp(date.getTimeInMillis());
 		//ResultSet outboundConnections = getAllOutboundConnections(airport.getIata(), time, millisecondsOfDay, true, false, false);
-		ResultSet outboundConnections = getAllOutboundConnections(originAirport.getIata(), destinationAirport.getIata(), time, millisecondsOfDay, false, false, true);
+		ResultSet outboundConnections = getAllOutboundConnections(originAirport.getIata(), destinationAirport.getIata(), time, millisecondsOfDay, Request.isZeroPriceAllowed(), false, true);
 		LinkedBlockingQueue<Connection> connectionList = SQLUtilities.getConnectionListFromResultSetWhithDestinations(originAirport, outboundConnections);
 		return connectionList;
 	}
@@ -54,7 +55,7 @@ public class ConnectedHotspots {
 	public static LinkedBlockingQueue<Connection> getAllInboundConnectionsWithinFiveDays(Place destinationAirport, GregorianCalendar date) throws SQLException{
 		java.sql.Timestamp time = new java.sql.Timestamp(date.getTimeInMillis());
 		//ResultSet outboundConnections = getAllOutboundConnections(airport.getIata(), time, millisecondsOfDay, true, false, false);
-		ResultSet inboundConnections = getAllInboundConnections(destinationAirport.getIata(), time, millisecondsOfDay * 5, false, false, true);
+		ResultSet inboundConnections = getAllInboundConnections(destinationAirport.getIata(), time, millisecondsOfDay * 5, Request.isZeroPriceAllowed(), false, true);
 		LinkedBlockingQueue<Connection> connectionList = SQLUtilities.getConnectionListFromResultSetWhithOrigins(destinationAirport, inboundConnections);
 		return connectionList;
 	}

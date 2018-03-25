@@ -117,8 +117,8 @@ public class ControlObject {
 	
 	
 	public void addUnusedConnection(Connection con){
-		con.setRecursiveAction(Connection.UNUSED);
-		unusedConnectionList.add(con);
+		//con.setRecursiveAction(Connection.UNUSED);
+		//unusedConnectionList.add(con);
 	}
 	
 	public void setUsedConnectionList(LinkedBlockingQueue<Connection> connectionList){

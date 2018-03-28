@@ -31,14 +31,14 @@ public class TerminationCriteria {
 		//if this airport was already reached by a better (cheaper at a earlier point of time) connection terminate
 		if(connection.getSubConnections().size() > 1 && !controlObject.addConnectionToAirportInfo(connection)){
 			controlObject.addUnusedConnection(connection);
-			controlObject.increaseCounter(ControlObject.BETTER_CONNECTION_TO_AIRPORT);
+			controlObject.increaseCounter(ControlObject.BETTER_CONNECTION_TO_AIRPORT, connection);
 			return false;
 		}
 		
 		//If connections has already x steps terminate
-		if(amountOfSubConnections(connection) >= 6){
+		if(amountOfSubConnections(connection) >= 8){
 			controlObject.addUnusedConnection(connection);
-			controlObject.increaseCounter(ControlObject.TO_MANY_STEPS);
+			controlObject.increaseCounter(ControlObject.TO_MANY_STEPS, connection);
 			return false;
 		}
 		
@@ -46,7 +46,7 @@ public class TerminationCriteria {
 		if(controlObject.isDestinationAirport(connection.getDestination().getIata())){
 			Connection newConnection = addConnectionFromAirport(connection.clone(), controlObject);
 			controlObject.addUsedConnection(newConnection.clone());
-			controlObject.increaseCounter(ControlObject.CONNECTION_FOUND);
+			controlObject.increaseCounter(ControlObject.CONNECTION_FOUND, connection);
 			reachedDestinationInThisStep = true;
 			//return false;
 		}
@@ -55,7 +55,7 @@ public class TerminationCriteria {
 		//last and not current airport because if the current airport is one of the destinations the algorithm should have the possibility to go to a even better destination airport
 		if(connection.isDestinationReached()){
 			controlObject.addUnusedConnection(connection);
-			controlObject.increaseCounter(ControlObject.LAST_CONNECTION_DESTINATION);
+			controlObject.increaseCounter(ControlObject.LAST_CONNECTION_DESTINATION, connection);
 			return false;
 		}
 		
@@ -68,17 +68,17 @@ public class TerminationCriteria {
 			return true;
 		}
 		
-		//if the distance to the destination is to high terminate
-		if(connection.getSubConnections().size() > 1 && isDistanceToDestinationToHigh2(controlObject, connection)){
-			controlObject.addUnusedConnection(connection);
-			controlObject.increaseCounter(ControlObject.TO_FAR_FROM_DESTINATION);
-			return false;
-		}
-
 		//If connection is already worse than the x best connections terminate this connection
 		if(controlObject.isVirtualPriceToHigth(connection)){
 			controlObject.addUnusedConnection(connection);
-			controlObject.increaseCounter(ControlObject.CONNECTION_IS_WORSE);
+			controlObject.increaseCounter(ControlObject.CONNECTION_IS_WORSE, connection);
+			return false;
+		}
+		
+		//if the distance to the destination is to high terminate
+		if(connection.getSubConnections().size() > 1 && isDistanceToDestinationToHigh3(controlObject, connection)){
+			controlObject.addUnusedConnection(connection);
+			controlObject.increaseCounter(ControlObject.TO_FAR_FROM_DESTINATION, connection);
 			return false;
 		}
 		
@@ -143,12 +143,35 @@ public class TerminationCriteria {
 		try{
 			AirportInfo airportinfo = controlObject.getAirportinfo(connection.getDestination().getIata());		
 			int fullDistance = controlObject.getBeelineDistance();
-			int distanceToOrigin = fullDistance - airportinfo.getDistanceToDestination();
+			int distanceSolved = fullDistance - airportinfo.getDistanceToDestination();
 			int hops = amountOfSubConnections(connection);
 			
-			if(distanceToOrigin < 100 * Math.pow(hops, 2) - 2000)
+			if(distanceSolved < 100 * Math.pow(hops, 2) - 2000)
 				return true;
 		
+			return false;
+		}catch(NullPointerException e){
+			System.out.println("Error");
+			return true;
+		}
+	}
+	
+	private static boolean isDistanceToDestinationToHigh3(ControlObject controlObject, Connection connection){
+		try{
+			AirportInfo airportinfo = controlObject.getAirportinfo(connection.getDestination().getIata());		
+			int fullDistance = controlObject.getBeelineDistance();
+			int distanceSolved = fullDistance - airportinfo.getDistanceToDestination();
+			double duration = (double) connection.getDuration().getMillis() / 1000.0 / 60.0 / 60.0;
+			double factor = controlObject.getFactorForMaxDistance();
+			
+			//System.out.println(distanceSolved + " < " + (factor * Math.pow(duration, 2) - fullDistance));
+			
+			if(distanceSolved < factor * Math.pow(duration, 2) - fullDistance){
+				//System.out.println("T: " + distanceSolved + " < " + (factor * Math.pow(duration, 2) - fullDistance));
+				return true;
+			}
+		
+			//System.out.println("F: " + distanceSolved + " < " + (factor * Math.pow(duration, 2) - fullDistance));
 			return false;
 		}catch(NullPointerException e){
 			System.out.println("Error");
@@ -161,19 +184,6 @@ public class TerminationCriteria {
 	 * @param connection
 	 * @return
 	 */
-	/*private static int amountOfSubConnections(Connection connection){
-		AtomicInteger counter = new AtomicInteger(0);	
-		connection.getSubConnections().parallelStream().forEach(subConnection -> {
-			if(subConnection.getType() == Connection.PLANE){
-				if(subConnection.getSubConnections().size() != 0){
-					counter.addAndGet(subConnection.getSubConnections().size());
-				}else{
-					counter.incrementAndGet();
-				}
-			}
-		});
-		return counter.get();
-	}*/
 	private static int amountOfSubConnections(Connection connection){
 		return connection.getSubConnections().size();
 	}

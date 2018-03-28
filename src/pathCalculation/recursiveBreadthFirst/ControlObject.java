@@ -1,5 +1,6 @@
 package pathCalculation.recursiveBreadthFirst;
 
+import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -33,7 +34,8 @@ public class ControlObject {
 	private ConcurrentHashMap<String, Place> originAirports = null;
 	private ConcurrentHashMap<String, Place> destinationAirports = null;
 	private int beelineDistance = Integer.MAX_VALUE;
-	private AtomicInteger[] terminationReasons = {new AtomicInteger(0), new AtomicInteger(0), new AtomicInteger(0), new AtomicInteger(0), new AtomicInteger(0), new AtomicInteger(0)};
+	private double factorForMaxDistance = Double.MAX_VALUE;
+	private AtomicInteger[][] terminationReasons = new AtomicInteger[6][20];
 	
 	
 	public ControlObject(Request request, ConcurrentHashMap<String, Place> originAirports, ConcurrentHashMap<String, Place> destinationAirports){
@@ -42,7 +44,15 @@ public class ControlObject {
 		this.destinationAirports = destinationAirports;
 		// generates the list for the used connections and sets the price for an hour value to the Comparator object
 		usedConnectionSet = new ConcurrentSkipListSet<Connection>(new ConnectionComparator(request.getPriceForHoure()));
-		this.beelineDistance = Query.getDistanceBetweenPlaces(request.getOrigin(), request.getDestination());
+		this.beelineDistance = Query.getDistanceBetweenPlaces(request.getOrigin(), request.getDestination()) / 1000;
+		this.factorForMaxDistance = beelineDistance / 150;
+		System.out.println(beelineDistance + " " + factorForMaxDistance);
+		for(int i = 0; i < terminationReasons.length; i++){
+			for(int j = 0; j < terminationReasons[i].length; j++){
+				terminationReasons[i][j] = new AtomicInteger(0);
+				//System.out.println(i + ":" + j + " = " + terminationReasons[i][j].get());
+			}
+		}
 	}
 	
 	public void setConnectionIsFound(){
@@ -69,6 +79,10 @@ public class ControlObject {
 	
 	public int getBeelineDistance(){
 		return beelineDistance;
+	}
+	
+	public double getFactorForMaxDistance(){
+		return factorForMaxDistance;
 	}
 	
 	/* -------------------- used and unused connection Lists -----------------------------*/
@@ -215,18 +229,43 @@ public class ControlObject {
 		return airportsMap.get(iata);
 	}
 	
+	public int countVisitedAirports(){
+		return airportsMap.size();
+	}
+	
 	/* ----------- Termination Reasons Array ------------ */
 	
-	public void increaseCounter(int counterNumber){
-		terminationReasons[counterNumber].incrementAndGet();
+	public void increaseCounter(int counterNumber, Connection connection){
+		increaseCounter(counterNumber, connection.getSubConnections().size() - 1);
+	}
+	
+	public void increaseCounter(int counterNumber, int step){
+		terminationReasons[counterNumber][step].incrementAndGet();
 	}
 	
 	public String terminationReasonsToString(){
-		return "It exists a better connection to the same airport: " + terminationReasons[ControlObject.BETTER_CONNECTION_TO_AIRPORT].get() + "\n"
-				+ "To many steps: " + terminationReasons[ControlObject.TO_MANY_STEPS].get() + "\n"
-				+ "Last connection was destination: " + terminationReasons[ControlObject.LAST_CONNECTION_DESTINATION].get() + "\n"
-				+ "Airport is to far from Destination: " + terminationReasons[ControlObject.TO_FAR_FROM_DESTINATION].get() + "\n"
-				+ "Connection is worse than the x best: " + terminationReasons[ControlObject.CONNECTION_IS_WORSE].get() + "\n"
-				+ "Connections found: " + terminationReasons[ControlObject.CONNECTION_FOUND].get() + "\n";
+		String delimiter = "\t";
+		return "--------------------------------------------------------------\n"
+				+ "Step: \t\t\t\t\t\t\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\n"
+				+ "It exists a better connection to the same airport: \t" + stringForCounter(ControlObject.BETTER_CONNECTION_TO_AIRPORT, delimiter) + "\n"
+				+ "To many steps: \t\t\t\t\t\t" + stringForCounter(ControlObject.TO_MANY_STEPS, delimiter) + "\n"
+				+ "Last connection was destination: \t\t\t" + stringForCounter(ControlObject.LAST_CONNECTION_DESTINATION, delimiter) + "\n"
+				+ "Connection is worse than the x best: \t\t\t" + stringForCounter(ControlObject.CONNECTION_IS_WORSE, delimiter) + "\n"
+				+ "Airport is to far from Destination: \t\t\t" + stringForCounter(ControlObject.TO_FAR_FROM_DESTINATION, delimiter) + "\n"
+				+ "Connections found: \t\t\t\t\t" + stringForCounter(ControlObject.CONNECTION_FOUND, delimiter) + "\n"
+				+ "--------------------------------------------------------------";
 	}
+	
+	private String stringForCounter(int reason, String delimiter){
+		String result = "" + terminationReasons[reason][0].get();
+		int total = 0;
+		for(int i = 1; i < terminationReasons[reason].length; i++){
+			total += terminationReasons[reason][i].get();
+			result += delimiter + terminationReasons[reason][i].get();
+		}
+		result += delimiter + total;
+		return result;
+	}
+	
+	
 }

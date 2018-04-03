@@ -16,8 +16,6 @@ import utilities.TimeFunctions;
 public class TerminationCriteria {
 	
 	protected static final Logger logger = LogManager.getLogger(TerminationCriteria.class);
-	
-	public static AtomicInteger GoogleApiCallCounter = new AtomicInteger(0);
 
 	
 	public TerminationCriteria(){
@@ -36,7 +34,7 @@ public class TerminationCriteria {
 		}
 		
 		//If connections has already x steps terminate
-		if(amountOfSubConnections(connection) >= 8){
+		if(amountOfSubConnections(connection) >= 6){
 			controlObject.addUnusedConnection(connection);
 			controlObject.increaseCounter(ControlObject.TO_MANY_STEPS, connection);
 			return false;
@@ -48,7 +46,6 @@ public class TerminationCriteria {
 			controlObject.addUsedConnection(newConnection.clone());
 			controlObject.increaseCounter(ControlObject.CONNECTION_FOUND, connection);
 			reachedDestinationInThisStep = true;
-			//return false;
 		}
 		
 		//if last airport was destination terminate connection
@@ -61,11 +58,6 @@ public class TerminationCriteria {
 		
 		if(reachedDestinationInThisStep){
 			connection.setDestinationReached(true);
-		}/**/	
-		
-		//ensure that 5 connectios are in the used connection list
-		if(controlObject.getUsedConnectionSet().size() < 5){
-			return true;
 		}
 		
 		//If connection is already worse than the x best connections terminate this connection
@@ -91,7 +83,7 @@ public class TerminationCriteria {
 	 * @param controlObject
 	 * @return
 	 */
-	public static boolean shouldExploitMin(Connection connection, ControlObject controlObject){
+	/*public static boolean shouldExploitMin(Connection connection, ControlObject controlObject){
 		//connection to destination is found
 		if(controlObject.isDestinationAirport(connection.getDestination().getIata())){
 			connection = addConnectionFromAirport(connection, controlObject);
@@ -103,24 +95,7 @@ public class TerminationCriteria {
 			return false;
 		}
 		return true;
-	}
-	
-	
-	private static Connection addConnectionFromAirport(Connection connection, ControlObject controlObject){
-		GoogleApiCallCounter.incrementAndGet();
-		// first remove the rough connection from origin to origin airport and than add the new one (with origin and departure time and polyline)
-		api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();
-		//Add connection from origin to origin airport
-		try {
-			//GregorianCalendar departureTimeOnAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(connection.getSubConnections().peek().getDepartureDate(), 1), connection.getDestination());
-			GregorianCalendar departureTimeOnAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(connection.getArrivalDate(), 1), connection.getDestination());
-			LinkedBlockingQueue<Connection> connectionFromAirport = googleDirection.getConnection(connection.getDestination(), controlObject.getRequest().getDestination(), departureTimeOnAirport, true, controlObject.getRequest().getBestTransportation(), "", "", false);
-			connection.addSubconnection(connectionFromAirport.peek());
-		} catch (IllegalStateException | IOException | JDOMException e) {
-			logger.warn("Connection from destination Airport to destination can't be added. (destination airport: " + connection.getDestination().getIata() + ")\n" + e);
-		}		
-		return connection;
-	}
+	}*/
 	
 	private static boolean isDistanceToDestinationToHigh1(ControlObject controlObject, Connection connection){
 		try{
@@ -164,7 +139,7 @@ public class TerminationCriteria {
 			double duration = (double) connection.getDuration().getMillis() / 1000.0 / 60.0 / 60.0;
 			double factor = controlObject.getFactorForMaxDistance();
 			
-			//System.out.println(distanceSolved + " < " + (factor * Math.pow(duration, 2) - fullDistance));
+			//System.out.println(fullDistance + "km " + duration + "h " + connection.getDestination().getName() + ": " + distanceSolved + " < " + (factor * Math.pow(duration, 2) - fullDistance));
 			
 			if(distanceSolved < factor * Math.pow(duration, 2) - fullDistance){
 				//System.out.println("T: " + distanceSolved + " < " + (factor * Math.pow(duration, 2) - fullDistance));
@@ -186,6 +161,23 @@ public class TerminationCriteria {
 	 */
 	private static int amountOfSubConnections(Connection connection){
 		return connection.getSubConnections().size();
+	}
+	
+	
+	private static Connection addConnectionFromAirport(Connection connection, ControlObject controlObject){
+		controlObject.incrementGoogleApiCounter();
+		// first remove the rough connection from origin to origin airport and than add the new one (with origin and departure time and polyline)
+		api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();
+		//Add connection from origin to origin airport
+		try {
+			//GregorianCalendar departureTimeOnAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(connection.getSubConnections().peek().getDepartureDate(), 1), connection.getDestination());
+			GregorianCalendar departureTimeOnAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(connection.getArrivalDate(), 1), connection.getDestination());
+			LinkedBlockingQueue<Connection> connectionFromAirport = googleDirection.getConnection(connection.getDestination(), controlObject.getRequest().getDestination(), departureTimeOnAirport, true, controlObject.getRequest().getBestTransportation(), "", "", false);
+			connection.addSubconnection(connectionFromAirport.peek());
+		} catch (IllegalStateException | IOException | JDOMException e) {
+			logger.warn("Connection from destination Airport to destination can't be added. (destination airport: " + connection.getDestination().getIata() + ")\n" + e);
+		}		
+		return connection;
 	}
 	
 

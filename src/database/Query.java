@@ -209,7 +209,7 @@ public class Query {
 		try{
 			ResultSet queryResult = DatabaseConnection.getConnection().createStatement().executeQuery(querryString);
 			queryResult.next();
-			return (int) queryResult.getDouble("distance");
+			return (int) queryResult.getDouble("distance") / 1000;
 		} catch(SQLException e) {
 			logger.error("For airport " + iata + " it's not possible to determine rest distance");
 		}
@@ -236,7 +236,7 @@ public class Query {
 		try{
 			ResultSet queryResult = DatabaseConnection.getConnection().createStatement().executeQuery(querryString);
 			queryResult.next();
-			return (int) queryResult.getDouble("distance");
+			return (int) queryResult.getDouble("distance") / 1000;
 		} catch(SQLException e) {
 			logger.error("It's not possible to determine distance bewteen origin and destination.");
 		}

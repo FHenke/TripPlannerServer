@@ -18,6 +18,7 @@ public class Request extends Connection {
 	private int amountOfOriginAirports = 10;
 	private int amountOfDestinationAirports = 10;
 	private int AmountOfConnectionsToShow = 5;
+	private int avgSpeed = 125;
 	
 	//final static values that can only be changed in code
 	//private static final int amountOfOriginAirports = 10;
@@ -25,7 +26,7 @@ public class Request extends Connection {
 	//private static final int AmountOfConnectionsToShow = 5;
 	//private static final int exploitMethod = pathCalculation.recursiveBreadthFirst.SearchNode.Best_CONNECTIONS;
 	private static final int exploitMethod = pathCalculation.recursiveBreadthFirst.SearchNode.Best_CONNECTIONS;
-	private static final boolean allowZeroPrice = true;
+	private static final boolean allowZeroPrice = false;
 	
 	
 	
@@ -132,10 +133,16 @@ public class Request extends Connection {
 		return allowZeroPrice;
 	}
 
-	
+	public int getAvgSpeed(){
+		return avgSpeed;
+	}
 	
 //#######
 
+	public void setAvgSpeed(int avgSpeed){
+		this.avgSpeed = avgSpeed;
+	}
+	
 	/**
 	 * @param amountOfOriginAirports the amountOfOriginAirports to set
 	 */

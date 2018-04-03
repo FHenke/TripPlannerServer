@@ -36,6 +36,7 @@ public class ControlObject {
 	private int beelineDistance = Integer.MAX_VALUE;
 	private double factorForMaxDistance = Double.MAX_VALUE;
 	private AtomicInteger[][] terminationReasons = new AtomicInteger[6][20];
+	private AtomicInteger GoogleApiCallCounter = new AtomicInteger(0);
 	
 	
 	public ControlObject(Request request, ConcurrentHashMap<String, Place> originAirports, ConcurrentHashMap<String, Place> destinationAirports){
@@ -44,15 +45,15 @@ public class ControlObject {
 		this.destinationAirports = destinationAirports;
 		// generates the list for the used connections and sets the price for an hour value to the Comparator object
 		usedConnectionSet = new ConcurrentSkipListSet<Connection>(new ConnectionComparator(request.getPriceForHoure()));
-		this.beelineDistance = Query.getDistanceBetweenPlaces(request.getOrigin(), request.getDestination()) / 1000;
-		this.factorForMaxDistance = beelineDistance / 150;
-		System.out.println(beelineDistance + " " + factorForMaxDistance);
+		this.beelineDistance = Query.getDistanceBetweenPlaces(request.getOrigin(), request.getDestination());
+		this.factorForMaxDistance = (double) (2*request.getAvgSpeed()*request.getAvgSpeed()) / (double) beelineDistance;
 		for(int i = 0; i < terminationReasons.length; i++){
 			for(int j = 0; j < terminationReasons[i].length; j++){
 				terminationReasons[i][j] = new AtomicInteger(0);
 				//System.out.println(i + ":" + j + " = " + terminationReasons[i][j].get());
 			}
 		}
+		System.out.println(request.getAvgSpeed());
 	}
 	
 	public void setConnectionIsFound(){
@@ -83,6 +84,14 @@ public class ControlObject {
 	
 	public double getFactorForMaxDistance(){
 		return factorForMaxDistance;
+	}
+	
+	public void incrementGoogleApiCounter(){
+		GoogleApiCallCounter.getAndIncrement();
+	}
+	
+	public int getGoogleApiCount(){
+		return GoogleApiCallCounter.get();
 	}
 	
 	/* -------------------- used and unused connection Lists -----------------------------*/
@@ -221,7 +230,7 @@ public class ControlObject {
 		boolean result = false;
 		addAirportToMap(connection);
 		AirportInfo airportInfo = airportsMap.get(connection.getDestination().getIata());
-		result = airportInfo.addIfNoBetterConnectionIsAvailable(connection.getArrivalDate(), connection.getPrice());
+		result = airportInfo.addIfNoBetterConnectionIsAvailable(connection.getArrivalDate(), connection.getVirtualPrice(request.getPriceForHoure()));
 		return result;
 	}
 	
@@ -246,7 +255,7 @@ public class ControlObject {
 	public String terminationReasonsToString(){
 		String delimiter = "\t";
 		return "--------------------------------------------------------------\n"
-				+ "Step: \t\t\t\t\t\t\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\n"
+				+ "Step: \t\t\t\t\t\t\t1\t2\t3\t4\t5\t6\t7\t8\t9\t10\t11\t12\t13\t14\t15\t16\t17\t18\t19\t20\tTotal\n"
 				+ "It exists a better connection to the same airport: \t" + stringForCounter(ControlObject.BETTER_CONNECTION_TO_AIRPORT, delimiter) + "\n"
 				+ "To many steps: \t\t\t\t\t\t" + stringForCounter(ControlObject.TO_MANY_STEPS, delimiter) + "\n"
 				+ "Last connection was destination: \t\t\t" + stringForCounter(ControlObject.LAST_CONNECTION_DESTINATION, delimiter) + "\n"

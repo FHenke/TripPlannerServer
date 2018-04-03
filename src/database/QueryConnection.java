@@ -36,12 +36,12 @@ public class QueryConnection {
 		ResultSet queryResult;
 		String queryString = "SELECT distinct origin.iata_code AS org_iata, origin.name AS org_name, ST_Y(origin.location) As org_latitude, ST_X(origin.location) As org_longitude, "
 				+ "destination.iata_code AS dst_iata, destination.name AS dst_name, ST_Y(destination.location) As dst_latitude, ST_X(destination.location) As dst_longitude, "
-				+ "connections.departure_date, connections.arrival_time, connections.min_price, connections.weekday, connections.flightnumber, connections.duration, connections.currency, connections.operating_airline, connections.connection_number as connection_number "
-				+ "FROM airports origin, airports destination, connections_with_aprx_price as connections "
+				+ "connections.departure_date, connections.arrival_time, connections.aprx_price as min_price, connections.weekday, connections.flightnumber, connections.duration, connections.currency, connections.operating_airline, connections.connection_number as connection_number "
+				+ "FROM airports origin, airports destination, flight_connections as connections "
 				+ "WHERE connections.origin = '" + origin_iata + "' "
 				+ "and connections.destination = '" + destination_iata + "' ";
 		if(!allowZeroPrice)
-			queryString += "and min_price is not ";
+			queryString += "and aprx_price != 0.0 ";
 		if(!allowIncompleteData)
 			queryString += "and duration is not null ";
 		if(!allowConnectedFlights)
@@ -54,7 +54,7 @@ public class QueryConnection {
 		try {
 			queryResult = DatabaseConnection.getConnection().createStatement().executeQuery(queryString);
 		} catch (SQLException e) {
-			logger.error("Cant Query connection for: " + origin_iata + " to " + destination_iata + "\n " + e);
+			logger.error("Cant Query connection for: " + origin_iata + " to " + destination_iata + "\n " + e + "\n" + queryString);
 			throw new SQLException("Cant Query connection for: " + origin_iata + " to " + destination_iata + "\n ");
 		}	
 		return queryResult;

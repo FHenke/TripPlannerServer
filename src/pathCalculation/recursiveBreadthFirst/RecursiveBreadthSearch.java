@@ -60,10 +60,10 @@ public class RecursiveBreadthSearch {
 		waitForJoin(controlObject.getThreadList());
 		
 		long elapsedTime = System.nanoTime() - startTime;
-		System.out.println(controlObject.getUnusedConnectionList().size() + " connections found. And " + TerminationCriteria.GoogleApiCallCounter + " Google API calls for destination were necessary.");
+		//System.out.println(controlObject.getUnusedConnectionList().size() + " connections found. And " + TerminationCriteria.GoogleApiCallCounter + " Google API calls for destination were necessary.");
 		System.out.println(controlObject.terminationReasonsToString());
 		System.out.println("Amount of visited Airports: " + controlObject.countVisitedAirports());
-		System.out.println(TerminationCriteria.GoogleApiCallCounter + " Google API calls were necessary.");
+		System.out.println(controlObject.getGoogleApiCount() + " Google API calls were necessary.");
 		System.out.println((double) elapsedTime / 1000000000.0 + " seconds needed for Recursive search");
 		
 		LinkedBlockingQueue<Connection> connectionList = controlObject.getUsedConnectionQueue();
@@ -104,14 +104,14 @@ public class RecursiveBreadthSearch {
 		ClosestAirports closestAirports = new ClosestAirports();
 		Connection[][] airports = new Connection[2][];
 
-		//get 10 closest airports to origin
+		//get x closest airports to origin
 		Callable<Connection[]> findOriginAirports = () -> {
 			boolean placeIsOrigin = true;
 			return closestAirports.getFastestAirports(request, request.getOrigin(), placeIsOrigin, request.getAmountOfOriginAirports()); 
 		};
 		Future<Connection[]> futureOriginAirports = executor.submit(findOriginAirports);
 		
-		//get 10 closest airports to destination
+		//get x closest airports to destination
 		Callable<Connection[]> findDestinationAirports = () -> {
 			boolean placeIsOrigin = false;
 			return closestAirports.getFastestAirports(request, request.getDestination(), placeIsOrigin, request.getAmountOfDestinationAirports());

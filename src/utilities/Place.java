@@ -341,5 +341,13 @@ public class Place {
 		return typeString;
 	}
 	
+	public boolean equals(Place place){
+		if(this.latitude == place.getLatitude() && this.longitude == place.getLongitude() && this.hasCoordinates())
+			return true;
+		if(this.hasIata() && place.hasIata() && this.iata.equals(place.getIata()))
+			return true;
+		return false;
+	}
+	
 	
 }

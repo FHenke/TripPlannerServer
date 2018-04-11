@@ -20,6 +20,9 @@ public class ControlObject {
 	public static final int CONNECTION_IS_WORSE = 3;
 	public static final int BETTER_CONNECTION_TO_AIRPORT = 4;
 	public static final int CONNECTION_FOUND = 5;
+	public static final int CYCLE = 6;
+	public static final int BAD_CONNECTION = 7;
+	public static final int OPEN_CONNECTIONS = 8;
 
 	//caches all connection for an airport
 	private Request request = null;
@@ -35,7 +38,7 @@ public class ControlObject {
 	private ConcurrentHashMap<String, Place> destinationAirports = null;
 	private int beelineDistance = Integer.MAX_VALUE;
 	private double factorForMaxDistance = Double.MAX_VALUE;
-	private AtomicInteger[][] terminationReasons = new AtomicInteger[6][20];
+	private AtomicInteger[][] terminationReasons = new AtomicInteger[8][20];
 	private AtomicInteger GoogleApiCallCounter = new AtomicInteger(0);
 	
 	
@@ -53,7 +56,6 @@ public class ControlObject {
 				//System.out.println(i + ":" + j + " = " + terminationReasons[i][j].get());
 			}
 		}
-		System.out.println(request.getAvgSpeed());
 	}
 	
 	public void setConnectionIsFound(){
@@ -262,6 +264,25 @@ public class ControlObject {
 				+ "Connection is worse than the x best: \t\t\t" + stringForCounter(ControlObject.CONNECTION_IS_WORSE, delimiter) + "\n"
 				+ "Airport is to far from Destination: \t\t\t" + stringForCounter(ControlObject.TO_FAR_FROM_DESTINATION, delimiter) + "\n"
 				+ "Connections found: \t\t\t\t\t" + stringForCounter(ControlObject.CONNECTION_FOUND, delimiter) + "\n"
+				+ "Cycle: \t\t\t\t\t\t\t" + stringForCounter(ControlObject.CYCLE, delimiter) + "\n"
+				+ "Bad connections (request): \t\t\t\t" + stringForCounter(ControlObject.BAD_CONNECTION, delimiter) + "\n"
+				+ "Open paths: \t\t\t\t\t\t" + stringForCounter(ControlObject.OPEN_CONNECTIONS, delimiter) + "\n"
+				+ "--------------------------------------------------------------";
+	}
+	
+	public String terminationReasonsToCSV(){
+		String delimiter = ";";
+		return "--------------------------------------------------------------\n"
+				+ "Step;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;Total\n"
+				+ "It exists a better connection to the same airport;" + stringForCounter(ControlObject.BETTER_CONNECTION_TO_AIRPORT, delimiter) + "\n"
+				+ "To many steps;" + stringForCounter(ControlObject.TO_MANY_STEPS, delimiter) + "\n"
+				+ "Last connection was destination;" + stringForCounter(ControlObject.LAST_CONNECTION_DESTINATION, delimiter) + "\n"
+				+ "Connection is worse than the x best;" + stringForCounter(ControlObject.CONNECTION_IS_WORSE, delimiter) + "\n"
+				+ "Airport is to far from destination;" + stringForCounter(ControlObject.TO_FAR_FROM_DESTINATION, delimiter) + "\n"
+				+ "Connections found;" + stringForCounter(ControlObject.CONNECTION_FOUND, delimiter) + "\n"
+				+ "Cycle;" + stringForCounter(ControlObject.CYCLE, delimiter) + "\n"
+				+ "Bad connections (request);" + stringForCounter(ControlObject.BAD_CONNECTION, delimiter) + "\n"
+				+ "Open paths;" + stringForCounter(ControlObject.OPEN_CONNECTIONS, delimiter) + "\n"
 				+ "--------------------------------------------------------------";
 	}
 	

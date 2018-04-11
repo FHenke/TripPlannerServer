@@ -1,0 +1,7 @@
+2018-04-10 10:49:38.648 [Thread-179041] WARN  pathCalculation.recursiveBreadthFirst.TerminationCriteria - Connection from destination Airport to destination can't be added. (destination airport: PVG)
+javax.net.ssl.SSLPeerUnverifiedException: peer not authenticated
+2018-04-10 10:50:02.360 [Thread-179309] ERROR api.GoogleMapsTimeZone - Local Time can't be calculated. javax.net.ssl.SSLPeerUnverifiedException: peer not authenticated
+2018-04-10 10:50:02.360 [Thread-179309] WARN  pathCalculation.recursiveBreadthFirst.TerminationCriteria - Connection from destination Airport to destination can't be added. (destination airport: PVG)
+java.lang.IllegalStateException: Local Time can't be calculated. javax.net.ssl.SSLPeerUnverifiedException: peer not authenticated
+2018-04-10 10:59:03.355 [Thread-127373] ERROR database.ConnectedAirports - Cant Query connected outbound airports for: LWO
+ org.postgresql.util.PSQLException: Die Abfrage ergab mehrere ResultSets.

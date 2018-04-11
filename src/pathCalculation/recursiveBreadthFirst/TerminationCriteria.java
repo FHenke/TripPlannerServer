@@ -34,9 +34,16 @@ public class TerminationCriteria {
 		}
 		
 		//If connections has already x steps terminate
-		if(amountOfSubConnections(connection) >= 6){
+		if(amountOfSubConnections(connection) >= 8){
 			controlObject.addUnusedConnection(connection);
 			controlObject.increaseCounter(ControlObject.TO_MANY_STEPS, connection);
+			return false;
+		}
+		
+		//If connection is already worse than the x best connections terminate this connection
+		if(controlObject.isVirtualPriceToHigth(connection)){
+			controlObject.addUnusedConnection(connection);
+			controlObject.increaseCounter(ControlObject.CONNECTION_IS_WORSE, connection);
 			return false;
 		}
 		
@@ -58,13 +65,6 @@ public class TerminationCriteria {
 		
 		if(reachedDestinationInThisStep){
 			connection.setDestinationReached(true);
-		}
-		
-		//If connection is already worse than the x best connections terminate this connection
-		if(controlObject.isVirtualPriceToHigth(connection)){
-			controlObject.addUnusedConnection(connection);
-			controlObject.increaseCounter(ControlObject.CONNECTION_IS_WORSE, connection);
-			return false;
 		}
 		
 		//if the distance to the destination is to high terminate

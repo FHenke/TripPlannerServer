@@ -39,7 +39,7 @@ public class SearchNode implements Runnable{
 	
 	@Override
 	public void run() {
-		
+		controlObject.increaseCounter(ControlObject.OPEN_CONNECTIONS, connection);
 		if(TerminationCriteria.shouldExploit(connection, controlObject)){
 			try {
 				//get all outbound connections for this airport
@@ -129,15 +129,21 @@ public class SearchNode implements Runnable{
 	private LinkedBlockingQueue<Connection> findBestConnections(LinkedBlockingQueue<Connection> outboundConnections, ConcurrentHashMap<String, Boolean> visitedAirportsMap){
 		LinkedBlockingQueue<Connection> bestConnectionList = new LinkedBlockingQueue<Connection>();
 		HashMap<String, Double> bestPriceToAirport = new HashMap<String, Double>();
-		for(Connection connection : outboundConnections){
-			String destinationIata = connection.getDestination().getIata();
+		for(Connection con : outboundConnections){
+			String destinationIata = con.getDestination().getIata();
 			//if the connections does not contain this airport already
 			if(!visitedAirportsMap.containsKey(destinationIata)){
 				//if no connection to this airport is added already or the earlier connections are more expensice add current connection
-				if(!bestPriceToAirport.containsKey(destinationIata) || bestPriceToAirport.get(destinationIata) > connection.getPrice()){
-					bestPriceToAirport.put(destinationIata, connection.getPrice());
-					bestConnectionList.add(connection);
+				if(!bestPriceToAirport.containsKey(destinationIata) || bestPriceToAirport.get(destinationIata) > con.getPrice()){
+					bestPriceToAirport.put(destinationIata, con.getPrice());
+					bestConnectionList.add(con);
 				}
+				else{
+					controlObject.increaseCounter(ControlObject.BAD_CONNECTION, connection);
+				}
+			}
+			else{
+				controlObject.increaseCounter(ControlObject.CYCLE, connection);
 			}
 		}
 		return bestConnectionList;
@@ -159,7 +165,7 @@ public class SearchNode implements Runnable{
 	private LinkedBlockingQueue<Connection> addOldConnection(Connection connection, LinkedBlockingQueue<Connection> connectionList){
 		LinkedBlockingQueue<Connection> newConnectionList = new LinkedBlockingQueue<Connection>();
 		
-		//add for each connection the best flight to the previous connection and add the full connection to the result set
+		//add for each connection the best flights to the previous connection and add the full connection to the result set
 		connectionList.parallelStream().forEach(nextSubConnection -> {
 			Connection newConnection = connection.clone();
 			newConnection.addSubconnection(nextSubConnection);
@@ -204,33 +210,7 @@ public class SearchNode implements Runnable{
 	 * @param method 1: all outbound connections, 2: hotspots only, 3: destination hash data only
 	 * @return
 	 */
-	/*
-	
-	private void addToFromAirport(Connection newConnection, ControlObject controlObject){
-		api.GoogleMapsDirection googleDirection = new api.GoogleMapsDirection();
-		newConnection.getSubConnections().poll();
-		//Add connection from origin to origin airport
-		try {
-			GregorianCalendar arrivalTimeToAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(newConnection.getSubConnections().peek().getDepartureDate(), -1), newConnection.getSubConnections().peek().getOrigin());
-			LinkedBlockingQueue<Connection> connectionToAirport = googleDirection.getConnection(controlObject.getRequest().getOrigin(), newConnection.getSubConnections().peek().getOrigin(), arrivalTimeToAirport, false, controlObject.getRequest().getBestTransportation(), "", "", false);
-			newConnection.addHeadOnSubconnection(connectionToAirport.peek());
-		} catch (IllegalStateException | IOException | JDOMException e) {
-			logger.warn("Connection from origin to origin airport cant be added. (origin: " + newConnection.getOrigin().getIata() + ")" + e);
-		}
-		
-		//Add connection from destination airport to destination
-		try {
-			GregorianCalendar departureTimeFromAirport = GoogleMapsTimeZone.getUTCTime(TimeFunctions.cloneAndAddHoures(newConnection.getArrivalDate(), 1), newConnection.getDestination());
-			LinkedBlockingQueue<Connection> connectionFromAirport = googleDirection.getConnection(newConnection.getDestination(), controlObject.getRequest().getDestination(), departureTimeFromAirport, true, controlObject.getRequest().getBestTransportation(), "", "", false);
-			newConnection.addSubconnection(connectionFromAirport.peek());
-		} catch (IllegalStateException | IOException | JDOMException e) {
-			logger.warn("Connection from origin to origin airport cant be added. (origin: " + newConnection.getDestination().getIata() + ")" + e);
-		}
-		
-		newConnection.setRecursiveAction(Connection.ADD);
-		controlObject.addConnection(newConnection);
-		System.out.println("-> Connection Found");
-	}
+
 	
 	/**
 	 * put all already visited airports for this connection in a hash map

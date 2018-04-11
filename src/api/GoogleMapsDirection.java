@@ -25,6 +25,7 @@ import org.joda.time.Duration;
 import api.utilities.GoogleMaps;
 import utilities.Connection;
 import utilities.Place;
+import utilities.TimeFunctions;
 import utilities.XMLUtilities;
 
 /**
@@ -79,6 +80,9 @@ public class GoogleMapsDirection implements API {
 	 * @throws JDOMException
 	 */
 	public LinkedBlockingQueue<Connection> getConnection(Place origin, Place destination, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language, boolean alternatives) throws ClientProtocolException, IOException, IllegalStateException, JDOMException{
+		//TODO: Remove
+		date = TimeFunctions.cloneAndAddHoures(date, 14*24);
+		
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
 		
 		String url = api.utilities.GoogleMaps.createDirectionURL(GoogleMaps.PlaceToGoogleMapsString(origin), GoogleMaps.PlaceToGoogleMapsString(destination), date, isDepartureDate, transportation, avoid, language, alternatives);
@@ -142,6 +146,8 @@ public class GoogleMapsDirection implements API {
 					GregorianCalendar departureTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 					departureTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("departure_time").getChildText("value")) * 1000L);
 					departureTime = GoogleMapsTimeZone.getLocalTime(departureTime, connection.getOrigin());
+					//TODO: Remove
+					departureTime = TimeFunctions.cloneAndAddHoures(departureTime, -1*14*24);
 					connection.setDepartureDate(departureTime);
 					
 					//arrival time
@@ -149,6 +155,8 @@ public class GoogleMapsDirection implements API {
 					GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 					arrivalTime.setTimeInMillis(Integer.parseInt(routeOption.getChild("arrival_time").getChildText("value")) * 1000L);
 					arrivalTime = GoogleMapsTimeZone.getLocalTime(arrivalTime, connection.getDestination());
+					//TODO: Remove
+					arrivalTime = TimeFunctions.cloneAndAddHoures(arrivalTime, -1*14*24);
 					connection.setArrivalDate(arrivalTime);
 					
 				}catch(NumberFormatException e){
@@ -161,6 +169,8 @@ public class GoogleMapsDirection implements API {
 						else
 							departureTime.setTimeInMillis(date.getTimeInMillis() - connection.getDuration().getMillis());
 						departureTime = GoogleMapsTimeZone.getLocalTime(departureTime, connection.getOrigin());
+						//TODO: Remove
+						departureTime = TimeFunctions.cloneAndAddHoures(departureTime, -1*14*24);
 						connection.setDepartureDate(departureTime);
 						
 						GregorianCalendar arrivalTime = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
@@ -169,6 +179,8 @@ public class GoogleMapsDirection implements API {
 						else
 							arrivalTime.setTimeInMillis(date.getTimeInMillis());
 						arrivalTime = GoogleMapsTimeZone.getLocalTime(arrivalTime, connection.getDestination());
+						//TODO: Remove
+						arrivalTime = TimeFunctions.cloneAndAddHoures(arrivalTime, -1*14*24);
 						connection.setArrivalDate(arrivalTime);
 					}catch(NullPointerException ex){
 						if(date != null)

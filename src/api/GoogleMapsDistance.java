@@ -23,7 +23,7 @@ import org.joda.time.Duration;
 import utilities.Connection;
 import utilities.XMLUtilities;
 import utilities.Place;
-
+import utilities.TimeFunctions;
 import api.utilities.GoogleMaps;
 
 /**
@@ -96,6 +96,9 @@ public class GoogleMapsDistance implements API {
 	 */
 	public LinkedBlockingQueue<Connection> getConnection(LinkedList<Place> originList, LinkedList<Place> destinationList, GregorianCalendar date, boolean isDepartureDate, String transportation, String avoid, String language) throws ClientProtocolException, IOException, IllegalStateException, JDOMException{
 		LinkedBlockingQueue<Connection> connectionList = new LinkedBlockingQueue<Connection>();
+		//TODO: Remove
+		date = TimeFunctions.cloneAndAddHoures(date, 14*24);
+
 		int originIndex = 0;
 		int destinationIndex = 0;
 		

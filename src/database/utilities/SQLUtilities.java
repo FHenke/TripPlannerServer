@@ -92,14 +92,44 @@ public class SQLUtilities {
 		connectionList.parallelStream().forEach(connection -> {
 			if(!connection.isDirect() && connection.getType() == Connection.PLANE){
 				try {
-					connection.setSubConnections(ConnectedFlights.getSubConnectionsOfConnection(connection.getConnectionNumber()));
+					//Sometimes sub conection of a connections are missing due inconsistenceies in the databases and apis this connections are added as alibi connections in this function
+					LinkedBlockingQueue<Connection> subConnectionQueue = addMissingSubConnections(ConnectedFlights.getSubConnectionsOfConnection(connection.getConnectionNumber()), connection);
+
+					connection.setSubConnections(subConnectionQueue);
 					connection.setRecursiveAction(Connection.ADD);
 				} catch (SQLException e) {
 					logger.error("Its not possible to generate Subconnections: \n " + e);
 				}
 			}
+			
 		});
 		return connectionList;
+	}
+	
+	private static LinkedBlockingQueue<Connection> addMissingSubConnections(LinkedBlockingQueue<Connection> subConnections, Connection connection){
+		Connection[] subConnectionArray = subConnections.toArray(new Connection[subConnections.size()]);
+		LinkedBlockingQueue<Connection> subConnectionQueue = new LinkedBlockingQueue<Connection>();
+		
+		if(!connection.getOrigin().equals(subConnectionArray[0].getOrigin())){
+			subConnectionQueue.add(new Connection(connection.getOrigin(), subConnectionArray[0].getOrigin()));
+		}
+		
+		for(int i = 0; i < subConnectionArray.length - 1; i++){
+			if(!subConnectionArray[i].getOrigin().equals(subConnectionArray[i+1].getOrigin()) && !subConnectionArray[i].getDestination().equals(subConnectionArray[i+1].getDestination())){
+				subConnectionQueue.add(subConnectionArray[i]);
+				if(!subConnectionArray[i].getDestination().equals(subConnectionArray[i+1].getOrigin())){
+					subConnectionQueue.add(new Connection(subConnectionArray[i].getDestination(), subConnectionArray[i+1].getOrigin()));
+				}
+			}
+			
+		}
+		
+		subConnectionQueue.add(subConnectionArray[subConnectionArray.length - 1]);
+		if(!connection.getDestination().equals(subConnectionArray[subConnectionArray.length - 1].getDestination())){
+			subConnectionQueue.add(new Connection(subConnectionArray[subConnectionArray.length - 1].getDestination(), connection.getDestination()));
+		}
+		
+		return subConnectionQueue;
 	}
 	
 	public static Place generatePlaceFromResultSet(ResultSet result) throws SQLException{
